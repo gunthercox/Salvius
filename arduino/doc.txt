@@ -1,0 +1,9 @@
+/* 
+ Hardware setup instructions:
+ 
+ Plug Ethernet shield into Arduino Uno.
+ Plug Seeed Relay Shield into Ethernet Shield.
+ Attach 9 volt power supply to GND and +9V plugs of Relay Shield.
+ PIR + to arduino 5V, PIR - to arduino GND, PIR OUT to HUB2 D3.
+ Connect ethernt shield to wireless router with ethernet cable.
+ */
