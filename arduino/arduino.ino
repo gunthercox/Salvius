@@ -7,13 +7,17 @@
 #include <Udp.h>
 
 // VARIABLES FOR MANUAL SETUP
-byte mac[] = { 0x90, 0xA2, 0xDA, 0x0D, 0x00, 0x8F }; // physical mac address
-byte ip[] = { 192, 168, 1, 177 };          // ip in lan
-byte gateway[] = { 192, 168, 0, 1 };       // internet access via router
-byte subnet[] = { 255, 255, 255, 0 };      //subnet mask
+byte mac[] = { 
+  0x90, 0xA2, 0xDA, 0x0D, 0x00, 0x8F }; // physical mac address
+byte ip[] = { 
+  192, 168, 1, 177 };          // ip in lan
+byte gateway[] = { 
+  192, 168, 0, 1 };       // internet access via router
+byte subnet[] = { 
+  255, 255, 255, 0 };      //subnet mask
 EthernetServer server(80);
 
-int pirPin = 3;    // PIR SENSOR
+//int pirPin = 3;    // PIR SENSOR
 int relayPin1 = 4; // relay connected to digital pin 4 (D3 on relay shield - on switch)
 int relayPin2 = 7; // relay connected to digital pin 5 (D2 on relay shield) - Inferred LEDs
 int relayPin3 = 6; // relay connected to digital pin 6 (D1 on relay shield) - Ultraviolte LEDs
@@ -46,10 +50,11 @@ void setup(){
   pinMode(relayPin3, OUTPUT);    // declare relay3 as output
   pinMode(relayPin4, OUTPUT);    // declare relay4 as output
 
-  //digitalWrite(relayPin1, LOW);
-  //digitalWrite(pirPin, LOW);
-  //pirState = digitalRead(pirPin); // read the initial state
-  //delay(60000);                   // pause before calibrating
+  /*digitalWrite(relayPin1, LOW);
+   digitalWrite(pirPin, LOW);
+   pirState = digitalRead(pirPin); // read the initial state
+   delay(60000);                   // pause before calibrating
+   */
 }
 
 void loop(){
@@ -66,60 +71,55 @@ void loop(){
 
         if (c == '\n') {  //if HTTP request has ended
 
-          if (readString.indexOf("?") <0) //dirty skip of "GET /favicon.ico HTTP/1.1"
-          {
-            //skip everything
+          //dirty skip of "GET /favicon.ico HTTP/1.1"
+          if (readString.indexOf("?") <0) { /*skip everything*/
           }
-          
+
           else
 
-              // begin drive control
-            if(readString.indexOf("N1=Forward") >0)
-            {
-              //item has to be turned ON
-              digitalWrite(relayPin1, HIGH);    // set the item on
-              
-              digitalWrite(relayPin1, HIGH);    // set the item on
-              
-              FORWARD = true;
-            }
-          else{
-            //item has to be turned OFF
+            // BEGIN DRIVE CONTROL
+          if(readString.indexOf("N1=Forward") >0) {
+
+            // ITEM HAS TO BE TURNED ON
+            digitalWrite(relayPin1, HIGH);    // set the item on
+            FORWARD = true;
+          }
+
+          else {
+            
+            // ITEM HAS TO BE TURNED OFF
             digitalWrite(relayPin1, LOW);    // set the item off
             FORWARD = false;           
           }
 
-          if(readString.indexOf("N2=BACKWARD") >0)
-          {
+          if (readString.indexOf("N2=BACKWARD") > 0) {
             //item has to be turned ON
             digitalWrite(relayPin2, HIGH);    // set the item on
             BACKWARD = true;
           }
-          else{
+          else {
             //item has to be turned OFF
             digitalWrite(relayPin2, LOW);    // set the item off
             BACKWARD = false;           
           }
 
-          if(readString.indexOf("N3=LEFT") >0)
-          {
+          if (readString.indexOf("N3=LEFT") > 0) {
             //item has to be turned ON
             digitalWrite(relayPin3, HIGH);    // set the item on
             LEFT = true;
           }
-          else{
+          else {
             //item has to be turned OFF
             digitalWrite(relayPin3, LOW);    // set the item off
             LEFT = false;           
           }
 
-          if(readString.indexOf("N4=RIGHT") >0)
-          {
+          if (readString.indexOf("N4=RIGHT") > 0) {
             //item has to be turned ON
             digitalWrite(relayPin4, HIGH);    // set the item on
             RIGHT = true;
           }
-          else{
+          else {
             //item has to be turned OFF
             digitalWrite(relayPin4, LOW);    // set the item off
             RIGHT = false;           
@@ -127,20 +127,18 @@ void loop(){
           // end drive control
 
           //lets check if LED should be lighted
-          if(readString.indexOf("L=ON") >0)//replaces if(readString.contains("L=1"))
-          {
+          if (readString.indexOf("L=ON") >0) {
             //led has to be turned ON
             digitalWrite(relayPin3, HIGH);    // set the LED on
             LEDON = true;
           }
-          else if(readString.indexOf("L2=ON") >0)//replaces if(readString.contains("L2=1"))
-          {
+          else if (readString.indexOf("L2=ON") >0) {
             //led has to be turned ON
             digitalWrite(relayPin4, HIGH);    // set the LED on
             LED2ON = true;
           }
           //led has to be turned OFF
-          else{
+          else {
             //led has to be turned OFF
             digitalWrite(relayPin4, LOW);    // set the LED OFF
             LED2ON = false;
@@ -158,7 +156,7 @@ void loop(){
           client.println("<input type=submit name=N1 value=FORWARD>");
           client.println("<input type=submit name=N3 value=LEFT><input type=submit value=STOP><input type=submit name=N4 value=RIGHT>");
           client.println("<input type=submit name=N2 value=BACKWARD>");
-          
+
           //controlling leds via buttons (address will look like http://192.168.1.177/?L=ON when submited)
           if (LEDON)
             client.println("<form method=get name=LED><input type=submit value=OFF></form>");
@@ -219,7 +217,7 @@ void autoActivat() {
   int pirMode = 0;    // determines if the relay closed already (0 = not closed yet)
   // End variabled for motion sensor
 
-  val = digitalRead(pirPin);  // read input value and store it in val
+  /*val = digitalRead(pirPin);  // read input value and store it in val
   if(digitalRead(pirPin) == HIGH) {
     if (pirMode == 0) {
       if (val != pirState) {            //look for 2 inconsistant readings
@@ -232,5 +230,7 @@ void autoActivat() {
       }     
     }
   }
+  */
 }
+
 
