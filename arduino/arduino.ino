@@ -1,3 +1,10 @@
+/*
+* Author: Gunther Cox
+* CC: Salvius Robot Project
+* Website: http://salviusrobot.blogspot.com
+*
+*/
+
 // FOR ETHERNET
 #include <Ethernet.h>
 #include <SPI.h>
