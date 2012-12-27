@@ -3,6 +3,8 @@
 * CC: Salvius Robot Project
 * Website: http://salviusrobot.blogspot.com
 *
+* This project has been made possible with funding from the following individuals:
+* Jennifer Cox, Adam Iredale, Janet Wise
 */
 
 // FOR ETHERNET
