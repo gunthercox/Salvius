@@ -4,7 +4,7 @@
 * Website: http://salviusrobot.blogspot.com
 *
 * This project has been made possible with funding from the following individuals:
-* Jennifer Cox, Adam Iredale, Janet Wise
+* Jennifer Cox, Adam Iredale, Janet Wise, Glen Zenor, Boris Hofer, Derek White, Nick Nault, 
 */
 
 // FOR ETHERNET
