@@ -12,6 +12,7 @@ Website: http://salviusrobot.blogspot.com
 
 This project has been made possible with funding from the following individuals:
 Jennifer Cox, Adam Iredale, Janet Wise, Glen Zenor, Boris Hofer, Derek White, Nick Nault,
+Señora Alderperson, Wilbraham Music (Chris Cox)
 
 This work is licenced under Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0). Under this licence you are free to to Share, to copy, distribute and transmit the work
 to Remix to adapt the work, to make commercial use of the work under the following conditions.
