@@ -5,6 +5,7 @@
 *
 * This project has been made possible with funding from the following individuals:
 * Jennifer Cox, Adam Iredale, Janet Wise, Glen Zenor, Boris Hofer, Derek White, Nick Nault, 
+* Señora Alderperson, Wilbraham Music (Chris Cox)
 */
 
 // FOR ETHERNET
@@ -19,14 +20,14 @@
 byte mac[] = { 
   0x90, 0xA2, 0xDA, 0x0D, 0x00, 0x8F }; // physical mac address
 byte ip[] = { 
-  192, 168, 1, 177 };          // ip in lan
+  192, 168, 1, 177 };      // ip in lan
 byte gateway[] = { 
-  192, 168, 0, 1 };       // internet access via router
+  192, 168, 0, 1 };        // internet access via router
 byte subnet[] = { 
   255, 255, 255, 0 };      //subnet mask
 EthernetServer server(80);
 
-//int pirPin = 3;    // PIR SENSOR
+//int pirPin = 3;  // PIR SENSOR
 int relayPin1 = 4; // relay connected to digital pin 4 (D3 on relay shield - on switch)
 int relayPin2 = 7; // relay connected to digital pin 5 (D2 on relay shield) - Inferred LEDs
 int relayPin3 = 6; // relay connected to digital pin 6 (D1 on relay shield) - Ultraviolte LEDs
