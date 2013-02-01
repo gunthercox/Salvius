@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+	<classpathentry kind="lib" path="C:/Users/nostronus/Documents/GitHub/Salvius/schema/interaction/lib/WSJ_8gau_13dCep_16k_40mel_130Hz_6800Hz.jar"/>
+	<classpathentry kind="lib" path="C:/Users/nostronus/Documents/GitHub/Salvius/schema/interaction/lib/voce.jar"/>
+	<classpathentry kind="lib" path="C:/Users/nostronus/Documents/GitHub/Salvius/schema/interaction/lib/sphinx4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/nostronus/Documents/GitHub/Salvius/schema/interaction/lib/jsapi.jar"/>
+	<classpathentry kind="lib" path="C:/Users/nostronus/Documents/GitHub/Salvius/schema/interaction/lib/freetts.jar"/>
+	<classpathentry kind="lib" path="C:/Users/nostronus/Documents/GitHub/Salvius/schema/interaction/lib/en_us.jar"/>
+	<classpathentry kind="lib" path="C:/Users/nostronus/Documents/GitHub/Salvius/schema/interaction/lib/cmulex.jar"/>
+	<classpathentry kind="lib" path="C:/Users/nostronus/Documents/GitHub/Salvius/schema/interaction/lib/cmu_us_kal.jar"/>
+	<classpathentry kind="lib" path="C:/Users/nostronus/Documents/GitHub/Salvius/schema/interaction/lib/chatter-bot-api.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
