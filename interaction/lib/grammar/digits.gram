@@ -1,0 +1,11 @@
+#JSGF V1.0;
+
+/**
+ * JSGF Digits Grammar file
+ */
+
+grammar digits;
+
+public <miscellaneous> = (quit);
+
+public <numbers> = (oh | zero | one | two | three | four | five | six | seven | eight | nine) * ;
