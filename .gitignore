@@ -14,15 +14,11 @@ local.properties
 .classpath
 .settings/
 .metadata/
-.metadate/*
-.metadate/**/*
-.metadate/**/**/**/*
+.metadata/*
+.metadata/**/*
+.metadata/**/**/**/*
+.metadata/**/**/**/**/*
 .loadpath
-
-*
-!*/
-!.gitignore
-!layout.css
 
 # External tool builders
 .externalToolBuilders/
