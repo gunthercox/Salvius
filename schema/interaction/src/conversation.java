@@ -70,7 +70,7 @@ class Voice {
 
     public void say(String[] thingsToSay) {
         for (int i = 0; i < thingsToSay.length; i++) {
-            this.say( thingsToSay[i] );
+            this.say(thingsToSay[i]);
         }
     }
 
