@@ -19,7 +19,7 @@ public class conversation {
 		
 		Voice voiceKevin16 = new Voice("kevin16");
 		
-		String say = "good morning";
+		String say = "hello world";
 
 		System.out.println("Speak now, say 'quit' to quit.");
 
