@@ -1,7 +1,7 @@
 import com.google.code.chatterbotapi.*;
 import com.sun.speech.freetts.VoiceManager;
 
-/* FOR APIS REFER TO COPYRIGHT AND USAGE TEXT FILES */
+/* FOR THE APIS USED REFER TO COPYRIGHT AND USAGE TEXT FILES */
 
 public class conversation {
 	
