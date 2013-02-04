@@ -6,50 +6,66 @@ import com.sun.speech.freetts.VoiceManager;
 public class conversation {
 	
 	public static String s = "default text";
+	public static String input = "hello world";
 	
 	public static void main(String[] argv) throws Exception {
 		
 		// INITIALISE SPEECH SYNTHESIS AND RECOGNITION
 		voce.SpeechInterface.init("lib", true, true, "./lib/grammar", "test");
-		
 		ChatterBotFactory factory = new ChatterBotFactory();
-		
 		ChatterBot bot1 = factory.create(ChatterBotType.CLEVERBOT);
 		ChatterBotSession bot1session = bot1.createSession();
-		
 		Voice voiceKevin16 = new Voice("kevin16");
-		
-		String say = "hello world";
 
-		System.out.println("Speak now, say 'quit' to quit.");
-
+		// SETS RECOGNITION ON OR OFF
 		boolean quit = false;
-		while (!quit) {
-			System.out.println("bot1> " + say);
-			voiceKevin16.say(say);
-			say = bot1session.think(s);
-
-			while (voce.SpeechInterface.getRecognizerQueueSize() > 0) {
-				s = voce.SpeechInterface.popRecognizedString();
-
-				// QUIT SPEECH RECOGNITION IF INSTRUCTED
-				if (-1 != s.indexOf("quit")) {
-					quit = true;
+		boolean confirm = false;
+		boolean listen = false;
+		
+		while (!quit && !confirm) {
+			
+			while (!listen) {
+				
+				// Normally, applications would do application-specific things here
+				// For this sample, we'll just sleep for a little bit
+				try {
+					Thread.sleep(200);
+				}
+				catch (InterruptedException e) {
 				}
 				
-				// POSSIBLE RESPONSE
-				if (-1 != s.indexOf("how are you")) {
-					voce.SpeechInterface.synthesize("I am good");
+				// LISTEN FOR THE USER TO SAY SOMETHING
+				while (voce.SpeechInterface.getRecognizerQueueSize() > 0) {
+					s = voce.SpeechInterface.popRecognizedString();
+	
+					// QUIT SPEECH RECOGNITION IF INSTRUCTED
+					if (-1 != s.indexOf("quit")) {
+						quit = true;
+					}
+					
+					if (-1 != s.indexOf("confirm")) {
+						quit = true;
+					}
+	
+					System.out.println("You said: " + s);
+					//voce.SpeechInterface.synthesize(s);
+					
+					// STOP LISTENING AND SAY SOMETHING
+					listen = true;
 				}
-				
-				// POSSIBLE RESPONSE
-				if (-1 != s.indexOf("thank you")) {
-					voce.SpeechInterface.synthesize("your welcome");
-				}
-
-				System.out.println("You said: " + s);
-				//voce.SpeechInterface.synthesize(s);
 			}
+			
+			while (listen) {
+				
+				// GENERATE A RESPONCE TO THE USERS INPUT
+				System.out.println("bot1> " + input);
+				voiceKevin16.say(input);
+				input = bot1session.think(s);
+				
+				// STOP SPEAKING AND LISTEN
+				listen = false;
+			}
+			
 		}
 
 		voce.SpeechInterface.destroy();

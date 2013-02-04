@@ -18,7 +18,7 @@ public <item> = (project | program | file | class) * ;
 
 public <miscellaneous> = (quit | reset);
 
-public <words> = (hi | I | how | you | are | computer | science | in | love | thank | class | testing) * ;
+public <words> = (hi | I | how | you | are | computer | science | in | love | thank | class | testing | confirm) * ;
 
 <colors> = (yellow | red | blue | green | purple | orange) * ;
 
