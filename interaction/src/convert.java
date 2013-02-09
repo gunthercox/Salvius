@@ -74,7 +74,7 @@ public class convert {
 		String hexidecimal = "";
 		String hex;
 		
-		// SELECT A 
+		// SELECT A HEX VALUE FOR EACH BINARY VALUE
 		for (int i = 0; i < quartet.length; i++) {
 			switch (quartet[i]) {
             case "0000": hex = "0";
@@ -119,6 +119,60 @@ public class convert {
 		}
 		
 		return hexidecimal;
+	}
+	
+	// HEX TO BINARY
+	public static String hex_to_binary(String hexidecimal) {
+		
+		String binary = "";
+		String bin;
+		
+		// SELECT A BINARY VALUE FOR EACH HEX VALUE
+		for (int i = 0; i < 4; i++) {
+			
+			switch (hexidecimal.substring(i)) {
+            case "0": bin = "0000";
+            break;
+            case "1": bin = "0001";
+            break;
+            case "2": bin = "0010";
+            break;
+            case "3": bin = "0011";
+            break;
+            case "4": bin = "0100";
+            break;
+            case "5": bin = "0101";
+            break;
+            case "6": bin = "0110";
+            break;
+            case "7": bin = "0111";
+            break;
+            case "8": bin = "1000";
+            break;
+            case "9": bin = "1001";
+            break;
+            case "A": bin = "1010";
+            break;
+            case "B": bin = "1011";
+            break;
+            case "C": bin = "1100";
+            break;
+            case "D": bin = "1101";
+            break;
+            case "E": bin = "1110";
+            break;
+            case "F": bin = "1111";
+            break;
+            default: bin = "";
+            break;
+	        }
+			
+			// CONCATINATE THE QUARTETS
+			binary += bin;
+			
+		}
+		
+		return binary;
 	}
 	
 }
