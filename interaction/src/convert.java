@@ -62,6 +62,163 @@ public class convert {
 		return (fahrenheit - 32) * 5 / 9;
 	}
 	
+	// METRIC UNIT CONVERSION
+	public static double metric(double value, String current, String desired) {
+		
+		String[] prefix = {"yocto", "zepto", "atto", "femto", "pico", "nano", 
+				"micro", "milli", "centi", "deci", "none", "deka", "hecto", 
+				"kilo", "mega", "giga", "tera", "peta", "exa", "zetta", "yotta"};
+		
+		String[] symbol = {"y", "z", "a", "f", "p", "n", "u", "m", "c", "d", 
+				"none", "D", "h", "K", "M", "G", "T", "P", "E", "Z", "Y"};
+		
+		double[] power = {-24, -21, -18, -15, -12, -9, -6, -3, -2, -1, 
+							0, 1, 2, 3, 6, 9, 12, 15, 18, 21, 24};
+		
+		double converted = 0;
+		double temp;
+		
+		for (int i = 0; i < prefix.length; i++) {
+			
+			// CONVERT TO BASE
+			if (prefix[i].equals(current) || symbol[i].equals(current)) {
+				temp = value * (-1 * power[i]);
+				
+				for (int j = 0; j < prefix.length; j++) {
+					
+					// CONVERT TO DESIRED UNIT
+					if (prefix[j].equals(desired) || symbol[j].equals(current)) {
+						converted = temp * Math.pow(10, power[j]);
+					}
+				}
+			}
+			
+		}
+		
+		return converted;
+	}
+	
+	// ENGLISH TO PIG-LATIN
+	public static String english_to_piglatin(String str) {
+	    String[] temp;
+	    String last = null;
+	    String piglatin = "";
+	    temp = str.split(" ");
+	    for (int i = 0; i < temp.length; i++) {
+	        char first = '\u0000';
+	        String s = "";
+	        char[] third = temp[i].toCharArray();
+	        for (int counter = 0; counter < third.length; counter++) {
+	            // IF VOWELS
+	            if (third[0] == 'a' || third[0] == 'e' || third[0] == 'i'
+	                    || third[0] == 'o' || third[0] == 'u') {
+	                last = "yo";
+	            } else {
+	                // LETTER IS CONSONENT
+	                last = "oy";
+	            }
+	            if (counter == 0) {
+	                first = third[0];
+	            } else
+	                s = s + third[counter];
+	        }
+	        piglatin += s + first + last + " ";
+	    }
+	    return piglatin;
+	}
+	
+	// ARABIC TO ROMAN NUMERATION
+	public static String arabic_to_roman(int arabic) {
+	    if (arabic < 1 || arabic > 3999) {
+	        return "-1";
+	    }
+	
+	    int[] arabicVals = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
+	    String[] romanVals = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
+	    String roman = "";
+	
+	    for(int i = 0; i<arabicVals.length; i++ ) {
+	        while(arabic >= arabicVals[i]) {
+	            roman += romanVals[i];
+	            arabic -= arabicVals[i];
+	        }
+	    }
+
+    return roman;
+	}
+	
+	// ROMAN TO ARABIC NUMERATION
+	public static String roman_to_arabic(String roman) {
+		
+		// DETERMINE IF ROMAN NUMERAL IS VALID
+		boolean validRoman = true;
+		
+		// CHECK IF ROMAN NUMERAL CONTAINS ROMAN CHARACTERS
+		for (int k = 0; k < roman.length(); k++) {
+			if (roman.charAt(k) != 'I' &&
+				roman.charAt(k) != 'V' &&
+				roman.charAt(k) != 'X' &&
+				roman.charAt(k) != 'L' &&
+				roman.charAt(k) != 'C' &&
+				roman.charAt(k) != 'D' &&
+				roman.charAt(k) != 'M') {
+				validRoman = false;
+			}
+		}
+
+		// ONLY IF IT IS A VALID ROMAN NUMERAL
+		if (validRoman) {
+
+			int arabic = 0;
+			int last_digit = 0;
+			int current_digit = 0;
+
+			for (int i = 0; i < roman.length(); i++) {
+
+				if (roman.charAt(i) == 'I') {
+					current_digit = 1;
+				}
+				if (roman.charAt(i) == 'V') {
+					current_digit = 5;
+				}
+				if (roman.charAt(i) == 'X') {
+					current_digit = 10;
+				}
+				if (roman.charAt(i) == 'L') {
+					current_digit = 50;
+				}
+				if (roman.charAt(i) == 'C') {
+					current_digit = 100;
+				}
+				if (roman.charAt(i) == 'D') {
+					current_digit = 500;
+				}
+				if (roman.charAt(i) == 'M') {
+					current_digit = 1000;
+				}
+
+				if (last_digit < current_digit && last_digit != 0) {
+					current_digit -= last_digit;
+					arabic -= last_digit;
+					arabic += current_digit;
+					last_digit = current_digit;
+					current_digit = 0;
+				} else {
+					last_digit = current_digit;
+					arabic += current_digit;
+					current_digit = 0;
+				}
+			}
+
+			return String.valueOf(arabic);
+
+		} else {
+			
+		// THE INPUT WAS NOT A VALID ROMAN NUMBER
+		return null;
+		}
+	}
+	
 	// BINARY TO HEX
 	public static String binary_to_hex(String binary) {
 		

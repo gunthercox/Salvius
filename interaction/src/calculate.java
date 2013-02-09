@@ -34,7 +34,7 @@ public class calculate {
 	
 	// CALCULATE THE CIRCUMFERANCE OF A CIRCLE
 	public static double circumference(double radius) {
-	// could also do: pi * diamiter;
+	// could also use: pi * diamiter;
 	return 2 * calculate.calc_pi() * radius;
 	}
 	
