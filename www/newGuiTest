@@ -1,0 +1,22 @@
+<html>
+<head>
+
+<style type="text/css">
+.circle{
+min-height:100px;
+min-width:100px;
+height:20%;
+width:auto;
+background:#0F0;
+border-radius:50%;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="circle"></div>
+
+</body>
+</html>
