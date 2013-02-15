@@ -1,22 +1,43 @@
 <html>
+
 <head>
+<meta http-equiv="X-UA-Compatible" content="IE=9" />
 
 <style type="text/css">
 .circle{
-min-height:100px;
-min-width:100px;
-height:20%;
-width:auto;
-background:#0F0;
+height:300px;
+width:300px;
+background:#00F;
 border-radius:50%;
+margin:30% auto;
+position:relative;
 }
+.tab{
+position:absolute;
+top:50%;
+height:40px;
+margin-top:-20px;
+background:#FF0;
+height:50px;
+width:100px;
+text-align:center;
+
+-webkit-transform: rotate(320deg);
+-ms-transform: rotate(320deg); 
+}
+.tab p{padding:auto;}
 </style>
 
 </head>
 
 <body>
 
-<div class="circle"></div>
+<div class='circle'>
+<div class='tab'><p>A</p></div>
+<div class='tab'><p>U</p></div>
+<div class='tab'><p>T</p></div>
+</div>
 
 </body>
+
 </html>
