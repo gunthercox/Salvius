@@ -13,8 +13,6 @@ I like to use a Ubuntu Server setup and these are just a few things that I do.
 ### These the packages I installed to setup my server environment
 sudo apt-get install ssh gnome-core gdm php5 libapache2-mod-php5
 
-Also be sure to get https://developers.google.com/speed/pagespeed/mod
-
 ## Arduino Setup:
 * Plug Ethernet shield into Arduino Uno.
 * Plug Seeed Relay Shield into Ethernet Shield.
