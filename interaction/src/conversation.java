@@ -12,10 +12,12 @@ public class conversation {
 		
 		// INITIALISE SPEECH SYNTHESIS AND RECOGNITION
 		voce.SpeechInterface.init("lib", true, true, "./lib/grammar", "test");
+		Voice voiceKevin16 = new Voice("kevin16");
+		
+		// START CHATBOT
 		ChatterBotFactory factory = new ChatterBotFactory();
 		ChatterBot bot1 = factory.create(ChatterBotType.CLEVERBOT);
 		ChatterBotSession bot1session = bot1.createSession();
-		Voice voiceKevin16 = new Voice("kevin16");
 
 		// SETS RECOGNITION ON OR OFF
 		boolean quit = false;

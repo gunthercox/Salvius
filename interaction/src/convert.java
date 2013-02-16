@@ -62,7 +62,93 @@ public class convert {
 		return (fahrenheit - 32) * 5 / 9;
 	}
 	
-	// METRIC UNIT CONVERSION
+	// CANDLEPOWER AND LUMENS
+	public static double candlepower_to_lumens (double candlepower, boolean isInCandlepower) {
+		
+		// CALCULATE LUMENS
+		double lumens = 4 * Math.PI;
+		
+		// RETURN VALUE IN CANDEL POWER OR LUMENS
+		if (isInCandlepower == true) {
+			return candlepower * lumens;
+		} else {
+			return candlepower / lumens;
+		}
+	}
+	
+	// STANDARD UNIT CONVERSION
+	public static double standard (double value, String type, String current, String desired) {
+		double output = 0.0;	
+		boolean lower = false;
+		
+		// NOTE THE DIFFERENCE BETWEEN THE BRITISH LONG TON AND THE AMERICAN SHORT TON
+		// THE DIFFERENCE IN TONS IS DUE TO THE VALUE OF THE HUNDREDWEIGHT IN EACH COUNRY
+		// US HUNDREDWEIGHT = 100 POUNDS, BRITISH HUNDREDWEIGHT = 112 POUNDS
+		// THERE IS ALSO THE METRIC TON (1000 KILOGRAMS)
+		
+		// LENGTH
+		
+		// DRY MEASURE
+		String[] dryMeasure = {"pint", "quart", "peck", "bushel"};
+		double[] dryMeasureValues = {};
+		double[] dryMeasureToLiters = {};
+				
+		// AVOIRDUPOIS WEIGHT
+		String[] avoidupoisWeight = {"ounce", "pound", "hundredweight", "ton"};
+		double[] avoidupoisWeightValues = {1, 16, 100, 20};
+		double[] avoidupoisWeightToGrams = {28.3495, 453.59, 45360, 907180};
+		
+		
+		// TROY WEIGHT
+		String[] troyWeight = {"grain", "carat", "pennyweight", "ounce", "pound"};
+		double[] troyWeightConversion = {1, 3.086, 24, 20, 12};
+		double[] troyWeightToGrams = {0.0648, 0.2, 1.5552, 31.1035, 373.24};
+		
+		if (type.equals("troyweight")) {
+			
+			output = value;
+			
+			for (int i = troyWeight.length; i >= 0; i--) {
+				
+				// CONVERT INPUT TO SMALLEST UNIT OF MEASURE
+				if (! (troyWeight[i].equals(current)) || lower == true) {
+					output = output / troyWeightConversion[i];
+					lower = true;
+				}
+				
+				if (troyWeight[i].equals(desired)) {
+					output = output * troyWeightConversion[i];
+				}
+				
+			}
+			
+		}
+		
+		if (type.equals("troyToMetric")) {
+			
+			output = value;
+			
+			for (int i = troyWeight.length; i >= 0; i--) {
+				
+				// CONVERT INPUT TO SMALLEST UNIT OF MEASURE
+				if (! (troyWeight[i].equals(current)) || lower == true) {
+					output = output / troyWeightToGrams[i];
+					lower = true;
+				}
+				
+				if (troyWeight[i].equals(desired)) {
+					output = output * troyWeightToGrams[i];
+				}
+				
+			}
+			
+		}
+		
+		return output;
+	}
+	
+	
+	// METRIC UNITS
 	public static double metric(double value, String current, String desired) {
 		
 		String[] prefix = {"yocto", "zepto", "atto", "femto", "pico", "nano", 
