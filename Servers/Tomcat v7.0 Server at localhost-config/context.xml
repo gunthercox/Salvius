@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+--><!-- The contents of this file will be loaded for each web application --><!-- Marty Hall: Changed <Context> to <Context reloadable="true">.
+     This enables servlet reloading, so that WEB-INF/classes and WEB-INF/lib 
+     are monitored for changes. This lets you redeploy .class files or .jar 
+     files without restarting Tomcat. This is useful during application 
+     development, but servlet reloading slows things down for deployed apps. 
+     Disable it for deployment environments!
+     
+     This and the other changes for app
+     development (not deployment!) are discussed in
+     http://www.coreservlets.com/Apache-Tomcat-Tutorial/.
+--><Context reloadable="true">
+
+    <!-- Default set of monitored resources -->
+    <WatchedResource>WEB-INF/web.xml</WatchedResource>
+    
+    <!-- Marty Hall: added struts-config.xml and faces-config.xml,
+         to plan ahead for Struts or JSF development. Changes to any 
+         files listed in WatchedResource causes Tomcat to restart the
+         Web app automatically. 
+    -->
+    <WatchedResource>WEB-INF/struts-config.xml</WatchedResource>
+    <WatchedResource>WEB-INF/faces-config.xml</WatchedResource>
+
+    <!-- Uncomment this to disable session persistence across Tomcat restarts -->
+    <!--
+    <Manager pathname="" />
+    -->
+
+    <!-- Uncomment this to enable Comet connection tacking (provides events
+         on session expiration as well as webapp lifecycle) -->
+    <!--
+    <Valve className="org.apache.catalina.valves.CometConnectionManagerValve" />
+    -->
+
+</Context>
