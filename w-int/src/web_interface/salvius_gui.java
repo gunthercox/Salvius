@@ -43,7 +43,6 @@ public class salvius_gui extends HttpServlet {
         out.println("<html><head><meta http-equiv='X-UA-Compatible' content='IE=9' /><title>Interface</title></head>" +
 				"<link rel='stylesheet' type='text/css' href='./css/gui.css' />" +
         		"<link rel='stylesheet' type='text/css' href='./css/font-awesome.min.css' />" +
-        		"<link rel='stylesheet' type='text/css' href='./css/toggle-switch.css' />" +
         		"<link rel='stylesheet' type='text/css' href='./css/bootstrap.css' />" +
         		"<body>"+        		
         		"<div class='circle'>");
@@ -61,22 +60,22 @@ public class salvius_gui extends HttpServlet {
                 		"data-toggle='dropdown'>" +
                 		"<i class='" + tab[i][1] + "'></i></div>" +
                 		"<ul class='dropdown-menu' role='menu' aria-labelledby='dLabel'>");
+    		
+					    // LIGHTS
+						if (i == 2) {
+					        out.println("<div class='btn-group' data-toggle='buttons-checkbox'>" +
+					        			"<button type='button' class='btn btn-danger'>IR</button>" +
+					        			"<button type='button' class='btn btn-inverse'>UV</button>" +
+					        			"</div>");
+						}
     					
-    					if (i == 2) {
-    						// LIGHTS
-    				        out.println("<div class='btn-group' data-toggle='buttons-checkbox'>" +
-    				        			"<button type='button' class='btn btn-danger'>IR</button>" +
-    				        			"<button type='button' class='btn btn-inverse'>UV</button>" +
-    				        			"</div>");
-    					}
-    					
-    					if (i == 1) {
-    				        // OPERATING MODE
-    				        out.println("<div class='btn-group btn-group-vertical' data-toggle='buttons-radio'>" +
-    				        			"<button type='button' class='btn btn-action'>Atonomus</button>" +
-    				        			"<button type='button' class='btn btn-success'>Assisted</button>" +
-    				        			"<button type='button' class='btn btn-warning'>Teleoperated</button>" +
-    				        			"</div>");
+    					// OPERATING MODE
+						if (i == 1) {					        
+					        out.println("<div class='btn-group btn-group-vertical' data-toggle='buttons-radio'>" +
+					        			"<button type='button' class='btn btn-action'>Atonomus</button>" +
+					        			"<button type='button' class='btn btn-success'>Assisted</button>" +
+					        			"<button type='button' class='btn btn-warning'>Teleoperated</button>" +
+					        			"</div>");
     					}
     					
     		out.println("</ul>" +
@@ -85,17 +84,9 @@ public class salvius_gui extends HttpServlet {
         
         // CAMERA CIRCLE & EXPAND-ALL / COLLAPSE-ALL BUTTONS
 		out.println("<div class='camera'></div>" +
-	        		"<label class='toggle candy' id='toggle' onclick='validate()'>" +
-	        		"<input type='checkbox' id='view' checked />" +
-	        		"<p><span>-</span><span>+</span></p>" +
-	        		"<a class='btn btn-primary slide-button'></a></label>" +
+	        		"<button class='toggle btn btn-danger icon-plus' id='toggle'></button>" +
 	        		
 					"</div>");
-		
-		out.println("<p class='blue'>Click to toggle (<span>clicks: 0</span>)</p>" +
-				"<p class='blue highlight'>highlight (<span>clicks: 0</span>)</p>" +
-				"<p class='blue'>on these (<span>clicks: 0</span>)</p>" +
-				"<p class='blue'>paragraphs (<span>clicks: 0</span>)</p>");
 		
 		out.println("<script src='./js/jquery.js'></script>" +
 					"<script src='./js/bootstrap.js'></script>" +
@@ -105,20 +96,17 @@ public class salvius_gui extends HttpServlet {
 		
 		out.println("<script>" +
 		
-					"var count = 0;" +
-					"$('p').each(function() {" +
-					"var $thisParagraph = $(this);" +
-					"var count = 0;" +
-					"$thisParagraph.click(function() {" +
-					    "count++;" +
-					    "$thisParagraph.find('span').text('clicks: ' + count);" +
-					    "$thisParagraph.toggleClass('highlight', count % 3 == 0);" +
-					  "});" +
+					"$('.tab').each(function() {" +
+					"$(this).click(function() {" +
+					"$(this).toggleClass('open');" +
+					"});" +
 					"});" +
 					
-					"$('#toggle1').click(function() {" +
-					"$('div').toggleClass(btn, open);" +
-					"});"+
+					"$('.toggle').each(function() {" +
+					"$(this).click(function() {" +
+					"$(this).toggleClass('btn-danger icon-minus', 'btn-success icon-plus');" +
+					"});" +
+					"});" +
 					
 					"$(document).ready(function() {" +
 					"});" +
