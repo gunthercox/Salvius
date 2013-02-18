@@ -43,6 +43,7 @@ public class salvius_gui extends HttpServlet {
         out.println("<html><head><meta http-equiv='X-UA-Compatible' content='IE=9' /><title>Interface</title></head>" +
 				"<link rel='stylesheet' type='text/css' href='./css/gui.css' />" +
         		"<link rel='stylesheet' type='text/css' href='./css/font-awesome.min.css' />" +
+        		"<link rel='stylesheet' type='text/css' href='./css/toggle-switch.css' />" +
         		"<link rel='stylesheet' type='text/css' href='./css/bootstrap.css' />" +
         		"<body>"+        		
         		"<div class='circle'>");
@@ -84,19 +85,45 @@ public class salvius_gui extends HttpServlet {
         
         // CAMERA CIRCLE & EXPAND-ALL / COLLAPSE-ALL BUTTONS
 		out.println("<div class='camera'></div>" +
-	        		"<div class='btn-group toggle' data-toggle='buttons-radio'>" +
-					"<button class='btn' title='Expand All' onclick='return toggle()'><i class='icon-plus'></i></button>" +
-					"<button class='btn active' title='Collapse All'><i class='icon-minus'></i></button>" +
-					"</div></div>");    
+	        		"<label class='toggle candy' id='toggle' onclick='validate()'>" +
+	        		"<input type='checkbox' id='view' checked />" +
+	        		"<p><span>-</span><span>+</span></p>" +
+	        		"<a class='btn btn-primary slide-button'></a></label>" +
+	        		
+					"</div>");
 		
-		out.println("<script src='./js/jquery.min.js'></script>" +
+		out.println("<p class='blue'>Click to toggle (<span>clicks: 0</span>)</p>" +
+				"<p class='blue highlight'>highlight (<span>clicks: 0</span>)</p>" +
+				"<p class='blue'>on these (<span>clicks: 0</span>)</p>" +
+				"<p class='blue'>paragraphs (<span>clicks: 0</span>)</p>");
+		
+		out.println("<script src='./js/jquery.js'></script>" +
+					"<script src='./js/bootstrap.js'></script>" +
 					"<script src='./js/bootstrap-dropdown.js'></script>" +
 					"<script src='./js/bootstrap-popover.js'></script>" +
-					"<script src='./js/bootstrap-button.js'></script>" +
-					"<script>" +					
-					"$(function toggle(){");
+					"<script src='./js/bootstrap-button.js'></script>");
+		
+		out.println("<script>" +
+		
+					"var count = 0;" +
+					"$('p').each(function() {" +
+					"var $thisParagraph = $(this);" +
+					"var count = 0;" +
+					"$thisParagraph.click(function() {" +
+					    "count++;" +
+					    "$thisParagraph.find('span').text('clicks: ' + count);" +
+					    "$thisParagraph.toggleClass('highlight', count % 3 == 0);" +
+					  "});" +
+					"});" +
 					
-					out.println("});</script>");
+					"$('#toggle1').click(function() {" +
+					"$('div').toggleClass(btn, open);" +
+					"});"+
+					
+					"$(document).ready(function() {" +
+					"});" +
+					
+					"</script>");
 		
         out.println("</body></html>");
 			

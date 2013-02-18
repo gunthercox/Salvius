@@ -35,15 +35,6 @@ margin-top:-100px;
 margin-left:-110px;
 background:#888
 }
-.toggle{
-position:absolute!important;
-top:50%;left:50%;
-height:20px;
-width:220px;
-margin-top:80px;
-margin-left:-110px!important;
-background:#BBB
-}
 .rotate{
 position:fixed;
 top:50%;left:50%;
