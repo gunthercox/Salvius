@@ -1,7 +1,7 @@
 package web_interface;
 
 // GEOMETRIC FORMULAS
-public class calculate {
+public class Calculate {
 
 	// CALCULATE THE SPEED OF AN OBJECT
 	public static double speed(double distance, double time) {
@@ -36,12 +36,12 @@ public class calculate {
 	// CALCULATE THE CIRCUMFERANCE OF A CIRCLE
 	public static double circumference(double radius) {
 	// could also use: pi * diamiter;
-	return 2 * calculate.calc_pi() * radius;
+	return 2 * Calculate.calc_pi() * radius;
 	}
 	
 	// CALCULATE THE AREA OF A CIRCLE
 	public static double circle_area(double radius) {
-	return calculate.calc_pi() * Math.pow(radius, 2);
+	return Calculate.calc_pi() * Math.pow(radius, 2);
 	}
 	
 	// CALCULATE THE TOTAL SURFACE AREA OF A RECTANGULAR PRISM
@@ -51,7 +51,7 @@ public class calculate {
 	
 	// CALCULATE THE TOTAL SURFACE AREA OF A CYLANDER
 	public static double surface_area_cylander(double radius, double height) {
-	return 2 * calculate.calc_pi() * radius * 2 + 2 * calculate.calc_pi() * radius * height;
+	return 2 * Calculate.calc_pi() * radius * 2 + 2 * Calculate.calc_pi() * radius * height;
 	}
 	
 	// CALCULATE THE VOLUME OF A RECTANGULAR PRISM

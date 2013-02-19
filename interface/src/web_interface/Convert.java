@@ -1,7 +1,7 @@
 package web_interface;
 
 // CONVERT VARIOUS UNITS OF MEASUREMENT
-public class convert {
+public class Convert {
 	
 	// RANKINE TO KELVIN
 	public static double rankine_to_kelvin(double rankine) {
@@ -10,12 +10,12 @@ public class convert {
 	
 	// RANKINE TO CELSIUS
 	public static double rankine_to_celsius(double rankine) {
-		return convert.kelvin_to_celsius(convert.rankine_to_kelvin(rankine));
+		return Convert.kelvin_to_celsius(Convert.rankine_to_kelvin(rankine));
 	}
 	
 	// RANKINE TO FAHRENHEIT
 	public static double rankine_to_fahrenheit(double rankine) {
-		return convert.kelvin_to_fahrenheit(convert.rankine_to_kelvin(rankine));
+		return Convert.kelvin_to_fahrenheit(Convert.rankine_to_kelvin(rankine));
 	}
 	
 	// KELVIN TO RANKINE
