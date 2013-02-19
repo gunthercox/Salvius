@@ -13,17 +13,17 @@ import javax.servlet.http.HttpServletResponse;
 public class salvius_gui extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	// CREATE TABS: TITLE | ICON | ID | HTML
+	// CREATE TABS: TITLE | ICON | ID
 	public static String[][] tab = {
-		{"Head", "icon-move", "X" , ""},
-	    {"Settings", "icon-cog", "X", ""},
-	    {"Lights", "icon-lightbulb", "X", ""},
-	    {"Speech", "icon-volume-up", "X", ""},
-	    {"Write", "icon-pencil", "X", ""},
-	    {"Science", "icon-beaker", "X", ""},
-	    {"Eye", "icon-eye-open", "X", ""},
-	    {"Something", "icon-book", "X", ""},
-	    {"Mode", "icon-off", "X", ""}
+		{"Head", "icon-eye-open", ""},
+	    {"Settings", "icon-cog", ""},
+	    {"Lights", "icon-lightbulb", ""},
+	    {"Speech", "icon-volume-up", ""},
+	    {"Write", "icon-pencil", ""},
+	    {"Science", "icon-beaker", ""},
+	    {"Eye", "icon-move", ""},
+	    {"Something", "icon-book", ""},
+	    {"Mode", "icon-off", ""}
 	    };
     
     public salvius_gui() {
@@ -41,9 +41,11 @@ public class salvius_gui extends HttpServlet {
         PrintWriter out = response.getWriter();
         
         out.println("<html><head><meta http-equiv='X-UA-Compatible' content='IE=9' /><title>Interface</title></head>" +
-				"<link rel='stylesheet' type='text/css' href='./css/gui.css' />" +
         		"<link rel='stylesheet' type='text/css' href='./css/font-awesome.min.css' />" +
         		"<link rel='stylesheet' type='text/css' href='./css/bootstrap.css' />" +
+        		"<script src='./js/jquery.js'></script>" +
+				"<script src='./js/bootstrap.js'></script>" +
+				"<script src='./js/bootstrap-button.js'></script>" +
         		"<body>"+        		
         		"<div class='circle'>");
         
@@ -52,45 +54,39 @@ public class salvius_gui extends HttpServlet {
         	// GIVE THE TAB AN ID NUMBER
         	tab[i][2] = Integer.toString(i);
         	
-        	//To keep URLs intact, use the data-target attribute instead of href="#".
-        	
         	// CREATE THE PRIMARY TAB RING
     		out.println("<div class='rotate' style='-webkit-transform:rotate(" + ((360 / tab.length) * i) + "deg);'>" +
-                		"<div class='tab btn dropdown' id='" + tab[i][2] + "' title='" + tab[i][0] + "' " + 
+                		"<div class='tab btn btn-inverse dropdown' id='" + tab[i][2] + "' title='" + tab[i][0] + "' " + 
                 		"data-toggle='dropdown'>" +
-                		"<i class='" + tab[i][1] + "'></i></div>" +
-                		"<ul class='dropdown-menu' role='menu' aria-labelledby='dLabel'>");
+                		"<i class='" + tab[i][1] + "'></i></div>");
     		
-					    // LIGHTS
-						if (i == 2) {
-					        out.println("<div class='btn-group' data-toggle='buttons-checkbox'>" +
-					        			"<button type='button' class='btn btn-danger'>IR</button>" +
-					        			"<button type='button' class='btn btn-inverse'>UV</button>" +
-					        			"</div>");
-						}
-    					
-    					// OPERATING MODE
+						// OPERATING MODE
 						if (i == 1) {					        
-					        out.println("<div class='btn-group btn-group-vertical' data-toggle='buttons-radio'>" +
+					        out.println("<ul class='dropdown-menu' role='menu' aria-labelledby='dLabel'>" +
+					        			"<div class='btn-group btn-group-vertical' data-toggle='buttons-radio'>" +
 					        			"<button type='button' class='btn btn-action'>Atonomus</button>" +
 					        			"<button type='button' class='btn btn-success'>Assisted</button>" +
 					        			"<button type='button' class='btn btn-warning'>Teleoperated</button>" +
-					        			"</div>");
-    					}
+					        			"</div></ul>");
+						}
+    		
+					    // LIGHTS
+						if (i == 2) {
+					        out.println("<ul class='dropdown-menu' role='menu' aria-labelledby='dLabel'>" +
+					        			"<div class='btn-group' data-toggle='buttons-checkbox'>" +
+					        			"<button type='button' class='btn btn-large btn-danger'>IR</button>" +
+					        			"<button type='button' class='btn btn-large btn-inverse'>UV</button>" +
+					        			"</div></ul>");
+						}
     					
-    		out.println("</ul>" +
-                		"</div>");
+    		out.println("</div>");
         	}
         
         // CAMERA CIRCLE & EXPAND-ALL / COLLAPSE-ALL BUTTONS
 		out.println("<div class='camera'></div>" +
-	        		"<button class='toggle btn btn-danger icon-plus' id='toggle'></button>" +
+	        		"<button class='toggle btn btn-primary icon-plus' id='toggle'></button>" +
 	        		
 					"</div>");
-		
-		out.println("<script src='./js/jquery.js'></script>" +
-					"<script src='./js/bootstrap.js'></script>" +
-					"<script src='./js/bootstrap-button.js'></script>");
 		
 		out.println("<script>" +
 					
