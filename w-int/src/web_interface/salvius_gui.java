@@ -96,19 +96,21 @@ public class salvius_gui extends HttpServlet {
 					
 					"$('.toggle').each(function() {" +
 					"$(this).click(function() {" +
-					"$(this).toggleClass('btn-danger icon-minus', 'btn-success icon-plus');" +
+					"$(this).toggleClass('btn-success icon-minus');" +
 					"if ($('.rotate').hasClass('open')) {" +
 					"$('.rotate').removeClass('open');" +
-					"}" +
-					"else {" +
-					"$('.rotate').each(function() {" +
-					"$(this).click(function() {" +
-					"$(this).toggleClass('open');" +
-					"});" +
-					"});" +
+					"} else {" +
 					"$('.rotate').addClass('open');" +
 					"}" +
 					"});" +
+					"});" +
+					
+					"$('.tab').click(function() {" +
+					"if ($(this).parent('div').hasClass('open')) {" +
+					"$(this).parent('div').removeClass('open');" +
+					"} else {" +
+					"$(this).parent('div').addClass('open');" +
+					"}" +
 					"});" +
 					
 					"$(document).ready(function() {" +
