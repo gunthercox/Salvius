@@ -101,6 +101,11 @@ public class salvius_gui extends HttpServlet {
 					"$('.rotate').removeClass('open');" +
 					"}" +
 					"else {" +
+					"$('.rotate').each(function() {" +
+					"$(this).click(function() {" +
+					"$(this).toggleClass('open');" +
+					"});" +
+					"});" +
 					"$('.rotate').addClass('open');" +
 					"}" +
 					"});" +
