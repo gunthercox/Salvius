@@ -59,6 +59,8 @@ margin-left:-50px;
 background:transparent;
 }
 
+.tts{top:30%!important;left:-80%!important;}
+
 .clearfix {
   *zoom: 1;
 }
@@ -2304,7 +2306,7 @@ table th[class*="span"],
 
 .dropdown-menu {
 position:absolute!important;
-top:50%!important;left:50%!important;
+top:50%;left:50%;
 min-height:70px;
 min-width:100px;
 margin-top:-320px;

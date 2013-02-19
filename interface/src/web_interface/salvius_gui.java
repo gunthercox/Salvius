@@ -21,9 +21,9 @@ public class salvius_gui extends HttpServlet {
 	    {"Speech", "icon-volume-up", ""},
 	    {"Write", "icon-pencil", ""},
 	    {"Science", "icon-beaker", ""},
-	    {"Eye", "icon-move", ""},
-	    {"Something", "icon-book", ""},
-	    {"Mode", "icon-off", ""}
+	    {"Signal", "icon-signal", ""},
+	    {"Sensor readings", "icon-bar-chart", ""},
+	    {"Power", "icon-off", ""}
 	    };
     
     public salvius_gui() {
@@ -54,15 +54,20 @@ public class salvius_gui extends HttpServlet {
         	// GIVE THE TAB AN ID NUMBER
         	tab[i][2] = Integer.toString(i);
         	
-        	// CREATE THE PRIMARY TAB RING
+        	// CREATE THE PRIMARY TAB RING-webkit-transform: rotate(-120deg);
     		out.println("<div class='rotate' style='-webkit-transform:rotate(" + ((360 / tab.length) * i) + "deg);'>" +
                 		"<div class='tab btn btn-inverse dropdown' id='" + tab[i][2] + "' title='" + tab[i][0] + "' " + 
                 		"data-toggle='dropdown'>" +
                 		"<i class='" + tab[i][1] + "'></i></div>");
     		
+    					// HEAD CONTROL
+    					if (true) {
+    						// OVERLAY HEAD NAVIGATION ON CAMERA IMAGE
+    					}
+    		
 						// OPERATING MODE
 						if (i == 1) {					        
-					        out.println("<ul class='dropdown-menu' role='menu' aria-labelledby='dLabel'>" +
+					        out.println("<ul class='dropdown-menu' role='menu'>" +
 					        			"<div class='btn-group btn-group-vertical' data-toggle='buttons-radio'>" +
 					        			"<button type='button' class='btn btn-action'>Atonomus</button>" +
 					        			"<button type='button' class='btn btn-success'>Assisted</button>" +
@@ -72,11 +77,19 @@ public class salvius_gui extends HttpServlet {
     		
 					    // LIGHTS
 						if (i == 2) {
-					        out.println("<ul class='dropdown-menu' role='menu' aria-labelledby='dLabel'>" +
+					        out.println("<ul class='dropdown-menu' role='menu'>" +
 					        			"<div class='btn-group' data-toggle='buttons-checkbox'>" +
 					        			"<button type='button' class='btn btn-large btn-danger'>IR</button>" +
 					        			"<button type='button' class='btn btn-large btn-inverse'>UV</button>" +
 					        			"</div></ul>");
+						}
+						
+						// TEXT TO SPEECH
+						if (i == 3) {
+							out.println("<ul class='dropdown-menu tts' style='-webkit-transform:rotate(" + ((360 / tab.length) * (-i)) + "deg);'>" +
+										"<div class='well well-small'>" +
+										"<input type='text' placeholder='Enter text...'>" +
+										"</div></ul>");
 						}
     					
     		out.println("</div>");
@@ -84,7 +97,7 @@ public class salvius_gui extends HttpServlet {
         
         // CAMERA CIRCLE & EXPAND-ALL / COLLAPSE-ALL BUTTONS
 		out.println("<div class='camera'></div>" +
-	        		"<button class='toggle btn btn-primary icon-plus' id='toggle'></button>" +
+	        		"<button class='toggle btn btn-primary icon-folder-close' id='toggle'></button>" +
 	        		
 					"</div>");
 		
@@ -92,7 +105,7 @@ public class salvius_gui extends HttpServlet {
 					
 					"$('.toggle').each(function() {" +
 					"$(this).click(function() {" +
-					"$(this).toggleClass('btn-success icon-minus');" +
+					"$(this).toggleClass('btn-success icon-folder-open');" +
 					"if ($('.rotate').hasClass('open')) {" +
 					"$('.rotate').removeClass('open');" +
 					"} else {" +
