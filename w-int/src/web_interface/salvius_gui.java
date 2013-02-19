@@ -90,21 +90,19 @@ public class salvius_gui extends HttpServlet {
 		
 		out.println("<script src='./js/jquery.js'></script>" +
 					"<script src='./js/bootstrap.js'></script>" +
-					"<script src='./js/bootstrap-dropdown.js'></script>" +
-					"<script src='./js/bootstrap-popover.js'></script>" +
 					"<script src='./js/bootstrap-button.js'></script>");
 		
 		out.println("<script>" +
-		
-					"$('.tab').each(function() {" +
-					"$(this).click(function() {" +
-					"$(this).toggleClass('open');" +
-					"});" +
-					"});" +
 					
 					"$('.toggle').each(function() {" +
 					"$(this).click(function() {" +
 					"$(this).toggleClass('btn-danger icon-minus', 'btn-success icon-plus');" +
+					"if ($('.rotate').hasClass('open')) {" +
+					"$('.rotate').removeClass('open');" +
+					"}" +
+					"else {" +
+					"$('.rotate').addClass('open');" +
+					"}" +
 					"});" +
 					"});" +
 					
