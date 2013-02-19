@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<server auto-publish-setting="2" auto-publish-time="1" configuration-id="/Servers/Tomcat v7.0 Server at localhost-config" deployDir="wtpwebapps" hostname="localhost" id="Tomcat v7.0 Server at localhost" name="Tomcat v7.0 Server at localhost" runtime-id="Apache Tomcat v7.0" server-type="org.eclipse.jst.server.tomcat.70" server-type-id="org.eclipse.jst.server.tomcat.70" start-timeout="45" stop-timeout="15" testEnvironment="true" timestamp="8">
-  <list key="modules" value0="w-int::org.eclipse.jst.jee.server:w-int::jst.web::3.0"/>
+<server auto-publish-setting="2" auto-publish-time="1" configuration-id="/Servers/Tomcat v7.0 Server at localhost-config" deployDir="wtpwebapps" hostname="localhost" id="Tomcat v7.0 Server at localhost" name="Tomcat v7.0 Server at localhost" runtime-id="Apache Tomcat v7.0" server-type="org.eclipse.jst.server.tomcat.70" server-type-id="org.eclipse.jst.server.tomcat.70" start-timeout="45" stop-timeout="15" testEnvironment="true" timestamp="9">
+  <list key="modules" value0="www::org.eclipse.jst.jee.server:www::jst.web::3.0"/>
 </server>
