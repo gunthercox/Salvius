@@ -106,6 +106,19 @@ public class salvius_gui extends HttpServlet {
 										"</div></ul>");
 						}
 						
+						// SENSOR READINGS
+						if (i == 7) {
+							out.println("<ul class='dropdown-menu sensor' style='-webkit-transform:rotate(" + ((360 / tab.length) * (-i)) + "deg);'>" +
+										"<table class='table table-striped'>" +
+							            "<thead>" +
+							            "<tr><th>ID</th><th>Sensor</th><th>Value</th></tr></thead>" +
+							            "<tbody>" +
+							            "<tr><td>~1</td><td>PIR</td><td>51.5 W</td></tr>" +
+							            "<tr><td>~2</td><td>Light</td><td>61.2 Lm</td></tr>" +
+							            "<tr><td>A0</td><td>Sound</td><td>0.2 dB</td></tr>" +
+							            "</tbody></table></ul>");
+						}
+						
 					    // POWER
 						if (i == 8) {
 					        out.println("<ul class='dropdown-menu' role='menu'>" +
