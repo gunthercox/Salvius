@@ -1,5 +1,7 @@
 package web_interface;
 
+import java.awt.MouseInfo;
+import java.awt.Point;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -54,15 +56,19 @@ public class salvius_gui extends HttpServlet {
         	// GIVE THE TAB AN ID NUMBER
         	tab[i][2] = Integer.toString(i);
         	
-        	// CREATE THE PRIMARY TAB RING-webkit-transform: rotate(-120deg);
+        	// CREATE THE PRIMARY TAB RING
     		out.println("<div class='rotate' style='-webkit-transform:rotate(" + ((360 / tab.length) * i) + "deg);'>" +
                 		"<div class='tab btn btn-inverse dropdown' id='" + tab[i][2] + "' title='" + tab[i][0] + "' " + 
                 		"data-toggle='dropdown'>" +
                 		"<i class='" + tab[i][1] + "'></i></div>");
     		
+    					// THIS WILL BECOME A CASE SELECT:
+    		
     					// HEAD CONTROL
-    					if (true) {
+    					if (i == 0) {
     						// OVERLAY HEAD NAVIGATION ON CAMERA IMAGE
+    						out.println("<ul class='dropdown-menu' role='menu'>" +
+    						"<p class='text-center'>Click a point on the view screen to center it.</p></ul>");
     					}
     		
 						// OPERATING MODE
@@ -71,7 +77,7 @@ public class salvius_gui extends HttpServlet {
 					        			"<div class='btn-group btn-group-vertical' data-toggle='buttons-radio'>" +
 					        			"<button type='button' class='btn btn-action'>Atonomus</button>" +
 					        			"<button type='button' class='btn btn-success'>Assisted</button>" +
-					        			"<button type='button' class='btn btn-warning'>Teleoperated</button>" +
+					        			"<button type='button' class='btn btn-warning active'>Teleoperated</button>" +
 					        			"</div></ul>");
 						}
     		
@@ -91,17 +97,44 @@ public class salvius_gui extends HttpServlet {
 										"<input type='text' placeholder='Enter text...'>" +
 										"</div></ul>");
 						}
+						
+						// HAND-WRITING
+						if (i == 4) {
+							out.println("<ul class='dropdown-menu txt' style='-webkit-transform:rotate(" + ((360 / tab.length) * (-i)) + "deg);'>" +
+										"<div class='well well-small'>" +
+										"<input type='text' placeholder='Enter text...'>" +
+										"</div></ul>");
+						}
+						
+					    // POWER
+						if (i == 8) {
+					        out.println("<ul class='dropdown-menu' role='menu'>" +
+					        			"<div class='btn-group' data-toggle='buttons-radio'>" +
+					        			"<button type='button' class='btn btn-large active'>" +
+					        			"<i class='icon-circle'></i></button>" +
+					        			"<button type='button' class='btn btn-large'><i class='icon-circle-blank'></i></button>" +
+					        			"</div>" +
+					        			"<p class='text-center'>Battery: " + "33.05%" + "</p>" +
+					        			"</ul>");
+						}
     					
     		out.println("</div>");
         	}
         
-        // CAMERA CIRCLE & EXPAND-ALL / COLLAPSE-ALL BUTTONS
-		out.println("<div class='camera'></div>" +
-	        		"<button class='toggle btn btn-primary icon-folder-close' id='toggle'></button>" +
+        // MOUSE CLICKS ON VIEW SCREEN
+        Point p = MouseInfo.getPointerInfo().getLocation();
+        
+        // CAMERA FEED & EXPAND-ALL / COLLAPSE-ALL BUTTONS
+		out.println("<img class='camera' src='./img/img.jpg' />" +
+	        		"<button class='toggle btn btn-primary icon-folder-close' id='toggle' data-toggle='button'></button>" +
 	        		
 					"</div>");
 		
 		out.println("<script>" +
+		
+					"$('.camera').click(function() {" +
+					"return confirm('" + p.y + "');" +
+					"});" +
 					
 					"$('.toggle').each(function() {" +
 					"$(this).click(function() {" +
@@ -128,7 +161,9 @@ public class salvius_gui extends HttpServlet {
 					"</script>");
 		
         out.println("</body></html>");
-			
+        
+		// CLOSE STREAM
+        out.close();
 	}
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
