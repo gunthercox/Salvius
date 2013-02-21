@@ -99,6 +99,10 @@ public class Calculate {
 	return length_of_base * width_of_side;
 	}
 	
+	// TIME CONVERSIONS
+	public static final int SECONDS_PER_MONTH = 60*60*24*30;
+	public static final int SECONDS_PER_YEAR = 60*60*24*365;
+	
 	// CALCULATE PI
     public static double calc_pi() {
 
