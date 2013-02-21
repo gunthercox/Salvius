@@ -42,103 +42,93 @@ public class salvius_gui extends HttpServlet {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
         
-        out.println("<html><head><meta http-equiv='X-UA-Compatible' content='IE=9' /><title>Interface</title></head>" +
-        		"<link rel='stylesheet' type='text/css' href='./css/font-awesome.min.css' />" +
-        		"<link rel='stylesheet' type='text/css' href='./css/bootstrap.css' />" +
-        		"<script src='./js/jquery.js'></script>" +
-				"<script src='./js/bootstrap.js'></script>" +
-				"<script src='./js/bootstrap-button.js'></script>" +
-        		"<body>"+        		
-        		"<div class='circle'>");
+        out.println(Utilities.head("Interface") +
+        		"<body><div class='circle'>");
         
+        // CREATE THE PRIMARY TAB RING
         for (int i = 0; i < tab.length; i++) {
         	
         	// GIVE THE TAB AN ID NUMBER
         	tab[i][2] = Integer.toString(i);
         	
-        	// CREATE THE PRIMARY TAB RING
-    		out.println("<div class='rotate' style='-webkit-transform:rotate(" + ((360 / tab.length) * i) + "deg);'>" +
-                		"<div class='tab btn btn-inverse dropdown' id='" + tab[i][2] + "' title='" + tab[i][0] + "' " + 
-                		"data-toggle='dropdown'>" +
-                		"<i class='" + tab[i][1] + "'></i></div>");
+    		out.println(Utilities.tab(tab[i][1], tab.length, i, tab[i][2], tab[i][0], ""));
     		
-    					// THIS WILL BECOME A CASE SELECT:
+			// THIS WILL BECOME A CASE SELECT
+			// OR, --> FOR X IN TAB <--
+	
+			// HEAD CONTROL
+			if (i == 0) {
+				// OVERLAY HEAD NAVIGATION ON CAMERA IMAGE
+				out.println("<ul class='dropdown-menu' role='menu'>" +
+				"<p class='text-center'>Click a point on the view screen to center it.</p></ul>");
+			}
     		
-    					// HEAD CONTROL
-    					if (i == 0) {
-    						// OVERLAY HEAD NAVIGATION ON CAMERA IMAGE
-    						out.println("<ul class='dropdown-menu' role='menu'>" +
-    						"<p class='text-center'>Click a point on the view screen to center it.</p></ul>");
-    					}
-    		
-						// OPERATING MODE
-						if (i == 1) {					        
-					        out.println("<ul class='dropdown-menu' role='menu'>" +
-					        			"<div class='btn-group btn-group-vertical' data-toggle='buttons-radio'>" +
-					        			"<button type='button' class='btn btn-action'>Atonomus</button>" +
-					        			"<button type='button' class='btn btn-success'>Assisted</button>" +
-					        			"<button type='button' class='btn btn-warning active'>Teleoperated</button>" +
-					        			"</div></ul>");
-						}
-    		
-					    // LIGHTS
-						if (i == 2) {
-					        out.println("<ul class='dropdown-menu' role='menu'>" +
-					        			"<div class='btn-group' data-toggle='buttons-checkbox'>" +
-					        			"<button type='button' class='btn btn-large btn-danger'>IR</button>" +
-					        			"<button type='button' class='btn btn-large btn-inverse'>UV</button>" +
-					        			"</div></ul>");
-						}
-						
-						// TEXT TO SPEECH
-						if (i == 3) {
-							out.println("<ul class='dropdown-menu tts' style='-webkit-transform:rotate(" + ((360 / tab.length) * (-i)) + "deg);'>" +
-										"<div class='well well-small'>" +
-										"<input type='text' placeholder='Enter text...'>" +
-										"</div></ul>");
-						}
-						
-						// HAND-WRITING
-						if (i == 4) {
-							out.println("<ul class='dropdown-menu txt' style='-webkit-transform:rotate(" + ((360 / tab.length) * (-i)) + "deg);'>" +
-										"<div class='well well-small'>" +
-										"<input type='text' placeholder='Enter text...'>" +
-										"</div></ul>");
-						}
-						
-						// SENSOR READINGS
-						if (i == 7) {
-							out.println("<ul class='dropdown-menu sensor' style='-webkit-transform:rotate(" + ((360 / tab.length) * (-i)) + "deg);'>" +
-										"<table class='table table-striped'>" +
-							            "<thead>" +
-							            "<tr><th>ID</th><th>Sensor</th><th>Value</th></tr></thead>" +
-							            "<tbody>" +
-							            "<tr><td>~1</td><td>PIR</td><td>51.5 W</td></tr>" +
-							            "<tr><td>~2</td><td>Light</td><td>61.2 Lm</td></tr>" +
-							            "<tr><td>A0</td><td>Sound</td><td>0.2 dB</td></tr>" +
-							            "</tbody></table></ul>");
-						}
-						
-					    // POWER
-						if (i == 8) {
-					        out.println("<ul class='dropdown-menu' role='menu'>" +
-					        			"<div class='btn-group' data-toggle='buttons-radio'>" +
-					        			"<button type='button' class='btn btn-large active'>" +
-					        			"<i class='icon-circle'></i></button>" +
-					        			"<button type='button' class='btn btn-large'><i class='icon-circle-blank'></i></button>" +
-					        			"</div>" +
-					        			"<p class='text-center'>Battery: " + "33.05%" + "</p>" +
-					        			"</ul>");
-						}
+			// OPERATING MODE
+			if (i == 1) {					        
+		        out.println("<ul class='dropdown-menu' role='menu'>" +
+		        			"<div class='btn-group btn-group-vertical' data-toggle='buttons-radio'>" +
+		        			"<button type='button' class='btn btn-action'>Atonomus</button>" +
+		        			"<button type='button' class='btn btn-success'>Assisted</button>" +
+		        			"<button type='button' class='btn btn-warning active'>Teleoperated</button>" +
+		        			"</div></ul>");
+			}
+
+		    // LIGHTS
+			if (i == 2) {
+		        out.println("<ul class='dropdown-menu' role='menu'>" +
+		        			"<div class='btn-group' data-toggle='buttons-checkbox'>" +
+		        			"<button type='button' class='btn btn-large btn-danger'>IR</button>" +
+		        			"<button type='button' class='btn btn-large btn-inverse'>UV</button>" +
+		        			"</div></ul>");
+			}
+			
+			// TEXT TO SPEECH
+			if (i == 3) {
+				out.println("<ul class='dropdown-menu tts' style='-webkit-transform:rotate(" + ((360 / tab.length) * (-i)) + "deg);'>" +
+							"<div class='well well-small'>" +
+							"<input type='text' placeholder='Enter text...'>" +
+							"</div></ul>");
+			}
+			
+			// HAND-WRITING
+			if (i == 4) {
+				out.println("<ul class='dropdown-menu txt' style='-webkit-transform:rotate(" + ((360 / tab.length) * (-i)) + "deg);'>" +
+							"<div class='well well-small'>" +
+							"<input type='text' placeholder='Enter text...'>" +
+							"</div></ul>");
+			}
+			
+			// SENSOR READINGS
+			if (i == 7) {
+				out.println("<ul class='dropdown-menu sensor' style='-webkit-transform:rotate(" + ((360 / tab.length) * (-i)) + "deg);'>" +
+							"<table class='table table-striped'>" +
+				            "<thead>" +
+				            "<tr><th>ID</th><th>Sensor</th><th>Value</th></tr></thead>" +
+				            "<tbody>" +
+				            "<tr><td>~1</td><td>PIR</td><td>51.5 W</td></tr>" +
+				            "<tr><td>~2</td><td>Light</td><td>61.2 Lm</td></tr>" +
+				            "<tr><td>A0</td><td>Sound</td><td>0.2 dB</td></tr>" +
+				            "</tbody></table></ul>");
+			}
+			
+		    // POWER
+			if (i == 8) {
+		        out.println("<ul class='dropdown-menu' role='menu'>" +
+		        			"<div class='btn-group' data-toggle='buttons-radio'>" +
+		        			"<button type='button' class='btn btn-large active'>" +
+		        			"<i class='icon-circle'></i></button>" +
+		        			"<button type='button' class='btn btn-large'><i class='icon-circle-blank'></i></button>" +
+		        			"</div>" +
+		        			"<p class='text-center'>Battery: " + "33.05%" + "</p>" +
+		        			"</ul>");
+			}
     					
     		out.println("</div>");
         	}
         
-        // MOUSE CLICKS ON VIEW SCREEN
-        Point p = MouseInfo.getPointerInfo().getLocation();
-        
         // CAMERA FEED & EXPAND-ALL / COLLAPSE-ALL BUTTONS
-		out.println("<img class='camera' src='./img/img.jpg' />" +
+		out.println("<h2 class='text-center' id='coordinates'>0, 0</h2>" +
+					"<img id='camera' src='./img/img.jpg' />" +
 	        		"<button class='toggle btn btn-primary icon-folder-close' id='toggle' data-toggle='button'></button>" +
 	        		
 					"</div>");
@@ -146,7 +136,7 @@ public class salvius_gui extends HttpServlet {
 		out.println("<script>" +
 		
 					"$('.camera').click(function() {" +
-					"return confirm('" + p.y + "');" +
+					"return confirm('" + "" + "');" +
 					"});" +
 					
 					"$('.toggle').each(function() {" +
@@ -168,7 +158,10 @@ public class salvius_gui extends HttpServlet {
 					"}" +
 					"});" +
 					
-					"$(document).ready(function() {" +
+					"jQuery(document).ready(function() {" +
+					   "$('#camera').click(function(e){" +
+					   "$('#coordinates').html(e.pageX +', '+ e.pageY);" +
+					   "});" + 
 					"});" +
 					
 					"</script>");
