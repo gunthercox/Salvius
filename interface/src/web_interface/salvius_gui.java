@@ -1,7 +1,5 @@
 package web_interface;
 
-import java.awt.MouseInfo;
-import java.awt.Point;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -58,28 +56,17 @@ public class salvius_gui extends HttpServlet {
 	
 			// HEAD CONTROL
 			if (i == 0) {
-				// OVERLAY HEAD NAVIGATION ON CAMERA IMAGE
-				out.println("<ul class='dropdown-menu' role='menu'>" +
-				"<p class='text-center'>Click a point on the view screen to center it.</p></ul>");
+				out.println(Robot_Head.tab);
 			}
     		
 			// OPERATING MODE
 			if (i == 1) {					        
-		        out.println("<ul class='dropdown-menu' role='menu'>" +
-		        			"<div class='btn-group btn-group-vertical' data-toggle='buttons-radio'>" +
-		        			"<button type='button' class='btn btn-action'>Atonomus</button>" +
-		        			"<button type='button' class='btn btn-success'>Assisted</button>" +
-		        			"<button type='button' class='btn btn-warning active'>Teleoperated</button>" +
-		        			"</div></ul>");
+		        out.println(Control_Mode.tab);
 			}
 
 		    // LIGHTS
 			if (i == 2) {
-		        out.println("<ul class='dropdown-menu' role='menu'>" +
-		        			"<div class='btn-group' data-toggle='buttons-checkbox'>" +
-		        			"<button type='button' class='btn btn-large btn-danger'>IR</button>" +
-		        			"<button type='button' class='btn btn-large btn-inverse'>UV</button>" +
-		        			"</div></ul>");
+		        out.println(Robot_Lights.tab);
 			}
 			
 			// TEXT TO SPEECH
@@ -113,14 +100,7 @@ public class salvius_gui extends HttpServlet {
 			
 		    // POWER
 			if (i == 8) {
-		        out.println("<ul class='dropdown-menu' role='menu'>" +
-		        			"<div class='btn-group' data-toggle='buttons-radio'>" +
-		        			"<button type='button' class='btn btn-large active'>" +
-		        			"<i class='icon-circle'></i></button>" +
-		        			"<button type='button' class='btn btn-large'><i class='icon-circle-blank'></i></button>" +
-		        			"</div>" +
-		        			"<p class='text-center'>Battery: " + "33.05%" + "</p>" +
-		        			"</ul>");
+		        out.println(Power.tab);
 			}
     					
     		out.println("</div>");
