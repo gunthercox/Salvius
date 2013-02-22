@@ -107,16 +107,22 @@ public class salvius_gui extends HttpServlet {
         	}
         
         // CAMERA FEED & EXPAND-ALL / COLLAPSE-ALL BUTTONS
-		out.println("<h2 class='text-center' id='coordinates'>0, 0</h2>" +
-					"<img id='camera' src='./img/img.jpg' />" +
-	        		"<button class='toggle btn btn-primary icon-folder-close' id='toggle' data-toggle='button'></button>" +
-	        		
+		out.println("<img id='camera' src='./img/img.jpg' />" +
+					"<div id='dot'></div>" +
+					"<button class='toggle btn btn-primary icon-folder-close' id='toggle' data-toggle='button'></button>" +
 					"</div>");
 		
-		out.println("<script>" +
+		out.println("<script>");
 		
-					"$('.camera').click(function() {" +
-					"return confirm('" + "" + "');" +
+		out.println(Power.script);
+					
+		out.println("$('#camera').click(function(e) {" +
+					"if ($('.rotate').hasClass('open')) {" +
+					"$('#dot').addClass('dot');" +
+					"$('.dot').css({'top':e.pageY, 'left':e.pageX});" +
+					"} else {" +
+					"$('#dot').removeClass('dot');" +
+					"}" +
 					"});" +
 					
 					"$('.toggle').each(function() {" +
@@ -136,12 +142,6 @@ public class salvius_gui extends HttpServlet {
 					"} else {" +
 					"$(this).parent('div').addClass('open');" +
 					"}" +
-					"});" +
-					
-					"jQuery(document).ready(function() {" +
-					   "$('#camera').click(function(e){" +
-					   "$('#coordinates').html(e.pageX +', '+ e.pageY);" +
-					   "});" + 
 					"});" +
 					
 					"</script>");
