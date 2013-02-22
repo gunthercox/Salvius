@@ -20,8 +20,8 @@ public class salvius_gui extends HttpServlet {
 	    {"Lights", "icon-lightbulb", ""},
 	    {"Speech", "icon-volume-up", ""},
 	    {"Write", "icon-pencil", ""},
-	    {"Science", "icon-beaker", ""},
-	    {"Signal", "icon-signal", ""},
+	    {"Tools", "icon-wrench", ""},
+	    {"Conversation", "icon-globe", ""},
 	    {"Sensor readings", "icon-bar-chart", ""},
 	    {"Power", "icon-off", ""}
 	    };
@@ -118,10 +118,10 @@ public class salvius_gui extends HttpServlet {
 					
 		out.println("$('#camera').click(function(e) {" +
 					"if ($('.rotate').hasClass('open')) {" +
-					"$('#dot').addClass('dot');" +
+					"$('#dot').addClass('dot icon-screenshot');" +
 					"$('.dot').css({'top':e.pageY, 'left':e.pageX});" +
 					"} else {" +
-					"$('#dot').removeClass('dot');" +
+					"$('#dot').removeClass('dot icon-screenshot');" +
 					"}" +
 					"});" +
 					
