@@ -27,9 +27,11 @@ height:300px;
 width:300px;
 margin-top:-150px;
 margin-left:-150px;
-background:#AAA;
 border-radius:50%;
+background:url(../img/img.jpg);
+background-size:cover;
 }
+.transparent{opacity:0.4;background:#FFF;border-radius:50%;height:100%;width:100%}
 .dot{
 position:fixed;
 top:50%;left:50%;
