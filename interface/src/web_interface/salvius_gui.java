@@ -26,6 +26,14 @@ public class salvius_gui extends HttpServlet {
 	    {"Power", "icon-off", ""}
 	    };
     
+	// ARRAY OF ARDUINO INPUT VALUES
+	public static String[][] sensorData = {
+		{"ID", "Sensor", "Value"},
+		{"~1", "PIR", "51.5 W"},
+		{"~2", "Light", "61.2 Lm"},
+		{"A0", "Sound", "0.2 dB"}
+	};
+	
     public salvius_gui() {
         super();
     }
@@ -71,37 +79,27 @@ public class salvius_gui extends HttpServlet {
 			
 			// TEXT TO SPEECH
 			if (i == 3) {
-				out.println("<ul class='dropdown-menu tts' style='-webkit-transform:rotate(" + ((360 / tab.length) * (-i)) + "deg);'>" +
-							"<div class='well well-small'>" +
-							"<input type='text' placeholder='Enter text...'>" +
-							"<button class='icon-play'></button>" +
-							"<button class='icon-pause'></button>" +
-							"<button class='icon-stop'></button>" +
-							"</div></ul>");
+				out.println("<ul class='dropdown-menu well tts' style='-webkit-transform:rotate(" + ((360 / tab.length) * (-i)) + "deg);'>" +
+							"<div class='row'></div><div class='row span4'>" +
+							"<input type='text' class='span3' placeholder='Enter text to speak'>");
+				out.println(Utilities.mediaControler());
+				out.println("</div></ul>");
 			}
 			
 			// HAND-WRITING
 			if (i == 4) {
-				out.println("<ul class='dropdown-menu txt' style='-webkit-transform:rotate(" + ((360 / tab.length) * (-i)) + "deg);'>" +
-							"<div class='well well-small'>" +
-							"<input type='text' placeholder='Enter text...'>" +
-							"<button class='icon-play'></button>" +
-							"<button class='icon-pause'></button>" +
-							"<button class='icon-stop'></button>" +
-							"</div></ul>");
+				out.println("<ul class='dropdown-menu well txt' style='-webkit-transform:rotate(" + ((360 / tab.length) * (-i)) + "deg);'>" +
+							"<div class='row span4'>" +
+							"<input type='text' class='span3' placeholder='Enter text to write'>");
+				out.println(Utilities.mediaControler());
+				out.println("</div></ul>");
 			}
 			
 			// SENSOR READINGS
 			if (i == 7) {
-				out.println("<ul class='dropdown-menu sensor' style='-webkit-transform:rotate(" + ((360 / tab.length) * (-i)) + "deg);'>" +
-							"<table class='table table-striped'>" +
-				            "<thead>" +
-				            "<tr><th>ID</th><th>Sensor</th><th>Value</th></tr></thead>" +
-				            "<tbody>" +
-				            "<tr><td>~1</td><td>PIR</td><td>51.5 W</td></tr>" +
-				            "<tr><td>~2</td><td>Light</td><td>61.2 Lm</td></tr>" +
-				            "<tr><td>A0</td><td>Sound</td><td>0.2 dB</td></tr>" +
-				            "</tbody></table></ul>");
+				out.println("<ul class='dropdown-menu sensor' style='-webkit-transform:rotate(" + ((360 / tab.length) * (-i)) + "deg);'>");
+				out.println(Utilities.table(sensorData));
+				out.println("</ul>");
 			}
 			
 		    // POWER
