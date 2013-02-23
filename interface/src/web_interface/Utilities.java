@@ -21,11 +21,47 @@ public class Utilities {
 				"</head>");
 	}
 	
+	// CREATE MEDIA BUTTON CONTROLS
 	public static String tab(String icon, int totalTabs, int currentTab, String id, String title, String content) {
 		return("<div class='rotate' style='-webkit-transform:rotate(" + ((360 / totalTabs) * currentTab) + "deg);'>" +
 				"<div class='tab btn btn-inverse dropdown' id='" + id + "' title='" + title + "' " + 
-                		"data-toggle='dropdown'>" +
-                		"<i class='" + icon + "'></i></div>");
+				"data-toggle='dropdown'>" +
+				"<i class='" + icon + "'></i></div>");
+	}
+	
+	// CREATE TABLE FROM 3D ARRAY
+	public static String table(String data[][]) {
+		StringBuffer sb = new StringBuffer();
+		
+		// CREATE TABLE HEAD
+		sb.append("<table class='table table-striped'><thead><tr>");
+		for (int i = 0; i < data[0].length; i++) {
+			sb.append("<th>" + data[0][i] + "</th>");
+		}
+		sb.append("</tr></thead>");
+		
+		// CREATE TABLE BODY
+		sb.append("<tbody>");
+		for (int j = 1; j < data.length; j++) {
+
+			sb.append("<tr>");
+			
+			for (int k = 0; k < data[j].length; k++) {
+				sb.append("<td>" + data[j][k] + "</td>");
+			}
+
+			sb.append("</tr>");
+			
+		}
+		
+		sb.append("</tbody></table>");
+		
+		return sb.toString();
+		
+	}
+	
+	public static String mediaControler() {
+		return("<button class='icon-play'></button><button class='icon-pause'></button><button class='icon-stop'></button>");
 	}
 	
 	  /** Read a parameter with the specified name, convert it to an int,
