@@ -74,6 +74,9 @@ public class salvius_gui extends HttpServlet {
 				out.println("<ul class='dropdown-menu tts' style='-webkit-transform:rotate(" + ((360 / tab.length) * (-i)) + "deg);'>" +
 							"<div class='well well-small'>" +
 							"<input type='text' placeholder='Enter text...'>" +
+							"<button class='icon-play'></button>" +
+							"<button class='icon-pause'></button>" +
+							"<button class='icon-stop'></button>" +
 							"</div></ul>");
 			}
 			
@@ -82,6 +85,9 @@ public class salvius_gui extends HttpServlet {
 				out.println("<ul class='dropdown-menu txt' style='-webkit-transform:rotate(" + ((360 / tab.length) * (-i)) + "deg);'>" +
 							"<div class='well well-small'>" +
 							"<input type='text' placeholder='Enter text...'>" +
+							"<button class='icon-play'></button>" +
+							"<button class='icon-pause'></button>" +
+							"<button class='icon-stop'></button>" +
 							"</div></ul>");
 			}
 			
