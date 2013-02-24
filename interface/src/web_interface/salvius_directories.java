@@ -56,13 +56,13 @@ public class salvius_directories extends HttpServlet {
 			
 			// ITEM IS FILE
 			if (listOfFiles[i].isFile()) {
-				out.print("<div class='dir btn btn-inverse dropdown' id='" + i + "' data-toggle='dropdown'>" +
+				out.print("<div class='dir btn btn-inverse dropdown' id='" + i + "' data-toggle='dropdown' style='margin-left:-40px!important'>" +
 						"<i class='icon-file'></i><br />" + listOfFiles[i].getName() + "</div>");
 			} 
 			
 			// ITEM IS FOLDER
 			else {
-				out.print("<div class='dir tab btn btn-inverse dropdown' id='" + i + "data-toggle='dropdown'>" +
+				out.print("<div class='dir tab btn btn-inverse dropdown' id='" + i + "data-toggle='dropdown' style='margin-left:-40px!important'>" +
 						"<i class='icon-folder-close-alt'></i><br />" + listOfFiles[i].getName() + "</div>");
 			}
 			
@@ -70,15 +70,7 @@ public class salvius_directories extends HttpServlet {
 		}
 		
         // CAMERA FEED & EXPAND-ALL / COLLAPSE-ALL BUTTONS
-		out.print("<img id='camera' src='./img/img.jpg' />" +
-				"<div id='dot'></div>" +
-				"<div class='btn-bar btn-toolbar'>" +
-				"<button class='btn btn-primary icon-folder-close' id='toggle' data-toggle='button'></button>" +
-				"<div class='btn-group' data-toggle='buttons-radio'>" +
-		  			"<button type='button' class='btn btn-primary active'>GUI</button>" +
-		  			"<button type='button' class='btn btn-primary'>CLI</button>" +
-		  			"<button href='http://localhost/interface/ftp' type='button' class='btn btn-primary'>FTP</button>" +
-				"</div></div></div>");
+		out.print(Utilities.circle());
 		
 		out.print("</div></body></html>");
 	}

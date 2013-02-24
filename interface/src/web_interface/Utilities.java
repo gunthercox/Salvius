@@ -21,6 +21,20 @@ public class Utilities {
 				"</head>");
 	}
 	
+	public static String circle() {
+		return( "<div id='dot'></div>" +
+				"<div class='btn-bar btn-toolbar'>" +
+				"<button class='btn btn-primary icon-folder-close' id='toggle' data-toggle='button'></button>" +
+				"<div class='btn-group' data-toggle='buttons-radio'>" +
+					"<a href='http://localhost/interface/gui'>" +
+		  			"<button type='button' class='btn btn-primary icon-dashboard active'></button></a>" +
+		  			"<a href='http://localhost/interface/cli'>" +
+		  			"<button type='button' class='btn btn-primary icon-list-alt'></button></a>" +
+		  			"<a href='http://localhost/interface/ftp'>" +
+		  			"<button href='http://localhost/interface/ftp' type='button' class='btn btn-primary icon-sitemap'></button></a>" +
+				"</div></div></div>");
+	}
+	
 	// CREATE MEDIA BUTTON CONTROLS
 	public static String tab(String icon, int totalTabs, int currentTab, String id, String title, String content) {
 		return("<div class='rotate' style='-webkit-transform:rotate(" + ((360 / totalTabs) * currentTab) + "deg);'>" +
