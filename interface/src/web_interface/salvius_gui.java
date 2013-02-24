@@ -116,11 +116,15 @@ public class salvius_gui extends HttpServlet {
         	}
         
         // CAMERA FEED & EXPAND-ALL / COLLAPSE-ALL BUTTONS
-		out.print("<div class='transparent'></div>" +
-				"<img id='camera' src='./img/img.jpg' />" +
+		out.print("<img id='camera' src='./img/img.jpg' />" +
 				"<div id='dot'></div>" +
-				"<button class='toggle btn btn-primary icon-folder-close' id='toggle' data-toggle='button'></button>" +
-				"</div>");
+				"<div class='btn-bar btn-toolbar'>" +
+				"<button class='btn btn-primary icon-folder-close' id='toggle' data-toggle='button'></button>" +
+				"<div class='btn-group' data-toggle='buttons-radio'>" +
+		  			"<button type='button' class='btn btn-primary active'>GUI</button>" +
+		  			"<button type='button' class='btn btn-primary'>CLI</button>" +
+		  			"<button type='button' class='btn btn-primary'>FTP</button>" +
+				"</div></div></div>");
 		
 		out.print("<script>");
 		
@@ -135,7 +139,7 @@ public class salvius_gui extends HttpServlet {
 				"}" +
 				"});" +
 				
-				"$('.toggle').each(function() {" +
+				"$('#toggle').each(function() {" +
 				"$(this).click(function() {" +
 				"$(this).toggleClass('btn-success icon-folder-open');" +
 				"if ($('.rotate').hasClass('open')) {" +
