@@ -31,7 +31,6 @@ border-radius:50%;
 background:url(../img/img.jpg);
 background-size:cover;
 }
-.transparent{opacity:0.4;background:#FFF;border-radius:50%;height:100%;width:100%}
 .dot{
 position:fixed;
 top:50%;left:50%;
@@ -45,7 +44,7 @@ text-shadow: 0.1em 0.1em 0.05em #000;
 border-radius:50%;
 z-index:100;
 }
-.toggle{
+.btn-bar{
 position:absolute!important;
 top:50%;left:50%;
 height:30px!important;
@@ -53,8 +52,8 @@ width:220px!important;
 margin-top:70px!important;
 margin-left:-110px;
 padding:0!important;
-background:#BBB
 }
+.btn-bar .btn {height:30px!important;padding:0 15px}
 #camera{
 position:absolute;
 top:50%;left:50%;
