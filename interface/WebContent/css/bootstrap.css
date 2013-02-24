@@ -19,6 +19,27 @@ margin-left:-50px!important;
 padding:0!important;
 }
 .tab i{font-size:50pt;margin:auto}
+.rotate{
+position:fixed;
+top:50%;left:50%;
+height:320px;
+width:100px;
+margin-top:-160px;
+margin-left:-50px;
+background:transparent;
+}
+
+.dir{
+position:absolute;
+top:50%;left:50%;
+height:70px;
+width:70px;
+margin-top:-230px;
+margin-left:-50px!important;
+padding:0!important;
+overflow:hidden;
+}
+.dir i{font-size:35pt;margin:auto}
 
 .circle{
 position:fixed;
@@ -62,15 +83,6 @@ width:220px;
 margin-top:-100px;
 margin-left:-110px;
 background:#888
-}
-.rotate{
-position:fixed;
-top:50%;left:50%;
-height:320px;
-width:100px;
-margin-top:-160px;
-margin-left:-50px;
-background:transparent;
 }
 
 .tts{top:30%!important;left:-80%!important}

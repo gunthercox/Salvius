@@ -123,7 +123,7 @@ public class salvius_gui extends HttpServlet {
 				"<div class='btn-group' data-toggle='buttons-radio'>" +
 		  			"<button type='button' class='btn btn-primary active'>GUI</button>" +
 		  			"<button type='button' class='btn btn-primary'>CLI</button>" +
-		  			"<button type='button' class='btn btn-primary'>FTP</button>" +
+		  			"<button href='http://localhost/interface/ftp' type='button' class='btn btn-primary'>FTP</button>" +
 				"</div></div></div>");
 		
 		out.print("<script>");
