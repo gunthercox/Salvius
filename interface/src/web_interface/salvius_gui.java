@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/home")
+@WebServlet("/gui")
 public class salvius_gui extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -54,7 +54,7 @@ public class salvius_gui extends HttpServlet {
         PrintWriter out = response.getWriter();
         
         out.print(Utilities.head("Interface") +
-        		"<body><div class='circle'>");
+        		"<body><div class='circle' id='camera'>");
         
         // CREATE THE PRIMARY TAB RING
         for (int i = 0; i < tab.length; i++) {
@@ -116,15 +116,7 @@ public class salvius_gui extends HttpServlet {
         	}
         
         // CAMERA FEED & EXPAND-ALL / COLLAPSE-ALL BUTTONS
-		out.print("<img id='camera' src='./img/img.jpg' />" +
-				"<div id='dot'></div>" +
-				"<div class='btn-bar btn-toolbar'>" +
-				"<button class='btn btn-primary icon-folder-close' id='toggle' data-toggle='button'></button>" +
-				"<div class='btn-group' data-toggle='buttons-radio'>" +
-		  			"<button type='button' class='btn btn-primary active'>GUI</button>" +
-		  			"<button type='button' class='btn btn-primary'>CLI</button>" +
-		  			"<button href='http://localhost/interface/ftp' type='button' class='btn btn-primary'>FTP</button>" +
-				"</div></div></div>");
+		out.print(Utilities.circle());
 		
 		out.print("<script>");
 		
@@ -141,7 +133,7 @@ public class salvius_gui extends HttpServlet {
 				
 				"$('#toggle').each(function() {" +
 				"$(this).click(function() {" +
-				"$(this).toggleClass('btn-success icon-folder-open');" +
+				"$(this).toggleClass('btn-a-primary icon-folder-open');" +
 				"if ($('.rotate').hasClass('open')) {" +
 				"$('.rotate').removeClass('open');" +
 				"} else {" +
