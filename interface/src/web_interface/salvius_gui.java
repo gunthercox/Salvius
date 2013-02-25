@@ -1,5 +1,6 @@
 package web_interface;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -44,6 +45,11 @@ public class salvius_gui extends HttpServlet {
 		//Voice robotVoice = new Voice("kevin16");
 		//robotVoice.say("testing 1 2 3");
 		
+		// ROOT DIRECTORY PATH AND GET LIST OF FOLDERS
+		String path = ".";
+		File folder = new File(path);
+		File[] listOfFiles = folder.listFiles();
+		
 		// PREVENT PAGE FROM BEING CACHED
 		response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
 		response.setHeader("Pragma", "no-cache");
@@ -53,66 +59,94 @@ public class salvius_gui extends HttpServlet {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
         
-        out.print(Utilities.head("Interface") +
-        		"<body><div class='circle' id='camera'>");
+        out.print(Utilities.head("Interface") + "<body><div class='circle' id='camera'>");
         
-        // CREATE THE PRIMARY TAB RING
-        for (int i = 0; i < tab.length; i++) {
+        // CHECK FOR URL PARAMETERS
+        if (request.getParameter("param1").equals("3")) {
         	
-        	// GIVE THE TAB AN ID NUMBER
-        	tab[i][2] = Integer.toString(i);
+    		for (int i = 0; i < listOfFiles.length; i++) {
+    			
+    			out.print("<div class='rotate' style='-webkit-transform:rotate(" + ((360 / listOfFiles.length) * i) + "deg);'>");
+    			
+    			// ITEM IS FILE
+    			if (listOfFiles[i].isFile()) {
+    				out.print("<div class='dir btn btn-inverse dropdown' id='" + i + "' data-toggle='dropdown' style='margin-left:-40px!important'>" +
+    						"<i class='icon-file'></i><br />" + listOfFiles[i].getName() + "</div>");
+    			} 
+    			
+    			// ITEM IS FOLDER
+    			else {
+    				out.print("<div class='dir tab btn btn-inverse dropdown' id='" + i + "data-toggle='dropdown' style='margin-left:-40px!important'>" +
+    						"<i class='icon-folder-close-alt'></i><br />" + listOfFiles[i].getName() + "</div>");
+    			}
+    			
+    			out.print("</div>");
+    		}
         	
-    		out.print(Utilities.tab(tab[i][1], tab.length, i, tab[i][2], tab[i][0], ""));
-    		
-			// THIS WILL BECOME A CASE SELECT
-			// OR, --> FOR X IN TAB <--
+        } else if (request.getParameter("param1").equals("2")) {
+        	
+        	out.print("CLI MODE");
+        	
+        } else {
+	        
+	        // CREATE THE PRIMARY TAB RING
+	        for (int i = 0; i < tab.length; i++) {
+	        	
+	        	// GIVE THE TAB AN ID NUMBER
+	        	tab[i][2] = Integer.toString(i);
+	        	
+	    		out.print(Utilities.tab(tab[i][1], tab.length, i, tab[i][2], tab[i][0], ""));
+	    		
+				// THIS WILL BECOME A CASE SELECT
+				// OR, --> FOR X IN TAB <--
+		
+				// HEAD CONTROL
+				if (i == 0) {
+					out.print(Robot_Head.tab);
+				}
+	    		
+				// OPERATING MODE
+				if (i == 1) {					        
+			        out.print(Control_Mode.tab);
+				}
 	
-			// HEAD CONTROL
-			if (i == 0) {
-				out.print(Robot_Head.tab);
-			}
-    		
-			// OPERATING MODE
-			if (i == 1) {					        
-		        out.print(Control_Mode.tab);
-			}
-
-		    // LIGHTS
-			if (i == 2) {
-		        out.print(Robot_Lights.tab);
-			}
-			
-			// TEXT TO SPEECH
-			if (i == 3) {
-				out.print("<ul class='dropdown-menu well tts' style='-webkit-transform:rotate(" + ((360 / tab.length) * (-i)) + "deg);'>" +
-							"<div class='row'></div><div class='row span4'>" +
-							"<input type='text' class='span3' placeholder='Enter text to speak'>");
-				out.print(Utilities.mediaControler());
-				out.print("</div></ul>");
-			}
-			
-			// HAND-WRITING
-			if (i == 4) {
-				out.print("<ul class='dropdown-menu well txt' style='-webkit-transform:rotate(" + ((360 / tab.length) * (-i)) + "deg);'>" +
-							"<div class='row span4'>" +
-							"<input type='text' class='span3' placeholder='Enter text to write'>");
-				out.print(Utilities.mediaControler());
-				out.print("</div></ul>");
-			}
-			
-			// SENSOR READINGS
-			if (i == 7) {
-				out.print("<ul class='dropdown-menu sensor' style='-webkit-transform:rotate(" + ((360 / tab.length) * (-i)) + "deg);'>");
-				out.print(Utilities.table(sensorData));
-				out.print("</ul>");
-			}
-			
-		    // POWER
-			if (i == 8) {
-		        out.print(Power.tab);
-			}
-    					
-    		out.print("</div>");
+			    // LIGHTS
+				if (i == 2) {
+			        out.print(Robot_Lights.tab);
+				}
+				
+				// TEXT TO SPEECH
+				if (i == 3) {
+					out.print("<ul class='dropdown-menu well tts' style='-webkit-transform:rotate(" + ((360 / tab.length) * (-i)) + "deg);'>" +
+								"<div class='row'></div><div class='row span4'>" +
+								"<input type='text' class='span3' placeholder='Enter text to speak'>");
+					out.print(Utilities.mediaControler());
+					out.print("</div></ul>");
+				}
+				
+				// HAND-WRITING
+				if (i == 4) {
+					out.print("<ul class='dropdown-menu well txt' style='-webkit-transform:rotate(" + ((360 / tab.length) * (-i)) + "deg);'>" +
+								"<div class='row span4'>" +
+								"<input type='text' class='span3' placeholder='Enter text to write'>");
+					out.print(Utilities.mediaControler());
+					out.print("</div></ul>");
+				}
+				
+				// SENSOR READINGS
+				if (i == 7) {
+					out.print("<ul class='dropdown-menu sensor' style='-webkit-transform:rotate(" + ((360 / tab.length) * (-i)) + "deg);'>");
+					out.print(Utilities.table(sensorData));
+					out.print("</ul>");
+				}
+				
+			    // POWER
+				if (i == 8) {
+			        out.print(Power.tab);
+				}
+	    					
+	    		out.print("</div>");
+	        	}
         	}
         
         // CAMERA FEED & EXPAND-ALL / COLLAPSE-ALL BUTTONS

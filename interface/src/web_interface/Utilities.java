@@ -26,11 +26,11 @@ public class Utilities {
 				"<div class='btn-bar btn-toolbar'>" +
 				"<button class='btn btn-primary icon-folder-close' id='toggle' data-toggle='button'></button>" +
 				"<div class='btn-group' data-toggle='buttons-radio'>" +
-					"<a href='http://localhost/interface/gui'>" +
+					"<a href='gui?param1=1'>" +
 		  			"<button type='button' class='btn btn-primary icon-dashboard active'></button></a>" +
-		  			"<a href='http://localhost/interface/cli'>" +
+		  			"<a href='gui?param1=2'>" +
 		  			"<button type='button' class='btn btn-primary icon-list-alt'></button></a>" +
-		  			"<a href='http://localhost/interface/ftp'>" +
+		  			"<a href='gui?param1=3'>" +
 		  			"<button href='http://localhost/interface/ftp' type='button' class='btn btn-primary icon-sitemap'></button></a>" +
 				"</div></div></div>");
 	}
