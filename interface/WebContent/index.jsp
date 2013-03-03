@@ -175,8 +175,8 @@ $('.tab').click(function() {
 <%-- CAMERA FEED & CONTROL BUTTONS --%>
 <div id="dot"></div>
 	<div class="btn-bar btn-toolbar">
-		<button type="submit" name=togglemode value="<% if (tog == 0) { out.print("1"); } else { out.print("0"); } %>" class="btn<% if (tog == 0) { out.print(" btn-success icon-folder-open"); } else { out.print(" btn-primary icon-folder-close"); } %>" id="toggle" data-toggle="button"></button>
-		<div class="btn-group" data-toggle="buttons-radio">
+		<button id="toggle" type="submit" name=togglemode value="<% if (tog == 0) { out.print("1"); } else { out.print("0"); } %>" class="btn<% if (tog == 0) { out.print(" btn-success icon-folder-open"); } else { out.print(" btn-primary icon-folder-close"); } %>"></button>
+		<div class="btn-group">
 			<button type="submit" name=viewmode value=1 class="btn btn-primary icon-dashboard <% if (val == 1) { out.print("active"); } %>"></button>
 			<button type="submit" name=viewmode value=2 class="btn btn-primary icon-list-alt <% if (val == 2) { out.print("active"); } %>"></button>
 			<button type="submit" name=viewmode value=3 class="btn btn-primary icon-sitemap <% if (val == 3) { out.print("active"); } %>"></button>
