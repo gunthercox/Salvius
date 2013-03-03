@@ -1,4 +1,4 @@
-package web_interface;
+package com;
 
 //import com.google.code.chatterbotapi.*;
 //import com.sun.speech.freetts.VoiceManager;

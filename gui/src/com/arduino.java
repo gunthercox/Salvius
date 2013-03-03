@@ -1,4 +1,4 @@
-package web_interface;
+package com;
 
 import java.io.BufferedReader;
 import java.io.IOException;
