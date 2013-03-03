@@ -11,8 +11,7 @@ public class Utilities {
 				"<link rel='stylesheet' type='text/css' href='./css/font-awesome.min.css' />" +
 				"<link rel='stylesheet' type='text/css' href='./css/bootstrap.css' />" +
 				"<script src='./js/jquery.js'></script>" +
-				"<script src='./js/bootstrap.js'></script>" +
-				"<script src='./js/bootstrap-button.js'></script>" );
+				"<script src='./js/bootstrap.js'></script>");
 	}
 	
 	// TABS
