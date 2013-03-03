@@ -12,10 +12,23 @@
 <% String path = "."; File folder = new File(path); File[] listOfFiles = folder.listFiles(); %>
 
 <%-- SESSION VARIABLES --%>
-<% String view = request.getParameter( "viewmode" ); session.setAttribute( "view", view ); %>
-<% String toggle = request.getParameter( "togglemode" ); session.setAttribute( "toggle", toggle ); %>
+<% String view = request.getParameter("viewmode"); session.setAttribute("view", view); %>
+<% String toggle = request.getParameter("togglemode"); session.setAttribute("toggle", toggle); %>
 
 <%-- INITIALIZE SESSION VARIABLES IF NULL OR NECESSARY --%>
+<% int val = 0;
+try {
+	
+	// TRY TO CONVERT THE VIEW STRING TO AN INTEGER
+	val = Integer.parseInt(view);
+	
+  } catch (NumberFormatException e) {
+	  
+	// IF VIEW IS NULL SET IT TO ZERO
+    val = 1;
+    session.setAttribute("view", "1");
+} %>
+
 <% int tog = 0;
 try {
 	
@@ -26,18 +39,7 @@ try {
 	  
 	// IF TOGGLE STRING IS NULL SET IT TO ZERO
     tog = 0;
-} %>
-
-<% int val = 0;
-try {
-	
-	// TRY TO CONVERT THE VIEW STRING TO AN INTEGER
-	val = Integer.parseInt(view);
-	
-  } catch (NumberFormatException e) {
-	  
-	// IF VIEW STRING IS NULL SET IT TO ZERO
-    val = 0;
+    session.setAttribute("toggle", "0");
 } %>
 
 <%-- SESSION VARIABLE OUTPUT --%>
