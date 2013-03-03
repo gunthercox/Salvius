@@ -8,7 +8,7 @@ Salvius is an open source humanoid robot. For details about this project visit:
 I don't always set up servers but when I do, I choose Ubuntu.
 This project runs on a Tomcat Java Server which you can choose during the initial installation of Ubuntu Server edition. It is also helpful to install OpenSSH at the same time.
 
-* The files in the interface directory go on the robot's server.
+* The files in the gui directory go on the robot's server.
 * The java file in the interaction directory gets compiled as a jar and runs on the robots computer.
 * The Arduino sketch in the arduino directory gets uploaded to the Arduino board.
 
