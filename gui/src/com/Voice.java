@@ -1,4 +1,4 @@
-package web_interface;
+package com;
 
 import com.sun.speech.freetts.FreeTTS;
 import com.sun.speech.freetts.VoiceManager;

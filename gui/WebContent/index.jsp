@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<% out.print(web_interface.Utilities.head()); %>
+<% out.print(com.Utilities.head()); %>
 </head>
 <body><form method="post" action="">
 
@@ -16,50 +16,27 @@
 <% String toggle = request.getParameter("togglemode"); session.setAttribute("toggle", toggle); %>
 
 <%-- INITIALIZE SESSION VARIABLES IF NULL OR NECESSARY --%>
-<% int val = 0;
-try {
-	
-	// TRY TO CONVERT THE VIEW STRING TO AN INTEGER
-	val = Integer.parseInt(view);
-	
-  } catch (NumberFormatException e) {
-	  
-	// IF VIEW IS NULL SET IT TO ZERO
-    val = 1;
-    session.setAttribute("view", "1");
-} %>
-
-<% int tog = 0;
-try {
-	
-	// TRY TO CONVERT THE TOGGLE STRING TO AN INTEGER
-	tog = Integer.parseInt(toggle);
-	
-  } catch (NumberFormatException e) {
-	  
-	// IF TOGGLE STRING IS NULL SET IT TO ZERO
-    tog = 0;
-    session.setAttribute("toggle", "0");
-} %>
+<% if (view == null) { session.setAttribute("view", "1"); } %>
+<% if (toggle == null) { session.setAttribute("toggle", "0"); } %>
 
 <%-- SESSION VARIABLE OUTPUT --%>
-view: <%= session.getAttribute( "view" ) %><br />
-toggle: <%= session.getAttribute( "toggle" ) %><br />
+view: <%=session.getAttribute( "view" )%><br />
+toggle: <%=session.getAttribute( "toggle" )%><br />
 
 <div class='circle' id='camera'>
 
 <%-- SELECT LAYOUT BASED ON SESSION VARIABLE --%>
-<% if (val == 3) {
+<% if ("3".equals(view)) {
     	
 	for (int i = 0; i < listOfFiles.length; i++) {
 		out.print("<div class='rotate' style='-webkit-transform:rotate(" + ((360 / listOfFiles.length) * i) + "deg);'>");
-			
+	
 		// ITEM IS FILE
 		if (listOfFiles[i].isFile()) {
 			out.print("<div class='dir btn btn-inverse dropdown' id='" + i + "' data-toggle='dropdown' style='margin-left:-40px!important'>" +
 			"<i class='icon-file'></i><br />" + listOfFiles[i].getName() + "</div>");
 		} 
-			
+	
 		// ITEM IS FOLDER
 		else {
 			out.print("<div class='dir tab btn btn-inverse dropdown' id='" + i + "data-toggle='dropdown' style='margin-left:-40px!important'>" +
@@ -70,7 +47,7 @@ toggle: <%= session.getAttribute( "toggle" ) %><br />
 }
     	
 // CLI VIEW
-} else if (val == 2) {
+} else if ("2".equals(view)) {
 	
 	// CURRENTLY NO ACTION
 	
@@ -78,33 +55,33 @@ toggle: <%= session.getAttribute( "toggle" ) %><br />
 } else {
      
 // CREATE THE PRIMARY TAB RING
-for (int i = 0; i < web_interface.Beans.tab.length; i++) {
+for (int i = 0; i < com.Beans.tab.length; i++) {
      	
 	// GIVE THE TAB AN ID NUMBER
-    web_interface.Beans.tab[i][2] = Integer.toString(i);
+    com.Beans.tab[i][2] = Integer.toString(i);
     
-	out.print(web_interface.Utilities.tab(web_interface.Beans.tab[i][1], web_interface.Beans.tab.length, i, web_interface.Beans.tab[i][2], web_interface.Beans.tab[i][0], ""));
+	out.print(com.Utilities.tab(com.Beans.tab[i][1], com.Beans.tab.length, i, com.Beans.tab[i][2], com.Beans.tab[i][0], ""));
  		
 // THIS WILL BECOME A CASE SELECT OR ( FOR X IN TAB )
 
 // HEAD CONTROL
 if (i == 0) {
-	out.print(web_interface.Robot_Head.tab);
+	out.print(com.Robot_Head.tab);
 }
  		
 // OPERATING MODE
 if (i == 1) {					        
-	out.print(web_interface.Control_Mode.tab);
+	out.print(com.Control_Mode.tab);
 }
 
    // LIGHTS
 if (i == 2) {
-	out.print(web_interface.Robot_Lights.tab);
+	out.print(com.Robot_Lights.tab);
 }
 
 // TEXT TO SPEECH
 if (i == 3) {
-	out.print("<ul class='dropdown-menu well tts' style='-webkit-transform:rotate(" + ((360 / web_interface.Beans.tab.length) * (-i)) + "deg);'>" +
+	out.print("<ul class='dropdown-menu well tts' style='-webkit-transform:rotate(" + ((360 / com.Beans.tab.length) * (-i)) + "deg);'>" +
 	"<div class='row span4'>" +
 	"<input type='text' name='box-speech' class='span3' placeholder='Enter text to speak'>" +
 	"<button type='submit' class='icon-play'></button>" +
@@ -115,7 +92,7 @@ if (i == 3) {
 
 // HAND-WRITING
 if (i == 4) {
-	out.print("<ul class='dropdown-menu well txt' style='-webkit-transform:rotate(" + ((360 / web_interface.Beans.tab.length) * (-i)) + "deg);'>" +
+	out.print("<ul class='dropdown-menu well txt' style='-webkit-transform:rotate(" + ((360 / com.Beans.tab.length) * (-i)) + "deg);'>" +
 	"<div class='row span4'>" +
 	"<input type='text' name='box-writing' class='span3' placeholder='Enter text to write'>" +
 	"<button type='submit' class='icon-play'></button>" +
@@ -126,24 +103,24 @@ if (i == 4) {
 
 // SENSOR READINGS
 if (i == 7) {
-	out.print("<ul class='dropdown-menu sensor' style='-webkit-transform:rotate(" + ((360 / web_interface.Beans.tab.length) * (-i)) + "deg);'>");
-	out.print(web_interface.Utilities.table(web_interface.Beans.sensorData));
+	out.print("<ul class='dropdown-menu sensor' style='-webkit-transform:rotate(" + ((360 / com.Beans.tab.length) * (-i)) + "deg);'>");
+	out.print(com.Utilities.table(com.Beans.sensorData));
 	out.print("</ul>");
 }
 
    // POWER
 if (i == 8) {
-	out.print(web_interface.Power.tab);
+	out.print(com.Power.tab);
 }
  		
 out.print("</div>");
+
 	}
-}
-      
-%>
+
+} %>
 
 <script>
-<% out.print(web_interface.Power.script); %>
+<% out.print(com.Power.script); %>
 
 $('#toggle').each(function() {
 	$(this).click(function() {
@@ -177,11 +154,11 @@ $('.tab').click(function() {
 <%-- CAMERA FEED & CONTROL BUTTONS --%>
 <div id="dot"></div>
 	<div class="btn-bar btn-toolbar">
-		<button id="toggle" type="submit" name=togglemode value="<% if (tog == 0) { out.print("1"); } else { out.print("0"); } %>" class="btn<% if (tog == 0) { out.print(" btn-success icon-folder-open"); } else { out.print(" btn-primary icon-folder-close"); } %>"></button>
+		<button id="toggle" type="submit" name=togglemode value="<% if ("1".equals(toggle)) { out.print("0"); } else { out.print("1"); } %>" class="btn<% if ("1".equals(toggle)) { out.print(" btn-success icon-folder-open"); } else { out.print(" btn-primary icon-folder-close"); } %>"></button>
 		<div class="btn-group">
-			<button type="submit" name=viewmode value=1 class="btn btn-primary icon-dashboard <% if (val == 1) { out.print("active"); } %>"></button>
-			<button type="submit" name=viewmode value=2 class="btn btn-primary icon-list-alt <% if (val == 2) { out.print("active"); } %>"></button>
-			<button type="submit" name=viewmode value=3 class="btn btn-primary icon-sitemap <% if (val == 3) { out.print("active"); } %>"></button>
+			<button type="submit" name=viewmode value=1 class="btn btn-primary icon-dashboard <% if ("1".equals(view)) { out.print("active"); } %>"></button>
+			<button type="submit" name=viewmode value=2 class="btn btn-primary icon-list-alt <% if ("2".equals(view)) { out.print("active"); } %>"></button>
+			<button type="submit" name=viewmode value=3 class="btn btn-primary icon-sitemap <% if ("3".equals(view)) { out.print("active"); } %>"></button>
 		</div>
 
 	</div>

@@ -1,4 +1,4 @@
-package web_interface;
+package com;
 
 /**
  * Servlet implementation class Robot_Head
