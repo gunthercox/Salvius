@@ -1,13 +1,6 @@
 package web_interface;
 
-import java.io.File;
-
 public class Beans {
-	
-	// ROOT DIRECTORY PATH AND GET LIST OF FOLDERS
-	public static String path = ".";
-	public static File folder = new File(path);
-	public static File[] listOfFiles = folder.listFiles();
   
 	// CREATE TABS: TITLE | ICON | ID
 	public static String[][] tab = {
