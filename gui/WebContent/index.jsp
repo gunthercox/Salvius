@@ -1,10 +1,20 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
 <%@ page import="java.io.File" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <% out.print(com.Utilities.head()); %>
+
+<%-- DYNAMICALLY GENERATE CSS --%><%-- not sure if this currently does anything but if it did this would be the way to go --%>
+<style>
+<% for (int i = 0; i < com.Beans.tab.length; i++) {
+	
+	out.println(".rotate" + i + " -webkit-transform:rotate(" + ((360 / com.Beans.tab.length) * (-i)) + "deg)!important;");
+	
+} %>
+</style>
+
 </head>
 <body><form method="post" action="">
 
@@ -12,21 +22,33 @@
 <% String path = "."; File folder = new File(path); File[] listOfFiles = folder.listFiles(); %>
 
 <%-- SESSION VARIABLES --%>
-<% String view = request.getParameter("viewmode"); session.setAttribute("view", view); %>
-<% String toggle = request.getParameter("togglemode"); session.setAttribute("toggle", toggle); %>
+<% ServletContext servletContext = getServletContext(); %>
 
-<%-- INITIALIZE SESSION VARIABLES IF NULL OR NECESSARY --%>
-<% if (view == null) { session.setAttribute("view", "1"); } %>
-<% if (toggle == null) { session.setAttribute("toggle", "0"); } %>
+<% Object view = "1"; %>
+<% Object toggle = "0"; %>
+
+<%-- SET SESSION VARIABLES --%>
+<%
+
+if (request.getParameter("viewmode") != null) {
+	view = request.getParameter("viewmode"); servletContext.setAttribute("vmode", view);
+}
+
+ if (request.getParameter("togglemode") != null) {
+	toggle = request.getParameter("togglemode"); servletContext.setAttribute("tmode", toggle);
+}
+
+%>
 
 <%-- SESSION VARIABLE OUTPUT --%>
-view: <%=session.getAttribute( "view" )%><br />
-toggle: <%=session.getAttribute( "toggle" )%><br />
+view: <%= servletContext.getAttribute("vmode") %><br />
+toggle: <%= servletContext.getAttribute("tmode") %><br />
+
 
 <div class='circle' id='camera'>
 
 <%-- SELECT LAYOUT BASED ON SESSION VARIABLE --%>
-<% if ("3".equals(view)) {
+<% if ("3".equals(servletContext.getAttribute("vmode"))) {
     	
 	for (int i = 0; i < listOfFiles.length; i++) {
 		out.print("<div class='rotate' style='-webkit-transform:rotate(" + ((360 / listOfFiles.length) * i) + "deg);'>");
@@ -47,7 +69,7 @@ toggle: <%=session.getAttribute( "toggle" )%><br />
 }
     	
 // CLI VIEW
-} else if ("2".equals(view)) {
+} else if ("2".equals(servletContext.getAttribute("vmode"))) {
 	
 	// CURRENTLY NO ACTION
 	
@@ -66,17 +88,27 @@ for (int i = 0; i < com.Beans.tab.length; i++) {
 
 // HEAD CONTROL
 if (i == 0) {
-	out.print(com.Robot_Head.tab);
+	out.print("<ul class='dropdown-menu' role='menu'>" +
+			"<p class='text-center'>Select a point on the view screen to center it.</p></ul>");
 }
  		
 // OPERATING MODE
 if (i == 1) {					        
-	out.print(com.Control_Mode.tab);
+	out.print("<ul class='dropdown-menu' role='menu'>" +
+			"<div class='btn-group btn-group-vertical' data-toggle='buttons-radio'>" +
+			"<button type='button' class='btn btn-action'>Atonomus</button>" +
+			"<button type='button' class='btn btn-success'>Assisted</button>" +
+			"<button type='button' class='btn btn-warning active'>Teleoperated</button>" +
+			"</div></ul>");
 }
 
-   // LIGHTS
+// LIGHTS
 if (i == 2) {
-	out.print(com.Robot_Lights.tab);
+	out.print("<ul class='dropdown-menu' role='menu'>" +
+			"<div class='btn-group' data-toggle='buttons-checkbox'>" +
+			"<button type='button' class='btn btn-large btn-danger'>IR</button>" +
+			"<button type='button' class='btn btn-large btn-inverse'>UV</button>" +
+			"</div></ul>");
 }
 
 // TEXT TO SPEECH
@@ -110,7 +142,14 @@ if (i == 7) {
 
    // POWER
 if (i == 8) {
-	out.print(com.Power.tab);
+	out.print("<ul class='dropdown-menu' role='menu'>" +
+			"<div class='btn-group' data-toggle='buttons-radio'>" +
+			"<button type='button' class='btn btn-large active'>" +
+			"<i class='icon-circle'></i></button>" +
+			"<button type='button' id='off' class='btn btn-large'><i class='icon-circle-blank'></i></button>" +
+			"</div>" +
+			"<p class='text-center'>Battery: " + "33.05%" + "</p>" +
+			"</ul>");
 }
  		
 out.print("</div>");
@@ -120,7 +159,10 @@ out.print("</div>");
 } %>
 
 <script>
-<% out.print(com.Power.script); %>
+
+$('#off').click(function() {
+	return confirm('Are you sure you want to deactivate the robot?');
+});
 
 $('#toggle').each(function() {
 	$(this).click(function() {
@@ -154,11 +196,11 @@ $('.tab').click(function() {
 <%-- CAMERA FEED & CONTROL BUTTONS --%>
 <div id="dot"></div>
 	<div class="btn-bar btn-toolbar">
-		<button id="toggle" type="submit" name=togglemode value="<% if ("1".equals(toggle)) { out.print("0"); } else { out.print("1"); } %>" class="btn<% if ("1".equals(toggle)) { out.print(" btn-success icon-folder-open"); } else { out.print(" btn-primary icon-folder-close"); } %>"></button>
+		<button id="toggle" type="submit" name=togglemode value="<% if ("1".equals(toggle)) { out.print("0"); } else { out.print("1"); } %>" class="btn<% if ("1".equals(servletContext.getAttribute("tmode"))) { out.print(" btn-success icon-folder-open"); } else { out.print(" btn-primary icon-folder-close"); } %>"></button>
 		<div class="btn-group">
-			<button type="submit" name=viewmode value=1 class="btn btn-primary icon-dashboard <% if ("1".equals(view)) { out.print("active"); } %>"></button>
-			<button type="submit" name=viewmode value=2 class="btn btn-primary icon-list-alt <% if ("2".equals(view)) { out.print("active"); } %>"></button>
-			<button type="submit" name=viewmode value=3 class="btn btn-primary icon-sitemap <% if ("3".equals(view)) { out.print("active"); } %>"></button>
+			<button type="submit" name=viewmode value=1 class="btn btn-primary icon-dashboard <% if ("1".equals(servletContext.getAttribute("vmode"))) { out.print("active"); } %>"></button>
+			<button type="submit" name=viewmode value=2 class="btn btn-primary icon-list-alt <% if ("2".equals(servletContext.getAttribute("vmode"))) { out.print("active"); } %>"></button>
+			<button type="submit" name=viewmode value=3 class="btn btn-primary icon-sitemap <% if ("3".equals(servletContext.getAttribute("vmode"))) { out.print("active"); } %>"></button>
 		</div>
 
 	</div>
