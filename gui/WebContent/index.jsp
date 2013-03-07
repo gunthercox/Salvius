@@ -27,15 +27,21 @@
 <% Object view = "1"; %>
 <% Object toggle = "0"; %>
 
-<%-- SET SESSION VARIABLES --%>
+<%-- SET SESSION VARIABLES AND DEFAULTS --%>
 <%
 
 if (request.getParameter("viewmode") != null) {
 	view = request.getParameter("viewmode"); servletContext.setAttribute("vmode", view);
 }
+if (servletContext.getAttribute("vmode") == null) {
+	servletContext.setAttribute("vmode", "1");
+}
 
- if (request.getParameter("togglemode") != null) {
+if (request.getParameter("togglemode") != null) {
 	toggle = request.getParameter("togglemode"); servletContext.setAttribute("tmode", toggle);
+}
+if (servletContext.getAttribute("tmode") == null) {
+	 servletContext.setAttribute("tmode", "0");
 }
 
 %>
@@ -43,6 +49,8 @@ if (request.getParameter("viewmode") != null) {
 <%-- SESSION VARIABLE OUTPUT --%>
 view: <%= servletContext.getAttribute("vmode") %><br />
 toggle: <%= servletContext.getAttribute("tmode") %><br />
+
+<%-- CREATE ARRAY OF EACH TAB'S DIFFERENT OBJECT --%>
 
 
 <div class='circle' id='camera'>
@@ -196,7 +204,7 @@ $('.tab').click(function() {
 <%-- CAMERA FEED & CONTROL BUTTONS --%>
 <div id="dot"></div>
 	<div class="btn-bar btn-toolbar">
-		<button id="toggle" type="submit" name=togglemode value="<% if ("1".equals(toggle)) { out.print("0"); } else { out.print("1"); } %>" class="btn<% if ("1".equals(servletContext.getAttribute("tmode"))) { out.print(" btn-success icon-folder-open"); } else { out.print(" btn-primary icon-folder-close"); } %>"></button>
+		<button id="toggle" type="submit" name=togglemode value="<% if ("1".equals(servletContext.getAttribute("tmode"))) { out.print("0"); } else { out.print("1"); } %>" class="btn<% if ("1".equals(servletContext.getAttribute("tmode"))) { out.print(" btn-success icon-folder-open"); } else { out.print(" btn-primary icon-folder-close"); } %>"></button>
 		<div class="btn-group">
 			<button type="submit" name=viewmode value=1 class="btn btn-primary icon-dashboard <% if ("1".equals(servletContext.getAttribute("vmode"))) { out.print("active"); } %>"></button>
 			<button type="submit" name=viewmode value=2 class="btn btn-primary icon-list-alt <% if ("2".equals(servletContext.getAttribute("vmode"))) { out.print("active"); } %>"></button>
