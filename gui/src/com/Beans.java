@@ -2,17 +2,17 @@ package com;
 
 public class Beans {
   
-	// CREATE TABS: TITLE | ICON | ID
+	// CREATE TABS: TITLE | ICON
 	public static String[][] tab = {
-		{"Head", "icon-eye-open", ""},
-	    {"Settings", "icon-cog", ""},
-	    {"Lights", "icon-lightbulb", ""},
-	    {"Speech", "icon-volume-up", ""},
-	    {"Write", "icon-pencil", ""},
-	    {"Tools", "icon-wrench", ""},
-	    {"Conversation", "icon-globe", ""},
-	    {"Sensor readings", "icon-bar-chart", ""},
-	    {"Power", "icon-off", ""}
+		{"Head", "icon-eye-open"},
+	    {"Settings", "icon-cog"},
+	    {"Lights", "icon-lightbulb"},
+	    {"Speech", "icon-volume-up"},
+	    {"Write", "icon-pencil"},
+	    {"Tools", "icon-wrench"},
+	    {"Conversation", "icon-globe"},
+	    {"Sensor readings", "icon-bar-chart"},
+	    {"Power", "icon-off"}
 	    };
 	
 	// ARRAY OF ARDUINO INPUT VALUES

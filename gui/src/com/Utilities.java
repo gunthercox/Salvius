@@ -14,7 +14,7 @@ public class Utilities {
 	}
 	
 	// TABS
-	public static String tab(String state, String icon, int totalTabs, int currentTab, String id, String title, String content) {
+	public static String tab(String state, String icon, int totalTabs, int id, String title, String content) {
 		
 		String open = "";
 		
@@ -24,11 +24,11 @@ public class Utilities {
 			open = "open";
 			
 		} else {
-			open = "";
+			open = " ";
 		}
 		
-		return("<div class='rotate " + open + "' style='-webkit-transform:rotate(" + ((360 / totalTabs) * currentTab) + "deg);'>" +
-				"<div class='tab btn btn-inverse dropdown' id='" + id + "' title='" + title + "' " + 
+		return("<div class='rotate " + open + " t" + Integer.toString(id) + "'>" +
+				"<div class='tab btn btn-inverse dropdown' title='" + title + "' " + 
 				"data-toggle='dropdown'>" +
 				"<i class='" + icon + "'></i></div>");
 	}
