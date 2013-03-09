@@ -6,13 +6,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <% out.print(com.Utilities.head()); %>
 
-<%-- DYNAMICALLY GENERATE CSS --%><%-- not sure if this currently does anything but if it did this would be the way to go --%>
+<%-- DYNAMICALLY GENERATE CSS --%>
 <style>
-<%-- for (int i = 0; i < com.Beans.tab.length; i++) {
-	
-	out.println(".rotate" + i + " -webkit-transform:rotate(" + ((360 / com.Beans.tab.length) * (-i)) + "deg)!important;");
-	
-} --%>
+<% for (int i = 0; i < com.Beans.tab.length; i++) {
+	out.println(".t" + i + "{ -webkit-transform:rotate(" + ((360 / com.Beans.tab.length) * i) + "deg);}");	
+} %>
 </style>
 
 </head>
@@ -86,11 +84,8 @@ toggle: <%= servletContext.getAttribute("tmode") %><br />
      
 // CREATE THE PRIMARY TAB RING
 for (int i = 0; i < com.Beans.tab.length; i++) {
-     	
-	// GIVE THE TAB AN ID NUMBER
-    com.Beans.tab[i][2] = Integer.toString(i);
 	
-	out.print(com.Utilities.tab((String)servletContext.getAttribute("tmode"), com.Beans.tab[i][1], com.Beans.tab.length, i, com.Beans.tab[i][2], com.Beans.tab[i][0], ""));
+	out.print(com.Utilities.tab((String)servletContext.getAttribute("tmode"), com.Beans.tab[i][1], com.Beans.tab.length, i, com.Beans.tab[i][0], ""));
 	
 // THIS WILL BECOME A CASE SELECT OR ( FOR X IN TAB )
 
@@ -164,7 +159,21 @@ out.print("</div>");
 
 	}
 
-} %>
+}
+
+// TAB OBJECT
+class tab {
+	
+	String title;
+	String icon;
+	String id;
+	
+	String attribute;
+	
+}
+
+
+%>
 
 <script>
 
