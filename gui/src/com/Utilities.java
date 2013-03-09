@@ -14,23 +14,18 @@ public class Utilities {
 	}
 	
 	// TABS
-	public static String tab(String state, String icon, int totalTabs, int id, String title, String content) {
+	public static String tab(String master_state, String minor_state, String icon, int totalTabs, int id, String title, String content) {
 		
 		String open = "";
+		String value = "0";
 		
-		if ("1".equals(state)) { 
-			
-			// SET A VARIABLE
-			open = "open";
-			
-		} else {
-			open = " ";
-		}
+		if ("1".equals(master_state) || "1".equals(minor_state)) { open = "open"; value = "0"; } else { open = " "; value = "1"; }
 		
 		return("<div class='rotate " + open + " t" + Integer.toString(id) + "'>" +
-				"<div class='tab btn btn-inverse dropdown' title='" + title + "' " + 
+				"<button name='tab" + id + "' class='tab btn btn-inverse dropdown' title='" + title + "' " +
+				"value='" + value + "'" +
 				"data-toggle='dropdown'>" +
-				"<i class='" + icon + "'></i></div>");
+				"<i class='" + icon + "'></i></button>");
 	}
 	
 	// CREATE TABLE FROM 3D ARRAY

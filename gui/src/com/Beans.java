@@ -22,4 +22,6 @@ public class Beans {
 		{"~2", "Light", "61.2 Lm"},
 		{"A0", "Sound", "0.2 dB"}
 	};
+	
+	public static String[] tabular = new String[tab.length];
 }

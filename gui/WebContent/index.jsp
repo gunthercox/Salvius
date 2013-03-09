@@ -1,5 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
 <%@ page import="java.io.File" %>
+
+<%-- DIRECTORY PATH AND LISTING VARIABLES --%>
+<% String path = "."; File folder = new File(path); File[] listOfFiles = folder.listFiles(); %>
+
+<%-- SESSION VARIABLES --%>
+<% ServletContext servletContext = getServletContext(); %>
+<% Object view = "1"; %>
+<% Object toggle = "0"; %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,47 +18,42 @@
 <%-- DYNAMICALLY GENERATE CSS --%>
 <style>
 <% for (int i = 0; i < com.Beans.tab.length; i++) {
-	out.println(".t" + i + "{ -webkit-transform:rotate(" + ((360 / com.Beans.tab.length) * i) + "deg);}");	
+	out.println(".t" + i + "{-webkit-transform:rotate(" + ((360 / com.Beans.tab.length) * i) + "deg);}");
+	
+	// SET VARIABLES FOR EACH TAB AS CLOSED (0)
+	if (com.Beans.tabular[i] == null) {
+	com.Beans.tabular[i] = "0";
+	}
+	servletContext.setAttribute("tab" + i, com.Beans.tabular[i]);
+	
+	String tabname = "tab" + i;
+	if (request.getParameter(tabname) != null) {
+		com.Beans.tabular[i] = request.getParameter(tabname); servletContext.setAttribute(tabname, com.Beans.tabular[i]);
+	}
+	
 } %>
 </style>
 
 </head>
 <body><form method="post" action="">
 
-<%-- DIRECTORY PATH AND LISTING VARIABLES --%>
-<% String path = "."; File folder = new File(path); File[] listOfFiles = folder.listFiles(); %>
-
-<%-- SESSION VARIABLES --%>
-<% ServletContext servletContext = getServletContext(); %>
-
-<% Object view = "1"; %>
-<% Object toggle = "0"; %>
-
 <%-- SET SESSION VARIABLES AND DEFAULTS --%>
 <%
-
 if (request.getParameter("viewmode") != null) {
 	view = request.getParameter("viewmode"); servletContext.setAttribute("vmode", view);
-}
-if (servletContext.getAttribute("vmode") == null) {
-	servletContext.setAttribute("vmode", "1");
 }
 
 if (request.getParameter("togglemode") != null) {
 	toggle = request.getParameter("togglemode"); servletContext.setAttribute("tmode", toggle);
 }
-if (servletContext.getAttribute("tmode") == null) {
-	 servletContext.setAttribute("tmode", "0");
-}
-
 %>
 
 <%-- SESSION VARIABLE OUTPUT --%>
 view: <%= servletContext.getAttribute("vmode") %><br />
 toggle: <%= servletContext.getAttribute("tmode") %><br />
-
-<%-- CREATE ARRAY OF EACH TAB'S DIFFERENT OBJECT --%>
-
+<% for (int i = 0; i < com.Beans.tab.length; i++) {
+out.println("tab" + i + ": " + servletContext.getAttribute("tab" + i) + "<br />");
+} %>
 
 <div class='circle' id='camera'>
 
@@ -85,7 +89,7 @@ toggle: <%= servletContext.getAttribute("tmode") %><br />
 // CREATE THE PRIMARY TAB RING
 for (int i = 0; i < com.Beans.tab.length; i++) {
 	
-	out.print(com.Utilities.tab((String)servletContext.getAttribute("tmode"), com.Beans.tab[i][1], com.Beans.tab.length, i, com.Beans.tab[i][0], ""));
+	out.print(com.Utilities.tab((String)servletContext.getAttribute("tmode"), (String)servletContext.getAttribute("tab" + i), com.Beans.tab[i][1], com.Beans.tab.length, i, com.Beans.tab[i][0], ""));
 	
 // THIS WILL BECOME A CASE SELECT OR ( FOR X IN TAB )
 
@@ -119,9 +123,9 @@ if (i == 3) {
 	out.print("<ul class='dropdown-menu well tts' style='-webkit-transform:rotate(" + ((360 / com.Beans.tab.length) * (-i)) + "deg);'>" +
 	"<div class='row span4'>" +
 	"<input type='text' name='box-speech' class='span3' placeholder='Enter text to speak'>" +
-	"<button type='submit' class='icon-play'></button>" +
-	"<button type='submit' class='icon-pause'></button>" +
-	"<button type='submit' class='icon-stop'></button>" +
+	"<button class='icon-play'></button>" +
+	"<button class='icon-pause'></button>" +
+	"<button class='icon-stop'></button>" +
 	"</div></ul>");
 }
 
@@ -130,9 +134,9 @@ if (i == 4) {
 	out.print("<ul class='dropdown-menu well txt' style='-webkit-transform:rotate(" + ((360 / com.Beans.tab.length) * (-i)) + "deg);'>" +
 	"<div class='row span4'>" +
 	"<input type='text' name='box-writing' class='span3' placeholder='Enter text to write'>" +
-	"<button type='submit' class='icon-play'></button>" +
-	"<button type='submit' class='icon-pause'></button>" +
-	"<button type='submit' class='icon-stop'></button>" +
+	"<button class='icon-play'></button>" +
+	"<button class='icon-pause'></button>" +
+	"<button class='icon-stop'></button>" +
 	"</div></ul>");
 }
 
@@ -159,21 +163,7 @@ out.print("</div>");
 
 	}
 
-}
-
-// TAB OBJECT
-class tab {
-	
-	String title;
-	String icon;
-	String id;
-	
-	String attribute;
-	
-}
-
-
-%>
+} %>
 
 <script>
 
@@ -213,11 +203,11 @@ $('.tab').click(function() {
 <%-- CAMERA FEED & CONTROL BUTTONS --%>
 <div id="dot"></div>
 	<div class="btn-bar btn-toolbar">
-		<button id="toggle" type="submit" name=togglemode value="<% if ("1".equals(servletContext.getAttribute("tmode"))) { out.print("0"); } else { out.print("1"); } %>" class="btn<% if ("1".equals(servletContext.getAttribute("tmode"))) { out.print(" btn-success icon-folder-open"); } else { out.print(" btn-primary icon-folder-close"); } %>"></button>
+		<button id="toggle" name=togglemode value="<% if ("1".equals(servletContext.getAttribute("tmode"))) { out.print("0"); } else { out.print("1"); } %>" class="btn<% if ("1".equals(servletContext.getAttribute("tmode"))) { out.print(" btn-success icon-folder-open"); } else { out.print(" btn-primary icon-folder-close"); } %>"></button>
 		<div class="btn-group">
-			<button type="submit" name=viewmode value=1 class="btn btn-primary icon-dashboard <% if ("1".equals(servletContext.getAttribute("vmode"))) { out.print("active"); } %>"></button>
-			<button type="submit" name=viewmode value=2 class="btn btn-primary icon-list-alt <% if ("2".equals(servletContext.getAttribute("vmode"))) { out.print("active"); } %>"></button>
-			<button type="submit" name=viewmode value=3 class="btn btn-primary icon-sitemap <% if ("3".equals(servletContext.getAttribute("vmode"))) { out.print("active"); } %>"></button>
+			<button name=viewmode value=1 class="btn btn-primary icon-dashboard <% if ("1".equals(servletContext.getAttribute("vmode"))) { out.print("active"); } %>"></button>
+			<button name=viewmode value=2 class="btn btn-primary icon-list-alt <% if ("2".equals(servletContext.getAttribute("vmode"))) { out.print("active"); } %>"></button>
+			<button name=viewmode value=3 class="btn btn-primary icon-sitemap <% if ("3".equals(servletContext.getAttribute("vmode"))) { out.print("active"); } %>"></button>
 		</div>
 
 	</div>
