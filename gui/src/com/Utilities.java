@@ -9,8 +9,7 @@ public class Utilities {
 		return( "<meta http-equiv='X-UA-Compatible' content='IE=9' />" +
 				"<title>" + TITLE + "</title>" +
 				"<link rel='stylesheet' type='text/css' href='./css/font-awesome.min.css' />" +
-				"<link rel='stylesheet' type='text/css' href='./css/bootstrap.css' />" +
-				"<script src='./js/jquery.js'></script>");
+				"<link rel='stylesheet' type='text/css' href='./css/bootstrap.css' />");
 	}
 	
 	// TABS
