@@ -21,7 +21,8 @@ public class Utilities {
 		String open = "";
 		String value = "0";
 		
-		if ("1".equals(master_state) || "1".equals(minor_state)) { open = "open"; value = "0"; } else { open = " "; value = "1"; }
+		if ("1".equals(minor_state)) { value = "0"; } else { value = "1"; }
+		if ("1".equals(master_state) || "1".equals(minor_state)) { open = "open"; } else { open = " "; }
 		
 		return("<div class='rotate " + open + " t" + Integer.toString(id) + "'>" +
 				"<button name='tab" + id + "' class='tab btn btn-inverse dropdown' title='" + title + "' " +
