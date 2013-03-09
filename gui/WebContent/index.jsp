@@ -165,41 +165,6 @@ out.print("</div>");
 
 } %>
 
-<script>
-
-$('#off').click(function() {
-	return confirm('Are you sure you want to deactivate the robot?');
-});
-
-$('#toggle').each(function() {
-	$(this).click(function() {
-		if ($('.rotate').hasClass('open')) {
-		$('.rotate').removeClass('open');
-		} else {
-		$('.rotate').addClass('open');
-		}
-	});
-});
-			
-$('#camera').click(function(e) {
-if ($('.rotate').hasClass('open')) {
-	$('#dot').addClass('dot icon-screenshot');
-	$('.dot').css({'top':e.pageY, 'left':e.pageX});
-} else {
-	$('#dot').removeClass('dot icon-screenshot');
-	}
-});
-		
-$('.tab').click(function() {
-	if ($(this).parent('div').hasClass('open')) {
-	$(this).parent('div').removeClass('open');
-	} else {
-	$(this).parent('div').addClass('open');
-	}
-});
-
-</script>
-
 <%-- CAMERA FEED & CONTROL BUTTONS --%>
 <div id="dot"></div>
 	<div class="btn-bar btn-toolbar">
