@@ -9,7 +9,10 @@ public class Utilities {
 		return( "<meta http-equiv='X-UA-Compatible' content='IE=9' />" +
 				"<title>" + TITLE + "</title>" +
 				"<link rel='stylesheet' type='text/css' href='./css/font-awesome.min.css' />" +
-				"<link rel='stylesheet' type='text/css' href='./css/bootstrap.css' />");
+				"<link rel='stylesheet' type='text/css' href='./css/bootstrap.css' />" +
+				"<link rel='stylesheet' href='css/normalize.css' />" +
+				"<link rel='stylesheet' href='css/foundation.css' />" +
+				"<script src='js/vendor/custom.modernizr.js'></script>");
 	}
 	
 	// TABS
@@ -57,5 +60,28 @@ public class Utilities {
 		return sb.toString();
 		
 	}
+	
+	// CREATE TABS: TITLE | ICON
+	public static String[][] tab = {
+		{"Head", "icon-eye-open"},
+	    {"Settings", "icon-cog"},
+	    {"Lights", "icon-lightbulb"},
+	    {"Speech", "icon-volume-up"},
+	    {"Write", "icon-pencil"},
+	    {"Tools", "icon-wrench"},
+	    {"Conversation", "icon-globe"},
+	    {"Sensor readings", "icon-bar-chart"},
+	    {"Power", "icon-off"}
+	    };
+	
+	// ARRAY OF ARDUINO INPUT VALUES
+	public static String[][] sensorData = {
+		{"ID", "Sensor", "Value"},
+		{"~1", "PIR", "51.5 W"},
+		{"~2", "Light", "61.2 Lm"},
+		{"A0", "Sound", "0.2 dB"}
+	};
+	
+	public static String[] tabular = new String[tab.length];
 
 }
