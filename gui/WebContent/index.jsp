@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
 <%@ page import="java.io.File" %>
 
+<%-- NEED TO FIGURE OUT HOW TO USE THIS --%>
+<%@ page import="com.Utilities. * " %>
+
 <%-- DIRECTORY PATH AND LISTING VARIABLES --%>
 <% String path = "."; File folder = new File(path); File[] listOfFiles = folder.listFiles(); %>
 
@@ -34,9 +37,6 @@
 } %>
 </style>
 
-</head>
-<body><form method="post" action="">
-
 <%-- SET SESSION VARIABLES AND DEFAULTS --%>
 <%
 if (request.getParameter("viewmode") != null) {
@@ -48,43 +48,61 @@ if (request.getParameter("togglemode") != null) {
 }
 %>
 
-<%-- SESSION VARIABLE OUTPUT --%>
-view: <%= servletContext.getAttribute("vmode") %><br />
-toggle: <%= servletContext.getAttribute("tmode") %><br />
-<% for (int i = 0; i < com.Utilities.tab.length; i++) {
-out.println("tab" + i + ": " + servletContext.getAttribute("tab" + i) + "<br />");
-} %>
+</head>
+<body><form class="row" method="post" action="">
 
-<div class='circle' id='camera'>
+	<%-- CAMERA FEED & CONTROL BUTTONS --%>
+	<div class="button-group">
+		<button class="button <% if ("1".equals(servletContext.getAttribute("tmode"))) { out.print("pending"); } %>" name=togglemode value="<% if ("1".equals(servletContext.getAttribute("tmode"))) { out.print("0"); } else { out.print("1"); } %>" >
+			<i class="icon-2x <% if ("1".equals(servletContext.getAttribute("tmode"))) { out.print(" icon-folder-open"); } else { out.print(" icon-folder-close"); } %>"></i>
+		</button>
+		
+		<button name=viewmode value=1 class="button <% if ("1".equals(servletContext.getAttribute("vmode"))) { out.print("success"); } %>">
+			<i class="icon-dashboard icon-2x"></i>
+		</button>
+		<button name=viewmode value=2 class="button <% if ("2".equals(servletContext.getAttribute("vmode"))) { out.print("success"); } %>">
+			<i class="icon-list-alt icon-2x"></i>
+		</button>
+		<button name=viewmode value=3 class="button <% if ("3".equals(servletContext.getAttribute("vmode"))) { out.print("success"); } %>">
+			<i class="icon-sitemap icon-2x"></i>
+		</button>
+	</div>
+	
+	<%-- SESSION VARIABLE OUTPUT (FOR DEVELOPMENT PURPOSES) --%>
+	<%--view: <%= servletContext.getAttribute("vmode") %><br />
+	toggle: <%= servletContext.getAttribute("tmode") %><br />
+	<% for (int i = 0; i < com.Utilities.tab.length; i++) {
+	out.println("tab" + i + ": " + servletContext.getAttribute("tab" + i) + "<br />");
+	} %>--%>
 
-<%-- SELECT LAYOUT BASED ON SESSION VARIABLE --%>
+<%-- ################ SELECT LAYOUT BASED ON SESSION VARIABLE ################ --%>
 <% if ("3".equals(servletContext.getAttribute("vmode"))) {
     	
 	for (int i = 0; i < listOfFiles.length; i++) {
-		out.print("<div class='rotate' style='-webkit-transform:rotate(" + ((360 / listOfFiles.length) * i) + "deg);'>");
-	
+		out.print("<button class='button' id='" + i + "'>");
+		
 		// ITEM IS FILE
 		if (listOfFiles[i].isFile()) {
-			out.print("<div class='dir btn btn-inverse dropdown' id='" + i + "' data-toggle='dropdown' style='margin-left:-40px!important'>" +
-			"<i class='icon-file'></i><br />" + listOfFiles[i].getName() + "</div>");
+			out.print("<i class='icon-file icon-2x'></i><br />" + listOfFiles[i].getName());
 		} 
 	
 		// ITEM IS FOLDER
 		else {
-			out.print("<div class='dir tab btn btn-inverse dropdown' id='" + i + "data-toggle='dropdown' style='margin-left:-40px!important'>" +
-			"<i class='icon-folder-close-alt'></i><br />" + listOfFiles[i].getName() + "</div>");
+			out.print("<i class='icon-folder-close-alt icon-2x'></i><br />" + listOfFiles[i].getName());
 		}
 		
-	out.print("</div>");
+	out.print("</button>");
 }
     	
-// CLI VIEW
+/* ################ CLI VIEW (CURRENTLY NO ATION) ################ */
 } else if ("2".equals(servletContext.getAttribute("vmode"))) {
 	
-	// CURRENTLY NO ACTION
+	out.print("<div class='circle' id='camera'>");
 	
-// APPS VIEW
+/* ################ APPS VIEW ################ */
 } else {
+	
+	out.print("<div class='circle' id='camera'>");
      
 // CREATE THE PRIMARY TAB RING
 for (int i = 0; i < com.Utilities.tab.length; i++) {
@@ -102,7 +120,7 @@ if (i == 0) {
 // OPERATING MODE
 if (i == 1) {					        
 	out.print("<ul class='dropdown-menu' role='menu'>" +
-			"<div class='btn-group btn-group-vertical' data-toggle='buttons-radio'>" +
+			"<div class='btn-group btn-group-vertical'>" +
 			"<button type='button' class='btn btn-action'>Atonomus</button>" +
 			"<button type='button' class='btn btn-success'>Assisted</button>" +
 			"<button type='button' class='btn btn-warning active'>Teleoperated</button>" +
@@ -112,7 +130,7 @@ if (i == 1) {
 // LIGHTS
 if (i == 2) {
 	out.print("<ul class='dropdown-menu' role='menu'>" +
-			"<div class='btn-group' data-toggle='buttons-checkbox'>" +
+			"<div class='btn-group'>" +
 			"<button type='button' class='btn btn-large btn-danger'>IR</button>" +
 			"<button type='button' class='btn btn-large btn-inverse'>UV</button>" +
 			"</div></ul>");
@@ -150,7 +168,7 @@ if (i == 7) {
    // POWER
 if (i == 8) {
 	out.print("<ul class='dropdown-menu' role='menu'>" +
-			"<div class='btn-group' data-toggle='buttons-radio'>" +
+			"<div class='btn-group'>" +
 			"<button type='button' class='btn btn-large active'>" +
 			"<i class='icon-circle'></i></button>" +
 			"<button type='button' id='off' class='btn btn-large'><i class='icon-circle-blank'></i></button>" +
@@ -164,18 +182,6 @@ out.print("</div>");
 	}
 
 } %>
-
-<%-- CAMERA FEED & CONTROL BUTTONS --%>
-<div id="dot"></div>
-	<div class="btn-bar btn-toolbar">
-		<button id="toggle" name=togglemode value="<% if ("1".equals(servletContext.getAttribute("tmode"))) { out.print("0"); } else { out.print("1"); } %>" class="btn<% if ("1".equals(servletContext.getAttribute("tmode"))) { out.print(" btn-success icon-folder-open"); } else { out.print(" btn-primary icon-folder-close"); } %>"></button>
-		<div class="btn-group">
-			<button name=viewmode value=1 class="btn btn-primary icon-dashboard <% if ("1".equals(servletContext.getAttribute("vmode"))) { out.print("active"); } %>"></button>
-			<button name=viewmode value=2 class="btn btn-primary icon-list-alt <% if ("2".equals(servletContext.getAttribute("vmode"))) { out.print("active"); } %>"></button>
-			<button name=viewmode value=3 class="btn btn-primary icon-sitemap <% if ("3".equals(servletContext.getAttribute("vmode"))) { out.print("active"); } %>"></button>
-		</div>
-
-	</div>
 	
 </div>
 
