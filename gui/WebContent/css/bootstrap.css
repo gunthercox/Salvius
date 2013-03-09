@@ -6,7 +6,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Designed and built with all the love in the world @twitter by @mdo and @fat.
- * Modified extensively by @salviusrobot
+ * Modified without regard by @salviusrobot
  */
 
 .tab{
@@ -29,18 +29,6 @@ margin-left:-50px;
 background:transparent;
 }
 
-.dir{
-position:absolute;
-top:50%;left:50%;
-height:70px;
-width:70px;
-margin-top:-230px;
-margin-left:-50px!important;
-padding:0!important;
-overflow:hidden;
-}
-.dir i{font-size:35pt;margin:auto}
-
 .circle{
 position:fixed;
 top:50%;left:50%;
@@ -52,27 +40,12 @@ border-radius:50%;
 background:url(../img/img.jpg);
 background-size:cover;
 }
-.dot{
-position:fixed;
-top:50%;left:50%;
-height:10px;
-width:10px;
-margin-top:-5px;
-margin-left:-5px;
-background:transparent;
-color:#FFF;
-text-shadow: 0.1em 0.1em 0.05em #000;
-border-radius:50%;
-z-index:100;
+
+.pending {
+background-color:#ff6c3c!important;
+border-color:#ff4609!important;
+color:#fff!important;
 }
-.btn-bar{
-position:absolute!important;
-top:50%;left:50%;
-margin-top:90px!important;
-margin-left:-93px;
-padding:0!important;
-}
-.btn-bar .btn {height:30px!important;padding:0 15px}
 
 .tts{top:30%!important;left:-80%!important}
 .txt{top:43%!important;left:-150%!important}
