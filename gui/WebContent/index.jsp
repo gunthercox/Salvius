@@ -49,31 +49,43 @@ if (request.getParameter("togglemode") != null) {
 %>
 
 </head>
-<body><form class="row" method="post" action="">
+<body><form method="post" action="">
 
-	<%-- CAMERA FEED & CONTROL BUTTONS --%>
-	<div class="button-group">
-		<button class="button <% if ("1".equals(servletContext.getAttribute("tmode"))) { out.print("pending"); } %>" name=togglemode value="<% if ("1".equals(servletContext.getAttribute("tmode"))) { out.print("0"); } else { out.print("1"); } %>" >
-			<i class="icon-2x <% if ("1".equals(servletContext.getAttribute("tmode"))) { out.print(" icon-folder-open"); } else { out.print(" icon-folder-close"); } %>"></i>
-		</button>
-		
-		<button name=viewmode value=1 class="button <% if ("1".equals(servletContext.getAttribute("vmode"))) { out.print("success"); } %>">
-			<i class="icon-dashboard icon-2x"></i>
-		</button>
-		<button name=viewmode value=2 class="button <% if ("2".equals(servletContext.getAttribute("vmode"))) { out.print("success"); } %>">
-			<i class="icon-list-alt icon-2x"></i>
-		</button>
-		<button name=viewmode value=3 class="button <% if ("3".equals(servletContext.getAttribute("vmode"))) { out.print("success"); } %>">
-			<i class="icon-sitemap icon-2x"></i>
-		</button>
+<nav class="top-bar">
+	<ul class="title-area">
+		<li class="name"><h1><a href="#">Interface</a></h1></li>
+	</ul>
+
+<div class="top-bar-section">
+	<ul class="left">
+		<li class="divider"></li>
+			<li>
+				<button class="button <% if ("1".equals(servletContext.getAttribute("tmode"))) { out.print("pending"); } %>" name=togglemode value="<% if ("1".equals(servletContext.getAttribute("tmode"))) { out.print("0"); } else { out.print("1"); } %>" >
+					<i class="icon-2x <% if ("1".equals(servletContext.getAttribute("tmode"))) { out.print(" icon-folder-open"); } else { out.print(" icon-folder-close"); } %>"></i>
+				</button>
+			</li>
+			<li>
+				<button name=viewmode value=1 class="button <% if ("1".equals(servletContext.getAttribute("vmode"))) { out.print("success"); } %>">
+					<i class="icon-dashboard icon-2x"></i>
+				</button>
+			</li>
+			<li>
+				<button name=viewmode value=2 class="button <% if ("2".equals(servletContext.getAttribute("vmode"))) { out.print("success"); } %>">
+					<i class="icon-list-alt icon-2x"></i>
+				</button>
+			</li>
+			<li>
+				<button name=viewmode value=3 class="button <% if ("3".equals(servletContext.getAttribute("vmode"))) { out.print("success"); } %>">
+					<i class="icon-sitemap icon-2x"></i>
+				</button>
+			</li>
+		</ul>
 	</div>
-	
-	<%-- SESSION VARIABLE OUTPUT (FOR DEVELOPMENT PURPOSES) --%>
-	<%--view: <%= servletContext.getAttribute("vmode") %><br />
-	toggle: <%= servletContext.getAttribute("tmode") %><br />
-	<% for (int i = 0; i < com.Utilities.tab.length; i++) {
-	out.println("tab" + i + ": " + servletContext.getAttribute("tab" + i) + "<br />");
-	} %>--%>
+</nav>
+
+<% if ("1".equals(servletContext.getAttribute("tab0"))) { %>
+<div data-alert="" class="alert-box primary"><b>Camera Position:</b> Select a point on the view screen to center it.<a href="" class="close">&times;</a></div>
+<% } %>
 
 <%-- ################ SELECT LAYOUT BASED ON SESSION VARIABLE ################ --%>
 <% if ("3".equals(servletContext.getAttribute("vmode"))) {
@@ -94,15 +106,20 @@ if (request.getParameter("togglemode") != null) {
 	out.print("</button>");
 }
     	
-/* ################ CLI VIEW (CURRENTLY NO ATION) ################ */
+/* ################ CLI VIEW ################ */
 } else if ("2".equals(servletContext.getAttribute("vmode"))) {
 	
-	out.print("<div class='circle' id='camera'>");
+	// SESSION VARIABLE OUTPUT (FOR DEVELOPMENT PURPOSES)
+	out.print("view: " + servletContext.getAttribute("vmode") + "<br />");
+	out.print("toggle: " + servletContext.getAttribute("tmode") + "<br />");
+	for (int i = 0; i < com.Utilities.tab.length; i++) {
+	out.print("tab" + i + ": " + servletContext.getAttribute("tab" + i) + "<br />");
+	}
 	
 /* ################ APPS VIEW ################ */
 } else {
 	
-	out.print("<div class='circle' id='camera'>");
+	out.print("<div class='circle' id='camera'></div>");
      
 // CREATE THE PRIMARY TAB RING
 for (int i = 0; i < com.Utilities.tab.length; i++) {
@@ -112,10 +129,7 @@ for (int i = 0; i < com.Utilities.tab.length; i++) {
 // THIS WILL BECOME A CASE SELECT OR ( FOR X IN TAB )
 
 // HEAD CONTROL
-if (i == 0) {
-	out.print("<ul class='dropdown-menu' role='menu'>" +
-			"<p class='text-center'>Select a point on the view screen to center it.</p></ul>");
-}
+if (i == 0) {}
  		
 // OPERATING MODE
 if (i == 1) {					        
@@ -182,7 +196,5 @@ out.print("</div>");
 	}
 
 } %>
-	
-</div>
 
 </form></body></html>
