@@ -1347,7 +1347,8 @@ blockquote p {
 input.button,
 button.button {
   padding-top: 0.8125em;
-  padding-bottom: 0.75em; }
+  padding-bottom: 0.75em;
+  margin: 2px; }
   input.button.tiny,
   button.button.tiny {
     padding-top: 0.5em;
@@ -2132,7 +2133,6 @@ form.custom {
       .section-container.tabs section.active .content,
       .section-container.tabs .section.active .content {
         position: relative; } }
-/* Wrapped around .top-bar to contain to grid width */
 .contain-to-grid {
   width: 100%;
   background: #111111; }
@@ -2172,7 +2172,7 @@ form.custom {
     font-size: 16px; }
     .top-bar .name h1 {
       line-height: 45px;
-      font-size: 1.0625em;
+      font-size: 2em;
       margin: 0; }
       .top-bar .name h1 a {
         font-weight: bold;
@@ -2908,16 +2908,15 @@ form.custom {
     right: 20px;
     padding-left: 0;
     padding-top: 0; } }
-/* Foundation Alerts */
 .alert-box {
   border-style: solid;
   border-width: 1px;
   display: block;
   font-weight: bold;
-  margin-bottom: 1.25em;
+  margin: 4px 2px;
   position: relative;
-  padding: 0.6875em 1.3125em 0.75em 0.6875em;
-  font-size: 0.875em;
+  padding: 20px;
+  font-size: 0.7em;
   background-color: #2ba6cb;
   border-color: #2284a1;
   color: white; }

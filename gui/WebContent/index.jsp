@@ -5,12 +5,10 @@
 <%@ page import="com.Utilities. * " %>
 
 <%-- DIRECTORY PATH AND LISTING VARIABLES --%>
-<% String path = "."; File folder = new File(path); File[] listOfFiles = folder.listFiles(); %>
+<% String path = "C:/"; File folder = new File(path); File[] listOfFiles = folder.listFiles(); %>
 
 <%-- SESSION VARIABLES --%>
 <% ServletContext servletContext = getServletContext(); %>
-<% Object view = "1"; %>
-<% Object toggle = "0"; %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -25,13 +23,12 @@
 	
 	// SET VARIABLES FOR EACH TAB AS CLOSED (0)
 	if (com.Utilities.tabular[i] == null) {
-	com.Utilities.tabular[i] = "0";
+		com.Utilities.tabular[i] = "0";
 	}
-	servletContext.setAttribute("tab" + i, com.Utilities.tabular[i]);
 	
-	String tabname = "tab" + i;
-	if (request.getParameter(tabname) != null) {
-		com.Utilities.tabular[i] = request.getParameter(tabname); servletContext.setAttribute(tabname, com.Utilities.tabular[i]);
+	if (request.getParameter("tab" + i) != null) {
+		servletContext.setAttribute("tab" + i, request.getParameter("tab" + i));
+		com.Utilities.tabular[i] = (String)servletContext.getAttribute("tab" + i);
 	}
 	
 } %>
@@ -40,52 +37,68 @@
 <%-- SET SESSION VARIABLES AND DEFAULTS --%>
 <%
 if (request.getParameter("viewmode") != null) {
-	view = request.getParameter("viewmode"); servletContext.setAttribute("vmode", view);
+	servletContext.setAttribute("vmode", request.getParameter("viewmode"));
 }
 
 if (request.getParameter("togglemode") != null) {
-	toggle = request.getParameter("togglemode"); servletContext.setAttribute("tmode", toggle);
+	servletContext.setAttribute("tmode", request.getParameter("togglemode"));
 }
+
+
+if ("1".equals(servletContext.getAttribute("tmode"))) {
+	for (int i = 0; i < com.Utilities.tabular.length; i++) {
+		com.Utilities.tabular[i] = "1";
+	}
+} else {
+	for (int i = 0; i < com.Utilities.tabular.length; i++) {
+		com.Utilities.tabular[i] = "0";
+	}
+}
+
 %>
 
 </head>
 <body><form method="post" action="">
 
 <nav class="top-bar">
-	<ul class="title-area">
-		<li class="name"><h1><a href="#">Interface</a></h1></li>
-	</ul>
-
 <div class="top-bar-section">
 	<ul class="left">
-		<li class="divider"></li>
-			<li>
-				<button class="button <% if ("1".equals(servletContext.getAttribute("tmode"))) { out.print("pending"); } %>" name=togglemode value="<% if ("1".equals(servletContext.getAttribute("tmode"))) { out.print("0"); } else { out.print("1"); } %>" >
-					<i class="icon-2x <% if ("1".equals(servletContext.getAttribute("tmode"))) { out.print(" icon-folder-open"); } else { out.print(" icon-folder-close"); } %>"></i>
-				</button>
-			</li>
-			<li>
-				<button name=viewmode value=1 class="button <% if ("1".equals(servletContext.getAttribute("vmode"))) { out.print("success"); } %>">
-					<i class="icon-dashboard icon-2x"></i>
-				</button>
-			</li>
-			<li>
-				<button name=viewmode value=2 class="button <% if ("2".equals(servletContext.getAttribute("vmode"))) { out.print("success"); } %>">
-					<i class="icon-list-alt icon-2x"></i>
-				</button>
-			</li>
-			<li>
-				<button name=viewmode value=3 class="button <% if ("3".equals(servletContext.getAttribute("vmode"))) { out.print("success"); } %>">
-					<i class="icon-sitemap icon-2x"></i>
-				</button>
-			</li>
-		</ul>
-	</div>
+		<li><button class="button <% if ("1".equals(servletContext.getAttribute("tmode"))) { out.print("pending"); } %>" name=togglemode value="<% if ("1".equals(servletContext.getAttribute("tmode"))) { out.print("0"); } else { out.print("1"); } %>" >
+			<i class="icon-2x <% if ("1".equals(servletContext.getAttribute("tmode"))) { out.print(" icon-folder-open"); } else { out.print(" icon-folder-close"); } %>"></i>
+		</button></li>
+	</ul>
+</div>
+<div class="top-bar-section">
+	<ul>		
+		<li><button name=viewmode value=1 class="button <% if ("1".equals(servletContext.getAttribute("vmode"))) { out.print("success"); } %>">
+			<i class="icon-dashboard icon-2x"></i>
+		</button></li>
+		<li><button name=viewmode value=2 class="button <% if ("2".equals(servletContext.getAttribute("vmode"))) { out.print("success"); } %>">
+			<i class="icon-list-alt icon-2x"></i>
+		</button></li>
+		<li><button name=viewmode value=3 class="button <% if ("3".equals(servletContext.getAttribute("vmode"))) { out.print("success"); } %>">
+			<i class="icon-sitemap icon-2x"></i>
+		</button></li>
+	</ul>
+</div>
 </nav>
 
-<% if ("1".equals(servletContext.getAttribute("tab0"))) { %>
-<div data-alert="" class="alert-box primary"><b>Camera Position:</b> Select a point on the view screen to center it.<a href="" class="close">&times;</a></div>
+<div class="wrapper">
+
+<%-- DISPLAY ALERTS AND MESSAGES --%>
+<div>
+<% if ("1".equals(servletContext.getAttribute("vmode"))) { %>
+
+	<% if ("1".equals(servletContext.getAttribute("tab0"))) { %>
+	<div class="alert-box primary"><b>Camera:</b> Select a point on the view screen to center it.<a href="" class="close">&times;</a></div>
+	<% } %>
+	
+	<% if ("1".equals(servletContext.getAttribute("tab8"))) { %>
+		<p class="alert-box primary"><b>Battery:</b> 33.05% remaining</p>
+	<% } %>
+	
 <% } %>
+</div>
 
 <%-- ################ SELECT LAYOUT BASED ON SESSION VARIABLE ################ --%>
 <% if ("3".equals(servletContext.getAttribute("vmode"))) {
@@ -133,7 +146,7 @@ if (i == 0) {}
  		
 // OPERATING MODE
 if (i == 1) {					        
-	out.print("<ul class='dropdown-menu' role='menu'>" +
+	out.print("<ul class='dropdown-menu'>" +
 			"<div class='btn-group btn-group-vertical'>" +
 			"<button type='button' class='btn btn-action'>Atonomus</button>" +
 			"<button type='button' class='btn btn-success'>Assisted</button>" +
@@ -143,7 +156,7 @@ if (i == 1) {
 
 // LIGHTS
 if (i == 2) {
-	out.print("<ul class='dropdown-menu' role='menu'>" +
+	out.print("<ul class='dropdown-menu'>" +
 			"<div class='btn-group'>" +
 			"<button type='button' class='btn btn-large btn-danger'>IR</button>" +
 			"<button type='button' class='btn btn-large btn-inverse'>UV</button>" +
@@ -181,13 +194,12 @@ if (i == 7) {
 
    // POWER
 if (i == 8) {
-	out.print("<ul class='dropdown-menu' role='menu'>" +
+	out.print("<ul class='dropdown-menu'>" +
 			"<div class='btn-group'>" +
 			"<button type='button' class='btn btn-large active'>" +
 			"<i class='icon-circle'></i></button>" +
 			"<button type='button' id='off' class='btn btn-large'><i class='icon-circle-blank'></i></button>" +
 			"</div>" +
-			"<p class='text-center'>Battery: " + "33.05%" + "</p>" +
 			"</ul>");
 }
  		
@@ -196,5 +208,6 @@ out.print("</div>");
 	}
 
 } %>
+</div>
 
 </form></body></html>
