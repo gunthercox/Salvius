@@ -2,7 +2,7 @@
 ***
 
 Salvius is an open source humanoid robot. For details about this project visit:
-[http://salviusrobot.blogspot.com/p/about.html](http://salviusrobot.blogspot.com/p/about.html)
+[http://salviusrobot.blogspot.com](http://salviusrobot.blogspot.com)
 
 ## Server Setup:
 I don't always set up servers but when I do, I choose Ubuntu.
