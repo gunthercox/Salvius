@@ -10,6 +10,7 @@
  */
  
  .wrapper{margin:2px}
+ .cli{background:#222;width:700px;height:500px;color:#eee;padding:2px}
 
 .tab{
 position:absolute;
