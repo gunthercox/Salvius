@@ -1,4 +1,4 @@
-# Salvius Source Code
+# Open Source Humanoid Robot
 ***
 
 Salvius is an open source humanoid robot. For details about this project visit:
