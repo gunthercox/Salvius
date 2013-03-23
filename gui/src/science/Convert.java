@@ -63,18 +63,14 @@ public class Convert {
 		return (fahrenheit - 32) * 5 / 9;
 	}
 	
-	// CANDLEPOWER AND LUMENS
-	public static double candlepower_to_lumens (double candlepower, boolean isInCandlepower) {
-		
-		// CALCULATE LUMENS
-		double lumens = 4 * Math.PI;
-		
-		// RETURN VALUE IN CANDEL POWER OR LUMENS
-		if (isInCandlepower == true) {
-			return candlepower * lumens;
-		} else {
-			return candlepower / lumens;
-		}
+	// CANDLEPOWER TO LUMENS
+	public static double candlepower_to_lumens (double candlepower) {
+		return candlepower * (4 * Math.PI);
+	}
+	
+	// LUMENS TO CANDLEPOWER
+	public static double lumens_to_candlepower (double lumens) {
+		return lumens / (4 * Math.PI);
 	}
 	
 	// STANDARD UNIT CONVERSION
