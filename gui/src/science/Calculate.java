@@ -36,12 +36,12 @@ public class Calculate {
 	// CALCULATE THE CIRCUMFERANCE OF A CIRCLE
 	public static double circumference(double radius) {
 	// could also use: pi * diamiter;
-	return 2 * Calculate.calc_pi() * radius;
+	return 2 * Math.PI * radius;
 	}
 	
 	// CALCULATE THE AREA OF A CIRCLE
 	public static double circle_area(double radius) {
-	return Calculate.calc_pi() * Math.pow(radius, 2);
+	return Math.PI * Math.pow(radius, 2);
 	}
 	
 	// CALCULATE THE TOTAL SURFACE AREA OF A RECTANGULAR PRISM
@@ -51,7 +51,7 @@ public class Calculate {
 	
 	// CALCULATE THE TOTAL SURFACE AREA OF A CYLANDER
 	public static double surface_area_cylander(double radius, double height) {
-	return 2 * Calculate.calc_pi() * radius * 2 + 2 * Calculate.calc_pi() * radius * height;
+	return 2 * Math.PI * radius * 2 + 2 * Math.PI * radius * height;
 	}
 	
 	// CALCULATE THE VOLUME OF A RECTANGULAR PRISM
@@ -102,23 +102,5 @@ public class Calculate {
 	// TIME CONVERSIONS
 	public static final int SECONDS_PER_MONTH = 60*60*24*30;
 	public static final int SECONDS_PER_YEAR = 60*60*24*365;
-	
-	// CALCULATE PI
-    public static double calc_pi() {
-
-    	int input = 10; // ETERATIONS
-    	double output = 0.0;
-    	boolean positive = true;
-    	for (int i = 0; i < input; i++) { 
-    		double contribution = 1.0/(2.0 * ((double)i) + 1.0);
-    	    if (positive) 
-    	    	output += contribution;
-    	    else 
-    	       output -= contribution;
-    	    positive = !positive;
-    	}
-        
-		return output * 4.0;
-	}
 
 }
