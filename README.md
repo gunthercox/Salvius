@@ -40,3 +40,22 @@ Where the work or any of its elements is in the public domain under applicable l
 In no way are any of the following rights affected by the license: Your fair dealing or fair use rights, or other applicable copyright exceptions and limitations; The author's moral rights; Rights other persons may have either in the work itself or in how the work is used, such as publicity or privacy rights.
 
 Notice: For any reuse or distribution, you must not remove the attribution from these works.
+
+------
+
+Older information:
+
+All source code for the robot Salvius is licensed under a Creative Commons Attribution 3.0 Unported License unless otherwise noted.
+Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) Licence Summery:
+
+Under the terms of this licence you are free to to share (to copy, distribute and transmit the work) and to remix (to adapt the work), but not to make commercial use of the work all under the following condition:
+Attribution — You must attribute the work as specified by the author (but not in any way that suggests that they endorse you or your use of the work).
+You must understand that any of the above conditions can be waived if you get permission from the copyright holder. Where the work or any of its elements is in the public domain under applicable law, that status is in no way affected by the license. In no way are any of the following rights affected by the license:
+Your fair dealing or fair use rights, or other applicable copyright exceptions and limitations; The author's moral rights; Rights other persons may have either in the work itself or in how the work is used, such as publicity or privacy rights.
+
+Notice — For any reuse or distribution, you must make clear to others the license terms of this work. The required method for doing so is with the author specified attribution as shown below. For alternative methods of attribution please contact the author.
+Example attribution:
+
+Based on work by Gunther Cox from http://salviusrobot.blogspot.com
+
+The content of this blog including photos, videos, and written text are solely the property of the author accept where otherwise noted. Extended permissions for content can be made available. For inquiries contact me at salviusrobot@gmail.com.
