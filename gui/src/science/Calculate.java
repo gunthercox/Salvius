@@ -105,11 +105,20 @@ public class Calculate {
 	}
 
 	// TIME CONVERSIONS
-	public static final int SECONDS_PER_MONTH = 60*60*24*30;
-	public static final int SECONDS_PER_YEAR = 60*60*24*365;
+	public static final int SECONDS_PER_MONTH = 60 * 60 * 24 * 30;
+	public static final int SECONDS_PER_YEAR = 60 * 60 * 24 * 365;
+	
+	// UNIX EPOCH (STARTS MIDNIGHT, JAN 1, 1970)
+	long totalMilliseconds = (System.currentTimeMillis());
+	long totalSeconds = (totalMilliseconds / 1000);
+	long currentSecond = (totalSeconds % 60);
+	long totalMinutes = (totalSeconds / 60);
+	long currentMinute = (totalMinutes % 60);
+	long totalHours = (totalMinutes / 60);
+	long currentHour = (totalHours % 24);
 
 	// CALCULATE PI
-	public static double calc_pi() {
+	public static double digits_pi() {
 
 		int input = 10; // ETERATIONS
 		double output = 0.0;
