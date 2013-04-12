@@ -27,33 +27,29 @@
 	}
 	
 	if (request.getParameter("tab" + i) != null) {
-		servletContext.setAttribute("tab" + i, request.getParameter("tab" + i));
-		com.Utilities.tabular[i] = (String)servletContext.getAttribute("tab" + i);
+		servletContext.setAttribute("tab" + Integer.toString(i), request.getParameter("tab" + Integer.toString(i)));
+		com.Utilities.tabular[i] = (String)servletContext.getAttribute("tab" + Integer.toString(i));
 	}
 	
 } %>
 </style>
 
-<%-- SET SESSION VARIABLES AND DEFAULTS --%>
+<%-- GET SESSION VARIABLE VALUES FROMTHE PAGE --%>
 <%
-if (request.getParameter("viewmode") != null) {
-	servletContext.setAttribute("vmode", request.getParameter("viewmode"));
-}
+if (request.getParameter("viewmode") != null) { servletContext.setAttribute("vmode", request.getParameter("viewmode")); }
+if (request.getParameter("togglemode") != null) { servletContext.setAttribute("tmode", request.getParameter("togglemode")); }
 
-if (request.getParameter("togglemode") != null) {
-	servletContext.setAttribute("tmode", request.getParameter("togglemode"));
-}
-
-
-if ("1".equals(servletContext.getAttribute("tmode"))) {
-	for (int i = 0; i < com.Utilities.tabular.length; i++) {
-		com.Utilities.tabular[i] = "1";
-	}
-} else {
-	for (int i = 0; i < com.Utilities.tabular.length; i++) {
-		com.Utilities.tabular[i] = "0";
+for (int j = 0; j < com.Utilities.tabular.length; j++) {
+	if (request.getParameter("tab" + Integer.toString(j)) == null) {
+		// causes only one tab to show at a time and variable not to save
+		servletContext.setAttribute("tab" + Integer.toString(j), "0");
+	} else {
+		servletContext.setAttribute("tab" + Integer.toString(j), request.getParameter("tab" + Integer.toString(j)));
 	}
 }
+
+if (servletContext.getAttribute("vmode") == null) { servletContext.setAttribute("vmode", "1"); }
+if (servletContext.getAttribute("tmode") == null) { servletContext.setAttribute("tmode", "0"); }
 
 %>
 
@@ -69,7 +65,7 @@ if ("1".equals(servletContext.getAttribute("tmode"))) {
 	</ul>
 </div>
 <div class="top-bar-section">
-	<ul>		
+	<ul>
 		<li><button name=viewmode value=1 class="button <% if ("1".equals(servletContext.getAttribute("vmode"))) { out.print("success"); } %>">
 			<i class="icon-dashboard icon-2x"></i>
 		</button></li>
@@ -94,7 +90,7 @@ if ("1".equals(servletContext.getAttribute("tmode"))) {
 	<% } %>
 	
 	<% if ("1".equals(servletContext.getAttribute("tab8"))) { %>
-		<p class="alert-box primary"><b>Battery:</b> 33.05% remaining</p>
+		<div class="alert-box primary"><b>Battery:</b> 33.05% remaining,<a href="" class="close">&times;</a></div>
 	<% } %>
 	
 <% } %>
@@ -122,12 +118,16 @@ if ("1".equals(servletContext.getAttribute("tmode"))) {
 /* ################ CLI VIEW ################ */
 } else if ("2".equals(servletContext.getAttribute("vmode"))) {
 	
+	out.print("<div class='cli'>");
+	
 	// SESSION VARIABLE OUTPUT (FOR DEVELOPMENT PURPOSES)
 	out.print("view: " + servletContext.getAttribute("vmode") + "<br />");
 	out.print("toggle: " + servletContext.getAttribute("tmode") + "<br />");
 	for (int i = 0; i < com.Utilities.tab.length; i++) {
-	out.print("tab" + i + ": " + servletContext.getAttribute("tab" + i) + "<br />");
+		out.print("tab" + i + ": " + servletContext.getAttribute("tab" + i) + "<br />");
 	}
+	
+	out.print("</div>");
 	
 /* ################ APPS VIEW ################ */
 } else {

@@ -1,6 +1,6 @@
 *.class
 
-# Eclipse #
+# Eclipse
 *.tree
 *.index
 *.prefs
@@ -12,12 +12,8 @@
 *~.nib
 local.properties
 .classpath
-.settings/
-.metadata/
-.metadata/*
-.metadata/**/*
-.metadata/**/**/**/*
-.metadata/**/**/**/**/*
+.settings
+.metadata
 .loadpath
 
 # External tool builders
