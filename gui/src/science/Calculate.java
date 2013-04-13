@@ -40,22 +40,14 @@ public class Calculate {
 
 	// CALCULATE THE CIRCUMFERANCE OF A CIRCLE
 	public static double circumference(double radius) {
-<<<<<<< HEAD
+
 	// could also use: pi * diamiter;
-	return 2 * Math.PI * radius;
-=======
-		// could also use: pi * diamiter;
-		return 2 * Calculate.calc_pi() * radius;
->>>>>>> a0808fac6333bb3cfae80e32586d4870d99a9206
+		return 2 * Math.PI * radius;
 	}
 
 	// CALCULATE THE AREA OF A CIRCLE
 	public static double circle_area(double radius) {
-<<<<<<< HEAD
-	return Math.PI * Math.pow(radius, 2);
-=======
-		return Calculate.calc_pi() * Math.pow(radius, 2);
->>>>>>> a0808fac6333bb3cfae80e32586d4870d99a9206
+		return Math.PI * Math.pow(radius, 2);
 	}
 
 	// CALCULATE THE TOTAL SURFACE AREA OF A RECTANGULAR PRISM
@@ -65,11 +57,7 @@ public class Calculate {
 
 	// CALCULATE THE TOTAL SURFACE AREA OF A CYLANDER
 	public static double surface_area_cylander(double radius, double height) {
-<<<<<<< HEAD
-	return 2 * Math.PI * radius * 2 + 2 * Math.PI * radius * height;
-=======
-		return 2 * Calculate.calc_pi() * radius * 2 + 2 * Calculate.calc_pi() * radius * height;
->>>>>>> a0808fac6333bb3cfae80e32586d4870d99a9206
+		return 2 * Math.PI * radius * 2 + 2 * Math.PI * radius * height;
 	}
 
 	// CALCULATE THE VOLUME OF A RECTANGULAR PRISM
@@ -118,10 +106,6 @@ public class Calculate {
 	}
 
 	// TIME CONVERSIONS
-<<<<<<< HEAD
-	public static final int SECONDS_PER_MONTH = 60*60*24*30;
-	public static final int SECONDS_PER_YEAR = 60*60*24*365;
-=======
 	public static final int SECONDS_PER_MONTH = 60 * 60 * 24 * 30;
 	public static final int SECONDS_PER_YEAR = 60 * 60 * 24 * 365;
 	
@@ -151,6 +135,5 @@ public class Calculate {
 
 		return output * 4.0;
 	}
->>>>>>> a0808fac6333bb3cfae80e32586d4870d99a9206
 
 }

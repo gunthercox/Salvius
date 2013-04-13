@@ -24,7 +24,7 @@
 // * Read access to the web application's document root directory
 // * Read, write and delete access to the web application's working directory
 //
-// $Id: catalina.policy 1347048 2012-06-06 18:47:00Z markt $
+// $Id: catalina.policy 1084171 2011-03-22 13:32:12Z markt $
 // ============================================================================
 
 
@@ -67,7 +67,7 @@ grant codeBase "file:${catalina.home}/bin/commons-daemon.jar" {
 //  grant codeBase "file:${catalina.base}/bin/tomcat-juli.jar" {..}
 grant codeBase "file:${catalina.home}/bin/tomcat-juli.jar" {
         permission java.io.FilePermission
-         "${java.home}${file.separator}lib${file.separator}logging.properties", "read";
+         "${java.home}${file.separator}lib${file.separator}logging.properties", "read"; 
 
         permission java.io.FilePermission
          "${catalina.base}${file.separator}conf${file.separator}logging.properties", "read";
@@ -85,16 +85,11 @@ grant codeBase "file:${catalina.home}/bin/tomcat-juli.jar" {
         permission java.util.PropertyPermission "java.util.logging.config.class", "read";
         permission java.util.PropertyPermission "java.util.logging.config.file", "read";
         permission java.util.PropertyPermission "catalina.base", "read";
-        permission java.util.PropertyPermission
-         "org.apache.juli.logging.UserDataHelper.CONFIG", "read";
-        permission java.util.PropertyPermission
-         "org.apache.juli.logging.UserDataHelper.SUPPRESSION_TIME", "read";
 
         // Note: To enable per context logging configuration, permit read access to
         // the appropriate file. Be sure that the logging configuration is
         // secure before enabling such access.
-        // E.g. for the examples web application (uncomment and unwrap
-        // the following to be on a single line):
+        // E.g. for the examples web application:
         // permission java.io.FilePermission "${catalina.base}${file.separator}
         //  webapps${file.separator}examples${file.separator}WEB-INF
         //  ${file.separator}classes${file.separator}logging.properties", "read";
@@ -188,9 +183,6 @@ grant {
 
     // Applications using Comet need to be able to access this package
     permission java.lang.RuntimePermission "accessClassInPackage.org.apache.catalina.comet";
-
-    // Applications using WebSocket need to be able to access this package
-    permission java.lang.RuntimePermission "accessClassInPackage.org.apache.catalina.websocket";
 };
 
 
