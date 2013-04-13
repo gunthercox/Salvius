@@ -62,12 +62,12 @@ public class Convert {
 	public static double fahrenheit_to_celsius(double fahrenheit) {
 		return (fahrenheit - 32) * 5 / 9;
 	}
-	
+
 	// CANDLEPOWER TO LUMENS
 	public static double candlepower_to_lumens (double candlepower) {
 		return candlepower * (4 * Math.PI);
 	}
-	
+
 	// LUMENS TO CANDLEPOWER
 	public static double lumens_to_candlepower (double lumens) {
 		return lumens / (4 * Math.PI);
