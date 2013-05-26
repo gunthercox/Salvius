@@ -4,13 +4,17 @@
   Foundation.libs = Foundation.libs || {};
 
   Foundation.libs.orbit = {
-    version: '4.0.0',
+    name: 'orbit',
+
+    version: '4.1.0',
 
     settings: {
       timer_speed: 10000,
       animation_speed: 500,
       bullets: true,
       stack_on_small: true,
+      navigation_arrows: true,
+      slide_number: true,
       container_class: 'orbit-container',
       stack_on_small_class: 'orbit-stack-on-small',
       next_class: 'orbit-next',
@@ -29,12 +33,16 @@
 
     init: function (scope, method, options) {
       var self = this;
+      Foundation.inherit(self, 'data_options');
 
       if (typeof method === 'object') {
         $.extend(true, self.settings, method);
       }
 
-      $('[data-orbit]', scope).each($.proxy(self._init, self));
+      $('[data-orbit]', scope).each(function(idx, el) {
+        var scoped_self = $.extend(true, {}, self);
+        scoped_self._init(idx, el);
+      });
     },
 
     _container_html: function() {
@@ -88,14 +96,20 @@
           $slides_container = $(slider),
           $container = $slides_container.wrap(self._container_html()).parent(),
           $slides = $slides_container.children();
+      
+      $.extend(true, self.settings, self.data_options($slides_container));
 
-      $container.append(self._prev_html());
-      $container.append(self._next_html());
+      if (self.settings.navigation_arrows) {
+          $container.append(self._prev_html());
+          $container.append(self._next_html());
+      }
       $slides_container.addClass(self.settings.slides_container_class);
       if (self.settings.stack_on_small) {
         $container.addClass(self.settings.stack_on_small_class);
       }
-      $container.append(self._slide_number_html(1, $slides.length));
+      if (self.settings.slide_number) {
+        $container.append(self._slide_number_html(1, $slides.length));
+      }
       $container.append(self._timer_html());
       if (self.settings.bullets) {
         $container.after(self._bullets_container_html($slides));
@@ -135,7 +149,7 @@
 
         if ($slide.length === 1) {
           self._reset_timer($slides_container, true);
-          self.goto($slides_container, $slide.index(), function() {});
+          self._goto($slides_container, $slide.index(), function() {});
         }
       });
 
@@ -143,7 +157,7 @@
         .on('click.fndtn.orbit', '[data-orbit-slide-number]', function(e) {
           e.preventDefault();
           self._reset_timer($slides_container, true);
-          self.goto($slides_container, $(e.currentTarget).data('orbit-slide-number'),function() {});
+          self._goto($slides_container, $(e.currentTarget).data('orbit-slide-number'),function() {});
         });
 
       $container
@@ -157,12 +171,12 @@
         .on('orbit:next-slide.fndtn.orbit click.fndtn.orbit', '.' + self.settings.next_class, function(e) {
           e.preventDefault();
           self._reset_timer($slides_container, true);
-          self.goto($slides_container, 'next', function() {});
+          self._goto($slides_container, 'next', function() {});
         })
         .on('orbit:prev-slide.fndtn.orbit click.fndtn.orbit', '.' + self.settings.prev_class, function(e) {
           e.preventDefault();
           self._reset_timer($slides_container, true);
-          self.goto($slides_container, 'prev', function() {});
+          self._goto($slides_container, 'prev', function() {});
         })
         .on('orbit:toggle-play-pause.fndtn.orbit click.fndtn.orbit touchstart.fndtn.orbit', '.' + self.settings.timer_container_class, function(e) {
           e.preventDefault();
@@ -209,7 +223,7 @@
             self._stop_timer($slides_container);
             var direction = (data.delta_x < 0) ? 'next' : 'prev';
             data.active = true;
-            self.goto($slides_container, direction, function() {});
+            self._goto($slides_container, direction, function() {});
           }
         })
         .on('touchend.fndtn.orbit', function(e) {
@@ -234,7 +248,7 @@
 
       var callback = function() {
         self._reset_timer($slides_container, false);
-        self.goto($slides_container, 'next', function() {
+        self._goto($slides_container, 'next', function() {
           self._start_timer($slides_container);
         });
       };
@@ -244,7 +258,7 @@
           progress_pct = ($progress.width() / $timer.width()),
           delay = self.settings.timer_speed - (progress_pct * self.settings.timer_speed);
 
-      $progress.animate({'width': '100%'}, delay, 'linear', callback).data('is-original', 'beans?');
+      $progress.animate({'width': '100%'}, delay, 'linear', callback);
       $slides_container.trigger('orbit:timer-started');
     },
 
@@ -253,7 +267,7 @@
           $container = $slides_container.parent(),
           $timer = $container.find('.' + self.settings.timer_container_class),
           $progress = $timer.find('.' + self.settings.timer_progress_class),
-          progress_pct = $progress.width() / $timer.width()
+          progress_pct = $progress.width() / $timer.width();
       self._rebuild_timer($container, progress_pct * 100 + '%');
       // $progress.stop();
       $slides_container.trigger('orbit:timer-stopped');
@@ -292,12 +306,13 @@
       }
     },
 
-    goto: function($slides_container, index_or_direction, callback) {
+    _goto: function($slides_container, index_or_direction, callback) {
       var self = this,
           $container = $slides_container.parent(),
           $slides = $slides_container.children(),
           $active_slide = $slides_container.find('.' + self.settings.active_slide_class),
-          active_index = $active_slide.index();
+          active_index = $active_slide.index(),
+          margin_position = Foundation.rtl ? 'marginRight' : 'marginLeft';
 
       if ($container.hasClass(self.settings.orbit_transition_class)) {
         return false;
@@ -318,11 +333,11 @@
         active_index = (index_or_direction % $slides.length);
       }
       if (active_index === ($slides.length - 1) && index_or_direction === 'next') {
-        $slides_container.css('marginLeft', '0%');
+        $slides_container.css(margin_position, '0%');
         active_index = 1;
       }
       else if (active_index === 0 && index_or_direction === 'prev') {
-        $slides_container.css('marginLeft', '-' + ($slides.length - 1) * 100 + '%');
+        $slides_container.css(margin_position, '-' + ($slides.length - 1) * 100 + '%');
         active_index = $slides.length - 2;
       }
       // Start transition, make next slide active
@@ -339,14 +354,15 @@
       // Check to see if animation will occur, otherwise perform
       // callbacks manually
       $slides_container.trigger('orbit:before-slide-change');
-      if ($slides_container.css('marginLeft') === new_margin_left) {
+      if ($slides_container.css(margin_position) === new_margin_left) {
         $container.removeClass(self.settings.orbit_transition_class);
         $slides_container.trigger('orbit:after-slide-change', [{slide_number: active_index, total_slides: $slides_container.children().length - 2}]);
         callback();
       } else {
-        $slides_container.animate({
-          'marginLeft' : new_margin_left
-        }, self.settings.animation_speed, 'linear', function() {
+        var properties = {};
+        properties[margin_position] = new_margin_left;
+
+        $slides_container.animate(properties, self.settings.animation_speed, 'linear', function() {
           $container.removeClass(self.settings.orbit_transition_class);
           $slides_container.trigger('orbit:after-slide-change', [{slide_number: active_index, total_slides: $slides_container.children().length - 2}]);
           callback();
