@@ -1,0 +1,25 @@
+/COPYING/1.1.2.1/Wed Feb 19 13:28:41 2003//Tcommapi-0-0-1
+/CommDriver.java/1.1.2.2/Tue Oct 12 08:59:27 2004//Tcommapi-0-0-1
+/CommPort.java/1.1.2.2/Tue Oct 12 08:59:27 2004//Tcommapi-0-0-1
+/CommPortEnumerator.java/1.1.2.2/Tue Oct 12 08:59:27 2004//Tcommapi-0-0-1
+/CommPortIdentifier.java/1.1.2.2/Tue Oct 12 08:59:27 2004//Tcommapi-0-0-1
+/CommPortOwnershipListener.java/1.1.2.2/Tue Oct 12 08:59:27 2004//Tcommapi-0-0-1
+/Makefile/1.1.2.1/Wed Feb 19 13:28:41 2003//Tcommapi-0-0-1
+/NoSuchPortException.java/1.1.2.2/Tue Oct 12 08:59:27 2004//Tcommapi-0-0-1
+/PortInUseException.java/1.1.2.2/Tue Oct 12 08:59:27 2004//Tcommapi-0-0-1
+/README/1.1.2.2/Tue Oct 12 08:59:27 2004//Tcommapi-0-0-1
+/RXTXCommDriver.java/1.1.2.2/Tue Oct 12 08:59:27 2004//Tcommapi-0-0-1
+/RXTXPort.java/1.1.2.3/Thu Mar 10 12:22:57 2005//Tcommapi-0-0-1
+/RXTXVersion.java/1.1.2.2/Tue Oct 12 08:59:27 2004//Tcommapi-0-0-1
+/SerialImp.c/1.1.2.6/Thu Jun 16 15:09:55 2005//Tcommapi-0-0-1
+/SerialImp.h/1.1.2.2/Tue Oct 12 08:59:27 2004//Tcommapi-0-0-1
+/SerialPort.java/1.1.2.2/Tue Oct 12 08:59:27 2004//Tcommapi-0-0-1
+/SerialPortEvent.java/1.1.2.2/Tue Oct 12 08:59:27 2004//Tcommapi-0-0-1
+/SerialPortEventListener.java/1.1.2.2/Tue Oct 12 08:59:27 2004//Tcommapi-0-0-1
+/Simple.Java/1.1.2.1/Wed Feb 19 13:32:04 2003//Tcommapi-0-0-1
+/UnSupportedLoggerException.java/1.1.2.2/Tue Oct 12 08:59:27 2004//Tcommapi-0-0-1
+/UnsupportedCommOperationException.java/1.1.2.2/Tue Oct 12 08:59:27 2004//Tcommapi-0-0-1
+/Zystem.java/1.1.2.2/Tue Oct 12 08:59:27 2004//Tcommapi-0-0-1
+/config.h/1.1.2.1/Wed Feb 19 13:28:42 2003//Tcommapi-0-0-1
+/fuserImp.c/1.1.2.1/Wed Feb 19 13:28:42 2003//Tcommapi-0-0-1
+D
