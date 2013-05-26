@@ -1,0 +1,44 @@
+/.cvsignore/1.1.1.1.2.3/Fri Apr  5 20:15:18 2002//Tcommapi-0-0-1
+/AUTHORS/1.16.2.19/Sat Apr 17 20:44:31 2004//Tcommapi-0-0-1
+/BeOS/1.1.2.1/Fri Oct  6 20:49:19 2000//Tcommapi-0-0-1
+/COPYING/1.1.1.1/Thu Mar 18 18:18:45 1999//Tcommapi-0-0-1
+/ChangeLog/1.24.2.55/Mon Jan 30 04:37:40 2006//Tcommapi-0-0-1
+/INSTALL/1.12.2.35/Thu Jul  7 23:51:46 2005//Tcommapi-0-0-1
+/MacOSX/1.4.2.7/Sat Apr 17 20:46:00 2004//Tcommapi-0-0-1
+/Makefile.am/1.21.2.38/Fri Jul  8 03:47:33 2005//Tcommapi-0-0-1
+/Makefile.in/1.24.2.44/Fri Jul  8 03:47:33 2005//Tcommapi-0-0-1
+/Makefile.lcc/1.1.2.8/Fri Apr  5 18:21:56 2002//Tcommapi-0-0-1
+/Makefile.macosx/1.2.2.8/Tue Oct 12 08:59:26 2004//Tcommapi-0-0-1
+/Makefile.mingw32/1.1.2.22/Tue Oct 12 08:59:26 2004//Tcommapi-0-0-1
+/Makefile.msvc/1.1.2.1/Wed Sep  8 20:54:12 2004//Tcommapi-0-0-1
+/PORTING/1.5.2.6/Fri Apr  5 18:21:56 2002//Tcommapi-0-0-1
+/README/1.6.2.8/Tue Oct 12 08:59:26 2004//Tcommapi-0-0-1
+/README.IPAQ/1.1.2.1/Tue Jun 11 13:55:01 2002//Tcommapi-0-0-1
+/README.SCO/1.1.2.1/Fri Apr  5 20:32:47 2002//Tcommapi-0-0-1
+/RMISecurityManager.html/1.1.2.2/Fri Apr  5 18:21:56 2002//Tcommapi-0-0-1
+/SerialPortInstructions.txt/1.1.2.1/Thu Jan 18 23:32:57 2001//Tcommapi-0-0-1
+/TODO/1.14.2.16/Fri Apr  5 22:17:35 2002//Tcommapi-0-0-1
+/acinclude.m4/1.1.1.1.2.1/Tue Jul  5 08:25:26 2005//Tcommapi-0-0-1
+/aclocal.m4/1.6.2.12/Tue Jul  5 08:26:27 2005//Tcommapi-0-0-1
+/autogen.sh/1.1.1.1.2.5/Tue Aug  6 21:28:49 2002//Tcommapi-0-0-1
+/buildtest/1.1.2.2/Thu Jul 26 20:52:11 2001//Tcommapi-0-0-1
+/buildwin32/1.1.2.8/Sun Oct 17 09:48:56 2004//Tcommapi-0-0-1
+/config.guess/1.4.2.8/Thu Jul  7 23:50:55 2005//Tcommapi-0-0-1
+/config.h.in/1.4.2.10/Mon Oct 11 15:17:44 2004//Tcommapi-0-0-1
+/config.sub/1.4.2.8/Thu Jul  7 23:51:28 2005//Tcommapi-0-0-1
+/configure/1.35.2.64/Mon Jan 30 04:37:40 2006//Tcommapi-0-0-1
+/configure.in/1.35.2.73/Mon Jan 30 04:37:47 2006//Tcommapi-0-0-1
+/install-japanese.html/1.1/Wed Dec  1 17:16:05 1999//Tcommapi-0-0-1
+/install-sh/1.1.1.1/Thu Mar 18 18:18:47 1999//Tcommapi-0-0-1
+/ltconfig/1.4.2.3/Thu Aug 16 19:23:32 2001//Tcommapi-0-0-1
+/ltmain.sh/1.4.2.10/Thu Jul  7 23:51:28 2005//Tcommapi-0-0-1
+/missing/1.1.1.1.2.1/Sun Aug 18 15:36:03 2002//Tcommapi-0-0-1
+/mkinstalldirs/1.1.1.1/Thu Mar 18 18:18:47 1999//Tcommapi-0-0-1
+/rxtx.spec/1.3.2.4/Tue Mar 23 01:51:34 2004//Tcommapi-0-0-1
+/stamp-h.in/1.1.1.1/Thu Mar 18 18:18:47 1999//Tcommapi-0-0-1
+D/CNI////
+D/MACOSX_IDE////
+D/WinCE////
+D/contrib////
+D/debian////
+D/src////
