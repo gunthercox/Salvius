@@ -19,9 +19,20 @@ This project runs on a Tomcat Java Server which you can choose during the initia
 * PIR positive(+) to arduino 5V, PIR negative(-) to arduino GND, PIR OUT to HUB2 D3.
 * Connect Ethernet shield to wireless router with Ethernet cable.
 
+## Development:
+I have recently added the rxtx-2.1-7r2 library written mostly in java to this repository. The rxtx-2.1-7r2 library is
+the same one that is used in the Arduino IDE to allow the computer to communicate with the Arduino board through the
+serial port. I hope to use this library to allow a developer to access and make modifications to the microcontroller's
+code directly from the web interface on the robot's server.
+
+The main idea that I am attempting to promote is onboard expirimental development. My goal is to create this software
+so that I, and anyone else who needs it can develop and make changes to a robot's programming rapidly, and without
+having to plug in via a tethered connection. My web interface also is designed to contain many usefull control, and
+diagnostic tools.
+
 ## License:
-Author: Gunther Cox
-Website: http://salviusrobot.blogspot.com
+@author: Gunther Cox
+@website: http://salviusrobot.blogspot.com
 
 This project has been made possible with funding from the following businesses and individuals:
 Jennifer Cox, Adam Iredale, Janet Wise, Glen Zenor, Boris Hofer, Señora Alderperson, Wilbraham Music (Chris Cox), June Cox, Rantz
@@ -40,22 +51,3 @@ Where the work or any of its elements is in the public domain under applicable l
 In no way are any of the following rights affected by the license: Your fair dealing or fair use rights, or other applicable copyright exceptions and limitations; The author's moral rights; Rights other persons may have either in the work itself or in how the work is used, such as publicity or privacy rights.
 
 Notice: For any reuse or distribution, you must not remove the attribution from these works.
-
-------
-
-Older information:
-
-All source code for the robot Salvius is licensed under a Creative Commons Attribution 3.0 Unported License unless otherwise noted.
-Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) Licence Summery:
-
-Under the terms of this licence you are free to to share (to copy, distribute and transmit the work) and to remix (to adapt the work), but not to make commercial use of the work all under the following condition:
-Attribution — You must attribute the work as specified by the author (but not in any way that suggests that they endorse you or your use of the work).
-You must understand that any of the above conditions can be waived if you get permission from the copyright holder. Where the work or any of its elements is in the public domain under applicable law, that status is in no way affected by the license. In no way are any of the following rights affected by the license:
-Your fair dealing or fair use rights, or other applicable copyright exceptions and limitations; The author's moral rights; Rights other persons may have either in the work itself or in how the work is used, such as publicity or privacy rights.
-
-Notice — For any reuse or distribution, you must make clear to others the license terms of this work. The required method for doing so is with the author specified attribution as shown below. For alternative methods of attribution please contact the author.
-Example attribution:
-
-Based on work by Gunther Cox from http://salviusrobot.blogspot.com
-
-The content of this blog including photos, videos, and written text are solely the property of the author accept where otherwise noted. Extended permissions for content can be made available. For inquiries contact me at salviusrobot@gmail.com.
