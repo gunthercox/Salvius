@@ -1,4 +1,4 @@
-package com;
+package cox.speech;
 
 //import com.google.code.chatterbotapi.*;
 //import com.sun.speech.freetts.VoiceManager;

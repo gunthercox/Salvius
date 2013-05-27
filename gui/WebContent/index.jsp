@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
 <%@ page import="java.io.File" %>
-
-<%-- NEED TO FIGURE OUT HOW TO USE THIS --%>
-<%@ page import="com.Utilities. * " %>
+<%@ page import="cox.utilities. * " %>
 
 <%-- DIRECTORY PATH AND LISTING VARIABLES --%>
 <% String path = "C:/"; File folder = new File(path); File[] listOfFiles = folder.listFiles(); %>
@@ -14,21 +12,21 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<% out.print(com.Utilities.head()); %>
+<% out.print(utilities.head()); %>
 
 <%-- DYNAMICALLY GENERATE CSS --%>
 <style>
-<% for (int i = 0; i < com.Utilities.tab.length; i++) {
-	out.println(".t" + i + "{-webkit-transform:rotate(" + ((360 / com.Utilities.tab.length) * i) + "deg);}");
+<% for (int i = 0; i < utilities.tab.length; i++) {
+	out.println(".t" + i + "{-webkit-transform:rotate(" + ((360 / utilities.tab.length) * i) + "deg);}");
 	
 	// SET VARIABLES FOR EACH TAB AS CLOSED (0)
-	if (com.Utilities.tabular[i] == null) {
-		com.Utilities.tabular[i] = "0";
+	if (utilities.tabular[i] == null) {
+		utilities.tabular[i] = "0";
 	}
 	
 	if (request.getParameter("tab" + i) != null) {
 		servletContext.setAttribute("tab" + Integer.toString(i), request.getParameter("tab" + Integer.toString(i)));
-		com.Utilities.tabular[i] = (String)servletContext.getAttribute("tab" + Integer.toString(i));
+		utilities.tabular[i] = (String)servletContext.getAttribute("tab" + Integer.toString(i));
 	}
 	
 } %>
@@ -39,7 +37,7 @@
 if (request.getParameter("viewmode") != null) { servletContext.setAttribute("vmode", request.getParameter("viewmode")); }
 if (request.getParameter("togglemode") != null) { servletContext.setAttribute("tmode", request.getParameter("togglemode")); }
 
-for (int j = 0; j < com.Utilities.tabular.length; j++) {
+for (int j = 0; j < utilities.tabular.length; j++) {
 	if (request.getParameter("tab" + Integer.toString(j)) == null) {
 		// causes only one tab to show at a time and variable not to save
 		servletContext.setAttribute("tab" + Integer.toString(j), "0");
@@ -123,7 +121,7 @@ if (servletContext.getAttribute("tmode") == null) { servletContext.setAttribute(
 	// SESSION VARIABLE OUTPUT (FOR DEVELOPMENT PURPOSES)
 	out.print("view: " + servletContext.getAttribute("vmode") + "<br />");
 	out.print("toggle: " + servletContext.getAttribute("tmode") + "<br />");
-	for (int i = 0; i < com.Utilities.tab.length; i++) {
+	for (int i = 0; i < utilities.tab.length; i++) {
 		out.print("tab" + i + ": " + servletContext.getAttribute("tab" + i) + "<br />");
 	}
 	
@@ -135,9 +133,9 @@ if (servletContext.getAttribute("tmode") == null) { servletContext.setAttribute(
 	out.print("<div class='circle' id='camera'></div>");
      
 // CREATE THE PRIMARY TAB RING
-for (int i = 0; i < com.Utilities.tab.length; i++) {
+for (int i = 0; i < utilities.tab.length; i++) {
 	
-	out.print(com.Utilities.tab((String)servletContext.getAttribute("tmode"), (String)servletContext.getAttribute("tab" + i), com.Utilities.tab[i][1], com.Utilities.tab.length, i, com.Utilities.tab[i][0], ""));
+	out.print(utilities.tab((String)servletContext.getAttribute("tmode"), (String)servletContext.getAttribute("tab" + i), utilities.tab[i][1],utilities.tab.length, i, utilities.tab[i][0], ""));
 	
 // THIS WILL BECOME A CASE SELECT OR ( FOR X IN TAB )
 
@@ -165,7 +163,7 @@ if (i == 2) {
 
 // TEXT TO SPEECH
 if (i == 3) {
-	out.print("<ul class='dropdown-menu well tts' style='-webkit-transform:rotate(" + ((360 / com.Utilities.tab.length) * (-i)) + "deg);'>" +
+	out.print("<ul class='dropdown-menu well tts' style='-webkit-transform:rotate(" + ((360 / utilities.tab.length) * (-i)) + "deg);'>" +
 	"<div class='row span4'>" +
 	"<input type='text' name='box-speech' class='span3' placeholder='Enter text to speak'>" +
 	"<button class='icon-play'></button>" +
@@ -176,7 +174,7 @@ if (i == 3) {
 
 // HAND-WRITING
 if (i == 4) {
-	out.print("<ul class='dropdown-menu well txt' style='-webkit-transform:rotate(" + ((360 / com.Utilities.tab.length) * (-i)) + "deg);'>" +
+	out.print("<ul class='dropdown-menu well txt' style='-webkit-transform:rotate(" + ((360 / utilities.tab.length) * (-i)) + "deg);'>" +
 	"<div class='row span4'>" +
 	"<input type='text' name='box-writing' class='span3' placeholder='Enter text to write'>" +
 	"<button class='icon-play'></button>" +
@@ -187,8 +185,8 @@ if (i == 4) {
 
 // SENSOR READINGS
 if (i == 7) {
-	out.print("<ul class='dropdown-menu sensor' style='-webkit-transform:rotate(" + ((360 / com.Utilities.tab.length) * (-i)) + "deg);'>");
-	out.print(com.Utilities.table(com.Utilities.sensorData));
+	out.print("<ul class='dropdown-menu sensor' style='-webkit-transform:rotate(" + ((360 / utilities.tab.length) * (-i)) + "deg);'>");
+	out.print(utilities.table(utilities.sensorData));
 	out.print("</ul>");
 }
 

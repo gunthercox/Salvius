@@ -1,6 +1,6 @@
-package com;
+package cox.utilities;
 
-public class Utilities {
+public class utilities {
 			
 	private final static String TITLE = "Interface";
 	
