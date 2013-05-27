@@ -1,4 +1,4 @@
-package com;
+package cox.speech;
 
 import com.sun.speech.freetts.FreeTTS;
 import com.sun.speech.freetts.VoiceManager;
