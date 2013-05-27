@@ -1,8 +1,9 @@
 # Open Source Humanoid Robot
-***
 
 Salvius is an open source humanoid robot. For details about this project visit:
 [http://salviusrobot.blogspot.com](http://salviusrobot.blogspot.com)
+
+***
 
 ## Server Setup:
 I don't always set up servers but when I do, I choose Ubuntu.
@@ -12,6 +13,8 @@ This project runs on a Tomcat Java Server which you can choose during the initia
 * The java file in the interaction directory gets compiled as a jar and runs on the robots computer.
 * The Arduino sketch in the arduino directory gets uploaded to the Arduino board.
 
+***
+
 ## Arduino Setup:
 * Plug Ethernet shield into Arduino Uno.
 * Plug Seeed Relay Shield into Ethernet Shield.
@@ -19,16 +22,24 @@ This project runs on a Tomcat Java Server which you can choose during the initia
 * PIR positive(+) to arduino 5V, PIR negative(-) to arduino GND, PIR OUT to HUB2 D3.
 * Connect Ethernet shield to wireless router with Ethernet cable.
 
+***
+
 ## Development:
 I have recently added the rxtx-2.1-7r2 library written mostly in java to this repository. The rxtx-2.1-7r2 library is
 the same one that is used in the Arduino IDE to allow the computer to communicate with the Arduino board through the
 serial port. I hope to use this library to allow a developer to access and make modifications to the microcontroller's
 code directly from the web interface on the robot's server.
 
+### Tools and libraries included in this project
+* [JOONE (Java Oriented Neural Net)](http://sourceforge.net/projects/joone/)
+* {Foundation UI](http://foundation.zurb.com/)
+
 The main idea that I am attempting to promote is onboard expirimental development. My goal is to create this software
 so that I, and anyone else who needs it can develop and make changes to a robot's programming rapidly, and without
 having to plug in via a tethered connection. My web interface also is designed to contain many usefull control, and
 diagnostic tools.
+
+***
 
 ## License:
 @author: Gunther Cox
