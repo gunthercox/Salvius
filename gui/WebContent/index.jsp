@@ -145,20 +145,20 @@ if (i == 0) {}
 // OPERATING MODE
 if (i == 1) {					        
 	out.print("<ul class='dropdown-menu'>" +
-			"<div class='btn-group btn-group-vertical'>" +
-			"<button type='button' class='btn btn-action'>Atonomus</button>" +
-			"<button type='button' class='btn btn-success'>Assisted</button>" +
-			"<button type='button' class='btn btn-warning active'>Teleoperated</button>" +
+			"<div class='button-group button-group-vertical'>" +
+			"<button type='button' class='button action'>Atonomus</button>" +
+			"<button type='button' class='button success'>Assisted</button>" +
+			"<button type='button' class='button alert active'>Teleoperated</button>" +
 			"</div></ul>");
 }
 
 // LIGHTS
 if (i == 2) {
-	out.print("<ul class='dropdown-menu'>" +
-			"<div class='btn-group'>" +
-			"<button type='button' class='btn btn-large btn-danger'>IR</button>" +
-			"<button type='button' class='btn btn-large btn-inverse'>UV</button>" +
-			"</div></ul>");
+	out.print("<div class='dropdown-menu'><div class='button-bar'>" +
+			"<ul class='button-group'>" +
+			"<li><button type='button' class='button alert'>IR</button></li>" +
+			"<li><button type='button' class='button secondary'>UV</button></li>" +
+			"</ul></div></div>");
 }
 
 // TEXT TO SPEECH
@@ -193,10 +193,10 @@ if (i == 7) {
    // POWER
 if (i == 8) {
 	out.print("<ul class='dropdown-menu'>" +
-			"<div class='btn-group'>" +
-			"<button type='button' class='btn btn-large active'>" +
+			"<div class='button-group'>" +
+			"<button type='button' class='button active'>" +
 			"<i class='icon-circle'></i></button>" +
-			"<button type='button' id='off' class='btn btn-large'><i class='icon-circle-blank'></i></button>" +
+			"<button type='button' id='off' class='button'><i class='icon-circle-blank'></i></button>" +
 			"</div>" +
 			"</ul>");
 }

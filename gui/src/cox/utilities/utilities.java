@@ -9,7 +9,7 @@ public class utilities {
 		return( "<meta http-equiv='X-UA-Compatible' content='IE=9' />" +
 				"<title>" + TITLE + "</title>" +
 				"<link rel='stylesheet' type='text/css' href='./css/font-awesome.min.css' />" +
-				"<link rel='stylesheet' type='text/css' href='./css/bootstrap.css' />" +
+				"<link rel='stylesheet' type='text/css' href='./css/salvius.css' />" +
 				"<link rel='stylesheet' href='css/normalize.css' />" +
 				"<link rel='stylesheet' href='css/foundation.css' />" +
 				"<script src='js/foundation.min.js'></script>" +
@@ -50,9 +50,8 @@ public class utilities {
 		if ("1".equals(minor_state) || "1".equals(master_state)) { tabular[id] = "0"; open = "open"; } else { tabular[id] = "1"; open = " "; }
 		
 		return("<div class='rotate " + open + " t" + Integer.toString(id) + "'>" +
-				"<button name='tab" + id + "' class='tab btn btn-inverse dropdown' title='" + title + "' " +
-				"value='" + tabular[id] + "'" +
-				"data-toggle='dropdown'>" +
+				"<button name='tab" + id + "' class='tab' title='" + title + "' " +
+				"value='" + tabular[id] + "'>" +
 				"<i class='" + icon + "'></i></button>");
 	}
 	

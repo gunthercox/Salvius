@@ -1,0 +1,65 @@
+/*******************************************************************************
+ * Copyright (c) 2008, 2010 Xuggle Inc.  All rights reserved.
+ *  
+ * This file is part of Xuggle-Xuggler-Main.
+ *
+ * Xuggle-Xuggler-Main is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Xuggle-Xuggler-Main is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with Xuggle-Xuggler-Main.  If not, see <http://www.gnu.org/licenses/>.
+ *******************************************************************************/
+
+package com.xuggle.xuggler;
+
+/**
+ * Contains the version numbers for this library.
+ *
+ * <p>
+ * Use the accessor methods, not the constants, in your source code.
+ * </p>
+ */
+public class Version
+{
+  public static final int MAJOR_VERSION=@LIB_MAJOR_VERSION@;
+  /** The Major Version Number (Currently
+   * &quot;{@value #MAJOR_VERSION}&quot;).
+   * @return the major version number.
+   */
+  public static int getMajorVersion() { return MAJOR_VERSION; } 
+  
+  public static final int MINOR_VERSION=@LIB_MINOR_VERSION@;
+  /** The Minor Version Number (Currently
+   * &quot;{@value #MINOR_VERSION}&quot;).
+   * @return the minor version number.
+   */
+  public static int getMinorVersion() { return MINOR_VERSION; } 
+  
+  public static final int REVISION=@LIB_REVISION@;
+  /** The Revision Number (if known) (Currently
+   * &quot;{@value #REVISION}&quot;).
+   * @return the revision number, or 0 if unknown.
+   */
+  public static int getRevision() { return REVISION; } 
+  
+  public static final String VERSION=
+    "@LIB_MAJOR_VERSION@.@LIB_MINOR_VERSION@.@LIB_REVISION@";
+  /** The Version String (Currently {@value #VERSION}).
+   * @return the version string
+   */
+  
+  public static String getVersionString() { return VERSION; } 
+     
+  /**
+   * Don't allow creation of this class.
+   */
+  
+  private Version() {}
+}
