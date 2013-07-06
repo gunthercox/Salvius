@@ -33,8 +33,13 @@ code directly from the web interface on the robot's server.~~
 Note: If editing this code in eclipse make sure to set up tomcat in the build path:
 Right click on project ---> Properties ---> Java Build Path ---> Add Library... ---> Server Runtime ---> Apache Tomcat
 
+Note: If you make changes to a file you should restart Tomcat:
+/etc/init.d/tomcat6 start
+/etc/init.d/tomcat6 stop
+/etc/init.d/tomcat6 restart
+
 ### Tools and libraries included in this project
-* {Foundation UI](http://foundation.zurb.com/)
+* [Foundation UI](http://foundation.zurb.com/)
 
 The main idea that I am attempting to promote is onboard expirimental development. My goal is to create this software
 so that I, and anyone else who needs it can develop and make changes to a robot's programming rapidly, and without
