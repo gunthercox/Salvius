@@ -33,6 +33,22 @@ code directly from the web interface on the robot's server.~~
 Note: If editing this code in eclipse make sure to set up tomcat in the build path:
 Right click on project ---> Properties ---> Java Build Path ---> Add Library... ---> Server Runtime ---> Apache Tomcat
 
+Note: When deploying to Tomcat using the manager webapp you should first configure a username and password:
+Edit etc/tomcat7/tomcat-users.xml as shown bellow. Change USERNAME and PASSWORD to what you want.
+
+```
+<?xml version='1.0' encoding='utf-8'?>  
+<tomcat-users>  
+  <role rolename="tomcat"/>  
+  <role rolename="role1"/>  
+  <role rolename="manager"/>  
+  <user username="tomcat" password="tomcat" roles="tomcat"/>  
+  <user username="both" password="tomcat" roles="tomcat,role1"/>  
+  <user username="role1" password="tomcat" roles="role1"/>  
+  <user username="USERNAME" password="PASSWORD" roles="manager,tomcat,role1"/>  
+</tomcat-users>  
+```
+
 Note: If you make changes to a file you should restart Tomcat:
 /etc/init.d/tomcat6 start
 /etc/init.d/tomcat6 stop
@@ -40,6 +56,7 @@ Note: If you make changes to a file you should restart Tomcat:
 
 ### Tools and libraries included in this project
 * [Foundation UI](http://foundation.zurb.com/)
+* Tomcat7
 
 The main idea that I am attempting to promote is onboard expirimental development. My goal is to create this software
 so that I, and anyone else who needs it can develop and make changes to a robot's programming rapidly, and without
