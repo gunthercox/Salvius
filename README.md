@@ -25,13 +25,15 @@ This project runs on a Tomcat Java Server which you can choose during the initia
 ***
 
 ## Development:
-I have recently added the rxtx-2.1-7r2 library written mostly in java to this repository. The rxtx-2.1-7r2 library is
+~~I have recently added the rxtx-2.1-7r2 library written mostly in java to this repository. The rxtx-2.1-7r2 library is
 the same one that is used in the Arduino IDE to allow the computer to communicate with the Arduino board through the
 serial port. I hope to use this library to allow a developer to access and make modifications to the microcontroller's
-code directly from the web interface on the robot's server.
+code directly from the web interface on the robot's server.~~
+
+Note: If editing this code in eclipse make sure to set up tomcat in the build path:
+Right click on project ---> Properties ---> Java Build Path ---> Add Library... ---> Server Runtime ---> Apache Tomcat
 
 ### Tools and libraries included in this project
-* [JOONE (Java Oriented Neural Net)](http://sourceforge.net/projects/joone/)
 * {Foundation UI](http://foundation.zurb.com/)
 
 The main idea that I am attempting to promote is onboard expirimental development. My goal is to create this software
