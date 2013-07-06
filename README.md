@@ -45,7 +45,7 @@ Edit etc/tomcat7/tomcat-users.xml as shown bellow. Change USERNAME and PASSWORD 
   <user username="tomcat" password="tomcat" roles="tomcat"/>  
   <user username="both" password="tomcat" roles="tomcat,role1"/>  
   <user username="role1" password="tomcat" roles="role1"/>  
-  <user username="USERNAME" password="PASSWORD" roles="manager,tomcat,role1"/>  
+  <user username="USERNAME" password="PASSWORD" roles="manager,manager-gui,manager-script,tomcat,role1"/>  
 </tomcat-users>  
 ```
 
