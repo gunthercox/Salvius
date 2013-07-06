@@ -50,9 +50,9 @@ Edit etc/tomcat7/tomcat-users.xml as shown bellow. Change USERNAME and PASSWORD 
 ```
 
 Note: If you make changes to a file you should restart Tomcat:
-/etc/init.d/tomcat6 start
-/etc/init.d/tomcat6 stop
-/etc/init.d/tomcat6 restart
+/etc/init.d/tomcat7 start
+/etc/init.d/tomcat7 stop
+/etc/init.d/tomcat7 restart
 
 ### Tools and libraries included in this project
 * [Foundation UI](http://foundation.zurb.com/)
