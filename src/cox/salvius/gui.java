@@ -18,7 +18,9 @@ public class gui extends HttpServlet {
 	// CONTAINS EXAMPLES
 	
     public gui() {
+    	
         super();
+        
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
