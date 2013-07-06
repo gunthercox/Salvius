@@ -1,7 +1,3 @@
 language: java
-install: ant deps
-jdk:
-  - oraclejdk7
-  - openjdk6
-  - openjdk7
-  - oraclejdk7
+
+mvn test
