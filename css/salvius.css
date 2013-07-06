@@ -1,0 +1,177 @@
+.download-button {
+  width: 200px;
+  margin: 150px auto;
+}
+
+.download-button a {
+  display: block;
+  height: 50px;
+  width: 200px;
+  
+  /*TYPE*/
+  color: white;
+  font: 17px/50px Helvetica, Verdana, sans-serif;
+  text-decoration: none;
+  text-align: center;
+  text-transform: uppercase;
+  
+  /*GRADIENT*/  
+  background: #00b7ea; /* Old browsers */
+  background: -moz-linear-gradient(top, #00b7ea 0%, #009ec3 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#00b7ea), color-stop(100%,#009ec3)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #00b7ea 0%,#009ec3 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #00b7ea 0%,#009ec3 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #00b7ea 0%,#009ec3 100%); /* IE10+ */
+  background: linear-gradient(top, #00b7ea 0%,#009ec3 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00b7ea', endColorstr='#009ec3',GradientType=0 ); /* IE6-9 */
+}
+
+.download-button a, .backup p {
+    -webkit-border-radius: 10px;
+     -moz-border-radius: 10px;
+          border-radius: 10px;
+  
+  -webkit-box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+     -moz-box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+          box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+}
+
+.backup p {
+  background: #222;
+  display: block;
+  height: 40px;
+  width: 180px; 
+  margin: -50px 0 0 10px;
+  
+  /*TYPE*/
+  text-align: center;
+  font: 12px/45px Helvetica, Verdana, sans-serif;
+  color: #fff;
+  
+  /*POSITION*/
+  position: absolute;
+  z-index: -1;
+  
+  /*TRANSITION*/  
+  -webkit-transition: margin 0.5s ease;
+     -moz-transition: margin 0.5s ease;
+       -o-transition: margin 0.5s ease;
+      -ms-transition: margin 0.5s ease;
+          transition: margin 0.5s ease;
+}
+
+/*HOVER*/
+.download-button:hover .bottom {
+  margin: -10px 0 0 10px;
+}
+
+.download-button:hover .top {
+  margin: -80px 0 0 10px;
+  line-height: 35px;
+}
+
+/*ACTIVE*/
+.download-button a:active {
+background: #00b7ea; /* Old browsers */
+background: -moz-linear-gradient(top,  #00b7ea 36%, #009ec3 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(36%,#00b7ea), color-stop(100%,#009ec3)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #00b7ea 36%,#009ec3 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #00b7ea 36%,#009ec3 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #00b7ea 36%,#009ec3 100%); /* IE10+ */
+background: linear-gradient(top,  #00b7ea 36%,#009ec3 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00b7ea', endColorstr='#009ec3',GradientType=0 ); /* IE6-9 */
+}
+
+.download-button:active .bottom {
+  margin: -20px 0 0 10px;
+}
+
+.download-button:active .top {
+  margin: -70px 0 0 10px;
+}
+
+.shutdown {
+	background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAAAAACMmsGiAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABdJREFUCB1jUlGRkWH6CQRMf//y8oJZAFUaCmUwcfODAAAAAElFTkSuQmCC');
+	text-align:center;
+}
+.shutdown  section {
+	margin: 30px auto 30px;
+	width: 75px;
+	height: 95px;
+	position: relative;
+}
+
+.pushbutton {
+	font-family: "FontAwesome";
+	text-shadow: 0px 1px 1px rgba(250,250,250,0.1);
+	font-size: 32pt;
+	display: block;
+	position: relative;
+	text-decoration: none;
+    box-shadow: 0px 3px 0px 0px rgb(34,34,34), 0px 7px 10px 0px rgb(17,17,17), inset 0px 1px 1px 0px rgba(250, 250, 250, .2), inset 0px -12px 35px 0px rgba(0, 0, 0, .5);
+	width: 70px;
+	height: 70px;
+	border: 0;
+	color: rgb(37,37,37);
+	border-radius: 35px;
+	text-align: center;
+	line-height: 79px;
+	background-color: rgb(83,87,93);
+
+	transition: color 350ms ease, text-shadow 350ms;
+	-webkit-transition: color 350ms ease, text-shadow 350ms;
+}
+.pushbutton:before {
+	content: "";
+	width: 80px;
+	height: 80px;
+	display: block;
+	z-index: -2;
+	position: absolute;
+	background-color: rgb(26,27,29);
+	left: -5px;
+	top: -2px;
+	border-radius: 40px;
+	box-shadow: 0px 1px 0px 0px rgba(250,250,250,0.1), inset 0px 1px 2px rgba(0, 0, 0, 0.5);
+}
+.pushbutton:active {
+    box-shadow: 0px 0px 0px 0px rgb(34,34,34), 0px 3px 7px 0px rgb(17,17,17), inset 0px 1px 1px 0px rgba(250, 250, 250, .2), inset 0px -10px 35px 5px rgba(0, 0, 0, .5);
+    background-color: rgb(83,87,93);
+  	top: 3px;
+}
+.pushbutton.on {
+    box-shadow: 0px 0px 0px 0px rgb(34,34,34), 0px 3px 7px 0px rgb(17,17,17), inset 0px 1px 1px 0px rgba(250, 250, 250, .2), inset 0px -10px 35px 5px rgba(0, 0, 0, .5);
+    background-color: rgb(83,87,93);
+  	top: 3px;
+ 	color: #fff;
+  	text-shadow: 0px 0px 3px rgb(250,250,250);
+}
+.pushbutton:active:before, a.on:before {
+	top: -5px;
+	background-color: rgb(26,27,29);
+	box-shadow: 0px 1px 0px 0px rgba(250,250,250,0.1), inset 0px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.pushbutton:hover,.pushbutton:focus{color: rgb(37,37,37)}
+
+.led {
+	display: block;
+	width: 8px;
+	height: 8px;
+	background-color: rgb(226,0,0);
+	box-shadow: inset 0px 1px 0px 0px rgba(250,250,250,0.5), 0px 0px 3px 2px rgba(226,0,0,0.5);
+ 	border-radius: 4px;
+ 	clear: both;
+ 	position: absolute;
+ 	bottom: 0;
+ 	left: 42%;
+ 	transition: background-color 350ms, box-shadow 700ms;
+	-webkit-transition: background-color 350ms, box-shadow 700ms;
+}
+.shutdown a.on + .led {
+	box-shadow: inset 0px 1px 0px 0px rgba(250,250,250,0.5), 0px 0px 3px 2px rgba(135,187,83,0.5);
+	background-color: rgb(135,187,83);
+}
+
+.progress{height:36px!important}
+.progress label{padding-top:7px;padding-left:7px;font-weight:bold}

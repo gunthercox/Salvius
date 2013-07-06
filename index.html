@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html ng-app>
+<head>
+	<meta charset="utf-8" />
+	<title ng-bind="'interface ' + title">Interface</title>
+
+	<link rel="stylesheet" href="./css/foundation.css"></link>
+	<link rel="stylesheet" href="./css/normalize.css"></link>
+	<link rel="stylesheet" href="./css/font-awesome.css"></link>
+	<link rel="stylesheet" href="./css/salvius.css"></link>
+	<link rel="stylesheet" href="./css/dropzone.css"></link>
+	
+	<script src="./js/angular/angular.js"></script>
+	<script src="./js/vendor/zepto.js"></script>
+	<script src="./js/vendor/custom.modernizr.js"></script>
+	<script src="./js/foundation.js"></script>
+	<script src="./js/d3.v3.js"></script>
+	<script src="./js/dropzone.js"></script>
+	<script src="./js/jquery.js"></script>
+	
+	<script src="./controllers.js"></script>
+	
+	<script src="./js/search/searchEngine.js"></script>
+	<script src="./js/search/searchDB.js"></script>
+
+	<script>
+	$(document).foundation();
+	
+	$(document).ready(function(){
+		$('#button').on('click', function(){
+			$(this).toggleClass('on');
+		});
+		
+	});
+	
+	</script>
+	
+</head>
+<body ng-controller="RobotPageInterface">
+
+<script type="text/javascript">
+if (getURLvalue('search')) {
+	// Do the search
+	results = performSearch(getURLvalue("searchTxt"), 3);
+
+	if (results) {
+		// This means that there are search results to be displayed.
+		// Loop through them and make it pretty!
+		if (is_array(results)) {
+			document.writeln("<ol>");
+			for (r = 0; r < results.length; r++) {
+				result = searchDB[results[r]];
+			
+				// This is where you modify the formatting of the results
+				document.writeln("<li class=\"result\"><div class=\"result-title\"><a href=\"" + result.url + "\">" + result.heading + "</a></div>");
+				document.writeln("<div class=\"result-desc\">" + result.description + "</div></li>");
+			}
+			document.writeln("</ol>");
+		}
+		// If it's not an array, then we got an error message, so display that rather than results
+		else {
+			document.writeln("<i>" + results + "</i>");
+			document.writeln("<br />");
+		}
+	}
+}
+
+</script>
+
+<div data-alert class="alert-box alert hidden" style="display:none">{{alert}}<a href="#" class="close">&times;</a></div>
+
+<div class="section-container auto" data-section>
+<section>
+<h3 class="title" data-section-title><a href="#panel1"><i class="icon-gamepad"></i> GUI</a></h3>
+<div class="content" data-section-content>
+  <p>Graphic interface for the robot.</p>
+  
+  <div class="row display">
+  
+	<div class="large-4 columns">
+		<div class="row collapse">
+		<div class="small-10 columns">
+		<input type="text" placeholder="Text to Speech">
+		</div>
+		<div class="small-2 columns">
+		<a href="#" class="button prefix">Say</a>
+		</div>
+		</div>
+	</div>
+	  
+	  <div class="large-4 columns">
+		<div class="progress success round">
+		<span class="meter" style="width: 60%"><label>Battery charge</label></span>
+		</div>
+	  </div>
+	  
+	  <div class="large-4 columns">
+		<div class="switch round">
+		<input id="z" name="switch-z" type="radio" checked>
+		<label for="z" onclick="">Teleoperated mode</label>
+
+		<input id="z1" name="switch-z" type="radio">
+		<label for="z1" onclick="">Atonomus mode</label>
+
+		<span></span>
+		</div>
+	  </div>
+	</div>
+	
+	<div class="row display">
+	
+		<div class="large-4 columns">
+			<div class="row collapse">
+			<div class="small-10 columns">
+			<input type="text" placeholder="Text to Handwriting">
+			</div>
+			<div class="small-2 columns">
+			<a href="#" class="button prefix">Write</a>
+			</div>
+			</div>
+		</div>
+	  
+		<div class="large-4 columns">
+			<!--<img id="cam" src="http://192.168.1.2/image.jpg">-->
+			<!--<applet name="cvcs" codebase="http://192.168.1.2:80" code="aplug.class" width="320" height="240">
+			<param name="RemotePort" value="80">
+			<param name="Timeout" value="5000">
+			<param name="RotateAngle" value="0">
+			<param name="PreviewFrameRate" value="2">
+			<param name="DeviceSerialNo" value="YWRtaW46cGFzc3dvcmQ=">
+			</applet>-->
+		  
+			<div class="button-bar">
+			<ul class="button-group">
+				  <li><button class="small button" onclick="cvcs.Zoom(1)">x1</button></li>
+				  <li><button class="small button" onclick="cvcs.Zoom(2)">x2</button></li>
+				  <li><button class="small button" onclick="cvcs.Zoom(3)">x3</button></li>
+				  <li><button class="small button" onclick="cvcs.Zoom(4)">x4</button></li>
+			</ul>
+			<ul class="button-group">
+				<li><input class="small button" id="audioon" type="button" value="ON" onclick="SubmitAudioOn()" /></li>
+				<li><input class="small button" id="audiooff" type="button" value="OFF" onclick="SubmitAudioOff()" /></li>
+			</ul>
+			</div>
+		
+	  </div>
+	  <div class="large-4 columns">
+		<div class="switch round">
+		<input id="ir" name="switch-ir" type="radio" checked>
+		<label for="ir" onclick="">Infrared Off</label>
+
+		<input id="ir" name="switch-ir" type="radio">
+		<label for="ir" onclick="">Infrared On</label>
+
+		<span></span>
+		</div>
+	  </div>
+	</div>
+	
+</div>
+</section>
+
+<section>
+	<h3 class="title" data-section-title><a href="#panel2"><i class="icon-terminal"></i> Terminal</a></h3>
+	<div class="content" data-section-content>
+	
+	<div style="color:#0f0;background:#000;width:100%;height:300px;padding:10px">
+	Terminal login will appear here
+	</div>
+
+	</div>
+</section>
+
+<section>
+	<h3 class="title" data-section-title><a href="#panel2"><i class="icon-compass"></i> Sensors</a></h3>
+	<div class="content" data-section-content>
+		<p>Complete listing of all sensor readings</p>
+		
+		<table>
+			<thead>
+				<tr>
+					<th>{{sensors.sensortype}}</th>
+					<th>{{sensors.valuetype}}</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="sensor in sensors.components">
+					<td>{{sensor.type}}</td>
+					<td>{{sensor.reading}} {{sensor.unit}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</section>
+
+<section>
+<h3 class="title" data-section-title><a href="#panel2"><i class="icon-sitemap"></i> FTP</a></h3>
+<div class="content" data-section-content>
+  <p>Drag files here to upload them. Drag files from here to download them. Click file for options menu to download, view, edit.</p>
+  
+	<form action="/file-upload" class="dropzone">
+	<div class="fallback">
+	<input name="file" type="file" multiple />
+	</div>
+	</form>
+  
+</div>
+</section>
+
+<section>
+	<h3 class="title" data-section-title><a href="#panel2"><i class="icon-info-sign"></i> System</a></h3>
+	<div class="content" data-section-content>
+		<br>
+		<button data-reveal-id="settings"><i class="icon-cogs"></i> Settings</button>
+		<button data-reveal-id="shutdown"><i class="icon-off"></i> Shutdown</button>
+		<button data-reveal-id="backup"><i class="icon-download"></i> Backup</button>
+		<p>Computer, network and hardware information.</p>
+		<!-- BEGIN PARTITION -->
+		<form>
+			<label><input type="radio" name="mode" value="size"> Size</label>
+			<label><input type="radio" name="mode" value="count" checked> Count</label>
+		</form>
+
+		<script>
+		var width = 400,
+			height = 400,
+			radius = Math.min(width, height) / 2,
+			color = d3.scale.category20c();
+
+		var svg = d3.select("body").append("svg")
+			.attr("width", width)
+			.attr("height", height)
+		  .append("g")
+			.attr("transform", "translate(" + width / 2 + "," + height * .52 + ")");
+
+		var partition = d3.layout.partition()
+			.sort(null)
+			.size([2 * Math.PI, radius * radius])
+			.value(function(d) { return 1; });
+
+		var arc = d3.svg.arc()
+			.startAngle(function(d) { return d.x; })
+			.endAngle(function(d) { return d.x + d.dx; })
+			.innerRadius(function(d) { return Math.sqrt(d.y); })
+			.outerRadius(function(d) { return Math.sqrt(d.y + d.dy); });
+
+		d3.json("flare.json", function(error, root) {
+		  var path = svg.datum(root).selectAll("path")
+			  .data(partition.nodes)
+			.enter().append("path")
+			  .attr("display", function(d) { return d.depth ? null : "none"; }) // hide inner ring
+			  .attr("d", arc)
+			  .style("stroke", "#fff")
+			  .style("fill", function(d) { return color((d.children ? d : d.parent).name); })
+			  .style("fill-rule", "evenodd")
+			  .each(stash);
+
+		  d3.selectAll("input").on("change", function change() {
+			var value = this.value === "count"
+				? function() { return 1; }
+				: function(d) { return d.size; };
+
+			path
+				.data(partition.value(value).nodes)
+			  .transition()
+				.duration(1500)
+				.attrTween("d", arcTween);
+		  });
+		});
+
+		// Stash the old values for transition.
+		function stash(d) {
+		  d.x0 = d.x;
+		  d.dx0 = d.dx;
+		}
+
+		// Interpolate the arcs in data space.
+		function arcTween(a) {
+		  var i = d3.interpolate({x: a.x0, dx: a.dx0}, a);
+		  return function(t) {
+			var b = i(t);
+			a.x0 = b.x;
+			a.dx0 = b.dx;
+			return arc(b);
+		  };
+		}
+
+		d3.select(self.frameElement).style("height", height + "px");
+
+		</script>
+		<!-- END PARTITION -->
+		
+	</div>
+</section>
+
+<section>
+
+	<h3 class="title" data-section-title><a href="#panel2">
+	<form name="search" action="index.html" method="get" class="ng-pristine ng-valid">
+	<div class="row collapse">
+		<div class="small-10 columns">
+			<input class="small" type="text" name="searchTxt" placeholder="Search or command">
+		</div>
+		<div class="small-2 columns">
+			<input class="prefix button" type="submit" value="Go" name="search">
+		</div>
+	</div>
+	</form>
+	</h3>
+	<div class="content" data-section-content>
+	
+	</div>
+</section>
+  
+</div>
+
+<!-- Modals in like to live right before the closing body tag -->
+
+<div id="terminal" class="reveal-modal">
+  <div>TERMINAL</div>
+  <a class="close-reveal-modal">&#215;</a>
+</div>
+
+<div id="settings" class="reveal-modal">
+  <div class="large-12 columns" ng-include src="'./settings.html'"></div>
+  <a class="close-reveal-modal">&#215;</a>
+</div>
+
+<div id="shutdown" class="reveal-modal shutdown">
+	<h2 style="color:#f00"><i class="icon-warning-sign"></i> Emergency Shutdown</h2>
+	<section>
+	<a href="#" class="pushbutton on" id="button"><i class="icon-off"></i></a>
+	<span class="led"></span>
+	</section>
+	<p style="color:#F60">WARNING: This operation will deactivate all systems on the robot. Sudden deactivation may cause damage to the robot and objects near by.</p>
+  <a class="close-reveal-modal">&#215;</a>
+</div>
+
+<div id="backup" class="reveal-modal backup">
+	<h2 style="color:#00b7ea"><i class="icon-download"></i> Backup</h2>
+	<h4>Download current copy of the robots software</h4>
+	<section>
+		<div class="download-button">
+		<a href="#">Download</a>
+		<p class="top">click to begin</p>
+		<p class="bottom">1.2MB .zip</p>
+		</div>
+	</section>
+	<div>
+	<ul class="button-group">
+		<li><label><input type="checkbox"> Database </label></li>
+		<li><label><input type="checkbox"> Configuration </label></li>
+		<li><label><input type="checkbox"> Source </label></li>
+	</ul>
+	</div>
+  <a class="close-reveal-modal">&#215;</a>
+</div>
+
+</body>
+</html>
