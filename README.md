@@ -25,14 +25,38 @@ This project runs on a Tomcat Java Server which you can choose during the initia
 ***
 
 ## Development:
-I have recently added the rxtx-2.1-7r2 library written mostly in java to this repository. The rxtx-2.1-7r2 library is
+~~I have recently added the rxtx-2.1-7r2 library written mostly in java to this repository. The rxtx-2.1-7r2 library is
 the same one that is used in the Arduino IDE to allow the computer to communicate with the Arduino board through the
 serial port. I hope to use this library to allow a developer to access and make modifications to the microcontroller's
-code directly from the web interface on the robot's server.
+code directly from the web interface on the robot's server.~~
+
+Note: If editing this code in eclipse make sure to set up tomcat in the build path:
+Right click on project ---> Properties ---> Java Build Path ---> Add Library... ---> Server Runtime ---> Apache Tomcat
+
+Note: When deploying to Tomcat using the manager webapp you should first configure a username and password:
+Edit etc/tomcat7/tomcat-users.xml as shown bellow. Change USERNAME and PASSWORD to what you want.
+
+```
+<?xml version='1.0' encoding='utf-8'?>  
+<tomcat-users>  
+  <role rolename="tomcat"/>  
+  <role rolename="role1"/>  
+  <role rolename="manager"/>  
+  <user username="tomcat" password="tomcat" roles="tomcat"/>  
+  <user username="both" password="tomcat" roles="tomcat,role1"/>  
+  <user username="role1" password="tomcat" roles="role1"/>  
+  <user username="USERNAME" password="PASSWORD" roles="manager,manager-gui,manager-script,tomcat,role1"/>  
+</tomcat-users>  
+```
+
+Note: If you make changes to a file you should restart Tomcat:
+/etc/init.d/tomcat7 start
+/etc/init.d/tomcat7 stop
+/etc/init.d/tomcat7 restart
 
 ### Tools and libraries included in this project
-* [JOONE (Java Oriented Neural Net)](http://sourceforge.net/projects/joone/)
-* {Foundation UI](http://foundation.zurb.com/)
+* [Foundation UI](http://foundation.zurb.com/)
+* Tomcat7
 
 The main idea that I am attempting to promote is onboard expirimental development. My goal is to create this software
 so that I, and anyone else who needs it can develop and make changes to a robot's programming rapidly, and without
