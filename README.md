@@ -1,19 +1,36 @@
 # Open Source Humanoid Robot
 
-Salvius is an open source humanoid robot. For details about this project visit:
-[http://salviusrobot.blogspot.com](http://salviusrobot.blogspot.com)
+####Salvius is an open source humanoid robot. For additional details visit:
 
-***
+The main idea that I am attempting to promote is onboard expirimental development. My goal is to create this software
+so that I, and anyone else who needs it can develop and make changes to a robot's programming rapidly, and without
+having to plug in via a tethered connection. My web interface also is designed to contain many usefull control, and
+diagnostic tools.
 
 ## Server Setup:
 I don't always set up servers but when I do, I choose Ubuntu.
-This project runs on a Tomcat Java Server which you can choose during the initial installation of Ubuntu Server edition. It is also helpful to install OpenSSH at the same time.
+* Install or use a copy of Ubuntu Server edition. It is also helpful to install OpenSSH at the same time.
+* On the server it is helpfull to install OpenSSH, git, and nginx.
+* Configureing nginx is wicked easy, just edit etc/nginx/nginx.conf
+
+```
+
+```
+
+Install the robots web ui by cloning this git repository.
+```
+cd usr/share/nginx/www/
+git clone https://github.com/gunthercox/Salvius.git
+```
+
+After you make changes to files on the server you should restart nginx.
+```
+sudo service nginx restart
+```
 
 * The files in the gui directory go on the robot's server.
 * The java file in the interaction directory gets compiled as a jar and runs on the robots computer.
 * The Arduino sketch in the arduino directory gets uploaded to the Arduino board.
-
-***
 
 ## Arduino Setup:
 * Plug Ethernet shield into Arduino Uno.
@@ -22,48 +39,31 @@ This project runs on a Tomcat Java Server which you can choose during the initia
 * PIR positive(+) to arduino 5V, PIR negative(-) to arduino GND, PIR OUT to HUB2 D3.
 * Connect Ethernet shield to wireless router with Ethernet cable.
 
-***
+## Development: [![Build Status](https://travis-ci.org/gunthercox/Salvius.png?branch=master)](https://travis-ci.org/gunthercox/Salvius)
 
-## Development:
-~~I have recently added the rxtx-2.1-7r2 library written mostly in java to this repository. The rxtx-2.1-7r2 library is
-the same one that is used in the Arduino IDE to allow the computer to communicate with the Arduino board through the
-serial port. I hope to use this library to allow a developer to access and make modifications to the microcontroller's
-code directly from the web interface on the robot's server.~~
-
-Note: If editing this code in eclipse make sure to set up tomcat in the build path:
-Right click on project ---> Properties ---> Java Build Path ---> Add Library... ---> Server Runtime ---> Apache Tomcat
-
-Note: When deploying to Tomcat using the manager webapp you should first configure a username and password:
-Edit etc/tomcat7/tomcat-users.xml as shown bellow. Change USERNAME and PASSWORD to what you want.
-
-```
-<?xml version='1.0' encoding='utf-8'?>  
-<tomcat-users>  
-  <role rolename="tomcat"/>  
-  <role rolename="role1"/>  
-  <role rolename="manager"/>  
-  <user username="tomcat" password="tomcat" roles="tomcat"/>  
-  <user username="both" password="tomcat" roles="tomcat,role1"/>  
-  <user username="role1" password="tomcat" roles="role1"/>  
-  <user username="USERNAME" password="PASSWORD" roles="manager,manager-gui,manager-script,tomcat,role1"/>  
-</tomcat-users>  
-```
-
-Note: If you make changes to a file you should restart Tomcat:
-/etc/init.d/tomcat7 start
-/etc/init.d/tomcat7 stop
-/etc/init.d/tomcat7 restart
+I am currently working on implementing AJSON to interact with the arduino boards via api. This will be much simpler and
+more efficient than using the java library.
 
 ### Tools and libraries included in this project
-* [Foundation UI](http://foundation.zurb.com/)
-* Tomcat7
+* [angularjs](http://angularjs.org)
+* [Foundation UI](http://foundation.zurb.com)
+* [OneGate](https://github.com/liftoff/GateOne) [Wikipedia](http://en.wikipedia.org/wiki/Web-based_SSH)
 
-The main idea that I am attempting to promote is onboard expirimental development. My goal is to create this software
-so that I, and anyone else who needs it can develop and make changes to a robot's programming rapidly, and without
-having to plug in via a tethered connection. My web interface also is designed to contain many usefull control, and
-diagnostic tools.
+#### Packages
+* [nginx](http://wiki.nginx.org)
+* [nodejs](http://nodejs.org)
+* [component](https://github.com/component/component)
 
-***
+You can install all required packages for this project by running the following
+```
+sudo apt-get install nginx nodejs npm
+cd /tmp
+git clone http://github.com/isaacs/npm.git
+cd npm
+sudo make install
+npm install express
+```
+
 
 ## License:
 @author: Gunther Cox
