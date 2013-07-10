@@ -5,4 +5,6 @@ node_js:
   - "0.8"
   - "0.6"
 before_install:
+  - npm install -g express
+  - npm install -g component
   - "curl -L http://git.io/ejPSng | /bin/sh"
