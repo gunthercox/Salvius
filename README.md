@@ -44,45 +44,38 @@ sudo service nginx restart
 I am currently working on implementing AJSON to interact with the arduino boards via api. This will be much simpler and
 more efficient than using the java library.
 
+Check out what the interface looks like on the gh-pages branch: [http://gunthercox.github.io/Salvius/](http://gunthercox.github.io/Salvius/)
+
 ### Tools and libraries included in this project
 * [angularjs](http://angularjs.org)
 * [Foundation UI](http://foundation.zurb.com)
+* [DropzoneJS](http://www.dropzonejs.com)
+* [d3.js](http://d3js.org)
 * [OneGate](https://github.com/liftoff/GateOne) [Wikipedia](http://en.wikipedia.org/wiki/Web-based_SSH)
 
 #### Packages
 * [nginx](http://wiki.nginx.org)
 * [nodejs](http://nodejs.org)
+* [express](http://expressjs.com/)
 * [component](https://github.com/component/component)
 
-You can install all required packages for this project by running the following
+You can install required packages for this project by running the following
 ```
-sudo apt-get install nginx nodejs npm
-cd /tmp
-git clone http://github.com/isaacs/npm.git
-cd npm
-sudo make install
-npm install express
+sudo apt-get install nginx
 ```
 
-
+For installing node.js and npm there is wonderfull script that works, just download and run it.
+I have also included express in this install
+```
+wget https://npmjs.org/install.sh
+sudo sh install.sh
+sudo npm install express
+sudo npm install component
+```
 ## License:
+This work is GPL-3.0
 @author: Gunther Cox
 @website: http://salviusrobot.blogspot.com
 
 This project has been made possible with funding from the following businesses and individuals:
-Jennifer Cox, Adam Iredale, Janet Wise, Glen Zenor, Boris Hofer, Señora Alderperson, Wilbraham Music (Chris Cox), June Cox, Rantz
-
-This work is licenced under Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0). Under this licence you are free to to Share, to copy, distribute and transmit the work
-to Remix to adapt the work, to make commercial use of the work under the following conditions.
-
-You must attribute this work as depicted in the copyright attribution of the code's comments but you may (but not in any way that suggests any endorsement of you or your use of the work.
-
-If you alter, transform, or build upon this work, you may distribute the resulting work only under the same or similar license to this one.
-
-Understand that any of the above conditions can be waived if you get permission from the copyright holder.
-
-Where the work or any of its elements is in the public domain under applicable law, that status is in no way affected by the license.
-
-In no way are any of the following rights affected by the license: Your fair dealing or fair use rights, or other applicable copyright exceptions and limitations; The author's moral rights; Rights other persons may have either in the work itself or in how the work is used, such as publicity or privacy rights.
-
-Notice: For any reuse or distribution, you must not remove the attribution from these works.
+Jennifer Cox, Adam Iredale, Janet Wise, Glen Zenor, Boris Hofer, Señora Alderperson, Wilbraham Music (Chris Cox),June Cox, Rantz
