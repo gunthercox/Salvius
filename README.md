@@ -1,6 +1,7 @@
 # Open Source Humanoid Robot
 
 ####Salvius is an open source humanoid robot. For additional details visit: [salviusrobot.blogspot.com](http://salviusrobot.blogspot.com)
+[Bill of Materials](http://salviusrobot.blogspot.com/p/resources.html)
 
 The main idea that I am attempting to promote is onboard expirimental development. My goal is to create this software
 so that I, and anyone else who needs it can develop and make changes to a robot's programming rapidly, and without
@@ -69,7 +70,7 @@ Check out what the interface looks like on the gh-pages branch: [http://guntherc
 
 You can install required packages for this project by running the following
 ```
-sudo apt-get install nginx
+sudo apt-get install nginx git make
 ```
 
 For installing node.js and npm there is wonderfull script that works, just download and run it.
@@ -85,5 +86,7 @@ This work is GPL-3.0
 @author: Gunther Cox
 @website: http://salviusrobot.blogspot.com
 
-This project has been made possible with funding from the following businesses and individuals:
-Jennifer Cox, Adam Iredale, Janet Wise, Glen Zenor, Boris Hofer, Señora Alderperson, Wilbraham Music (Chris Cox), June Cox, Rantz
+This project has been made possible with funding from the following sources:
+Jennifer Cox, Adam Iredale, Janet Wise, Glen Zenor, Boris Hofer, Señora Alderperson, Wilbraham Music (Chris Cox), June Cox, Rantz, Yuri Yerofeyev
+
+The characteristics and/or functions of the robot are subject to changes without prior notice.
