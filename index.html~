@@ -163,10 +163,10 @@ if (getURLvalue('search')) {
 <section>
 	<h3 class="title" data-section-title><a href="#panel2"><i class="icon-terminal"></i> Terminal</a></h3>
 	<div class="content" data-section-content>
-	
-	<textarea style="color:#0f0;background:#000;width:100%;height:300px;padding:10px">
+	<input type="text" name="lname" style="color:#0f0;background:#000;width:100%;height:300px;padding:10px">
+	<div >
 	Terminal login will appear here
-	</textarea>
+	</div>
 
 	</div>
 </section>

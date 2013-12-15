@@ -1,7 +1,0 @@
-Just run:
-
-    ./hello_embedded_world.py
-
-...and connect to https://127.0.0.1/ in your browser.
-
-Optionally, you can pass --port=<whatever> to change which port it listens on.
