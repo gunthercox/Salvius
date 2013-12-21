@@ -49,9 +49,6 @@ sudo service nginx restart
 
 ## Development: [![Build Status](https://travis-ci.org/gunthercox/Salvius.png?branch=master)](https://travis-ci.org/gunthercox/Salvius)
 
-I am currently working on implementing AJSON to interact with the arduino boards via api. This will be much simpler and
-more efficient than using the java library.
-
 Check out what the interface looks like on the gh-pages branch: [http://gunthercox.github.io/Salvius/](http://gunthercox.github.io/Salvius/)
 
 ### Tools and libraries included in this project
@@ -62,29 +59,14 @@ Check out what the interface looks like on the gh-pages branch: [http://guntherc
 
 #### Packages
 * [nginx](http://wiki.nginx.org)
-* [nodejs](http://nodejs.org)
-* [express](http://expressjs.com/)
-* [component](https://github.com/component/component)
 
-You can install required packages for this project by running the following
-```
-sudo apt-get install nginx git make
-```
+You can install required packages for this project by running the ```./setup.sh``` file.
 
-For installing node.js and npm there is wonderfull script that works, just download and run it.
-I have also included express in this install
-```
-wget https://npmjs.org/install.sh
-sudo sh install.sh
-sudo npm install express
-sudo npm install component
-```
 ## License:
 This work is GPL-3.0
 @author: Gunther Cox
 @website: http://salviusrobot.blogspot.com
+The characteristics and/or functions of the robot are subject to changes without prior notice.
 
 This project has been made possible with funding from the following sources:
 Jennifer Cox, Adam Iredale, Janet Wise, Glen Zenor, Boris Hofer, Señora Alderperson, Wilbraham Music (Chris Cox), June Cox, Rantz, Yuri Yerofeyev
-
-The characteristics and/or functions of the robot are subject to changes without prior notice.
