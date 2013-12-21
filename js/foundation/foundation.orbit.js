@@ -210,7 +210,7 @@
         animate = new SlideAnimation(settings, slides_container);        
       container.on('click', '.'+settings.next_class, self.next);
       container.on('click', '.'+settings.prev_class, self.prev);
-      container.on('click', '[data-orbit-slide]', self.link_bullet);
+      /*container.on('click', '[data-orbit-slide]', self.link_bullet);*/
       container.on('click', self.toggle_timer);
       if (settings.swipe) {
         container.on('touchstart.fndtn.orbit', function(e) {
@@ -382,10 +382,10 @@
       timer_speed: 10000,
       pause_on_hover: true,
       resume_on_mouseout: false,
-      animation_speed: 500,
-      stack_on_small: false,
+      animation_speed: 400,
+      stack_on_small: true,
       navigation_arrows: true,
-      slide_number: true,
+      slide_number: false,
       slide_number_text: 'of',
       container_class: 'orbit-container',
       stack_on_small_class: 'orbit-stack-on-small',
@@ -402,7 +402,7 @@
       active_slide_class: 'active',
       orbit_transition_class: 'orbit-transitioning',
       bullets: true,
-      timer: true,
+      timer: false,
       variable_height: false,
       swipe: true,
       before_slide_change: noop,

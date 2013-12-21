@@ -11,12 +11,6 @@
     <link rel="stylesheet" href="css/salvius.css"></link>
     <link rel="stylesheet" href="css/dropzone.css"></link>
 
-    <style>
-    .orbit-bullets li {
-    height: 20px;
-    width: 20px;
-    }
-    </style>
 </head>
 
     <body>
@@ -31,18 +25,24 @@
           <section class="top-bar-section">
             <!-- Right Nav Section -->
             <ul class="right">
-              <li class="active"><a href="#">Right Nav Button Active</a></li>
-              <li class="has-dropdown">
-                <a href="#">Right</a>
-                <ul class="dropdown">
-                  <li><a href="#">Shutdown</a></li>
-                </ul>
-              </li>
+                <li style="width:200px">
+                    <div class="progress success">
+                        <span class="meter" style="width: 60%"><label>60%</label></span>
+                    </div>
+                </li>
+                <li class="has-dropdown">
+                    <a href="#"><i class="icon-cog"></i></a>
+                    <ul class="dropdown">
+                        <li><a href="#" data-reveal-id="backup"><i class="icon-download"></i> Backup</a></li>
+                        <li><a href="#" data-reveal-id="shutdown"><i class="icon-off"></i> Shutdown</a></li>
+                    </ul>
+                </li>
             </ul>
 
             <!-- Left Nav Section -->
             <ul class="left">
-              <li><a href="#">Left Nav Button</a></li>
+              <li>
+              </li>
             </ul>
           </section>
         </nav>
@@ -71,12 +71,6 @@
 		                    </div>
 		                    </div>
 	                    </div>
-	                      
-	                      <div class="large-4 columns">
-		                    <div class="progress success round">
-		                    <span class="meter" style="width: 60%"><label>Battery charge</label></span>
-		                    </div>
-	                      </div>
 	                      
 	                      <div class="large-4 columns">
 		                    <div class="switch round">
@@ -150,9 +144,9 @@
               	<h3 class="title" data-section-title><a href="#panel2"><i class="icon-terminal"></i> Terminal</a></h3>
 	            <div class="content" data-section-content>
 	
-	                <textarea style="color:#0f0;background:#000;width:100%;height:300px;padding:10px">
-	                Terminal login will appear here
-	                </textarea>
+<textarea style="color:#0f0;background:#000;width:100%;height:300px;padding:10px">
+Terminal login will appear here
+</textarea>
 
 	            </div>
             </div>
@@ -178,16 +172,6 @@
 		                </tbody>
 	                </table>
                 </div>
-            </div>
-          </li>
-          <li data-orbit-slide="headline-3">
-            <div>
-	            <h3 class="title" data-section-title><a href="#panel2"><i class="icon-info-sign"></i> System</a></h3>
-	            <div class="content" data-section-content>
-		            <button data-reveal-id="settings"><i class="icon-cogs"></i> Settings</button>
-		            <button data-reveal-id="shutdown"><i class="icon-off"></i> Shutdown</button>
-		            <button data-reveal-id="backup"><i class="icon-download"></i> Backup</button>
-	            </div>
             </div>
           </li>
           <li data-orbit-slide="headline-3">
@@ -270,15 +254,12 @@
 
                     <div class="row">
                       <div class="large-4 columns">
-	                    <label>&nbsp;</label>
 	                    <a href="http://www.routerlogin.net" class="small button">Router Login</a>
                       </div>
                       <div class="large-4 columns">
-	                    <label>&nbsp;</label>
 	                    <a href="http://192.168.1.2/" class="small button">Camera Login</a>
                       </div>
                       <div class="large-4 columns">
-	                    <label>&nbsp;</label>
 	                    <a href="#" class="small button">Documentation</a>
                       </div>
                     </div>
@@ -334,30 +315,18 @@
     <script src="./js/vendor/jquery.js"></script>
     <script src="./js/dropzone.js"></script>
     <script src="./js/d3.v3.js"></script>
-    <script src="js/foundation.min.js"></script>
+    <script src="js/foundation/foundation.js"></script>
+    <script src="js/foundation/foundation.topbar.js"></script>
+    <script src="js/foundation/foundation.orbit.js"></script>
+    <script src="js/foundation/foundation.reveal.js"></script>
+    <script src="js/foundation/foundation.alert.js"></script>
     <script>
-    $(document).foundation({
-      orbit: {
-          timer_speed: 100000, // Time in milliseconds before transitioning a slide
-          pause_on_hover: true, // Pauses on the current slide while hovering
-          resume_on_mouseout: false,
-
-          animation_speed: 400,
-          stack_on_small: true,
-          navigation_arrows: true,
-          slide_number: false,
-          timer: false,
-          variable_height: false,
-          swipe: true
-      }
-    });
-
+    $(document).foundation();
     $(document).ready(function(){
 	    $('#button').on('click', function(){
 		    $(this).toggleClass('on');
 	    });
     });
-
     </script>
   </body>
 </html>
