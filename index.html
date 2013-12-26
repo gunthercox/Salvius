@@ -13,274 +13,197 @@
 
 </head>
 
-    <body>
-        <nav class="top-bar" data-topbar>
-          <ul class="title-area">
-            <li class="name">
-              <h1><a href="#">Interface</a></h1>
-            </li>
-            <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
-          </ul>
+<body>
+    <nav class="top-bar" data-topbar>
+      <ul class="title-area">
+        <li class="name">
+          <h1><a href="#">Interface</a></h1>
+        </li>
+        <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+      </ul>
 
-          <section class="top-bar-section">
-            <!-- Right Nav Section -->
-            <ul class="right">
-                <li style="width:200px">
-                    <div class="progress success">
-                        <span class="meter" style="width: 60%"><label>60%</label></span>
-                    </div>
-                </li>
-                <li class="has-dropdown">
-                    <a href="#"><i class="icon-cog"></i></a>
-                    <ul class="dropdown">
-                        <li><a href="#" data-reveal-id="backup"><i class="icon-download"></i> Backup</a></li>
-                        <li><a href="#" data-reveal-id="shutdown"><i class="icon-off"></i> Shutdown</a></li>
-                    </ul>
-                </li>
-            </ul>
+      <section class="top-bar-section">
 
-            <!-- Left Nav Section -->
-            <ul class="left">
-              <li>
-              </li>
-            </ul>
-          </section>
-        </nav>
-
-        <div data-alert class="alert-box">Message<a href="#" class="close">&times;</a></div>
-
-    <div class="row">
-      <div class="large-12 columns">
-
-        <ul class="example-orbit-content" data-orbit>
-            <li data-orbit-slide="headline-1">
-                <div>
-                    <h3 class="title" data-section-title><a href="#panel1"><i class="icon-gamepad"></i> GUI</a></h3>
-                    <div class="content" data-section-content>
-                      <p>Graphic interface for the robot.</p>
-                      
-                      <div class="row display">
-                      
-	                    <div class="large-4 columns">
-		                    <div class="row collapse">
-		                    <div class="small-10 columns">
-		                    <input type="text" placeholder="Text to Speech">
-		                    </div>
-		                    <div class="small-2 columns">
-		                    <a href="#" class="button prefix">Say</a>
-		                    </div>
-		                    </div>
-	                    </div>
-	                      
-	                      <div class="large-4 columns">
-		                    <div class="switch round">
-		                    <input id="z" name="switch-z" type="radio" checked>
-		                    <label for="z" onclick="">Teleoperated mode</label>
-
-		                    <input id="z1" name="switch-z" type="radio">
-		                    <label for="z1" onclick="">Atonomus mode</label>
-
-		                    <span></span>
-		                    </div>
-	                      </div>
-	                    </div>
-	
-	                    <div class="row display">
-	
-		                    <div class="large-4 columns">
-			                    <div class="row collapse">
-			                    <div class="small-10 columns">
-			                    <input type="text" placeholder="Text to Handwriting">
-			                    </div>
-			                    <div class="small-2 columns">
-			                    <a href="#" class="button prefix">Write</a>
-			                    </div>
-			                    </div>
-		                    </div>
-	                      
-		                    <div class="large-4 columns">
-			                    <!--<img id="cam" src="http://192.168.1.2/image.jpg">-->
-			                    <!--<applet name="cvcs" codebase="http://192.168.1.2:80" code="aplug.class" width="320" height="240">
-			                    <param name="RemotePort" value="80">
-			                    <param name="Timeout" value="5000">
-			                    <param name="RotateAngle" value="0">
-			                    <param name="PreviewFrameRate" value="2">
-			                    <param name="DeviceSerialNo" value="YWRtaW46cGFzc3dvcmQ=">
-			                    </applet>-->
-		                      
-			                    <div class="button-bar">
-			                    <ul class="button-group">
-				                      <li><button class="small button" onclick="cvcs.Zoom(1)">x1</button></li>
-				                      <li><button class="small button" onclick="cvcs.Zoom(2)">x2</button></li>
-				                      <li><button class="small button" onclick="cvcs.Zoom(3)">x3</button></li>
-				                      <li><button class="small button" onclick="cvcs.Zoom(4)">x4</button></li>
-			                    </ul>
-			                    <ul class="button-group">
-				                    <li><input class="small button" id="audioon" type="button" value="ON" onclick="SubmitAudioOn()" /></li>
-				                    <li><input class="small button" id="audiooff" type="button" value="OFF" onclick="SubmitAudioOff()" /></li>
-			                    </ul>
-			                    </div>
-		
-	                      </div>
-	                      <div class="large-4 columns">
-		                    <div class="switch round">
-		                    <input id="ir" name="switch-ir" type="radio" checked>
-		                    <label for="ir" onclick="">Infrared Off</label>
-
-		                    <input id="ir" name="switch-ir" type="radio">
-		                    <label for="ir" onclick="">Infrared On</label>
-
-		                    <span></span>
-		                    </div>
-	                      </div>
-	                    </div>
-	
-                    </div>
+        <ul class="right">
+            <li style="width:200px">
+                <div class="progress success">
+                    <span class="meter" style="width: 60%"><label>60%</label></span>
                 </div>
             </li>
+            <li class="has-dropdown">
+                <a href="#"><i class="icon-cog"></i></a>
+                <ul class="dropdown">
+                    <li><a href="#" data-reveal-id="backup"><i class="icon-download"></i> Backup</a></li>
+                    <li><a href="#" data-reveal-id="shutdown"><i class="icon-off"></i> Shutdown</a></li>
+                </ul>
+            </li>
+        </ul>
 
-          <li data-orbit-slide="headline-1">
+        <ul class="left">
+          <li>
+          </li>
+        </ul>
+      </section>
+    </nav>
+
+    <div class="large-12 columns">
+    <ul class="example-orbit-content" data-orbit>
+        <li>
             <div>
-              	<h3 class="title" data-section-title><a href="#panel2"><i class="icon-terminal"></i> Terminal</a></h3>
-	            <div class="content" data-section-content>
-	
+                <h2><i class="icon-map-marker"></i> GUI <small>Primary control interface</small></h2>
+                  
+                <div class="row">
+                    <div class="large-4 columns">
+                        <div class="row collapse">
+                            <div class="small-9 columns">
+                            <input type="text" placeholder="Text to Speech">
+                            </div>
+                            <div class="small-3 columns">
+                            <a href="#" class="button prefix">
+                                <i class="icon-bullhorn"></i> Say</a>
+                            </div>
+                        </div>
+                        <div class="row collapse">
+                            <div class="small-9 columns">
+                                <input type="text" placeholder="Text to Handwriting">
+                                </div>
+                                <div class="small-3 columns">
+                                <a href="#" class="button prefix">
+                                    <i class="icon-pencil"></i> Write
+                                </a>
+                                </div>
+                            </div>
+                      </div>
+                  
+                    <div class="large-4 columns">
+	                    <img id="cam" src="http://192.168.1.2/image.jpg" onError="this.onerror=null;this.src='img/fail.png';" />
+                    </div>
+
+                    <div class="large-4 columns">
+                        <div class="row">
+                            <button class="small button large-12 columns toggle"><i class="icon-lightbulb"></i> Infrared</button>
+                        </div>
+                        <div class="row">
+                            <button class="small button large-6 columns toggle">Stand</button>
+                            <button class="small button large-6 columns toggle">Sit</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </li>
+
+      <li>
+        <div>
+          	<h2><i class="icon-terminal"></i> Terminal</h3>
 <textarea style="color:#0f0;background:#000;width:100%;height:300px;padding:10px">
 Terminal login will appear here
 </textarea>
+        </div>
+      </li>
 
-	            </div>
-            </div>
-          </li>
-          <li data-orbit-slide="headline-2">
+      <li>
+        <div>
+          	<h2><i class="icon-compass"></i> Sensors <small>Complete listing of all sensor readings</small></h2>
+            <table>
+                <thead>
+	                <tr>
+		                <th>{{sensors.sensortype}}</th>
+		                <th>{{sensors.valuetype}}</th>
+	                </tr>
+                </thead>
+                <tbody>
+	                <tr ng-repeat="sensor in sensors.components">
+		                <td>{{sensor.type}}</td>
+		                <td>{{sensor.reading}} {{sensor.unit}}</td>
+	                </tr>
+                </tbody>
+            </table>
+        </div>
+      </li>
+
+      <li>
+      <div>
+          <h2><i class="icon-sitemap"></i> FTP <small>Drag and drop files to upload and download them. Click files for options menu to download, view, edit.</small></h2>
+          <form action="/file-upload" class="dropzone">
+              <div class="fallback">
+                  <input name="file" type="file" multiple />
+              </div>
+          </form>
+    </div>
+    </li>
+
+        <li>
             <div>
-              	<h3 class="title" data-section-title><a href="#panel2"><i class="icon-compass"></i> Sensors</a></h3>
-                <div class="content" data-section-content>
-	                <p>Complete listing of all sensor readings</p>
-	
-	                <table>
-		                <thead>
-			                <tr>
-				                <th>{{sensors.sensortype}}</th>
-				                <th>{{sensors.valuetype}}</th>
-			                </tr>
-		                </thead>
-		                <tbody>
-			                <tr ng-repeat="sensor in sensors.components">
-				                <td>{{sensor.type}}</td>
-				                <td>{{sensor.reading}} {{sensor.unit}}</td>
-			                </tr>
-		                </tbody>
-	                </table>
+                <h2><i class="icon-cogs"></i> Settings <small>Settings that won't normally be changed but are useful for development purposes</small></h2>
+                <form class="custom">
+                <fieldset>
+                <legend>Defaults</legend>
+
+                <div class="row">
+                  <div class="large-4 columns">
+                    <label>Robot Name:</label>
+                    <input type="text" placeholder="Name">
+                  </div>
+                  <div class="large-4 columns">
+                    <label>&nbsp;</label>
+                    <a href="http://www.routerlogin.net" class="tiny button" style="width:100%;">Router Login</a>
+                  </div>
+                  <div class="large-4 columns">
+                    <label>&nbsp;</label>
+                    <a href="http://192.168.1.2/" class="tiny button" style="width:100%;">Camera Login</a>
+                  </div>
                 </div>
+
+                </fieldset>
+
+                <fieldset>
+                <legend>Internet Protocols</legend>
+
+                <div class="row">
+                  <div class="large-4 columns">
+                    <div class="row collapse">
+                      <label>Raspberry-Pi IP:</label>
+                      <div class="small-3 columns">
+	                    <span class="prefix">http://</span>
+                      </div>
+                      <div class="small-9 columns">
+	                    <input type="text" placeholder="0.0.0.0">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="large-4 columns">
+                    <div class="row collapse">
+                      <label>Camera IP:</label>
+                      <div class="small-3 columns">
+	                    <span class="prefix">http://</span>
+                      </div>
+                      <div class="small-9 columns">
+	                    <input type="text" placeholder="0.0.0.0">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="large-4 columns">
+                    <div class="row collapse">
+                      <label>Arduino IP:</label>
+                      <div class="small-3 columns">
+	                    <span class="prefix">http://</span>
+                      </div>
+                      <div class="small-9 columns">
+	                    <input type="text" placeholder="0.0.0.0">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                </fieldset>
+                </form>
             </div>
-          </li>
-          <li data-orbit-slide="headline-3">
-            <div>
-              <h3 class="title" data-section-title><a href="#panel2"><i class="icon-sitemap"></i> FTP</a></h3>
-                <div class="content" data-section-content>
-                  <p>Drag files here to upload them. Drag files from here to download them. Click file for options menu to download, view, edit.</p>
-                  
-	                <form action="/file-upload" class="dropzone">
-	                <div class="fallback">
-	                <input name="file" type="file" multiple />
-	                </div>
-	                </form>
-                  
-                </div>
-            </div>
-          </li>
-
-            <li data-orbit-slide="headline-3">
-                <div>
-                    <h2><i class="icon-cogs"></i> Settings</h2>
-                    <h4 class="subheader">These are all settings that can, but won't normally be changed but are useful for development purposes</h4>
-
-                    <form class="custom">
-                    <fieldset>
-                    <legend>Defaults</legend>
-
-                    <div class="row">
-                      <div class="large-12 columns">
-	                    <label>Robot Name:</label>
-	                    <input type="text" placeholder="Name">
-                      </div>
-                    </div>
-
-                    </fieldset>
-
-                    <fieldset>
-                    <legend>Internet Protocols</legend>
-
-                    <div class="row">
-                      <div class="large-4 columns">
-	                    <div class="row collapse">
-	                      <label>Arduino IP:</label>
-	                      <div class="small-3 columns">
-		                    <span class="prefix">http://</span>
-	                      </div>
-	                      <div class="small-9 columns">
-		                    <input type="text" placeholder="0.0.0.0">
-	                      </div>
-	                    </div>
-                      </div>
-                      <div class="large-4 columns">
-	                    <div class="row collapse">
-	                      <label>Camera IP:</label>
-	                      <div class="small-3 columns">
-		                    <span class="prefix">http://</span>
-	                      </div>
-	                      <div class="small-9 columns">
-		                    <input type="text" placeholder="0.0.0.0">
-	                      </div>
-	                    </div>
-                      </div>
-                      <div class="large-4 columns">
-	                    <div class="row collapse">
-	                      <label>Arduino IP:</label>
-	                      <div class="small-3 columns">
-		                    <span class="prefix">http://</span>
-	                      </div>
-	                      <div class="small-9 columns">
-		                    <input type="text" placeholder="0.0.0.0">
-	                      </div>
-	                    </div>
-                      </div>
-                    </div>
-
-                    </fieldset>
-
-                    <fieldset>
-                    <legend>Device Links</legend>
-
-                    <div class="row">
-                      <div class="large-4 columns">
-	                    <a href="http://www.routerlogin.net" class="small button">Router Login</a>
-                      </div>
-                      <div class="large-4 columns">
-	                    <a href="http://192.168.1.2/" class="small button">Camera Login</a>
-                      </div>
-                      <div class="large-4 columns">
-	                    <a href="#" class="small button">Documentation</a>
-                      </div>
-                    </div>
-
-                    </fieldset>
-
-                    </form>
-                </div>
-            </li>
-            
-        </ul>
-
-      </div>
+        </li>  
+    </ul>
     </div>
 
-<!-- Modals in like to live right before the closing body tag -->
-
-<div id="settings" class="reveal-modal">
-  <div class="large-12 columns" ng-include src="'./settings.html'"></div>
-  <a class="close-reveal-modal">&#215;</a>
-</div>
+<!-- MODALS -->
 
 <div id="shutdown" class="reveal-modal shutdown">
 	<h2 style="color:#f00"><i class="icon-warning-sign"></i> Emergency Shutdown</h2>
@@ -312,21 +235,20 @@ Terminal login will appear here
   <a class="close-reveal-modal">&#215;</a>
 </div>
 
-    <script src="./js/vendor/jquery.js"></script>
-    <script src="./js/dropzone.js"></script>
-    <script src="./js/d3.v3.js"></script>
-    <script src="js/foundation/foundation.js"></script>
-    <script src="js/foundation/foundation.topbar.js"></script>
-    <script src="js/foundation/foundation.orbit.js"></script>
-    <script src="js/foundation/foundation.reveal.js"></script>
-    <script src="js/foundation/foundation.alert.js"></script>
-    <script>
-    $(document).foundation();
-    $(document).ready(function(){
-	    $('#button').on('click', function(){
-		    $(this).toggleClass('on');
-	    });
+<script src="./js/vendor/jquery.js"></script>
+<script src="./js/dropzone.js"></script>
+<script src="./js/d3.v3.js"></script>
+<script src="js/foundation/foundation.js"></script>
+<script src="js/foundation/foundation.topbar.js"></script>
+<script src="js/foundation/foundation.orbit.js"></script>
+<script src="js/foundation/foundation.reveal.js"></script>
+<script>
+$(document).foundation();
+$(document).ready(function(){
+    $('#button').on('click', function(){
+	    $(this).toggleClass('on');
     });
-    </script>
-  </body>
+});
+</script>
+</body>
 </html>
