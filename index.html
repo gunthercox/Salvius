@@ -73,7 +73,7 @@
                       </div>
                   
                     <div class="large-4 columns">
-	                    <img id="cam" src="http://192.168.1.2/image.jpg" onError="this.onerror=null;this.src='img/fail.png';" />
+	                    <img class="cam" src="http://192.168.1.2/image.jpg"/>
                     </div>
 
                     <div class="large-4 columns">
@@ -231,6 +231,13 @@ $(document).ready(function() {
 	    $(this).toggleClass('on');
     });
     $('.terminal').error(function() {
+    });
+    $('.cam').error(function() {
+        var styles = {
+        height: "auto",
+        width: "100%",
+        };
+        $(this).unbind("error").attr("src", "data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=").css(styles);
     });
 });
 </script>
