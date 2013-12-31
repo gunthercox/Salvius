@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="css/font-awesome.css"></link>
     <link rel="stylesheet" href="css/salvius.css"></link>
     <link rel="stylesheet" href="css/dropzone.css"></link>
-
 </head>
 
 <body>
@@ -84,8 +83,8 @@
                             <button class="small button large-12 columns toggle"><i class="icon-lightbulb"></i> Infrared</button>
                         </div>
                         <div class="row">
-                            <button class="small button large-6 columns toggle">Stand</button>
-                            <button class="small button large-6 columns toggle">Sit</button>
+                            <button class="small button large-6 columns toggle"><i class="icon-male"></i> Stand Up</button>
+                            <button class="small button large-6 columns toggle"><i class="icon-male icon-rotate-270"></i> Sit Down</button>
                         </div>
                     </div>
                 </div>
@@ -96,9 +95,7 @@
       <li>
         <div>
           	<h2><i class="icon-terminal"></i> Terminal</h3>
-<textarea style="color:#0f0;background:#000;width:100%;height:300px;padding:10px">
-Terminal login will appear here
-</textarea>
+                <iframe class="terminal" src="/webshell/" style="width:100%;height:300px;"></iframe>
         </div>
       </li>
 
@@ -244,9 +241,11 @@ Terminal login will appear here
 <script src="js/foundation/foundation.reveal.js"></script>
 <script>
 $(document).foundation();
-$(document).ready(function(){
-    $('#button').on('click', function(){
+$(document).ready(function() {
+    $('#button').on('click', function() {
 	    $(this).toggleClass('on');
+    });
+    $('.terminal').error(function() {
     });
 });
 </script>
