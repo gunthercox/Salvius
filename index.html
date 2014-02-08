@@ -73,7 +73,8 @@
                       </div>
                   
                     <div class="large-4 columns">
-	                    <img class="cam" src="http://192.168.1.2/image.jpg"/>
+	                    <canvas id="cam" class="small-12" />
+ 	                    <div id="txt">0</div>
                     </div>
 
                     <div class="large-4 columns">
@@ -240,6 +241,36 @@ $(document).ready(function() {
         $(this).unbind("error").attr("src", "data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=").css(styles);
     });
 });
+</script>
+<script type="text/javascript">
+var iUpdateMs = 100;
+var count = 0;
+var newImg;
+
+setTimeout("imageupdate()", iUpdateMs );
+
+function imageupdate()
+{
+	document.getElementById("txt").innerHTML = count++;
+
+	newImg = new Image();
+	newImg.Id = "camimg" + count;
+	newImg.Name = newImg.Id;
+	newImg.onload = imageLoaded;
+	newImg.src = "http://192.168.1.2/image.jpg?u=" + count;
+}
+
+function imageLoaded() {
+	var drawingCanvas = document.getElementById("cam");
+
+	// Check if the browser supports canvas
+	if(drawingCanvas.getContext) {
+		var context = drawingCanvas.getContext("2d");
+		context.drawImage(newImg,0,0,640,480,0,0,300,150);
+	}
+
+	setTimeout("imageupdate()", iUpdateMs);
+}
 </script>
 </body>
 </html>
