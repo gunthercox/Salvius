@@ -24,7 +24,7 @@
         <ul class="right">
             <li style="width:200px">
                 <div class="progress success">
-                    <span class="meter" style="width: 60%"><label>60%</label></span>
+                    <span class="meter" style="width: 80%"><label>80%</label></span>
                 </div>
             </li>
             <li class="has-dropdown">
@@ -43,82 +43,78 @@
       </section>
     </nav>
 
+    <div data-alert id="camError" class="alert-box warning" style="display:none">
+        Camera input is unavailable.
+        <a href="#" class="close">&times;</a>
+    </div>
+
     <div class="large-12 columns">
     <ul class="example-orbit-content" data-orbit>
         <li>
-            <div>
+            <div class="row">
                 <h2><i class="icon-map-marker"></i> GUI <small>Primary control interface</small></h2>
-                  
-                <div class="row">
-                    <div class="large-4 columns">
-                        <div class="row collapse">
-                            <div class="small-9 columns">
-                            <input type="text" placeholder="Text to Speech">
-                            </div>
-                            <div class="small-3 columns">
-                            <a href="#" class="button prefix">
-                                <i class="icon-bullhorn"></i> Say</a>
-                            </div>
-                        </div>
-                        <div class="row collapse">
-                            <div class="small-9 columns">
-                                <input type="text" placeholder="Text to Handwriting">
-                                </div>
-                                <div class="small-3 columns">
-                                <a href="#" class="button prefix">
-                                    <i class="icon-pencil"></i> Write
-                                </a>
-                                </div>
-                            </div>
-                      </div>
-                  
-                    <div class="large-4 columns">
-	                    <canvas id="cam" class="small-12" />
- 	                    <div id="txt">0</div>
-                    </div>
 
-                    <div class="large-4 columns">
-                        <div class="row">
-                            <button class="small button large-12 columns toggle"><i class="icon-lightbulb"></i> Infrared</button>
+                <div class="large-4 columns">
+                    <div class="row collapse">
+                        <div class="small-9 columns">
+                            <input type="text" placeholder="Text to Speech"/>
                         </div>
-                        <div class="row">
-                            <button class="small button large-6 columns toggle"><i class="icon-male"></i> Stand Up</button>
-                            <button class="small button large-6 columns toggle"><i class="icon-male icon-rotate-270"></i> Sit Down</button>
+                        <div class="small-3 columns">
+                            <button class="button prefix"><i class="icon-bullhorn"></i> Say</button>
                         </div>
+                    </div>
+                    <div class="row collapse">
+                        <div class="small-9 columns">
+                            <input type="text" placeholder="Text to Handwriting"/>
+                        </div>
+                        <div class="small-3 columns">
+                            <button class="button prefix"><i class="icon-pencil"></i> Write</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="large-4 columns">
+                    <canvas id="cam" class="small-12"/>
+                    <div id="txt">0</div>
+                </div>
+
+                <div class="large-4 columns">
+                    <div class="row">
+                        <button class="small button large-12 columns toggle"><i class="icon-lightbulb"></i> Infrared</button>
+                    </div>
+                    <div class="row">
+                        <button class="small button large-6 columns toggle"><i class="icon-male"></i> Stand Up</button>
+                        <button class="small button large-6 columns toggle"><i class="icon-male icon-rotate-270"></i> Sit Down</button>
                     </div>
                 </div>
 
             </div>
         </li>
 
-      <li>
-        <div>
-          	<h2><i class="icon-terminal"></i> Terminal</h3>
-                <iframe class="terminal" src="/webshell/" style="width:100%;height:300px;"></iframe>
-        </div>
-      </li>
+        <li>
+            <div class="row">
+              	<h2><i class="icon-compass"></i> Sensors <small>Complete listing of all sensor readings</small></h2>
 
-      <li>
-        <div>
-          	<h2><i class="icon-compass"></i> Sensors <small>Complete listing of all sensor readings</small></h2>
-            <table>
-                <thead>
-	                <tr>
-		                <th>{{sensors.sensortype}}</th>
-		                <th>{{sensors.valuetype}}</th>
-	                </tr>
-                </thead>
-                <tbody>
-	                <tr ng-repeat="sensor in sensors.components">
-		                <td>{{sensor.type}}</td>
-		                <td>{{sensor.reading}} {{sensor.unit}}</td>
-	                </tr>
-                </tbody>
-            </table>
-        </div>
+                <div class="large-12 columns">
+                    <table>
+                        <thead>
+	                        <tr>
+		                        <th>{{sensors.sensortype}}</th>
+		                        <th>{{sensors.valuetype}}</th>
+	                        </tr>
+                        </thead>
+                        <tbody>
+	                        <tr ng-repeat="sensor in sensors.components">
+		                        <td>{{sensor.type}}</td>
+		                        <td>{{sensor.reading}} {{sensor.unit}}</td>
+	                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </li>
         <li>
-            <div>
+            <div class="row">
                 <h2><i class="icon-cogs"></i> Settings <small>Settings that won't normally be changed but are useful for development purposes</small></h2>
                 <form class="custom">
                 <fieldset>
@@ -220,44 +216,32 @@
 </div>
 
 <script src="./js/vendor/jquery.js"></script>
-<script src="./js/d3.v3.js"></script>
 <script src="js/foundation/foundation.js"></script>
 <script src="js/foundation/foundation.topbar.js"></script>
 <script src="js/foundation/foundation.orbit.js"></script>
 <script src="js/foundation/foundation.reveal.js"></script>
-<script>
-$(document).foundation();
-$(document).ready(function() {
-    $('#button').on('click', function() {
-	    $(this).toggleClass('on');
-    });
-    $('.terminal').error(function() {
-    });
-    $('.cam').error(function() {
-        var styles = {
-        height: "auto",
-        width: "100%",
-        };
-        $(this).unbind("error").attr("src", "data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=").css(styles);
-    });
-});
-</script>
 <script type="text/javascript">
+$(document).foundation();
+
+var cameraImage = "http://192.168.1.2/image.jpg";
 var iUpdateMs = 100;
 var count = 0;
 var newImg;
 
-setTimeout("imageupdate()", iUpdateMs );
+$.get(cameraImage, function(data) {
+    setTimeout("imageupdate()", iUpdateMs );
+}).error(function() {
+    $("#camError").show();
+});
 
-function imageupdate()
-{
+function imageupdate() {
 	document.getElementById("txt").innerHTML = count++;
 
 	newImg = new Image();
 	newImg.Id = "camimg" + count;
 	newImg.Name = newImg.Id;
 	newImg.onload = imageLoaded;
-	newImg.src = "http://192.168.1.2/image.jpg?u=" + count;
+	newImg.src = cameraImage + "?u=" + count;
 }
 
 function imageLoaded() {
@@ -271,6 +255,11 @@ function imageLoaded() {
 
 	setTimeout("imageupdate()", iUpdateMs);
 }
+
+// Hide alerts on click
+$(".alert-box").click(function() {
+    $(this).fadeOut();
+});
 </script>
 </body>
 </html>
