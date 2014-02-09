@@ -22,7 +22,7 @@ byte mac[] = {
 byte ip[] = { 
   192, 168, 1, 177 };      // ip in lan
 byte gateway[] = { 
-  192, 168, 0, 1 };        // internet access via router
+  192, 168, 1, 1 };        // internet access via router
 byte subnet[] = { 
   255, 255, 255, 0 };      //subnet mask
 EthernetServer server(80);
