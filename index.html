@@ -85,6 +85,10 @@
         Camera input is unavailable.
         <a href="#" class="close">&times;</a>
     </div>
+    <div data-alert id="apiError" class="alert-box warning" style="display:none">
+        Arduino api is unavailable.
+        <a href="#" class="close">&times;</a>
+    </div>
 
     <div data-alert id="shutdown" class="alert-box shutdown" style="display:none">
 	    <h2 style="color:#f00"><i class="icon-warning-sign"></i> Emergency Shutdown</h2>
@@ -142,11 +146,7 @@
                         <th class="center">Value</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr ng-repeat="sensor in sensors.components">
-                        <td>{{sensor.type}}</td>
-                        <td>{{sensor.reading}} {{sensor.unit}}</td>
-                    </tr>
+                <tbody class="sensorValues">
                 </tbody>
             </table>
         </div>
@@ -159,6 +159,8 @@
 $(document).foundation();
 
 var cameraImage = "http://192.168.1.2/image.jpg";
+var arduinoJson = "http://192.168.1.177/json";
+
 var iUpdateMs = 100;
 var count = 0;
 var newImg;
@@ -195,6 +197,20 @@ function imageLoaded() {
 $(".alert-box").click(function() {
     $(this).fadeOut();
 });
+
+$.ajax({ 
+    type: 'GET', 
+    url: arduinoJson, 
+    data: { get_param: 'value' }, 
+    dataType: 'json',
+    success: function (data) { 
+        $.each(data, function(index, element) {
+            $('.sensorValues').append('<tr><td>' + index + '</td><td>' + element + '</td></tr>');
+        });
+    }
+}).error(function() {
+    $("#apiError").show();
+});;
 </script>
 </body>
 </html>
