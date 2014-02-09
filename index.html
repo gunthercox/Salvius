@@ -36,8 +36,47 @@
         </ul>
 
         <ul class="left">
-          <li>
-          </li>
+            <li class="has-dropdown">
+                <a href="#"><i class="icon-wrench"></i> Configuration</a>
+                <ul class="dropdown">
+                    <li><label>Rapsberry Pi IP</label></li>
+                    <li class="has-form">
+                        <div class="row collapse">
+                            <div class="small-10 columns">
+                                <input type="text" placeholder="http://0.0.0.0">
+                            </div>
+                            <div class="small-2 columns">
+                                <a href="#" class="postfix button ok"><i class="icon-ok-sign"></i></a>
+                            </div>
+                        </div>
+                    </li>
+                    <li><label>Camera IP</label></li>
+                    <li class="has-form">
+                        <div class="row collapse">
+                            <div class="small-10 columns">
+                                <input type="text" placeholder="http://0.0.0.0">
+                            </div>
+                            <div class="small-2 columns">
+                                <a href="#" class="postfix button ok"><i class="icon-ok-sign"></i></a>
+                            </div>
+                        </div>
+                    </li>
+                    <li><label>Arduino IP</label></li>
+                    <li class="has-form">
+                        <div class="row collapse">
+                            <div class="small-10 columns">
+                                <input type="text" placeholder="http://0.0.0.0">
+                            </div>
+                            <div class="small-2 columns">
+                                <a href="#" class="postfix button ok"><i class="icon-ok-sign"></i></a>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="http://www.routerlogin.net"><i class="icon-external-link"></i> Router Login</a>
+                    </li>
+                </ul>
+            </li>
         </ul>
       </section>
     </nav>
@@ -56,117 +95,61 @@
 	    <p style="color:#F60">WARNING: This operation will deactivate all systems on the robot. Sudden deactivation may cause damage to the robot and objects near by.</p>
     </div>
 
-    <div class="large-12 columns">
+    <div class="row">
 
-            <div class="row">
-
-                <div class="large-4 columns">
-                    <div class="row collapse">
-                        <div class="small-9 columns">
-                            <input type="text" placeholder="Text to Speech"/>
-                        </div>
-                        <div class="small-3 columns">
-                            <button class="button prefix"><i class="icon-bullhorn"></i> Say</button>
-                        </div>
-                    </div>
-                    <div class="row collapse">
-                        <div class="small-9 columns">
-                            <input type="text" placeholder="Text to Handwriting"/>
-                        </div>
-                        <div class="small-3 columns">
-                            <button class="button prefix"><i class="icon-pencil"></i> Write</button>
-                        </div>
-                    </div>
+        <div class="large-3 columns">
+            <div class="row collapse">
+                <div class="small-9 columns">
+                    <input type="text" placeholder="Text to Speech"/>
                 </div>
-
-                <div class="large-4 columns">
-                    <canvas id="cam" class="small-12"/>
-                    <div id="txt">0</div>
-                </div>
-
-                <div class="large-4 columns">
-                    <div class="row">
-                        <button class="small button large-12 columns toggle"><i class="icon-lightbulb"></i> Infrared</button>
-                    </div>
-                    <div class="row">
-                        <button class="small button large-6 columns toggle"><i class="icon-male"></i> Stand Up</button>
-                        <button class="small button large-6 columns toggle"><i class="icon-male icon-rotate-270"></i> Sit Down</button>
-                    </div>
-                </div>
-
-            </div>
-            <div class="row">
-                <div class="large-6 columns">
-                    <i class="icon-compass"></i> Sensors Available sensors and readings
-                    <input type="text" placeholder="Filter by sensor"/>
-                    <table style="width:100%">
-                        <thead>
-	                        <tr>
-		                        <th>{{sensors.sensortype}}</th>
-		                        <th>{{sensors.valuetype}}</th>
-	                        </tr>
-                        </thead>
-                        <tbody>
-	                        <tr ng-repeat="sensor in sensors.components">
-		                        <td>{{sensor.type}}</td>
-		                        <td>{{sensor.reading}} {{sensor.unit}}</td>
-	                        </tr>
-                        </tbody>
-                    </table>
+                <div class="small-3 columns">
+                    <button class="button prefix"><i class="icon-bullhorn"></i> Say</button>
                 </div>
             </div>
-
-            <div class="row">
-                <form class="custom">
-                <fieldset>
-
-                <legend><i class="icon-cogs"></i> Settings</legend>
-
-                <div class="row">
-                  <div class="large-4 columns">
-                    <div class="row collapse">
-                      <label>Raspberry-Pi IP:</label>
-                      <div class="small-3 columns">
-	                    <span class="prefix">http://</span>
-                      </div>
-                      <div class="small-9 columns">
-	                    <input type="text" placeholder="0.0.0.0">
-                      </div>
-                    </div>
-                  </div>
-                <div class="large-4 columns">
-                    <div class="row collapse">
-                      <label>Camera IP:</label>
-                      <div class="small-3 columns">
-	                    <span class="prefix">http://</span>
-                      </div>
-                      <div class="small-6 columns">
-	                    <input type="text" placeholder="0.0.0.0">
-                      </div>
-                        <div class="small-3 columns">
-                            <a href="http://192.168.1.2/" class="postfix tiny button"><i class="icon-external-link"></i> Login</a>
-                        </div>
-                    </div>
+            <div class="row collapse">
+                <div class="small-9 columns">
+                    <input type="text" placeholder="Text to Handwriting"/>
                 </div>
-                  <div class="large-4 columns">
-                    <div class="row collapse">
-                      <label>Arduino IP:</label>
-                      <div class="small-3 columns">
-	                    <span class="prefix">http://</span>
-                      </div>
-                      <div class="small-9 columns">
-	                    <input type="text" placeholder="0.0.0.0">
-                      </div>
-                    </div>
-                  </div>
+                <div class="small-3 columns">
+                    <button class="button prefix"><i class="icon-pencil"></i> Write</button>
                 </div>
-
-                <a href="http://www.routerlogin.net" class="tiny button"><i class="icon-external-link"></i> Router Login</a>
-
-                </fieldset>
-                </form>
             </div>
+        </div>
 
+        <div class="large-6 columns">
+            <canvas id="cam" class="small-12"/>
+            <div id="txt">0</div>
+        </div>
+
+        <div class="large-3 columns">
+            <div class="row">
+                <button class="small button large-12 columns toggle"><i class="icon-lightbulb"></i> Infrared</button>
+            </div>
+            <div class="row">
+                <button class="small button small-6 columns toggle"><i class="icon-male"></i> Stand Up</button>
+                <button class="small button small-6 columns toggle"><i class="icon-male icon-rotate-270"></i> Sit Down</button>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="large-6 columns">
+            <input type="text" placeholder="Filter available sensors"/>
+            <table style="width:100%">
+                <thead>
+                    <tr>
+                        <th class="center"><i class="icon-compass"></i> Sensor</th>
+                        <th class="center">Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="sensor in sensors.components">
+                        <td>{{sensor.type}}</td>
+                        <td>{{sensor.reading}} {{sensor.unit}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 
 <script src="./js/jquery.js"></script>
