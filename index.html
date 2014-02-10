@@ -30,7 +30,7 @@
             <li class="has-dropdown">
                 <a href="#"><i class="icon-cog"></i></a>
                 <ul class="dropdown">
-                    <li><a href="#"><i class="icon-off"></i> Shutdown</a></li>
+                    <li><a href="#shutdown"><i class="icon-off"></i> Shutdown</a></li>
                 </ul>
             </li>
         </ul>
@@ -153,6 +153,7 @@
     </div>
 
 <script src="./js/jquery.js"></script>
+<script src="js/foundation/modernizr.js"></script>
 <script src="js/foundation/foundation.js"></script>
 <script src="js/foundation/foundation.topbar.js"></script>
 <script type="text/javascript">
@@ -198,6 +199,10 @@ $(".alert-box").click(function() {
     $(this).fadeOut();
 });
 
+$('a[href="#shutdown"]').click(function() {
+    $("#shutdown").show();
+});
+
 $.ajax({ 
     type: 'GET', 
     url: arduinoJson, 
@@ -210,7 +215,7 @@ $.ajax({
     }
 }).error(function() {
     $("#apiError").show();
-});;
+});
 </script>
 </body>
 </html>

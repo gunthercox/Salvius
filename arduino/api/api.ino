@@ -265,5 +265,5 @@ void loop()
   webserver.processConnection();
 
   // if you wanted to do other work based on a connecton, it would go here
-  i2cScan();
+  //i2cScan();
 }
