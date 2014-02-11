@@ -33,23 +33,16 @@
                     <li><a href="#shutdown"><i class="icon-off"></i> Shutdown</a></li>
                 </ul>
             </li>
+            <li class="divider"></li>
+            <li>
+                <a href="#"><i class="icon-question-sign"></i> Documentation</a>
+            </li>
         </ul>
 
         <ul class="left">
             <li class="has-dropdown">
                 <a href="#"><i class="icon-wrench"></i> Configuration</a>
                 <ul class="dropdown">
-                    <li><label>Rapsberry Pi IP</label></li>
-                    <li class="has-form">
-                        <div class="row collapse">
-                            <div class="small-10 columns">
-                                <input type="text" placeholder="http://0.0.0.0">
-                            </div>
-                            <div class="small-2 columns">
-                                <a href="#" class="postfix button ok"><i class="icon-ok-sign"></i></a>
-                            </div>
-                        </div>
-                    </li>
                     <li><label>Camera IP</label></li>
                     <li class="has-form">
                         <div class="row collapse">
@@ -81,25 +74,26 @@
       </section>
     </nav>
 
-    <div data-alert id="camError" class="alert-box warning" style="display:none">
-        Camera input is unavailable.
-        <a href="#" class="close">&times;</a>
-    </div>
-    <div data-alert id="apiError" class="alert-box warning" style="display:none">
-        Arduino api is unavailable.
-        <a href="#" class="close">&times;</a>
-    </div>
-
-    <div data-alert id="shutdown" class="alert-box shutdown" style="display:none">
-	    <h2 style="color:#f00"><i class="icon-warning-sign"></i> Emergency Shutdown</h2>
-	    <section>
-	    <a href="#" class="pushbutton on" id="button"><i class="icon-off"></i></a>
-	    <span class="led"></span>
-	    </section>
-	    <p style="color:#F60">WARNING: This operation will deactivate all systems on the robot. Sudden deactivation may cause damage to the robot and objects near by.</p>
-    </div>
-
     <div class="row">
+    
+        <div data-alert id="camError" class="alert-box warning hide">
+            Camera input is unavailable.
+            <a href="#" class="close">&times;</a>
+        </div>
+        
+        <div data-alert id="apiError" class="alert-box warning hide">
+            Arduino api is unavailable.
+            <a href="#" class="close">&times;</a>
+        </div>
+        
+        <div data-alert id="shutdown" class="alert-box shutdown hide">
+	        <h2 style="color:#f00"><i class="icon-warning-sign"></i> Emergency Shutdown</h2>
+	        <section>
+	        <a href="#" class="pushbutton on" id="button"><i class="icon-off"></i></a>
+	        <span class="led"></span>
+	        </section>
+	        <p style="color:#F60">WARNING: This operation will deactivate all systems on the robot.</p>
+        </div>
 
         <div class="large-3 columns">
             <div class="row collapse">
@@ -138,7 +132,7 @@
     </div>
     <div class="row">
         <div class="large-6 columns">
-            <input type="text" placeholder="Filter available sensors"/>
+            <input type="text" class="filter" style="display:none" placeholder="Filter available sensors"/>
             <table style="width:100%">
                 <thead>
                     <tr>
@@ -212,6 +206,7 @@ $.ajax({
         $.each(data, function(index, element) {
             $('.sensorValues').append('<tr><td>' + index + '</td><td>' + element + '</td></tr>');
         });
+        $(".filter").show();
     }
 }).error(function() {
     $("#apiError").show();
