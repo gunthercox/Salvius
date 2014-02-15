@@ -85,7 +85,7 @@ void jsonCmd(WebServer &server, WebServer::ConnectionType type, char *url_tail, 
   server << " }";
 }
 
-void outputPins(WebServer &server, WebServer::ConnectionType type, bool addControls = false)
+void outputPins(WebServer &server, WebServer::ConnectionType type)
 {
   P(htmlHead) =
     "<html>"
@@ -98,42 +98,7 @@ void outputPins(WebServer &server, WebServer::ConnectionType type, bool addContr
   server.httpSuccess();
   server.printP(htmlHead);
 
-  if (addControls)
-    server << "<form action='" PREFIX "/form' method='post'>";
-
-  server << "<h1>Digital Pins</h1><p>";
-
-  for (i = 0; i <= 9; ++i)
-  {
-    // ignore the pins we use to talk to the Ethernet chip
-    int val = digitalRead(i);
-    server << "Digital " << i << ": ";
-    if (addControls)
-    {
-      char pinName[4];
-      pinName[0] = 'd';
-      itoa(i, pinName + 1, 10);
-      server.radioButton(pinName, "1", "On", val);
-      server << " ";
-      server.radioButton(pinName, "0", "Off", !val);
-    }
-    else
-      server << (val ? "HIGH" : "LOW");
-
-    server << "<br/>";
-  }
-
-  server << "</p><h1>Analog Pins</h1><p>";
-  for (i = 0; i <= 5; ++i)
-  {
-    int val = analogRead(i);
-    server << "Analog " << i << ": " << val << "<br/>";
-  }
-
-  server << "</p>";
-
-  if (addControls)
-    server << "<input type='submit' value='Submit'/></form>";
+  server << "<h1>Static Page</h1><p>Webduino server is running!</p>";
   
   // ADDITIONAL OUTPUTS
   byte error, address;
@@ -168,8 +133,6 @@ void outputPins(WebServer &server, WebServer::ConnectionType type, bool addContr
   }
   if (nDevices == 0)
     server << "No I2C devices found";
-  else
-    server << "done";
 
   server << "</body></html>";
 }
@@ -204,7 +167,7 @@ void formCmd(WebServer &server, WebServer::ConnectionType type, char *url_tail, 
   }
   else
     // SETTING THE LAST PARAMETER TO FALSE WILL HIDE THE INPUT OPTIONS
-    outputPins(server, type, true);
+    outputPins(server, type);
 }
 
 void setup()
