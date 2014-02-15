@@ -43,7 +43,20 @@ void jsonCmd(WebServer &server, WebServer::ConnectionType type, char *url_tail, 
 {
   if (type == WebServer::POST)
   {
-    server.httpFail();
+    bool repeat;
+    char name[16], value[16];
+    do
+    {
+      repeat = server.readPOSTparam(name, 16, value, 16);
+      if (name[0] == 'd')
+      {
+        int pin = strtoul(name + 1, NULL, 10);
+        int val = strtoul(value, NULL, 10);
+        digitalWrite(pin, val);
+      }
+    } while (repeat);
+
+    server.httpSeeOther(PREFIX "/form");
     return;
   }
 
@@ -64,10 +77,11 @@ void jsonCmd(WebServer &server, WebServer::ConnectionType type, char *url_tail, 
   for (i = 0; i <= 5; ++i)
   {
     int val = analogRead(i);
-    server << "\"a" << i << "\": " << val;
-    if (i != 5)
-      server << ", ";
+    server << "\"a" << i << "\": " << val << ", "; 
   }
+  
+  // CUSTOM SENSOR OUTPUTS
+  server << "\"temperature" << "\": " << temperature_sensor(0);
   
   server << " }";
 }
@@ -121,26 +135,11 @@ void outputPins(WebServer &server, WebServer::ConnectionType type, bool addContr
 
   if (addControls)
     server << "<input type='submit' value='Submit'/></form>";
-
-  server << "</body></html>";
-}
-
-void outputI2c(WebServer &server, WebServer::ConnectionType type)
-{
+  
+  // ADDITIONAL OUTPUTS
   byte error, address;
-  int nDevices;
+  int nDevices = 0;
   
-    P(htmlHead) =
-    "<html>"
-    "<head>"
-    "<title>Arduino Web Server</title>"
-    "</head>"
-    "<body>";
-
-  server.httpSuccess();
-  server.printP(htmlHead);
-  
-  nDevices = 0;
   for(address = 1; address < 127; address++ ) 
   {
     // The i2c_scanner uses the return value of
@@ -172,10 +171,8 @@ void outputI2c(WebServer &server, WebServer::ConnectionType type)
     server << "No I2C devices found";
   else
     server << "done";
-    
-    server << "temperature";
-    server<< temperature_sensor(0);
-    
+
+  server << "</body></html>";
 }
 
 float temperature_sensor(int pin) {
@@ -211,11 +208,6 @@ void formCmd(WebServer &server, WebServer::ConnectionType type, char *url_tail, 
     outputPins(server, type, true);
 }
 
-void i2cCmd(WebServer &server, WebServer::ConnectionType type, char *url_tail, bool tail_complete)
-{
-    outputI2c(server, type);
-}
-
 void setup()
 {
   // set pins 0-8 for digital input
@@ -228,9 +220,8 @@ void setup()
 
   webserver.setDefaultCommand(&jsonCmd);
   webserver.addCommand("form", &formCmd);
-  webserver.addCommand("i2c", &i2cCmd);
   
-  // I2C Scanning
+  // I2C and Serial
   Wire.begin();
   Serial.begin(9600);
 }
@@ -240,6 +231,5 @@ void loop()
   // process incoming connections one at a time forever
   webserver.processConnection();
 
-  // start additional work here
-  //i2cCmd();
+  // start any additional work here
 }

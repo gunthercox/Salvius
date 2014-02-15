@@ -106,7 +106,6 @@
                             <a href="#"><i class="icon-cog"></i></a>
                             <ul class="dropdown">
                                 <li><a href="#shutdown"><i class="icon-off"></i> Shutdown</a></li>
-                                <li><a href="http://www.routerlogin.net"><i class="icon-external-link"></i> Router Login</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -146,6 +145,9 @@
             </table>
         </div>
     </div>
+    
+    <!-- for posting to api -->
+    <form action='http://192.168.1.177' method='post'><h1>Digital Pins</h1><p>Digital 0: <label><input type='radio' name='d0' value='1' /> On</label> <label><input type='radio' name='d0' value='0' checked /> Off</label><br/>Digital 1: <label><input type='radio' name='d1' value='1' /> On</label> <label><input type='radio' name='d1' value='0' checked /> Off</label><br/>Digital 2: <label><input type='radio' name='d2' value='1' checked /> On</label> <label><input type='radio' name='d2' value='0' /> Off</label><br/>Digital 3: <label><input type='radio' name='d3' value='1' checked /> On</label> <label><input type='radio' name='d3' value='0' /> Off</label><br/>Digital 4: <label><input type='radio' name='d4' value='1' /> On</label> <label><input type='radio' name='d4' value='0' checked /> Off</label><br/>Digital 5: <label><input type='radio' name='d5' value='1' /> On</label> <label><input type='radio' name='d5' value='0' checked /> Off</label><br/>Digital 6: <label><input type='radio' name='d6' value='1' /> On</label> <label><input type='radio' name='d6' value='0' checked /> Off</label><br/>Digital 7: <label><input type='radio' name='d7' value='1' /> On</label> <label><input type='radio' name='d7' value='0' checked /> Off</label><br/>Digital 8: <label><input type='radio' name='d8' value='1' /> On</label> <label><input type='radio' name='d8' value='0' checked /> Off</label><br/>Digital 9: <label><input type='radio' name='d9' value='1' /> On</label> <label><input type='radio' name='d9' value='0' checked /> Off</label><br/></p><h1>Analog Pins</h1><p>Analog 0: 485<br/>Analog 1: 363<br/>Analog 2: 291<br/>Analog 3: 254<br/>Analog 4: 222<br/>Analog 5: 226<br/></p><input type='submit' value='Submit'/></form>
 
 <script src="js/jquery.js"></script>
 <script src="js/foundation/foundation.js"></script>
