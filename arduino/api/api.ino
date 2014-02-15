@@ -56,7 +56,6 @@ void jsonCmd(WebServer &server, WebServer::ConnectionType type, char *url_tail, 
       }
     } while (repeat);
 
-    server.httpSeeOther(PREFIX "/form");
     return;
   }
 
