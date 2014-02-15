@@ -144,30 +144,15 @@
                 <tbody class="sensorValues">
                 </tbody>
             </table>
-            <div class="loading"></div>
         </div>
     </div>
 
 <script src="js/jquery.js"></script>
 <script src="js/foundation/foundation.js"></script>
 <script src="js/foundation/foundation.topbar.js"></script>
-<script src="js/jquery.spinner.js"></script>
 <script type="text/javascript">
-$(document).foundation();
 
-$('.loading').spinner({
-      sqr: 40,// The width/ height of the spinner
-      framerate : 10, // The number of frames per second,
-      rotation : 0, // The number of degrees the spinner should rotate per frame
-      spokeCount : 16, // The number of spokes in the spinner
-      spokeOffset : {
-        inner : 8, // The inner radius of the spinner in px
-        outer : 15 // The outer radius of the spinner in px
-      },
-      spokeWidth : 3, // The the width of each spoke in px
-      colour : '255,255,255', // Must be an RGB string
-      centered : true // Toggles auto centering of the spinner
-});
+$(document).foundation();
 
 // SETTINGS
 var camera_ip = "192.168.1.2";
