@@ -40,6 +40,17 @@
                 <button class="button prefix"><i class="icon-pencil"></i> Write</button>
             </div>
         </div>
+        <div class="row collapse">
+            <div class="small-4 columns">
+                <input type="text" id="key" placeholder="Key"/>
+            </div>
+            <div class="small-4 columns">
+                <input type="text" id="value" placeholder="Value"/>
+            </div>
+            <div class="small-4 columns">
+                <button id="post" class="button prefix"><i class="icon-rocket"></i> Post</button>
+            </div>
+        </div>
         
         <div class="row collapse">
             <form><fieldset>
@@ -220,17 +231,22 @@ $.ajax({
     $("#apiError").show();
 });
 
-var str = "d0=0";
-$.ajax({
-    type: "POST",
-    url: "http://192.168.1.177",
-    data: str,
-    contentType: "application/x-www-form-urlencoded; charset=utf-8",
-    success: function(e) {
-        // Currently, the post is going through, but the success function is failing
-        consoel.log("success");
-    }
+$("#post").click(function() {
+    var key = $("#key").val();
+    var value = $("#value").val();
+    var str = [key, value].join("=");
+    $.ajax({
+        type: "POST",
+        url: "http://192.168.1.177",
+        data: str,
+        contentType: "application/x-www-form-urlencoded; charset=utf-8",
+        success: function(e) {
+            // Currently, the post is going through, but the success function is failing
+            consoel.log("success");
+        }
+    });
 });
+
 </script>
 </body>
 </html>
