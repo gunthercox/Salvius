@@ -145,20 +145,6 @@
             </table>
         </div>
     </div>
-    
-    <!-- for posting to api -->
-    <form action='http://192.168.1.177' method='post'>    <p>
-    Digital 0: <label><input type='radio' name='d0' value='1' /> On</label><label><input type='radio' name='d0' value='0' checked /> Off</label><br/>
-    Digital 1: <label><input type='radio' name='d1' value='1' /> On</label> <label><input type='radio' name='d1' value='0' checked /> Off</label><br/>
-    Digital 2: <label><input type='radio' name='d2' value='1' checked /> On</label> <label><input type='radio' name='d2' value='0' /> Off</label><br/>
-    Digital 3: <label><input type='radio' name='d3' value='1' checked /> On</label> <label><input type='radio' name='d3' value='0' /> Off</label><br/>
-    Digital 4: <label><input type='radio' name='d4' value='1' /> On</label> <label><input type='radio' name='d4' value='0' checked /> Off</label><br/>
-    Digital 5: <label><input type='radio' name='d5' value='1' /> On</label> <label><input type='radio' name='d5' value='0' checked /> Off</label><br/>
-    Digital 6: <label><input type='radio' name='d6' value='1' /> On</label> <label><input type='radio' name='d6' value='0' checked /> Off</label><br/>
-    Digital 7: <label><input type='radio' name='d7' value='1' /> On</label> <label><input type='radio' name='d7' value='0' checked /> Off</label><br/>
-    Digital 8: <label><input type='radio' name='d8' value='1' /> On</label> <label><input type='radio' name='d8' value='0' checked /> Off</label><br/>
-    Digital 9: <label><input type='radio' name='d9' value='1' /> On</label> <label><input type='radio' name='d9' value='0' checked /> Off</label><br/></p>
-    <input type='submit' value='Submit'/></form>
 
 <script src="js/jquery.js"></script>
 <script src="js/foundation/foundation.js"></script>
@@ -234,10 +220,11 @@ $.ajax({
     $("#apiError").show();
 });
 
+var str = "d0=0";
 $.ajax({
     type: "POST",
     url: "http://192.168.1.177",
-    data: "d0=1",
+    data: str,
     contentType: "application/x-www-form-urlencoded; charset=utf-8",
     success: function(e) {
         // Currently, the post is going through, but the success function is failing

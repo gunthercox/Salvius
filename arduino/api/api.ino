@@ -185,7 +185,7 @@ void setup()
   
   // I2C and Serial
   Wire.begin();
-  Serial.begin(9600);
+  //Serial.begin();
 }
 
 void loop()
