@@ -16,13 +16,6 @@ int spead =500;//define the spead of motor
 //char letter[3] = {'A', 'B', 'C'};
 //text.toCharArray(letter, 3);
 
-// TEMP SENSOR
-/*int a;
- int del=1000; // duration between temperature readings
- float temperature;
- int B=3975; 
- float resistance;*/
-
 // GET A STRING FROM SERIAL PORT
 // SKIP THIS FOR NOW AND JUST USE THE FOLLOWING STRING
 String text = "abc";
@@ -106,11 +99,4 @@ void loop() {
   }
 
 }
-
-// SEND TEMPERATURE READING
-/*a=analogRead(0);
- resistance=(float)(1023-a)*10000/a; 
- temperature=1/(log(resistance/10000)/B+1/298.15)-273.15;
- delay(del);
- Serial.println(temperature);*/
 

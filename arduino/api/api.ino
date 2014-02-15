@@ -172,6 +172,19 @@ void outputI2c(WebServer &server, WebServer::ConnectionType type)
     server << "No I2C devices found";
   else
     server << "done";
+    
+    server << "temperature";
+    server<< temperature_sensor(0);
+    
+}
+
+float temperature_sensor(int pin) {
+  // READ GROVE I2C TEMPERATURE SENSOR
+  const int B=3975;
+  int a=analogRead(pin);
+  float resistance=(float)(1023-a)*10000/a;
+  float temperature=1/(log(resistance/10000)/B+1/298.15)-273.15;
+  return temperature;
 }
 
 void formCmd(WebServer &server, WebServer::ConnectionType type, char *url_tail, bool tail_complete)
@@ -194,17 +207,13 @@ void formCmd(WebServer &server, WebServer::ConnectionType type, char *url_tail, 
     server.httpSeeOther(PREFIX "/form");
   }
   else
+    // SETTING THE LAST PARAMETER TO FALSE WILL HIDE THE INPUT OPTIONS
     outputPins(server, type, true);
 }
 
 void i2cCmd(WebServer &server, WebServer::ConnectionType type, char *url_tail, bool tail_complete)
 {
     outputI2c(server, type);
-}
-
-void defaultCmd(WebServer &server, WebServer::ConnectionType type, char *url_tail, bool tail_complete)
-{
-  outputPins(server, type, false);  
 }
 
 void setup()
@@ -217,8 +226,7 @@ void setup()
   Ethernet.begin(mac, ip);
   webserver.begin();
 
-  webserver.setDefaultCommand(&defaultCmd);
-  webserver.addCommand("json", &jsonCmd);
+  webserver.setDefaultCommand(&jsonCmd);
   webserver.addCommand("form", &formCmd);
   webserver.addCommand("i2c", &i2cCmd);
   
