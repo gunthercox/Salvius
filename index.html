@@ -4,134 +4,135 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Interface</title>
+    <link rel="stylesheet" href="css/normalize.css" />
     <link rel="stylesheet" href="css/foundation.css" />
     <link rel="stylesheet" href="css/font-awesome.css"></link>
     <link rel="stylesheet" href="css/salvius.css"></link>
 </head>
 
 <body>
-
-    <nav class="top-bar" data-topbar>
-      <ul class="title-area">
-        <li class="name">
-          <h1><a href="#">Interface</a></h1>
-        </li>
-        <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
-      </ul>
-
-      <section class="top-bar-section">
-
-        <ul class="right">
-            <li>
-                <div class="progress success">
-                    <span class="meter" style="width: 80%"><label>80%</label></span>
-                </div>
-            </li>
-            <li class="has-dropdown">
-                <a href="#settings"><i class="icon-cog"></i></a>
-                <ul class="dropdown">
-                    <li><a href="#shutdown"><i class="icon-off"></i> Shutdown</a></li>
-                </ul>
-            </li>
-            <li class="divider"></li>
-            <li>
-                <a href="#"><i class="icon-question-sign"></i> Documentation</a>
-            </li>
-        </ul>
-
-        <ul class="left">
-            <li class="has-dropdown">
-                <a href="#"><i class="icon-wrench"></i> Configuration</a>
-                <ul class="dropdown">
-                    <li><label>Camera IP</label></li>
-                    <li class="has-form">
-                        <div class="row collapse">
-                            <div class="small-10 columns">
-                                <input type="text" placeholder="http://0.0.0.0">
-                            </div>
-                            <div class="small-2 columns">
-                                <a href="#" class="postfix button ok"><i class="icon-ok-sign"></i></a>
-                            </div>
-                        </div>
-                    </li>
-                    <li><label>Arduino IP</label></li>
-                    <li class="has-form">
-                        <div class="row collapse">
-                            <div class="small-10 columns">
-                                <input type="text" placeholder="http://0.0.0.0">
-                            </div>
-                            <div class="small-2 columns">
-                                <a href="#" class="postfix button ok"><i class="icon-ok-sign"></i></a>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <a href="http://www.routerlogin.net"><i class="icon-external-link"></i> Router Login</a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-      </section>
-    </nav>
-
-    <div class="row">
     
-        <div data-alert id="camError" class="alert-box warning hide">
-            Camera input is unavailable.
-            <a href="#" class="close">&times;</a>
-        </div>
-        
-        <div data-alert id="apiError" class="alert-box warning hide">
-            Arduino api is unavailable.
-            <a href="#" class="close">&times;</a>
-        </div>
-        
-        <div data-alert id="shutdown" class="alert-box shutdown hide">
-	        <h2 style="color:#f00"><i class="icon-warning-sign"></i> Emergency Shutdown</h2>
-	        <section>
-	        <a href="#" class="pushbutton on" id="button"><i class="icon-off"></i></a>
-	        <span class="led"></span>
-	        </section>
-	        <p style="color:#F60">WARNING: This operation will deactivate all systems on the robot.</p>
-        </div>
+    <div class="columns">&nbsp;</div>
+    
+    <div data-alert id="shutdown" class="alert-box shutdown hide">
+        <h2 style="color:#f00"><i class="icon-warning-sign"></i> Emergency Shutdown</h2>
+        <section>
+        <a href="#" class="pushbutton on" id="button"><i class="icon-off"></i></a>
+        <span class="led"></span>
+        </section>
+        <p style="color:#F60">WARNING: This operation will deactivate all systems on the robot.</p>
+    </div>
 
-        <div class="large-3 columns">
-            <div class="row collapse">
-                <div class="small-9 columns">
-                    <input type="text" placeholder="Text to Speech"/>
-                </div>
-                <div class="small-3 columns">
-                    <button class="button prefix"><i class="icon-bullhorn"></i> Say</button>
-                </div>
+    <div class="large-3 columns">
+        <div class="row collapse">
+            <div class="small-9 columns">
+                <input type="text" placeholder="Text to Speech"/>
             </div>
-            <div class="row collapse">
-                <div class="small-9 columns">
-                    <input type="text" placeholder="Text to Handwriting"/>
-                </div>
-                <div class="small-3 columns">
-                    <button class="button prefix"><i class="icon-pencil"></i> Write</button>
-                </div>
+            <div class="small-3 columns">
+                <button class="button prefix"><i class="icon-bullhorn"></i> Say</button>
             </div>
         </div>
+        <div class="row collapse">
+            <div class="small-9 columns">
+                <input type="text" placeholder="Text to Handwriting"/>
+            </div>
+            <div class="small-3 columns">
+                <button class="button prefix"><i class="icon-pencil"></i> Write</button>
+            </div>
+        </div>
+        
+        <div class="row collapse">
+            <form><fieldset>
+                <legend>Configuration</legend>
 
-        <div class="large-6 columns">
+                <label>Camera IP
+                <div class="row collapse">
+                    <div class="small-2 columns">
+                        <span class="prefix">http://</span>
+                    </div>
+                    <div class="small-8 columns">
+                        <input type="text" placeholder="0.0.0.0">
+                    </div>
+                    <div class="small-2 columns">
+                        <a href="#" class="postfix button ok"><i class="icon-ok-sign"></i></a>
+                    </div>
+                </div>
+                </label>
+                <label>Arduino IP
+                <div class="row collapse">
+                    <div class="small-2 columns">
+                        <span class="prefix">http://</span>
+                    </div>
+                    <div class="small-8 columns">
+                        <input type="text" placeholder="0.0.0.0">
+                    </div>
+                    <div class="small-2 columns">
+                        <a href="#" class="postfix button ok"><i class="icon-ok-sign"></i></a>
+                    </div>
+                </div>
+                </label>
+            </fieldset></form>
+        </div>
+        
+    </div>
+
+    <div class="large-6 columns">
+        <div class="row collapse">
+            <nav class="top-bar" data-topbar>
+                <section class="top-bar-section">
+                    <ul class="left">
+                        <li class="has-dropdown">
+                            <a href="#"><i class="icon-wrench"></i></a>
+                            <ul class="dropdown">
+                                <li><a href="#configuration"><i class="icon-wrench"></i> Configuration</a></li>
+                                <li><a href="http://www.routerlogin.net"><i class="icon-external-link"></i> Router Login</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="right">
+                        <li class="has-dropdown">
+                            <a href="#" class="warnings"><i class="icon-warning-sign"></i></a>
+                            <ul class="dropdown">
+                                <li id="camError" class="hide">
+                                    <a href="#">Camera input is unavailable.</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li id="apiError" class="hide">
+                                    <a href="#">Arduino api is unavailable.</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="has-dropdown">
+                            <a href="#"><i class="icon-cog"></i></a>
+                            <ul class="dropdown">
+                                <li><a href="#shutdown"><i class="icon-off"></i> Shutdown</a></li>
+                                <li><a href="http://www.routerlogin.net"><i class="icon-external-link"></i> Router Login</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+            </nav>
+        </div>
+        <div class="row collapse">
             <canvas id="cam" class="small-12"/>
             <div id="txt">0</div>
         </div>
-
-        <div class="large-3 columns">
-            <div class="row">
-                <button class="small button large-12 columns toggle"><i class="icon-lightbulb"></i> Infrared</button>
-            </div>
-            <div class="row">
-                <button class="small button small-6 columns toggle"><i class="icon-male"></i> Stand Up</button>
-                <button class="small button small-6 columns toggle"><i class="icon-male icon-rotate-270"></i> Sit Down</button>
+        <div class="row collapse">
+            <div class="large-12 columns">
+                <button class="button small-2 columns"><i class="icon-rotate-left"></i></button>
+                <button class="button small-2 columns"><i class="icon-chevron-sign-left"></i></button>
+                
+                <button class="button small-2 columns"><i class="icon-chevron-sign-up"></i></button>
+                <button class="button small-2 columns"><i class="icon-chevron-sign-down"></i></button>
+                
+                <button class="button small-2 columns"><i class="icon-chevron-sign-right"></i></button>
+                <button class="button small-2 columns"><i class="icon-rotate-right"></i></button>
             </div>
         </div>
-
     </div>
-    <div class="row">
-        <div class="large-6 columns">
+
+    <div class="large-3 columns">
+        <div class="row collapse">
             <input type="text" class="filter" style="display:none" placeholder="Filter available sensors"/>
             <table style="width:100%">
                 <thead>
@@ -143,15 +144,27 @@
                 <tbody class="sensorValues">
                 </tbody>
             </table>
+            <div class="loading"></div>
         </div>
     </div>
 
-<script src="./js/jquery.js"></script>
-<script src="js/foundation/modernizr.js"></script>
-<script src="js/foundation/foundation.js"></script>
+<script src="js/jquery.js"></script>
 <script src="js/foundation/foundation.topbar.js"></script>
+<script src="js/jquery.spinner.js"></script>
 <script type="text/javascript">
-$(document).foundation();
+$('.loading').spinner({
+      sqr: 40,// The width/ height of the spinner
+      framerate : 10, // The number of frames per second,
+      rotation : 0, // The number of degrees the spinner should rotate per frame
+      spokeCount : 16, // The number of spokes in the spinner
+      spokeOffset : {
+        inner : 8, // The inner radius of the spinner in px
+        outer : 15 // The outer radius of the spinner in px
+      },
+      spokeWidth : 3, // The the width of each spoke in px
+      colour : '255,255,255', // Must be an RGB string
+      centered : true // Toggles auto centering of the spinner
+});
 
 var cameraImage = "http://192.168.1.2/image.jpg";
 var arduinoJson = "http://192.168.1.177/json";
@@ -160,9 +173,14 @@ var iUpdateMs = 100;
 var count = 0;
 var newImg;
 
+function error() {
+$(".warnings").css("color", "#f08a24");
+};
+
 $.get(cameraImage, function(data) {
     setTimeout("imageupdate()", iUpdateMs );
 }).error(function() {
+    error();
     $("#camError").show();
 });
 
@@ -188,11 +206,6 @@ function imageLoaded() {
 	setTimeout("imageupdate()", iUpdateMs);
 }
 
-// Hide alerts on click
-$(".alert-box").click(function() {
-    $(this).fadeOut();
-});
-
 $('a[href="#shutdown"]').click(function() {
     $("#shutdown").show();
 });
@@ -209,6 +222,7 @@ $.ajax({
         $(".filter").show();
     }
 }).error(function() {
+    error();
     $("#apiError").show();
 });
 </script>
