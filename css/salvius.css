@@ -10,6 +10,11 @@ display: none;
 text-align: center;
 }
 
+.scroll-table {
+max-height: 360px;
+overflow-y: scroll;
+}
+
 .shutdown {
 	background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAAAAACMmsGiAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABdJREFUCB1jUlGRkWH6CQRMf//y8oJZAFUaCmUwcfODAAAAAElFTkSuQmCC');
 	text-align:center;
