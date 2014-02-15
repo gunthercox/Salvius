@@ -1,21 +1,11 @@
 /*
- * To use this demo,  enter one of the following USLs into your browser.
- * Replace "host" with the IP address assigned to the Arduino.
  *
  * http://host/
- * http://host/json
  *
  * This URL brings up a display of the values READ on digital pins 0-9
  * and analog pins 0-5.  This is done with a call to defaultCmd.
  * 
- * 
  * http://host/form
- *
- * This URL also brings up a display of the values READ on digital pins 0-9
- * and analog pins 0-5.  But it's done as a form,  by the "formCmd" function,
- * and the digital pins are shown as radio buttons you can change.
- * When you click the "Submit" button,  it does a POST that sets the
- * digital pins,  re-reads them,  and re-displays the form.
  * 
  */
 
@@ -31,8 +21,6 @@
 template<class T>
 inline Print &operator <<(Print &obj, T arg)
 { obj.print(arg); return obj; }
-
-#define PREFIX ""
 
 WebServer webserver(PREFIX, 80);
 
@@ -53,6 +41,11 @@ void jsonCmd(WebServer &server, WebServer::ConnectionType type, char *url_tail, 
         int pin = strtoul(name + 1, NULL, 10);
         int val = strtoul(value, NULL, 10);
         digitalWrite(pin, val);
+      }
+      // If this is a speech item
+      if (String(name).equals("say")) {
+        // CURRENTLY JUST A TEST TO PRINT THE VALUE TO SERIAL
+        Serial.println(String(value));
       }
     } while (repeat);
 
@@ -166,7 +159,6 @@ void formCmd(WebServer &server, WebServer::ConnectionType type, char *url_tail, 
     server.httpSeeOther(PREFIX "/form");
   }
   else
-    // SETTING THE LAST PARAMETER TO FALSE WILL HIDE THE INPUT OPTIONS
     outputPins(server, type);
 }
 
@@ -185,7 +177,7 @@ void setup()
   
   // I2C and Serial
   Wire.begin();
-  //Serial.begin();
+  Serial.begin(9600);
 }
 
 void loop()
