@@ -51,7 +51,7 @@
                         <span class="prefix">http://</span>
                     </div>
                     <div class="small-8 columns">
-                        <input type="text" placeholder="0.0.0.0">
+                        <input type="text" class="camera_ip" placeholder="0.0.0.0">
                     </div>
                     <div class="small-2 columns">
                         <a href="#" class="postfix button ok"><i class="icon-ok-sign"></i></a>
@@ -64,7 +64,7 @@
                         <span class="prefix">http://</span>
                     </div>
                     <div class="small-8 columns">
-                        <input type="text" placeholder="0.0.0.0">
+                        <input type="text" class="arduino_ip" placeholder="0.0.0.0">
                     </div>
                     <div class="small-2 columns">
                         <a href="#" class="postfix button ok"><i class="icon-ok-sign"></i></a>
@@ -169,15 +169,22 @@ $('.loading').spinner({
       centered : true // Toggles auto centering of the spinner
 });
 
-var cameraImage = "http://192.168.1.2/image.jpg";
-var arduinoJson = "http://192.168.1.177/json";
+// SETTINGS
+var camera_ip = "192.168.1.2";
+var arduino_ip = "192.168.1.177";
+
+$(".camera_ip").val(camera_ip);
+$(".arduino_ip").val(arduino_ip);
+
+var cameraImage = ["http://", camera_ip, "/image.jpg"].join("");
+var arduinoJson = ["http://", arduino_ip, "/json"].join("");
 
 var iUpdateMs = 100;
 var count = 0;
 var newImg;
 
 function error() {
-$(".warnings").css("color", "#f08a24");
+    $(".warnings").css("color", "#f08a24");
 };
 
 $.get(cameraImage, function(data) {
@@ -218,7 +225,7 @@ $.ajax({
     url: arduinoJson, 
     data: { get_param: 'value' }, 
     dataType: 'json',
-    success: function (data) { 
+    success: function (data) {
         $.each(data, function(index, element) {
             $('.sensorValues').append('<tr><td>' + index + '</td><td>' + element + '</td></tr>');
         });
