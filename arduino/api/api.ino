@@ -29,6 +29,10 @@ WebServer webserver(PREFIX, 80);
 
 void jsonCmd(WebServer &server, WebServer::ConnectionType type, char *url_tail, bool tail_complete)
 {
+  // NO PARAMETERS WERE USED ON THE FORM VERSION
+  //server.httpSuccess();
+  server.httpSuccess("application/json");
+  
   if (type == WebServer::POST)
   {
     bool repeat;
@@ -51,8 +55,6 @@ void jsonCmd(WebServer &server, WebServer::ConnectionType type, char *url_tail, 
 
     return;
   }
-
-  server.httpSuccess("application/json");
   
   if (type == WebServer::HEAD)
     return;
@@ -80,54 +82,54 @@ void jsonCmd(WebServer &server, WebServer::ConnectionType type, char *url_tail, 
 
 void outputPins(WebServer &server, WebServer::ConnectionType type)
 {
-  P(htmlHead) =
-    "<html>"
-    "<head>"
-    "<title>Arduino Web Server</title>"
-    "</head>"
-    "<body>";
-
-  int i;
-  server.httpSuccess();
-  server.printP(htmlHead);
-
-  server << "<h1>Static Page</h1><p>Webduino server is running!</p>";
+  // IF EMPTY BRACKETS ARE RETURNED, THEN THERE IS NO I2C DEVICES
   
-  // ADDITIONAL OUTPUTS
   byte error, address;
   int nDevices = 0;
+  nDevices = 0;
+
+  server.httpSuccess("application/json");
+  server << "{ ";
   
   for(address = 1; address < 127; address++ ) 
   {
-    // The i2c_scanner uses the return value of
-    // the Write.endTransmisstion to see if
-    // a device did acknowledge to the address.
+    /* The i2c_scanner uses the return value of 
+    the Write.endTransmisstion to see if
+    a device did acknowledge to the address.*/
+        
     Wire.beginTransmission(address);
-    error = Wire.endTransmission();
+        
+    /*
+    There is an issue with the arduino wire library in which
+    it will stop the code if an i2c device looses power.
+    This issue does not affect the prefrmance of this code if
+    there is no i2c devices connected.
+    http://forum.arduino.cc/index.php/topic,37822.0.html
+    */
+        
+    Serial.println("3");
 
     if (error == 0)
     {
-      server << "I2C device found at address 0x";
-      if (address<16) 
+      server << "\"i2c" << "\": " << "0x";
+      if (address<16) {
         server << "0";
-      server << address;
-      server << HEX;
-
+      }
+      server << address << HEX << ", ";
       nDevices++;
     }
-    else if (error==4) 
+    if (error==4) 
     {
-      server << "Unknow error at address 0x";
-      if (address<16) 
+      server << "\"error" << "\": " << "0x";
+      if (address<16) {
         server << "0";
-      server << address;
-      server << HEX;
+      }
+      server << address << HEX;
+      return;
     }    
   }
-  if (nDevices == 0)
-    server << "No I2C devices found";
 
-  server << "</body></html>";
+  server << " }";
 }
 
 float temperature_sensor(int pin) {
@@ -139,26 +141,8 @@ float temperature_sensor(int pin) {
   return temperature;
 }
 
-void formCmd(WebServer &server, WebServer::ConnectionType type, char *url_tail, bool tail_complete)
+void i2cCmd(WebServer &server, WebServer::ConnectionType type, char *url_tail, bool tail_complete)
 {
-  if (type == WebServer::POST)
-  {
-    bool repeat;
-    char name[16], value[16];
-    do
-    {
-      repeat = server.readPOSTparam(name, 16, value, 16);
-      if (name[0] == 'd')
-      {
-        int pin = strtoul(name + 1, NULL, 10);
-        int val = strtoul(value, NULL, 10);
-        digitalWrite(pin, val);
-      }
-    } while (repeat);
-
-    server.httpSeeOther(PREFIX "/form");
-  }
-  else
     outputPins(server, type);
 }
 
@@ -168,16 +152,20 @@ void setup()
   for (int i = 0; i <= 9; ++i)
     pinMode(i, INPUT);
   pinMode(9, OUTPUT);
+  //pin 10 - RESERVED FOR ETHERNET SHIELD
+  //pin 11 - RESERVED FOR ETHERNET SHIELD
+  //pin 12 - RESERVED FOR ETHERNET SHIELD
+  //pin 13 - RESERVED FOR ETHERNET SHIELD
 
   Ethernet.begin(mac, ip);
   webserver.begin();
 
   webserver.setDefaultCommand(&jsonCmd);
-  webserver.addCommand("form", &formCmd);
+  webserver.addCommand("i2c", &i2cCmd);
   
   // I2C and Serial
   Wire.begin();
-  Serial.begin(9600);
+  //Serial.begin(9600);
 }
 
 void loop()
