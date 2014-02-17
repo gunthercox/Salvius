@@ -52,7 +52,7 @@
             </div>
         </div>
         
-        <div class="row collapse">
+        <div id="configuration" class="row collapse hide">
             <form><fieldset>
                 <legend>Configuration</legend>
 
@@ -216,6 +216,9 @@ function imageLoaded() {
 $('a[href="#shutdown"]').click(function() {
     $("#shutdown").show();
 });
+$('a[href="#configuration"]').click(function() {
+    $("#configuration").show();
+});
 
 $.ajax({ 
     type: 'GET', 
@@ -242,10 +245,16 @@ $("#post").click(function() {
         url: "http://192.168.1.177",
         data: str,
         contentType: "application/x-www-form-urlencoded; charset=utf-8",
-        success: function(e) {
-            // Currently, the post is going through, but the success function is failing
-            consoel.log("success");
+        success: function(data) {
+            $("#key").val("");
+            $("#value").val("");
+            //TODO: UPDATE TABLE IF NEEDED
+            // if key in table table.key.val(key)
         }
+    }).error(function(error) {
+        /*APPEND: <li id="camError" class="hide" style="display: list-item;">
+            <a href="#">Camera input is unavailable.</a>
+        </li>*/
     });
 });
 

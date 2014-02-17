@@ -9,11 +9,10 @@
  * 
  */
 
-#include "SPI.h"
-#include "Ethernet.h"
-#include "WebServer.h"
+#include <SPI.h>
+#include <Ethernet.h>
 #include <Wire.h>
-
+#include "WebServer.h"
 #include "settings.h"
 
 // no-cost stream operator as described at 
@@ -24,14 +23,9 @@ inline Print &operator <<(Print &obj, T arg)
 
 WebServer webserver(PREFIX, 80);
 
-// commands are functions that get called by the webserver framework
-// they can read any posted data from client, and they output to server
-
 void jsonCmd(WebServer &server, WebServer::ConnectionType type, char *url_tail, bool tail_complete)
 {
-  // NO PARAMETERS WERE USED ON THE FORM VERSION
-  //server.httpSuccess();
-  server.httpSuccess("application/json");
+  server.httpSuccess();
   
   if (type == WebServer::POST)
   {
@@ -49,7 +43,9 @@ void jsonCmd(WebServer &server, WebServer::ConnectionType type, char *url_tail, 
       // If this is a speech item
       if (String(name).equals("say")) {
         // CURRENTLY JUST A TEST TO PRINT THE VALUE TO SERIAL
+        Serial.println("master:");
         Serial.println(String(value));
+        send_string(value, text_to_speech_i2c_address);
       }
     } while (repeat);
 
@@ -106,9 +102,7 @@ void outputPins(WebServer &server, WebServer::ConnectionType type)
     there is no i2c devices connected.
     http://forum.arduino.cc/index.php/topic,37822.0.html
     */
-        
-    Serial.println("3");
-
+    
     if (error == 0)
     {
       server << "\"i2c" << "\": " << "0x";
@@ -141,6 +135,16 @@ float temperature_sensor(int pin) {
   return temperature;
 }
 
+void send_string(char string[], int address) {
+ /*
+ Send a string to an i2c address.
+ */
+ Wire.beginTransmission(address);
+ Wire.write(string);
+ Serial.println("String: " + String(string));
+ Wire.endTransmission();
+}
+
 void i2cCmd(WebServer &server, WebServer::ConnectionType type, char *url_tail, bool tail_complete)
 {
     outputPins(server, type);
@@ -165,7 +169,8 @@ void setup()
   
   // I2C and Serial
   Wire.begin();
-  //Serial.begin(9600);
+  Serial.begin(9600);
+  Serial.println("master online");
 }
 
 void loop()
