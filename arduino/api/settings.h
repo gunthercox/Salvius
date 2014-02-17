@@ -7,6 +7,8 @@ static uint8_t ip[] = { 192, 168, 1, 177 };
 // USED FOR WEB SERVER
 #define PREFIX ""
 
+const int text_to_speech_i2c_address = 4;
+
 // NOTES FOR LATER
 //int relayPin1 = 4; // relay connected to digital pin 4 (D3 on relay shield - on switch)
 //int relayPin2 = 7; // relay connected to digital pin 5 (D2 on relay shield) - Inferred LEDs
