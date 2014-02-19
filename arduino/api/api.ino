@@ -5,7 +5,7 @@
  * This URL brings up a display of the values READ on digital pins 0-9
  * and analog pins 0-5.  This is done with a call to defaultCmd.
  * 
- * http://host/form
+ * http://host/json
  * 
  */
 
