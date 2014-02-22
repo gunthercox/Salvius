@@ -10,32 +10,33 @@
 #include <Wire.h>
 #include "TTS.h"
 
-// digital pin 13
-#define ledPin 13
-
 char text [50];
-boolean state = 0;
+
+// String to store text which needs to be spoken
+String buffer = "";
 
 // speech output is digital pin 10
 TTS text2speech;
 
-void Test_Speech() {
+void Test_Speech(char input []) {
   // higher values = lower voice pitch
   text2speech.setPitch(16);
   
-  strcpy(text, "This is a test how are you doing I am a robot");
+  strcpy(text, input);
   text2speech.say(text);
 }
 
-// function that executes whenever data is received from master
-// this function is registered as an event, see setup()
-void receiveEvent(int howMany) {
-  String x = String(Wire.read());    // receive byte as an integer
-    Serial.println(x);
+// This event function executes whenever data is received from master
+void receiveEvent(int byteCount) {
+  while(Wire.available())
+  {
+    // receive a byte as character
+    char c = Wire.read();
+    buffer += c;
+  }
 }
 
 void setup() {
-  pinMode(ledPin, OUTPUT);
   
   Serial.begin(9600);
   Serial.println("Slave online");
@@ -49,21 +50,22 @@ void setup() {
 
 void loop() {
   
-  // slave may send less than requested
-  while(Wire.available())
-  {
-    // receive a byte as character
-    char c = Wire.read();
-    Serial.print(c);
-    delay(1000);
-  }
-  
   while(Wire.available() == false)
   {
-  state = !state;
-  digitalWrite(ledPin, state);
-  Test_Speech();
-  delay(1000);
+  
+  Serial.print(buffer);
+    if (buffer != "") {
+      // Convert string to char array
+      char item[50];
+      buffer.toCharArray(item, 50);
+      
+      Test_Speech(item);
+      
+      // The text has been spoken so clear the buffer
+      buffer = "";
+    }
   }
+  
+  delay(1000);
 }
 
