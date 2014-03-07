@@ -29,7 +29,7 @@
                 <input type="text" placeholder="Text to Speech"/>
             </div>
             <div class="small-3 columns">
-                <button class="button prefix"><i class="icon-bullhorn"></i> Say</button>
+                <button id="say" class="button prefix"><i class="icon-bullhorn"></i> Say</button>
             </div>
         </div>
         <div class="row collapse">
@@ -37,7 +37,7 @@
                 <input type="text" placeholder="Text to Handwriting"/>
             </div>
             <div class="small-3 columns">
-                <button class="button prefix"><i class="icon-pencil"></i> Write</button>
+                <button id="write" class="button prefix"><i class="icon-pencil"></i> Write</button>
             </div>
         </div>
         <div class="row collapse">
@@ -96,14 +96,14 @@
                             <a href="#"><i class="icon-wrench"></i></a>
                             <ul class="dropdown">
                                 <li><a href="#configuration"><i class="icon-wrench"></i> Configuration</a></li>
-                                <li><a href="http://www.routerlogin.net"><i class="icon-external-link"></i> Router Login</a></li>
+                                <li><a href="http://www.routerlogin.net" target="_blank"><i class="icon-external-link"></i> Router Login</a></li>
                             </ul>
                         </li>
                     </ul>
                     <ul class="right">
                         <li class="has-dropdown">
                             <a href="#" class="warnings"><i class="icon-warning-sign"></i></a>
-                            <ul class="dropdown">
+                            <ul class="dropdown error-list">
                                 <li id="camError" class="hide">
                                     <a href="#">Camera input is unavailable.</a>
                                 </li>
@@ -176,50 +176,57 @@ $(".arduino_ip").val(arduino_ip);
 var cameraImage = ["http://", camera_ip, "/image.jpg"].join("");
 var arduinoJson = ["http://", arduino_ip].join("");
 
-var iUpdateMs = 100;
+function error() {
+    // TODO: LOOK INTO EXTENDING THE JQUERY ERROR HANDLER
+    // ALSO, THIS SHOULD CHANGE THE COLOR BACK WHEN THERE ARE NO MORE ERRORS
+    // WHICH REMINDS ME, I NEED TO AUTOMATICALLY RETRY IF A GET FAILS
+    // I WOULD LOVE TO PIPE CONSOLE ERRORS INTO THIS FIELD
+    //$(".warnings").css("color", "#f08a24");
+};
+
+(function($) {
+    $(".warnings").css("color", "#f08a24");
+    // maintain a to the existing function
+    var olderror = $.fn.error;
+    // ...before overwriting the jQuery extension point
+    $.fn.error = function() {
+        // original behavior - use function.apply to preserve context
+        var ret = olderror.apply(this, arguments);
+
+        // stuff I will be extending
+        // that doesn't affect/change
+        // the way .css() works
+        
+
+        // preserve return value (probably the jQuery object...)
+        return ret;
+    };
+})(jQuery);
+
+/* CANVIS CODE FROM http://dwdii.github.io/2011/10/23/Using-HTML5-Canvas-tag-for-Simple-Video-Animation.html
+Known issue: http://stackoverflow.com/questions/13674835/canvas-tainted-by-cross-origin-data */
+var imageUpdateMs = 1;
 var count = 0;
 var newImg;
 
-function error() {
-    $(".warnings").css("color", "#f08a24");
-};
+setTimeout("imageUpdate()", imageUpdateMs );
 
-$.get(cameraImage, function(data) {
-    setTimeout("imageupdate()", iUpdateMs );
-}).error(function() {
-    error();
-    $("#camError").show();
-});
-
-function imageupdate() {
+function imageUpdate() {
 	document.getElementById("txt").innerHTML = count++;
 
 	newImg = new Image();
-	newImg.Id = "camimg" + count;
+	newImg.Id = "cam" + count;
 	newImg.Name = newImg.Id;
 	newImg.onload = imageLoaded;
-	newImg.src = cameraImage + "?u=" + count;
+	newImg.src = cameraImage;
 }
 
 function imageLoaded() {
-	var drawingCanvas = document.getElementById("cam");
-
-	// Check if the browser supports canvas
-	if(drawingCanvas.getContext) {
-		var context = drawingCanvas.getContext("2d");
-		context.drawImage(newImg,0,0,640,480,0,0,300,150);
-	}
-
-	setTimeout("imageupdate()", iUpdateMs);
+	var context = $("#cam")[0].getContext('2d');
+	context.drawImage(newImg,0,0,640,480,0,0,300,150);
+	setTimeout("imageUpdate()", imageUpdateMs);
 }
-
-$('a[href="#shutdown"]').click(function() {
-    $("#shutdown").show();
-});
-$('a[href="#configuration"]').click(function() {
-    $("#configuration").show();
-});
-
+ 		
 $.ajax({ 
     type: 'GET', 
     url: arduinoJson, 
@@ -236,26 +243,56 @@ $.ajax({
     $("#apiError").show();
 });
 
+$('a[href="#shutdown"]').click(function() {
+    $("#shutdown").show();
+});
+
+$('a[href="#configuration"]').click(function() {
+    $("#configuration").show();
+});
+
 $("#post").click(function() {
     var key = $("#key").val();
     var value = $("#value").val();
     var str = [key, value].join("=");
     $.ajax({
         type: "POST",
-        url: "http://192.168.1.177",
+        url: "http://"+arduino_ip,
         data: str,
         contentType: "application/x-www-form-urlencoded; charset=utf-8",
         success: function(data) {
             $("#key").val("");
             $("#value").val("");
-            //TODO: UPDATE TABLE IF NEEDED
+            //TODO: UPDATE TABLE IF NEEDED WHEN POSTING Dx
             // if key in table table.key.val(key)
         }
-    }).error(function(error) {
-        /*APPEND: <li id="camError" class="hide" style="display: list-item;">
-            <a href="#">Camera input is unavailable.</a>
-        </li>*/
+    }).error(function(data) {
+        $(".error-list").append("<li style='display:list-item'>" +
+          "<a href='#'>Failure to post data</a></li>");
     });
+});
+
+$("#say").click(function() {
+    var key = "say";
+    var value = $("#value").val();
+    var str = [key, value].join("=");
+    $.ajax({
+        type: "POST",
+        url: "http://"+arduino_ip,
+        data: str,
+        contentType: "application/x-www-form-urlencoded; charset=utf-8",
+        success: function(data) {
+            $("#key").val("");
+            $("#value").val("");
+        }
+    }).error(function(data) {
+        $(".error-list").append("<li style='display:list-item'>" +
+          "<a href='#'>Failure to post data</a></li>");
+    });
+});
+
+$("#write").click(function() {
+    console.log("Write button not implemented");
 });
 
 </script>
