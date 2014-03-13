@@ -1,0 +1,6 @@
+Hows it going?
+Good day to you.
+Greetings fellow robot.
+base64.b64decode("aGVsbG8=")
+0110100001100101011011000110110001101111
+I need help opening a jar. Do you have a copy of Java I can borrow?
