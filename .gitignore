@@ -1,5 +1,9 @@
 *.class
 
+# Python
+*.pyc
+settings.py
+
 # Eclipse
 *.tree
 *.index
