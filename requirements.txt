@@ -1,0 +1,4 @@
+flask
+flask-restful
+pySerial
+RPi.GPIO
