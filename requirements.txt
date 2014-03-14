@@ -2,3 +2,4 @@ flask
 flask-restful
 pySerial
 RPi.GPIO
+twitter==1.14.1
