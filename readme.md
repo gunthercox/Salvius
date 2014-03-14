@@ -15,11 +15,12 @@ For additional details visit [salviusrobot.blogspot.com](http://salviusrobot.blo
 **Key features:** 
   - Web based user interface
   - RESTfull API
+  - Modular design makes it easy to add controllers via I2C
 
 ## Setup
 Installing this software on your robot should be easy. Once you have downloaded the latest copy into a directory on your Rapsberry Pi, you can download and configure the robot's api and interface by running the following three lines of code.
 ```
-sudo apt-get install pip
+apt-get install pip
 pip install -r requirements.txt
 chmod a+x app.py
 ```
@@ -40,7 +41,7 @@ TOKEN = ""
 TOKEN_SECRET = ""
 ```
 
-## License:
+## License
 This work is licensed MIT free by Gunther Cox
 
 This project has been made possible with funding from the following sources:
