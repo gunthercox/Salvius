@@ -1,11 +1,13 @@
-
 #include "uspeech.h"
+
 #define led 13
+
 signal voice(A0);
 String collvoice;
 char prev;
 boolean newline=false;
 int sum = 0;
+
 void setup(){
   voice.f_enabled = true;
   voice.minVolume = 1500;
