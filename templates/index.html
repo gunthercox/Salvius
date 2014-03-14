@@ -15,9 +15,9 @@
     <div class="columns">&nbsp;</div>
     
     <div data-alert id="shutdown" class="alert-box shutdown hide">
-        <h2 style="color:#f00"><i class="icon-warning-sign"></i> Emergency Shutdown</h2>
+        <h2 style="color:#f00">Emergency Shutdown</h2>
         <section>
-        <a href="#" class="pushbutton on" id="button"><i class="icon-off"></i></a>
+        <a href="#" class="pushbutton on" id="button">&spades;</a>
         <span class="led"></span>
         </section>
         <p style="color:#F60">WARNING: This operation will deactivate all systems on the robot.</p>
@@ -29,7 +29,7 @@
                 <input type="text" placeholder="Text to Speech"/>
             </div>
             <div class="small-3 columns">
-                <button id="say" class="button prefix"><i class="icon-bullhorn"></i> Say</button>
+                <button id="say" class="button prefix">Say</button>
             </div>
         </div>
         <div class="row collapse">
@@ -37,7 +37,7 @@
                 <input type="text" placeholder="Text to Handwriting"/>
             </div>
             <div class="small-3 columns">
-                <button id="write" class="button prefix"><i class="icon-pencil"></i> Write</button>
+                <button id="write" class="button prefix">Write</button>
             </div>
         </div>
         <div class="row collapse">
@@ -48,7 +48,7 @@
                 <input type="text" id="value" placeholder="Value"/>
             </div>
             <div class="small-4 columns">
-                <button id="post" class="button prefix"><i class="icon-rocket"></i> Post</button>
+                <button id="post" class="button prefix">Post</button>
             </div>
         </div>
         
@@ -61,11 +61,8 @@
                     <div class="small-2 columns">
                         <span class="prefix">http://</span>
                     </div>
-                    <div class="small-8 columns">
+                    <div class="small-10 columns">
                         <input type="text" class="camera_ip" placeholder="0.0.0.0">
-                    </div>
-                    <div class="small-2 columns">
-                        <a href="#" class="postfix button ok"><i class="icon-ok-sign"></i></a>
                     </div>
                 </div>
                 </label>
@@ -74,11 +71,8 @@
                     <div class="small-2 columns">
                         <span class="prefix">http://</span>
                     </div>
-                    <div class="small-8 columns">
+                    <div class="small-10 columns">
                         <input type="text" class="arduino_ip" placeholder="0.0.0.0">
-                    </div>
-                    <div class="small-2 columns">
-                        <a href="#" class="postfix button ok"><i class="icon-ok-sign"></i></a>
                     </div>
                 </div>
                 </label>
@@ -93,16 +87,16 @@
                 <section class="top-bar-section">
                     <ul class="left">
                         <li class="has-dropdown">
-                            <a href="#"><i class="icon-wrench"></i></a>
+                            <a href="#">Settings</a>
                             <ul class="dropdown">
-                                <li><a href="#configuration"><i class="icon-wrench"></i> Configuration</a></li>
-                                <li><a href="http://www.routerlogin.net" target="_blank"><i class="icon-external-link"></i> Router Login</a></li>
+                                <li><a href="#configuration">Configuration</a></li>
+                                <li><a href="http://www.routerlogin.net" target="_blank">Router Login</a></li>
                             </ul>
                         </li>
                     </ul>
                     <ul class="right">
                         <li class="has-dropdown">
-                            <a href="#" class="warnings"><i class="icon-warning-sign"></i></a>
+                            <a href="#" class="warnings">&#9632;</a>
                             <ul class="dropdown error-list">
                                 <li id="camError" class="hide">
                                     <a href="#">Camera input is unavailable.</a>
@@ -114,9 +108,9 @@
                             </ul>
                         </li>
                         <li class="has-dropdown">
-                            <a href="#"><i class="icon-cog"></i></a>
+                            <a href="#">Options</a>
                             <ul class="dropdown">
-                                <li><a href="#shutdown"><i class="icon-off"></i> Shutdown</a></li>
+                                <li><a href="#shutdown">Shutdown</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -129,14 +123,14 @@
         </div>
         <div class="row collapse">
             <div class="large-12 columns">
-                <button class="button small-2 columns"><i class="icon-rotate-left"></i></button>
-                <button class="button small-2 columns"><i class="icon-chevron-sign-left"></i></button>
+                <button class="button small-2 columns rotate-left">&#8592;</button>
+                <button class="button small-2 columns tilt-left">&#8601;</button>
                 
-                <button class="button small-2 columns"><i class="icon-chevron-sign-up"></i></button>
-                <button class="button small-2 columns"><i class="icon-chevron-sign-down"></i></button>
+                <button class="button small-2 columns tilt-up">&#8593;</button>
+                <button class="button small-2 columns tilt-down">&#8595;</button>
                 
-                <button class="button small-2 columns"><i class="icon-chevron-sign-right"></i></button>
-                <button class="button small-2 columns"><i class="icon-rotate-right"></i></button>
+                <button class="button small-2 columns tilt-right">&#8600;</button>
+                <button class="button small-2 columns rotate-right">&#8594;</button>
             </div>
         </div>
     </div>
@@ -149,7 +143,7 @@
             <table style="width:100%">
                 <thead>
                     <tr>
-                        <th class="center"><i class="icon-compass"></i> Sensor</th>
+                        <th class="center">Sensor</th>
                         <th class="center">Value</th>
                     </tr>
                 </thead>
