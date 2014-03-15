@@ -3,14 +3,11 @@
 #define led 13
 
 signal voice(A0);
-String collvoice;
 char prev;
-boolean newline=false;
-int sum = 0;
 
 void setup(){
   voice.f_enabled = true;
-  voice.minVolume = 1500;
+  voice.minVolume = 1000;
   voice.fconstant = 400;
   voice.econstant = 1;
   voice.aconstant = 2;
@@ -30,18 +27,11 @@ void loop(){
     }
       
     if(p!=' ') {
-      if((p=='e')) {
-          newline = false;
+      if((p=='v')) {
+          digitalWrite(led, HIGH);
       } else {
           
-          newline = true;
-      }
-    } else {
-      if(newline) {
-        digitalWrite(led, LOW);
-      }
-      else {
-        digitalWrite(led, HIGH);
+          digitalWrite(led, LOW);
       }
     }
     prev = p;
