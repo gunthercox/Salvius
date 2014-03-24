@@ -1,7 +1,8 @@
 Salvius
 =========
 
-This repository contains the source code for Salvius, a robot who uses a Rapsberry Pi and several Arduino microcontrollers as a brain.
+This repository contains the source code for Salvius, a robot who uses a 
+Rapsberry Pi and several Arduino microcontrollers as a brain.
 
 > Salvius is a robot made out of recycled materials
 > and designed to be able to perform a wide range of
@@ -18,7 +19,10 @@ For additional details visit [salviusrobot.blogspot.com](http://salviusrobot.blo
   - Modular design makes it easy to add controllers via I2C
 
 ## Setup
-Installing this software on your robot should be easy. Once you have downloaded the latest copy into a directory on your Rapsberry Pi, you can download and configure the robot's api and interface by running the following three lines of code.
+Installing this software on your robot should be easy. Once you have downloaded 
+the latest copy into a directory on your Rapsberry Pi, you can download and 
+configure the robot's api and interface by running the following three lines of code.
+
 ```
 apt-get install pip
 pip install -r requirements.txt
@@ -31,22 +35,49 @@ python app.py runserver
 ```
 
 ## Features
-I've included a package which allows the robot to tweet randomly selected messages to Twitter accounts. For now the robot cannot reply to tweets, however I have plans to add this feature soon.
-If you want to use this program you will need to register your app on https://dev.twitter.com/apps to get the token and secret keys. You will then need to create a file ```settings.py``` in the ```twitter``` directory with the following variables pointing to your Twitter keys and tokens.
+I've included a package which allows the robot to tweet randomly selected 
+messages to Twitter accounts. For now the robot cannot reply to users, however 
+I have plans to add this feature. To use this feature you will need to register 
+your app on https://dev.twitter.com/apps to get the token and secret keys. 
+You will then need to create a file ```settings.py``` in the ```twitter``` 
+directory with the following dictionary pointing to your Twitter keys and tokens.
 
 ```
-CONSUMER_KEY = ""
-CONSUMER_SECRET = ""
-TOKEN = ""
-TOKEN_SECRET = ""
+# Set DEBUG flag to true for testing
+DEBUG = True
+
+# Twitter api
+TWITTER = {
+    'CONSUMER_KEY': '',
+    'CONSUMER_SECRET': '',
+    'TOKEN': '',
+    'TOKEN_SECRET': ''
+}
 ```
 
 ## License
-This work is licensed MIT free by Gunther Cox
+The MIT License (MIT)
+
+Copyright (c) 2014 Gunther Cox
 
 This project has been made possible with funding from the following sources:
-Jennifer Cox, Adam Iredale, Janet Wise, Glen Zenor, Boris Hofer, Señora Alderperson, Wilbraham Music (Chris Cox), June Cox, Rantz, Yuri Yerofeyev
+Jennifer Cox, Adam Iredale, Janet Wise, Glen Zenor, Boris Hofer, 
+Señora Alderperson, Wilbraham Music (Chris Cox), June Cox, Rantz, Yuri Yerofeyev
 
-_The characteristics and/or functions of the robot are subject to changes without prior notice._
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
