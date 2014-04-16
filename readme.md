@@ -1,6 +1,8 @@
 Salvius
 =========
 
+[![Build Status](https://travis-ci.org/gunthercox/salvius.svg?branch=master)](https://travis-ci.org/gunthercox/salvius)
+
 This repository contains the source code for Salvius, a robot who uses a 
 Rapsberry Pi and several Arduino microcontrollers as a brain.
 
@@ -35,6 +37,15 @@ python app.py runserver
 ```
 
 ## Features
+
+### Text to speech
+The robot uses a speech synthesis library to convert processed text into verbal sounds.
+Checkout the repo for this library here: https://github.com/jscrane/TTS
+
+### Speech recognition
+This is still a bit of a work in progress, at best a few small words can be recognised.
+
+### Communication experiment
 I've included a package which allows the robot to tweet randomly selected 
 messages to Twitter accounts. For now the robot cannot reply to users, however 
 I have plans to add this feature. To use this feature you will need to register 
@@ -63,6 +74,8 @@ Copyright (c) 2014 Gunther Cox
 This project has been made possible with funding from the following sources:
 Jennifer Cox, Adam Iredale, Janet Wise, Glen Zenor, Boris Hofer, 
 Señora Alderperson, Wilbraham Music (Chris Cox), June Cox, Rantz, Yuri Yerofeyev
+
+See http://salviusrobot.blogspot.com/2012/12/support-salvius.html for more information.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
