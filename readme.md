@@ -1,8 +1,6 @@
-#Salvius
+#Salvius [![Build Status](https://travis-ci.org/gunthercox/salvius.svg?branch=master)](https://travis-ci.org/gunthercox/salvius)
 
 ![Project photos](http://i.imgur.com/4sXpuA4.png)
-
-[![Build Status](https://travis-ci.org/gunthercox/salvius.svg?branch=master)](https://travis-ci.org/gunthercox/salvius)
 
 This repository contains the source code for Salvius, a robot who uses a 
 Rapsberry Pi and several Arduino microcontrollers as a brain.
