@@ -44,6 +44,12 @@ Checkout the repo for this library here: https://github.com/jscrane/TTS
 ### Speech recognition
 This is still a bit of a work in progress, at best a few small words can be recognised.
 
+### Handwriting
+
+The robot can hold a pen and write when given a string of text.
+The robot's handwriting is based on a grid in which each letter is created as a result
+of horizontal and vertical lines.
+
 ### Communication experiment
 I've included a package which allows the robot to tweet randomly selected 
 messages to Twitter accounts. For now the robot cannot reply to users, however 
