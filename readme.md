@@ -1,7 +1,6 @@
-Salvius
-=========
+#Salvius [![Build Status](https://travis-ci.org/gunthercox/salvius.svg?branch=master)](https://travis-ci.org/gunthercox/salvius)
 
-[![Build Status](https://travis-ci.org/gunthercox/salvius.svg?branch=master)](https://travis-ci.org/gunthercox/salvius)
+![Project photos](http://i.imgur.com/4sXpuA4.png)
 
 This repository contains the source code for Salvius, a robot who uses a 
 Rapsberry Pi and several Arduino microcontrollers as a brain.
@@ -45,6 +44,12 @@ Checkout the repo for this library here: https://github.com/jscrane/TTS
 ### Speech recognition
 This is still a bit of a work in progress, at best a few small words can be recognised.
 
+### Handwriting
+
+The robot can hold a pen and write when given a string of text.
+The robot's handwriting is based on a grid in which each letter is created as a result
+of horizontal and vertical lines.
+
 ### Communication experiment
 I've included a package which allows the robot to tweet randomly selected 
 messages to Twitter accounts. For now the robot cannot reply to users, however 
@@ -66,31 +71,10 @@ TWITTER = {
 }
 ```
 
-## License
-The MIT License (MIT)
-
-Copyright (c) 2014 Gunther Cox
+## Contributors
 
 This project has been made possible with funding from the following sources:
 Jennifer Cox, Adam Iredale, Janet Wise, Glen Zenor, Boris Hofer, 
 Señora Alderperson, Wilbraham Music (Chris Cox), June Cox, Rantz, Yuri Yerofeyev
 
 See http://salviusrobot.blogspot.com/2012/12/support-salvius.html for more information.
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
