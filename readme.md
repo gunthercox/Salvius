@@ -1,5 +1,6 @@
-Salvius
-=========
+#Salvius
+
+![Project photos](http://i.imgur.com/4sXpuA4.png)
 
 [![Build Status](https://travis-ci.org/gunthercox/salvius.svg?branch=master)](https://travis-ci.org/gunthercox/salvius)
 
