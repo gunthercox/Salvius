@@ -3,6 +3,17 @@ from flask.ext.restful import reqparse, abort, Api, Resource
 from os.path import join
 import serial
 
+gpio_available = True
+
+try:
+    import RPi.GPIO as GPIO
+except RuntimeError:
+    '''            
+    A RuntimeError is returned if the current device does
+    not have GPIO pins.
+    '''
+    gpio_available = False
+
 app = Flask(__name__)
 api = Api(app)
 
@@ -47,23 +58,18 @@ class PiPins(Resource):
 
     def __init__(self):
         super(PiPins, self).__init__()
-        self.active = True
-        try:
-            import RPi.GPIO as GPIO
-        except ImportError:
-            self.active = False
 
     def pin_data(self, pin):
         GPIO.setmode(GPIO.BOARD)
         funcion = GPIO.gpio_function(pin)
         return {'function' : function, 'state' : 'GPIO.LOW'}
 
-    def get(self):    
-        #if self.active == False:
+    def get(self):
+        if not gpio_available:
             # See "Fail fast"
-            #return {0 : 0}
-        
-        #GPIO.setmode(GPIO.BCM)
+            return {0 : 0}
+
+        GPIO.setmode(GPIO.BCM)
         
         pin_range = [24, 25]
         pins = {}
@@ -91,12 +97,12 @@ class App(Resource):
 
 @app.route('/js/<path:path>')
 def static_js(path):
-    # send_static_file will guess the correct MIME type
+    # send_static_file sets the correct MIME type
     return app.send_static_file(join('js', path))
 
 @app.route('/css/<path:path>')
 def static_css(path):
-    # send_static_file will guess the correct MIME type
+    # send_static_file sets the correct MIME type
     return app.send_static_file(join('css', path))
 
 # Setup the Api resource routing

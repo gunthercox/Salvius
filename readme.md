@@ -24,15 +24,36 @@ Installing this software on your robot should be easy. Once you have downloaded
 the latest copy into a directory on your Rapsberry Pi, you can download and 
 configure the robot's api and interface by running the following three lines of code.
 
-```
+```bash
 apt-get install pip
 pip install -r requirements.txt
-chmod a+x app.py
+chmod a+x robot.py
+```
+
+To enable I2C communication on the Rapsberry Pi, edit
+```/etc/modprobe.d/raspi-blacklist.conf```
+and make sure that the line ```blacklist i2c-bcm2708``` is commented out. Also edit ```/etc/modules``` and make sure that the line ```i2c-dev``` exists somewhere in the file.
+Be sure to **apt-get install** i2c-tools and python-smbus.
+To configure the software, we will add the Pi user to the I2C access group, by running the command sudo adduser pi i2c.
+Reboot after installing the required packages.
+
+To test the configuration, run the command ```i2cdetect -y 0``` to display anything connected. A typical response showing that nothing is connected should look like this:
+
+```
+0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
+00:          -- -- -- -- -- -- -- -- -- -- -- -- --
+10: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+20: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+30: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+40: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+50: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+70: -- -- -- -- -- -- -- --
 ```
 
 Use the following to run the robot's server.
-```
-python app.py runserver
+```bash
+python robot.py runserver
 ```
 
 ## Features
@@ -58,7 +79,7 @@ your app on https://dev.twitter.com/apps to get the token and secret keys.
 You will then need to create a file ```settings.py``` in the ```twitter``` 
 directory with the following dictionary pointing to your Twitter keys and tokens.
 
-```
+```python
 # Set DEBUG flag to true for testing
 DEBUG = True
 
