@@ -1,5 +1,15 @@
-from flask import Flask, render_template, make_response, url_for
+from flask import Flask, render_template, make_response, url_for, jsonify
 from flask.ext.restful import reqparse, abort, Api, Resource
+
+from robot import Robot, RobotSerializer
+from robot.body import Body, BodySerializer
+from robot.arm import Arm, ArmSerializer
+from robot.arm.shoulder import Shoulder, ShoulderSerializer
+from robot.arm.elbow import Elbow, ElbowSerializer
+from robot.arm.wrist import Wrist, WristSerializer
+from robot.arm.hand import Hand, HandSerializer
+from robot.arm.hand import Finger, FingerSerializer
+
 from os.path import join
 import serial
 
@@ -8,12 +18,39 @@ gpio_available = True
 try:
     import RPi.GPIO as GPIO
 except RuntimeError:
-    '''            
+    '''
     A RuntimeError is returned if the current device does
     not have GPIO pins.
     '''
     gpio_available = False
 
+# Build the robot here
+robot = Robot("Salvius")
+
+body = Body()
+robot.setBody(body)
+
+leftArm = Arm()
+body.addArm(leftArm)
+
+leftShoulder = Shoulder()
+leftArm.setShoulder(leftShoulder)
+
+leftElbow = Elbow()
+leftElbow.move(1)
+leftArm.setElbow(leftElbow)
+
+left_wrist = Wrist()
+leftArm.setWrist(left_wrist)
+
+left_hand = Hand()
+leftArm.setHand(left_hand)
+
+fingers = [Finger(), Finger(), Finger(), Finger(), Finger()]
+for finger in fingers:
+    left_hand.add_finger(finger)
+
+# Create flask app
 app = Flask(__name__)
 api = Api(app)
 
@@ -21,17 +58,8 @@ parser = reqparse.RequestParser()
 parser.add_argument('task', type=str)
 
 def abort_if_pin_does_not_exist(pin_id):
-    if pin_id not in TODOS:
-        abort(404, message="Todo {} doesn't exist".format(pin_id))
-
-# http://playground.arduino.cc/interfacing/python#.UyD0yHVdUYp
-def serial_example():
-    ser = serial.Serial('/dev/tty.usbserial', 9600)
-    while True:
-        print ser.readline()
-        # OR
-        ser = serial.Serial('/dev/tty.usbserial', 9600)
-        ser.write('5')
+    if pin_id not in SOME_LIST_OF_PINS:
+        abort(404, message="Pin {} doesn't exist".format(pin_id))
 
 
 class PiPin(Resource):
@@ -39,10 +67,10 @@ class PiPin(Resource):
         abort_if_pin_does_not_exist(pin_id)
         return TODOS[pin_id]
 
-    def put(self, todo_id):
+    def put(self, pin_id):
         args = parser.parse_args()
         task = {'task': args['task']}
-        TODOS[todo_id] = task
+        TODOS[pin_id] = task
         return task, 201
 
 
@@ -70,30 +98,49 @@ class PiPins(Resource):
             return {0 : 0}
 
         GPIO.setmode(GPIO.BCM)
-        
+
         pin_range = [24, 25]
         pins = {}
-        
+
         for pin in pin_range:
             pins[pin] = self.pin_data(pin)
-            
+
         return pins
-        
+
     def post(self):
         args = parser.parse_args()
         print(args)
-        #pin_number = 
-        
+
         # EXAMPLE:
-        args = parser.parse_args()
-        todo_id = 'todo%d' % (len(TODOS) + 1)
-        TODOS[todo_id] = {'task': args['task']}
-        return TODOS[todo_id], 201
+        pin_id = 'todo%d' % (len(TODOS) + 1)
+        TODOS[pin_id] = {'task': args['task']}
+        return TODOS[pin_id], 201
 
 
 class App(Resource):
     def get(self):
         return make_response(render_template('index.html'))
+
+@app.route('/api/robot')
+def api_robot():
+    serialized = RobotSerializer(robot)
+    return jsonify(serialized.data)
+
+@app.route('/api/robot/body')
+def api_robot_body():
+    serialized = BodySerializer(body)
+    return jsonify(serialized.data)
+
+@app.route('/api/robot/body/arms')
+def api_robot_body_arms():
+    serialized = ArmSerializer(leftArm)
+    return jsonify(serialized.data)
+
+@app.route('/api/arm/shoulder')
+def authors():
+    shoulder = Shoulder()
+    serialized = ShoulderSerializer(shoulder)
+    return jsonify(serialized.data)
 
 @app.route('/js/<path:path>')
 def static_js(path):

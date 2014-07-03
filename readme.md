@@ -31,8 +31,7 @@ chmod a+x robot.py
 ```
 
 To enable I2C communication on the Rapsberry Pi, edit
-```/etc/modprobe.d/raspi-blacklist.conf```
-and make sure that the line ```blacklist i2c-bcm2708``` is commented out. Also edit ```/etc/modules``` and make sure that the line ```i2c-dev``` exists somewhere in the file.
+```/etc/modprobe.d/raspi-blacklist.conf``` and make sure that the line ```blacklist i2c-bcm2708``` is commented out. Also edit ```/etc/modules``` and make sure that the line ```i2c-dev``` exists somewhere in the file.
 Be sure to **apt-get install** i2c-tools and python-smbus.
 To configure the software, we will add the Pi user to the I2C access group, by running the command sudo adduser pi i2c.
 Reboot after installing the required packages.

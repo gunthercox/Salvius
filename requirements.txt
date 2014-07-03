@@ -1,5 +1,6 @@
 flask
 flask-restful
+marshmallow==0.7.0
 pySerial
 RPi.GPIO
 twitter==1.14.1
