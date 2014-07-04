@@ -12,8 +12,11 @@ class Elbow(object):
         """
         self.angle += degrees
 
-    def relax(self):
+    def reset(self):
         self.angle = 0
+
+    def get_angle(self):
+        return self.angle
 
 class ElbowSerializer(Serializer):
     angle = fields.Integer()

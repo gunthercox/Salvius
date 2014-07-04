@@ -27,10 +27,13 @@ class Wrist(object):
         """
         self.yaw += degrees
 
-    def relax(self):
+    def reset(self):
         self.roll = 0
         self.pitch = 0
         self.yaw = 0
+
+    def get_position(self):
+        return [self.roll, self.pitch, self.yaw]
 
 
 class WristSerializer(Serializer):
