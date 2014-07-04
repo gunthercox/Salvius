@@ -1,6 +1,7 @@
 from marshmallow import Serializer, fields
 from ..arm import ArmSerializer
 
+
 class Body(object):
 
     def __init__(self):
@@ -8,17 +9,18 @@ class Body(object):
         self.arms = []
         self.legs = []
 
-    def addHead(self, head):
+    def add_head(self, head):
         self.head.append(head)
 
-    def addArm(self, arm):
+    def add_arm(self, arm):
         self.arms.append(arm)
 
-    def addLegs(self, leg):
+    def add_legs(self, leg):
         self.legs.append(leg)
 
     def list_arms(self):
         return self.arms
+
 
 class BodySerializer(Serializer):
     arms = fields.Nested(ArmSerializer, many=True)

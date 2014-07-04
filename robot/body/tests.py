@@ -7,6 +7,6 @@ class Tests(TestCase):
     def test_add_arm(self):
         body = Body()
         arm = Arm()
-        body.addArm(arm)
+        body.add_arm(arm)
 
         self.assertTrue(len(body.list_arms()) == 1)
