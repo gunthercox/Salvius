@@ -16,16 +16,16 @@ class Arm(object):
         self.wrist = None
         self.hand = None
 
-    def setShoulder(self, shoulder):
+    def set_shoulder(self, shoulder):
         self.shoulder = shoulder
 
-    def setElbow(self, elbow):
+    def set_elbow(self, elbow):
         self.elbow = elbow
 
-    def setWrist(self, wrist):
+    def set_wrist(self, wrist):
         self.wrist = wrist
 
-    def setHand(self, hand):
+    def set_hand(self, hand):
         self.hand = hand
 
 

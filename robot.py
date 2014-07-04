@@ -30,25 +30,28 @@ robot = Robot("Salvius")
 body = Body()
 robot.setBody(body)
 
-leftArm = Arm()
-body.addArm(leftArm)
+left_arm = Arm()
+body.add_arm(left_arm)
 
 leftShoulder = Shoulder()
-leftArm.setShoulder(leftShoulder)
+left_arm.set_shoulder(leftShoulder)
 
 leftElbow = Elbow()
 leftElbow.move(1)
-leftArm.setElbow(leftElbow)
+left_arm.set_elbow(leftElbow)
 
 left_wrist = Wrist()
-leftArm.setWrist(left_wrist)
+left_arm.set_wrist(left_wrist)
 
 left_hand = Hand()
-leftArm.setHand(left_hand)
+left_arm.set_hand(left_hand)
 
-fingers = [Finger(), Finger(), Finger(), Finger(), Finger()]
+fingers = [Finger(), Finger(), Finger(), Finger()]
+thumb = Finger()
 for finger in fingers:
     left_hand.add_finger(finger)
+
+left_hand.set_thumb(thumb)
 
 # Create flask app
 app = Flask(__name__)
@@ -95,7 +98,7 @@ class PiPins(Resource):
     def get(self):
         if not gpio_available:
             # See "Fail fast"
-            return {0 : 0}
+            return {"warning" : "GPIO pins unavailable"}
 
         GPIO.setmode(GPIO.BCM)
 
@@ -121,26 +124,30 @@ class App(Resource):
     def get(self):
         return make_response(render_template('index.html'))
 
-@app.route('/api/robot')
+@app.route('/api/robot/')
 def api_robot():
     serialized = RobotSerializer(robot)
     return jsonify(serialized.data)
 
-@app.route('/api/robot/body')
+@app.route('/api/robot/body/')
 def api_robot_body():
     serialized = BodySerializer(body)
     return jsonify(serialized.data)
 
-@app.route('/api/robot/body/arms')
+@app.route('/api/robot/body/arms/')
 def api_robot_body_arms():
-    serialized = ArmSerializer(leftArm)
+    serialized = ArmSerializer(left_arm)
     return jsonify(serialized.data)
 
-@app.route('/api/arm/shoulder')
-def authors():
+@app.route('/api/robot/body/arms/shoulder/')
+def api_robot_body_arms_shouder():
     shoulder = Shoulder()
     serialized = ShoulderSerializer(shoulder)
     return jsonify(serialized.data)
+
+@app.route('/api/')
+def api_root():
+    return jsonify({"robot": "/api/robot/", "gpio": "/gpio/"})
 
 @app.route('/js/<path:path>')
 def static_js(path):
@@ -155,7 +162,7 @@ def static_css(path):
 # Setup the Api resource routing
 api.add_resource(App, '/')
 
-api.add_resource(PiPins, '/gpio')
+api.add_resource(PiPins, '/gpio/')
 api.add_resource(PiPin, '/gpio/<string:pin_id>')
 
 if __name__ == '__main__':

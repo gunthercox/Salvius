@@ -63,6 +63,19 @@ class HandTests(TestCase):
 
         self.assertEqual(len(hand.get_fingers()), 2)
 
+    def test_close_hand(self):
+        hand = Hand()
+        fingers = [Finger(), Finger(), Finger(), Finger()]
+        thumb = Finger()
+        for finger in fingers:
+            hand.add_finger(finger)
+        hand.set_thumb(thumb)
+
+        hand.close()
+
+        self.assertEqual(hand.get_fingers()[0].get_position(), 100)
+        self.assertEqual(hand.get_thumb().get_position(), 100)
+
 
 class FingerTests(TestCase):
 

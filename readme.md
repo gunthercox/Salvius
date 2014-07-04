@@ -14,7 +14,7 @@ Rapsberry Pi and several Arduino microcontrollers as a brain.
 
 For additional details visit [salviusrobot.blogspot.com](http://salviusrobot.blogspot.com).
 
-**Key features:** 
+**Key features:**
   - Web based user interface
   - RESTfull API
   - Modular design makes it easy to add controllers via I2C
@@ -67,8 +67,8 @@ This is still a bit of a work in progress, at best a few small words can be reco
 ### Handwriting
 
 The robot can hold a pen and write when given a string of text.
-The robot's handwriting is based on a grid in which each letter is created as a result
-of horizontal and vertical lines.
+The robot's handwriting is based on a grid in which each letter is created as a
+result of horizontal and vertical lines.
 
 ### Communication experiment
 I've included a package which allows the robot to tweet randomly selected 
@@ -90,6 +90,12 @@ TWITTER = {
     'TOKEN_SECRET': ''
 }
 ```
+
+## Tests
+The code for this project is automatically tested to ensure that class methods
+perform as expected. These tests can also be run manually by running the command
+```nosetests``` from within the repository's root directory. See 
+([unit tests](http://en.wikipedia.org/wiki/Unit_testing)) for more information.
 
 ## Contributors
 
