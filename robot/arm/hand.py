@@ -13,8 +13,11 @@ class Finger(object):
         """
         self.position += degrees
 
-    def relax(self):
+    def reset(self):
         self.position = 0
+
+    def get_position(self):
+        return self.position
 
 class Hand(object):
 
@@ -23,6 +26,9 @@ class Hand(object):
 
     def add_finger(self, finger):
         self.fingers.append(finger)
+
+    def get_fingers(self):
+        return self.fingers
 
 
 class FingerSerializer(Serializer):
