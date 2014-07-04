@@ -1,5 +1,5 @@
 from unittest import TestCase, TestSuite, TextTestRunner
-from shoulder import Shoulder
+from .shoulder import Shoulder
 
 class Tests(TestCase):
     def test_finger(self):
@@ -21,16 +21,3 @@ class Tests(TestCase):
 
         self.assertEqual(shoulder.get_rotation(), 0)
         self.assertEqual(shoulder.get_angle(), 0)
-        
-
-    @staticmethod
-    def suite():
-        suite = TestSuite()
-        suite.addTest(Tests('test_finger'))
-        suite.addTest(Tests('test_wrist'))
-        suite.addTest(Tests('test_shoulder_reset'))
-        return suite
-
-if __name__ == '__main__':
-    test = Tests.suite()
-    TextTestRunner().run(test)

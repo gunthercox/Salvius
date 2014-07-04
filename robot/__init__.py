@@ -1,5 +1,5 @@
 from marshmallow import Serializer, fields
-from body import BodySerializer
+from .body import BodySerializer
 
 class Robot(object):
 

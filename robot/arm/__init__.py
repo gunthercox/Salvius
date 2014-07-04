@@ -1,8 +1,8 @@
 from marshmallow import Serializer, fields
-from shoulder import ShoulderSerializer
-from elbow import ElbowSerializer
-from wrist import WristSerializer
-from hand import HandSerializer
+from .shoulder import ShoulderSerializer
+from .elbow import ElbowSerializer
+from .wrist import WristSerializer
+from .hand import HandSerializer
 
 
 class Arm(object):
