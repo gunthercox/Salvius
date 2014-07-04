@@ -17,5 +17,8 @@ class Body(object):
     def addLegs(self, leg):
         self.legs.append(leg)
 
+    def list_arms(self):
+        return self.arms
+
 class BodySerializer(Serializer):
     arms = fields.Nested(ArmSerializer, many=True)
