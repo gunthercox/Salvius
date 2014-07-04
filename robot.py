@@ -18,26 +18,23 @@ gpio_available = True
 try:
     import RPi.GPIO as GPIO
 except RuntimeError:
-    '''
-    A RuntimeError is returned if the current device does
-    not have GPIO pins.
-    '''
+    # A RuntimeError is returned if the current device does not have GPIO pins.
     gpio_available = False
 
 # Build the robot here
 robot = Robot("Salvius")
 
 body = Body()
-robot.setBody(body)
+robot.set_body(body)
 
+# Create left arm
 left_arm = Arm()
 body.add_arm(left_arm)
 
-leftShoulder = Shoulder()
-left_arm.set_shoulder(leftShoulder)
+left_shoulder = Shoulder()
+left_arm.set_shoulder(left_shoulder)
 
 leftElbow = Elbow()
-leftElbow.move(1)
 left_arm.set_elbow(leftElbow)
 
 left_wrist = Wrist()
@@ -46,12 +43,35 @@ left_arm.set_wrist(left_wrist)
 left_hand = Hand()
 left_arm.set_hand(left_hand)
 
-fingers = [Finger(), Finger(), Finger(), Finger()]
-thumb = Finger()
-for finger in fingers:
+left_fingers = [Finger(), Finger(), Finger(), Finger()]
+left_thumb = Finger()
+for finger in left_fingers:
     left_hand.add_finger(finger)
 
-left_hand.set_thumb(thumb)
+left_hand.set_thumb(left_thumb)
+
+# Create right arm
+right_arm = Arm()
+body.add_arm(right_arm)
+
+right_shoulder = Shoulder()
+right_arm.set_shoulder(right_shoulder)
+
+leftElbow = Elbow()
+right_arm.set_elbow(leftElbow)
+
+right_wrist = Wrist()
+right_arm.set_wrist(right_wrist)
+
+right_hand = Hand()
+right_arm.set_hand(right_hand)
+
+right_fingers = [Finger(), Finger(), Finger(), Finger()]
+right_thumb = Finger()
+for finger in right_fingers:
+    right_hand.add_finger(finger)
+
+right_hand.set_thumb(right_thumb)
 
 # Create flask app
 app = Flask(__name__)
@@ -136,14 +156,39 @@ def api_robot_body():
 
 @app.route('/api/robot/body/arms/')
 def api_robot_body_arms():
-    serialized = ArmSerializer(left_arm)
+
+    arms = []
+
+    for arm in body.list_arms():
+        serialized = ArmSerializer(arm)
+        arms.append(serialized.data)
+
+    return jsonify({"results": arms})
+
+@app.route('/api/robot/body/arms/arm/<id>')
+def api_robot_body_arms_detail(id):
+
+    serialized = ArmSerializer(body.list_arms()[int(id)])
     return jsonify(serialized.data)
 
-@app.route('/api/robot/body/arms/shoulder/')
-def api_robot_body_arms_shouder():
-    shoulder = Shoulder()
+@app.route('/api/robot/body/arms/arm/<id>/shoulder/')
+def api_robot_body_arms_shouder(id):
+
+    arm = body.list_arms()
+    shoulder = arm[int(id)].get_shoulder()
     serialized = ShoulderSerializer(shoulder)
+
     return jsonify(serialized.data)
+
+@app.route('/api/robot/body/arms/arm/<id>/hand/')
+def api_robot_body_arms_hand(id):
+
+    arm = body.list_arms()
+    hand = arm[int(id)].get_hand()
+    serialized = HandSerializer(hand)
+
+    return jsonify(serialized.data)
+
 
 @app.route('/api/')
 def api_root():

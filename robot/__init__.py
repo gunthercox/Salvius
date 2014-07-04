@@ -7,7 +7,7 @@ class Robot(object):
         self.name = name
         self.body = None
 
-    def setBody(self, body):
+    def set_body(self, body):
         self.body = body
 
 class RobotSerializer(Serializer):

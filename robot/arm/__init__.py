@@ -8,9 +8,6 @@ from .hand import HandSerializer
 class Arm(object):
 
     def __init__(self):
-        """
-        Arm must be designated as 'left' or 'right'.
-        """
         self.shoulder = None
         self.elbow = None
         self.wrist = None
@@ -27,6 +24,18 @@ class Arm(object):
 
     def set_hand(self, hand):
         self.hand = hand
+
+    def get_shoulder(self):
+        return self.shoulder
+
+    def get_elbow(self):
+        return self.elbow
+
+    def get_wrist(self):
+        return self.wrist
+
+    def get_hand(self):
+        return self.hand
 
 
 class ArmSerializer(Serializer):
