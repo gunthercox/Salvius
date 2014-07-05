@@ -272,11 +272,10 @@ $("#say").click(function() {
         type: "POST",
         url: "http://"+arduino_ip,
         data: str,
-        contentType: "application/x-www-form-urlencoded; charset=utf-8",
-        success: function(data) {
-            $("#key").val("");
-            $("#value").val("");
-        }
+        contentType: "application/x-www-form-urlencoded; charset=utf-8"
+    }).success(function(data) {
+        $("#key").val("");
+        $("#value").val("");
     }).error(function(data) {
         $(".error-list").append("<li style='display:list-item'>" +
           "<a href='#'>Failure to post data</a></li>");
@@ -286,6 +285,18 @@ $("#say").click(function() {
 $("#write").click(function() {
     console.log("Write button not implemented");
 });
+
+
+// for testing speech
+$.ajax({
+    type: "POST",
+    url: "/api/speech/",
+    data: JSON.stringify({"speech_text": "Text for the robot to say"})
+}).success(function(data) {
+    console.log(data);
+});
+
+
 
 </script>
 </body>
