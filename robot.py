@@ -2,7 +2,7 @@ from flask import Flask, render_template, make_response, url_for, jsonify
 from flask.ext.restful import reqparse, abort, Api, Resource
 
 from robot import Robot, RobotSerializer
-from robot.body import Body, BodySerializer
+from robot.body import BodySerializer
 from robot.arm import Arm, ArmSerializer
 from robot.arm.shoulder import Shoulder, ShoulderSerializer
 from robot.arm.elbow import Elbow, ElbowSerializer
@@ -25,12 +25,11 @@ except RuntimeError:
 # Build the robot here
 robot = Robot("Salvius")
 
-body = Body()
-robot.set_body(body)
+
 
 # Create left arm
 left_arm = Arm()
-body.add_arm(left_arm)
+robot.body.add_arm(left_arm)
 
 left_shoulder = Shoulder()
 left_arm.set_shoulder(left_shoulder)
@@ -53,7 +52,7 @@ left_hand.set_thumb(left_thumb)
 
 # Create right arm
 right_arm = Arm()
-body.add_arm(right_arm)
+robot.body.add_arm(right_arm)
 
 right_shoulder = Shoulder()
 right_arm.set_shoulder(right_shoulder)
@@ -152,7 +151,7 @@ def api_robot():
 
 @app.route('/api/robot/body/')
 def api_robot_body():
-    serialized = BodySerializer(body)
+    serialized = BodySerializer(robot.body)
     return jsonify(serialized.data)
 
 @app.route('/api/robot/body/arms/')
@@ -160,7 +159,7 @@ def api_robot_body_arms():
 
     arms = []
 
-    for arm in body.list_arms():
+    for arm in robot.body.list_arms():
         serialized = ArmSerializer(arm)
         arms.append(serialized.data)
 
@@ -169,13 +168,13 @@ def api_robot_body_arms():
 @app.route('/api/robot/body/arms/arm/<id>')
 def api_robot_body_arms_detail(id):
 
-    serialized = ArmSerializer(body.list_arms()[int(id)])
+    serialized = ArmSerializer(robot.body.list_arms()[int(id)])
     return jsonify(serialized.data)
 
 @app.route('/api/robot/body/arms/arm/<id>/shoulder/')
 def api_robot_body_arms_shouder(id):
 
-    arm = body.list_arms()
+    arm = robot.body.list_arms()
     shoulder = arm[int(id)].get_shoulder()
     serialized = ShoulderSerializer(shoulder)
 
@@ -184,7 +183,7 @@ def api_robot_body_arms_shouder(id):
 @app.route('/api/robot/body/arms/arm/<id>/hand/')
 def api_robot_body_arms_hand(id):
 
-    arm = body.list_arms()
+    arm = robot.body.list_arms()
     hand = arm[int(id)].get_hand()
     serialized = HandSerializer(hand)
 
