@@ -91,6 +91,113 @@ TWITTER = {
 }
 ```
 
+## Modular robot library
+The robot library included in this project can be used to easially build and
+customize robots. The library is **ideal for humanoid** type robots, however it
+could also work well with quadropeds and other types of robots.
+
+To build a custom robot you must first create a new robot object. The robot
+object is a container for each of the submodules required to build a robot.
+
+```
+from robot import Robot
+robot = new Robot("Robot Name")
+```
+
+The robot object provides assess to skill modules that handle capabiliteis such
+as speech, but also component modules which allow physical parts of the robot
+to be assembled.
+
+To add physical components to the robot you must first create a
+new body object and add it to the robot object.
+
+```
+body = Body()
+robot.set_body(body)
+```
+
+Environmental effectors such as arms and legs can be added to a body object.
+
+```
+arm = Arm()
+body.add_arm(arm)
+```
+
+Various robots can be constructed following a basic humanod disign. A modified
+robot could, for instance, have only three fingers.
+
+```
+fingers = [Finger(), Finger(), Finger(), Finger()]
+for finger in fingers:
+    hand.add_finger(finger)
+```
+
+Once the physical robot has been constructed, the robot library provides access
+to usefull methods to allow you to control its movements.
+
+The robot object is also serialized to privide a web based endpoint to post data
+to inorder to control the robot. The endpoint's structure reflects how each of
+the robot's components contain their sub-components.
+
+A robot with one arm would look like this:
+
+```
+{
+  "body": {
+    "arms": [
+      {
+        "elbow": {
+          "angle": 0
+        },
+        "hand": {
+          "fingers": [
+            {
+              "position": 0
+            },
+            {
+              "position": 0
+            },
+            {
+              "position": 0
+            },
+            {
+              "position": 0
+            }
+          ],
+          "thumb": {
+            "position": 0
+          }
+        },
+        "shoulder": {
+          "angle": 0,
+          "rotation": 0
+        },
+        "wrist": {
+          "pitch": 0,
+          "roll": 0,
+          "yaw": 0
+        }
+      }
+    ]
+  },
+  "name": "Robot Name"
+}
+```
+
+A specific part of the robot can be accessed by changing the url to narrow the
+objects that are serialized.
+
+The url ```/api/robot/body/arms/arm/0/hand/fingers/finger/0/``` would return
+only the serialized representation of the first finger on the first arm attached
+to the robot. This data would be shown as follows, showing only the numeric
+position of that one finger.
+
+```
+{
+  "position": 0
+}
+```
+
 ## Tests
 The code for this project is automatically tested to ensure that class methods
 perform as expected. These tests can also be run manually by running the command

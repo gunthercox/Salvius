@@ -9,6 +9,7 @@ from robot.arm.elbow import Elbow, ElbowSerializer
 from robot.arm.wrist import Wrist, WristSerializer
 from robot.arm.hand import Hand, HandSerializer
 from robot.arm.hand import Finger, FingerSerializer
+from robot.speech import Speech
 
 from os.path import join
 import serial
@@ -206,6 +207,8 @@ def static_css(path):
 
 # Setup the Api resource routing
 api.add_resource(App, '/')
+
+api.add_resource(Speech, '/api/speech/')
 
 api.add_resource(PiPins, '/gpio/')
 api.add_resource(PiPin, '/gpio/<string:pin_id>')
