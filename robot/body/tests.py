@@ -9,4 +9,4 @@ class Tests(TestCase):
         arm = Arm()
         body.add_arm(arm)
 
-        self.assertTrue(len(body.list_arms()) == 1)
+        self.assertTrue(len(body.arms) == 1)

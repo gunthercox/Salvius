@@ -11,8 +11,7 @@ Rapsberry Pi and several Arduino microcontrollers as a brain.
 > that of a human. The primary goal for Salvius is to 
 > create a humanoid robot that will be able to function
 > dynamically in a domestic environment.
-
-For additional details visit [salviusrobot.blogspot.com](http://salviusrobot.blogspot.com).
+> - [salviusrobot.blogspot.com](http://salviusrobot.blogspot.com)
 
 **Key features:**
   - Web based user interface
@@ -111,7 +110,7 @@ to be assembled.
 Environmental effectors such as arms and legs can be added to a the robot's body
 object.
 
-```
+```python
 arm = Arm()
 body.add_arm(arm)
 ```
@@ -119,7 +118,7 @@ body.add_arm(arm)
 Various robots can be constructed following a basic humanod disign. A modified
 robot could, for instance, have only three fingers.
 
-```
+```python
 fingers = [Finger(), Finger(), Finger(), Finger()]
 for finger in fingers:
     hand.add_finger(finger)
@@ -134,7 +133,7 @@ the robot's components contain their sub-components.
 
 A robot with one arm would look like this:
 
-```
+```json
 {
   "body": {
     "arms": [
@@ -185,7 +184,7 @@ only the serialized representation of the first finger on the first arm attached
 to the robot. This data would be shown as follows, showing only the numeric
 position of that one finger.
 
-```
+```json
 {
   "position": 0
 }

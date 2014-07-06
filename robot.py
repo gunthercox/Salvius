@@ -1,4 +1,4 @@
-from flask import Flask, render_template, make_response, url_for, jsonify
+from flask import Flask, render_template, make_response, url_for, jsonify, request
 from flask.ext.restful import reqparse, abort, Api, Resource
 
 from robot import Robot, RobotSerializer
@@ -75,17 +75,12 @@ right_hand.set_thumb(right_thumb)
 app = Flask(__name__)
 api = Api(app)
 
-parser = reqparse.RequestParser()
-parser.add_argument('task', type=str)
-
-def abort_if_pin_does_not_exist(pin_id):
-    if pin_id not in SOME_LIST_OF_PINS:
-        abort(404, message="Pin {} doesn't exist".format(pin_id))
-
 
 class PiPin(Resource):
     def get(self, pin_id):
-        abort_if_pin_does_not_exist(pin_id)
+        # abort if pin does not exist
+        if pin_id not in SOME_LIST_OF_PINS:
+            abort(404, message="Pin {} doesn't exist".format(pin_id))
         return TODOS[pin_id]
 
     def put(self, pin_id):
@@ -157,7 +152,7 @@ def api_robot_body_arms():
 
     arms = []
 
-    for arm in robot.body.list_arms():
+    for arm in robot.body.arms:
         serialized = ArmSerializer(arm)
         arms.append(serialized.data)
 
@@ -166,13 +161,13 @@ def api_robot_body_arms():
 @app.route('/api/robot/body/arms/arm/<id>')
 def api_robot_body_arms_detail(id):
 
-    serialized = ArmSerializer(robot.body.list_arms()[int(id)])
+    serialized = ArmSerializer(robot.body.arms[int(id)])
     return jsonify(serialized.data)
 
 @app.route('/api/robot/body/arms/arm/<id>/shoulder/')
 def api_robot_body_arms_shouder(id):
 
-    arm = robot.body.list_arms()
+    arm = robot.body.arms
     shoulder = arm[int(id)].get_shoulder()
     serialized = ShoulderSerializer(shoulder)
 
@@ -181,16 +176,39 @@ def api_robot_body_arms_shouder(id):
 @app.route('/api/robot/body/arms/arm/<id>/hand/')
 def api_robot_body_arms_hand(id):
 
-    arm = robot.body.list_arms()
+    arm = robot.body.arms
     hand = arm[int(id)].get_hand()
     serialized = HandSerializer(hand)
 
     return jsonify(serialized.data)
 
+@app.route('/api/robot/body/arms/arm/<id>/hand/fingers/')
+def api_robot_body_arms_hand_fingers(id):
 
-@app.route('/api/')
-def api_root():
-    return jsonify({"robot": "/api/robot/", "gpio": "/gpio/"})
+    fingers = []
+
+    hand = robot.body.arms[int(id)].get_hand()
+
+    for finger in hand.get_fingers():
+
+        serialized = FingerSerializer(finger)
+        fingers.append(serialized.data)
+
+    return jsonify({"results": fingers})
+
+@app.route('/api/robot/body/arms/arm/<id>/hand/fingers/<int:finger_id>/', methods=["GET", "POST"])
+def api_robot_body_arms_hand_fingers_finger(id, finger_id):
+
+    hand = robot.body.arms[int(id)].get_hand()
+    finger = hand.get_fingers()[finger_id]
+
+    if request.method == "POST":
+        value = request.get_json(force=True)["position"]
+        finger.move(value)
+
+    serialized = FingerSerializer(finger)
+
+    return jsonify(serialized.data)
 
 @app.route('/js/<path:path>')
 def static_js(path):
@@ -207,8 +225,8 @@ api.add_resource(App, '/')
 
 api.add_resource(Speech, '/api/speech/')
 
-api.add_resource(PiPins, '/gpio/')
-api.add_resource(PiPin, '/gpio/<string:pin_id>')
+api.add_resource(PiPins, '/api/gpio/')
+api.add_resource(PiPin, '/api/gpio/<string:pin_id>')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
