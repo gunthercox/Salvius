@@ -108,15 +108,8 @@ The robot object provides assess to skill modules that handle capabiliteis such
 as speech, but also component modules which allow physical parts of the robot
 to be assembled.
 
-To add physical components to the robot you must first create a
-new body object and add it to the robot object.
-
-```
-body = Body()
-robot.set_body(body)
-```
-
-Environmental effectors such as arms and legs can be added to a body object.
+Environmental effectors such as arms and legs can be added to a the robot's body
+object.
 
 ```
 arm = Arm()
