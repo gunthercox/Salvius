@@ -77,7 +77,7 @@ provide as much detail and context as possible.
 
 ## Pull requests
 
-Good pull requests—patches, improvements, new features—are a fantastic
+Good pull requests/patches, improvements, and new features are a fantastic
 help. They should remain focused in scope and avoid containing unrelated
 commits.
 
@@ -86,9 +86,8 @@ implementing features, refactoring code, porting to a different language),
 otherwise you risk spending a lot of time working on something that the
 project's developers might not want to merge into the project.
 
-Please adhere to the [coding guidelines](#code-guidelines) used throughout the
-project (indentation, accurate comments, etc.) and any other requirements
-(such as test coverage).
+Please kep your code (indentation, accurate comments, etc.) consistant with
+the styles used throughout the project.
 
 Adhering to the following process is the best way to get your work
 included in the project:
@@ -144,27 +143,6 @@ included in the project:
 license your work under the terms of the [MIT License](LICENSE.md).
 
 
-
-
-
-
-
-
-
-
-
-
-
-## Key branches
-
-- `master` is the latest, deployed version (not to be used for pull requests)
-
-
-## Pull requests
-
-- Try not to pollute your pull request with unintended changes--keep them simple and small
-
-
 ## Code guidelines
 
 ### Python
@@ -172,7 +150,6 @@ license your work under the terms of the [MIT License](LICENSE.md).
 Python code should comply with the standards established by PEP8
 See the PEP8 documentation here:
 http://legacy.python.org/dev/peps/pep-0008/
-
 
 ### Arduino
 
@@ -202,7 +179,6 @@ http://legacy.python.org/dev/peps/pep-0008/
 */
 ```
 
-
 ### JS
 
 - No semicolons (in client-side JS)
@@ -210,14 +186,12 @@ http://legacy.python.org/dev/peps/pep-0008/
 - strict mode
 - "Attractive"
 
-
 ### HTML
 
 - Two spaces for indentation, never tabs
 - Double quotes only, never single quotes
 - Always use proper indentation
 - Use tags and elements appropriate for an HTML5 doctype (e.g., self-closing tags)
-
 
 ### CSS
 

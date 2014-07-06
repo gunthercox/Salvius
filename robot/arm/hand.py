@@ -33,7 +33,6 @@ class Hand(object):
         Takes a finger object as a parameter.
         """
         self.thumb = thumb
-        
 
     def get_fingers(self):
         return self.fingers
