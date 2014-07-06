@@ -6,7 +6,10 @@ class Head(object):
         self.camera_url = ""
 
     def set_camera_url(self, url):
-        self.camera_url(url)
+        self.camera_url = url
+
+    def get_camera_url(self):
+        return self.camera_url
 
 
 class Neck(object):
@@ -19,13 +22,14 @@ class Neck(object):
         self.rotation = 0
         self.right_elevation = 0
         self.left_elevation = 0
-        self.head = None
+        self._head = None
 
     def set_head(self, head):
-        self.head = head
+        self._head = head
 
-    def get_head(self):
-        return self.head
+    @property
+    def head(self):
+        return self._head
 
 
 class HeadSerializer(Serializer):

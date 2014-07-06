@@ -9,20 +9,24 @@ class Body(object):
     def __init__(self):
         self.head = None
         self._arms = []
-        self.legs = []
+        self._legs = []
 
-    def add_head(self, head):
-        self.head.append(head)
+    def set_head(self, head):
+        self.head = head
 
     def add_arm(self, arm):
         self._arms.append(arm)
 
-    def add_legs(self, leg):
+    def add_leg(self, leg):
         self.legs.append(leg)
 
     @property
     def arms(self):
         return self._arms
+
+    @property
+    def legs(self):
+        return self._legs
 
 
 class BodySerializer(Serializer):
