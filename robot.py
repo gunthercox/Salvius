@@ -25,8 +25,6 @@ except RuntimeError:
 # Build the robot here
 robot = Robot("Salvius")
 
-
-
 # Create left arm
 left_arm = Arm()
 robot.body.add_arm(left_arm)
