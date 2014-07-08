@@ -7,18 +7,22 @@ from ..leg import LegSerializer
 class Body(object):
 
     def __init__(self):
-        self.head = None
+        self._head = None
         self._arms = []
         self._legs = []
 
     def set_head(self, head):
-        self.head = head
+        self._head = head
 
     def add_arm(self, arm):
         self._arms.append(arm)
 
     def add_leg(self, leg):
         self.legs.append(leg)
+
+    @property
+    def head(self):
+        return self._head
 
     @property
     def arms(self):

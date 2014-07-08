@@ -8,34 +8,38 @@ from .hand import HandSerializer
 class Arm(object):
 
     def __init__(self):
-        self.shoulder = None
-        self.elbow = None
-        self.wrist = None
-        self.hand = None
+        self._shoulder = None
+        self._elbow = None
+        self._wrist = None
+        self._hand = None
 
     def set_shoulder(self, shoulder):
-        self.shoulder = shoulder
+        self._shoulder = shoulder
 
     def set_elbow(self, elbow):
-        self.elbow = elbow
+        self._elbow = elbow
 
     def set_wrist(self, wrist):
-        self.wrist = wrist
+        self._wrist = wrist
 
     def set_hand(self, hand):
-        self.hand = hand
+        self._hand = hand
 
-    def get_shoulder(self):
-        return self.shoulder
+    @property
+    def shoulder(self):
+        return self._shoulder
 
-    def get_elbow(self):
-        return self.elbow
+    @property
+    def elbow(self):
+        return self._elbow
 
-    def get_wrist(self):
-        return self.wrist
+    @property
+    def wrist(self):
+        return self._wrist
 
-    def get_hand(self):
-        return self.hand
+    @property
+    def hand(self):
+        return self._hand
 
 
 class ArmSerializer(Serializer):

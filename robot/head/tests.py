@@ -1,4 +1,4 @@
-from unittest import TestCase, TestSuite, TextTestRunner
+from unittest import TestCase
 from .__init__ import Head, Neck
 
 class Tests(TestCase):
