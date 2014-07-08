@@ -1,8 +1,9 @@
-from unittest import TestCase, TestSuite, TextTestRunner
-from .shoulder import Shoulder
-from .elbow import Elbow
-from .wrist import Wrist
-from .hand import Hand, Finger
+from unittest import TestCase
+
+from robot.arm.shoulder import Shoulder
+from robot.arm.elbow import Elbow
+from robot.arm.wrist import Wrist
+from robot.arm.hand import Hand, Finger
 
 
 class ShoulderTests(TestCase):

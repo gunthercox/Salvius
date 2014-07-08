@@ -1,5 +1,5 @@
 from flask import Flask, render_template, make_response, url_for, jsonify, request
-from flask.ext.restful import reqparse, abort, Api, Resource
+from flask.ext.restful import abort, Api, Resource
 
 from robot import Robot, RobotSerializer
 from robot.body import BodySerializer
@@ -11,7 +11,6 @@ from robot.arm.hand import HandSerializer, FingerSerializer
 from robot.speech import Speech
 
 from os.path import join
-import serial
 
 gpio_available = True
 

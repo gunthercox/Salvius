@@ -1,8 +1,4 @@
 from marshmallow import Serializer, fields
-from .shoulder import ShoulderSerializer
-from .elbow import ElbowSerializer
-from .wrist import WristSerializer
-from .hand import HandSerializer
 
 
 class Arm(object):
@@ -43,8 +39,8 @@ class Arm(object):
 
 
 class ArmSerializer(Serializer):
-    shoulder = fields.Nested(ShoulderSerializer)
-    elbow = fields.Nested(ElbowSerializer)
-    wrist = fields.Nested(WristSerializer)
-    hand = fields.Nested(HandSerializer)
+    shoulder = fields.Nested("ShoulderSerializer")
+    elbow = fields.Nested("ElbowSerializer")
+    wrist = fields.Nested("WristSerializer")
+    hand = fields.Nested("HandSerializer")
 
