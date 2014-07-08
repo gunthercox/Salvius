@@ -1,5 +1,5 @@
 from unittest import TestCase
-from .__init__ import Head, Neck
+from robot.head import Head, Neck
 
 class Tests(TestCase):
 

@@ -1,7 +1,7 @@
 from marshmallow import Serializer, fields
-from ..head import HeadSerializer
-from ..arm import ArmSerializer
-from ..leg import LegSerializer
+from robot.head import HeadSerializer
+from robot.arm import ArmSerializer
+from robot.leg import LegSerializer
 
 
 class Body(object):

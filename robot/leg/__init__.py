@@ -1,41 +1,45 @@
 from marshmallow import Serializer, fields
-from .hip import Hip, HipSerializer
-from .knee import Knee, KneeSerializer
-from .ankle import Ankle, AnkleSerializer
-from .foot import Foot, FootSerializer
+from robot.leg.hip import Hip, HipSerializer
+from robot.leg.knee import Knee, KneeSerializer
+from robot.leg.ankle import Ankle, AnkleSerializer
+from robot.leg.foot import Foot, FootSerializer
 
 
 class Leg(object):
 
     def __init__(self):
-        self.hip = None
-        self.knee = None
-        self.ankle = None
-        self.foot = None
+        self._hip = None
+        self._knee = None
+        self._ankle = None
+        self._foot = None
 
     def set_hip(self, hip):
-        self.hip = hip
+        self._hip = hip
 
     def set_knee(self, knee):
-        self.knee = knee
+        self._knee = knee
 
     def set_ankle(self, ankle):
-        self.ankle = ankle
+        self._ankle = ankle
 
     def set_foot(self, foot):
-        self.foot = foot
+        self._foot = foot
 
-    def get_hip(self):
-        return self.hip
+    @property
+    def hip(self):
+        return self._hip
 
-    def get_knee(self):
-        return self.knee
+    @property
+    def knee(self):
+        return self._knee
 
+    @property
     def get_ankle(self):
-        return self.ankle
+        return self._ankle
 
+    @property
     def get_foot(self):
-        return self.foot
+        return self._foot
 
 
 class LegSerializer(Serializer):

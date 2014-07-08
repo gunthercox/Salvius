@@ -1,6 +1,6 @@
 from marshmallow import Serializer, fields
-from robot.body import Body, BodySerializer
 
+from robot.body import Body, BodySerializer
 from robot.arm import Arm
 from robot.arm.shoulder import Shoulder
 from robot.arm.elbow import Elbow
