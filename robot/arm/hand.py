@@ -22,31 +22,33 @@ class Finger(object):
 class Hand(object):
 
     def __init__(self):
-        self.fingers = []
-        self.thumb = None
+        self._fingers = []
+        self._thumb = None
 
     def add_finger(self, finger):
-        self.fingers.append(finger)
+        self._fingers.append(finger)
 
     def set_thumb(self, thumb):
         """
         Takes a finger object as a parameter.
         """
-        self.thumb = thumb
+        self._thumb = thumb
 
-    def get_fingers(self):
-        return self.fingers
+    @property
+    def fingers(self):
+        return self._fingers
 
-    def get_thumb(self):
-        return self.thumb
+    @property
+    def thumb(self):
+        return self._thumb
 
     def close(self):
         """
         Closes all of the hands fingers to make a fist shape.
         """
-        for finger in self.fingers:
+        for finger in self._fingers:
             finger.move(100)
-        self.thumb.move(100)
+        self._thumb.move(100)
 
 
 class FingerSerializer(Serializer):

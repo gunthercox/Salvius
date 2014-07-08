@@ -158,55 +158,67 @@ def api_robot_body_arms():
 
     return jsonify({"results": arms})
 
-@app.route('/api/robot/body/arms/arm/<id>')
+@app.route('/api/robot/body/arms/<int:id>')
 def api_robot_body_arms_detail(id):
 
-    serialized = ArmSerializer(robot.body.arms[int(id)])
+    arm = robot.body.arms[id]
+    serialized = ArmSerializer(arm)
+
     return jsonify(serialized.data)
 
-@app.route('/api/robot/body/arms/arm/<id>/shoulder/')
+@app.route('/api/robot/body/arms/<int:id>/shoulder/')
 def api_robot_body_arms_shouder(id):
 
-    arm = robot.body.arms
-    shoulder = arm[int(id)].get_shoulder()
+    shoulder = robot.body.arms[id].shoulder
     serialized = ShoulderSerializer(shoulder)
 
     return jsonify(serialized.data)
 
-@app.route('/api/robot/body/arms/arm/<id>/hand/')
+@app.route('/api/robot/body/arms/<int:id>/hand/')
 def api_robot_body_arms_hand(id):
 
-    arm = robot.body.arms
-    hand = arm[int(id)].get_hand()
+    hand = robot.body.arms[id].hand
     serialized = HandSerializer(hand)
 
     return jsonify(serialized.data)
 
-@app.route('/api/robot/body/arms/arm/<id>/hand/fingers/')
+@app.route('/api/robot/body/arms/<int:id>/hand/fingers/')
 def api_robot_body_arms_hand_fingers(id):
 
     fingers = []
 
-    hand = robot.body.arms[int(id)].get_hand()
+    hand = robot.body.arms[id].hand
 
-    for finger in hand.get_fingers():
+    for finger in hand.fingers:
 
         serialized = FingerSerializer(finger)
         fingers.append(serialized.data)
 
     return jsonify({"results": fingers})
 
-@app.route('/api/robot/body/arms/arm/<id>/hand/fingers/<int:finger_id>/', methods=["GET", "POST"])
+@app.route('/api/robot/body/arms/<int:id>/hand/fingers/<int:finger_id>/', methods=["GET", "POST"])
 def api_robot_body_arms_hand_fingers_finger(id, finger_id):
 
-    hand = robot.body.arms[int(id)].get_hand()
-    finger = hand.get_fingers()[finger_id]
+    finger = robot.body.arms[id].hand.fingers[finger_id]
 
     if request.method == "POST":
         value = request.get_json(force=True)["position"]
         finger.move(value)
 
     serialized = FingerSerializer(finger)
+
+    return jsonify(serialized.data)
+
+@app.route('/api/robot/body/arms/<int:id>/hand/thumb/', methods=["GET", "POST"])
+def api_robot_body_arms_hand_thumb(id):
+
+    thumb = robot.body.arms[id].hand.thumb
+
+    if request.method == "POST":
+        value = request.get_json(force=True)["position"]
+        thumb.move(value)
+
+    serialized = FingerSerializer(thumb)
 
     return jsonify(serialized.data)
 

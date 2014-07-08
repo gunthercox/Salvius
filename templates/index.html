@@ -287,8 +287,7 @@ $("#write").click(function() {
 });
 
 
-// for testing speech
-/*
+// For testing speech
 $.ajax({
     type: "POST",
     url: "/api/speech/",
@@ -296,12 +295,12 @@ $.ajax({
 }).success(function(data) {
     console.log(data);
 });
-*/
+
 
 // For testing api POST
 $.ajax({
     type: "POST",
-    url: "/api/robot/body/arms/arm/0/hand/fingers/0/",
+    url: "/api/robot/body/arms/0/hand/fingers/0/",
     data: JSON.stringify({"position": 2})
 }).success(function(data) {
     console.log(data);
