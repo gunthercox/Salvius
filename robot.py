@@ -3,12 +3,11 @@ from flask.ext.restful import reqparse, abort, Api, Resource
 
 from robot import Robot, RobotSerializer
 from robot.body import BodySerializer
-from robot.arm import Arm, ArmSerializer
-from robot.arm.shoulder import Shoulder, ShoulderSerializer
-from robot.arm.elbow import Elbow, ElbowSerializer
-from robot.arm.wrist import Wrist, WristSerializer
-from robot.arm.hand import Hand, HandSerializer
-from robot.arm.hand import Finger, FingerSerializer
+from robot.arm import ArmSerializer
+from robot.arm.shoulder import ShoulderSerializer
+from robot.arm.elbow import ElbowSerializer
+from robot.arm.wrist import WristSerializer
+from robot.arm.hand import HandSerializer, FingerSerializer
 from robot.speech import Speech
 
 from os.path import join
@@ -22,54 +21,9 @@ except RuntimeError:
     # A RuntimeError is returned if the current device does not have GPIO pins.
     gpio_available = False
 
-# Build the robot here
+# Create the default robot
 robot = Robot("Salvius")
-
-# Create left arm
-left_arm = Arm()
-robot.body.add_arm(left_arm)
-
-left_shoulder = Shoulder()
-left_arm.set_shoulder(left_shoulder)
-
-leftElbow = Elbow()
-left_arm.set_elbow(leftElbow)
-
-left_wrist = Wrist()
-left_arm.set_wrist(left_wrist)
-
-left_hand = Hand()
-left_arm.set_hand(left_hand)
-
-left_fingers = [Finger(), Finger(), Finger(), Finger()]
-left_thumb = Finger()
-for finger in left_fingers:
-    left_hand.add_finger(finger)
-
-left_hand.set_thumb(left_thumb)
-
-# Create right arm
-right_arm = Arm()
-robot.body.add_arm(right_arm)
-
-right_shoulder = Shoulder()
-right_arm.set_shoulder(right_shoulder)
-
-leftElbow = Elbow()
-right_arm.set_elbow(leftElbow)
-
-right_wrist = Wrist()
-right_arm.set_wrist(right_wrist)
-
-right_hand = Hand()
-right_arm.set_hand(right_hand)
-
-right_fingers = [Finger(), Finger(), Finger(), Finger()]
-right_thumb = Finger()
-for finger in right_fingers:
-    right_hand.add_finger(finger)
-
-right_hand.set_thumb(right_thumb)
+robot.default()
 
 # Create flask app
 app = Flask(__name__)
