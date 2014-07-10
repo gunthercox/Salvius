@@ -33,18 +33,11 @@ class Hand(object):
         """
         Adds a finger to the hand
         """
-        maxx = 0
-        for finger in self._fingers:
-            if finger.id > maxx:
-                maxx = finger.id
+        uuid = 0
+        if self._fingers:
+            uuid = max(finger.id for finger in self._fingers) + 1
 
-        maxx += 1
-
-        # Future: handle the above loop better
-        #un = max(self._fingers.y for id in self.id)
-
-        finger = Finger(maxx)
-
+        finger = Finger(uuid)
         self._fingers.append(finger)
 
     def set_thumb(self, thumb):
