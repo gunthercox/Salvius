@@ -55,21 +55,18 @@ class WristTests(TestCase):
 class HandTests(TestCase):
 
     def test_add_finger(self):
-        finger1 = Finger()
-        finger2 = Finger()
         hand = Hand()
 
-        hand.add_finger(finger1)
-        hand.add_finger(finger2)
+        hand.add_finger()
+        hand.add_finger()
 
         self.assertEqual(len(hand.fingers), 2)
 
     def test_close_hand(self):
         hand = Hand()
-        fingers = [Finger(), Finger(), Finger(), Finger()]
-        thumb = Finger()
-        for finger in fingers:
-            hand.add_finger(finger)
+        thumb = Finger(0)
+        for finger in range(4):
+            hand.add_finger()
         hand.set_thumb(thumb)
 
         hand.close()
@@ -81,7 +78,7 @@ class HandTests(TestCase):
 class FingerTests(TestCase):
 
     def test_finger_move(self):
-        finger = Finger()
+        finger = Finger(0)
         finger.move(-30)
 
         self.assertEqual(finger.get_position(), -30)
