@@ -1,8 +1,10 @@
-from unittest import TestCase, TestSuite, TextTestRunner
+from unittest import TestCase
+
 from robot.head import Head
 from robot.body import Body
 from robot.arm import Arm
 from robot.leg import Leg
+
 
 class Tests(TestCase):
 

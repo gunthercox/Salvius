@@ -38,10 +38,9 @@ class Robot(object):
         left_hand = Hand()
         left_arm.set_hand(left_hand)
 
-        left_fingers = [Finger(), Finger(), Finger(), Finger()]
-        left_thumb = Finger()
-        for finger in left_fingers:
-            left_hand.add_finger(finger)
+        left_thumb = Finger(0)
+        for finger in range(4):
+            left_hand.add_finger()
 
         left_hand.set_thumb(left_thumb)
 
@@ -61,10 +60,9 @@ class Robot(object):
         right_hand = Hand()
         right_arm.set_hand(right_hand)
 
-        right_fingers = [Finger(), Finger(), Finger(), Finger()]
-        right_thumb = Finger()
-        for finger in right_fingers:
-            right_hand.add_finger(finger)
+        right_thumb = Finger(0)
+        for finger in range(4):
+            right_hand.add_finger()
 
         right_hand.set_thumb(right_thumb)
 

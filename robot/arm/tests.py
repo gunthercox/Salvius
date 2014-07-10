@@ -1,4 +1,5 @@
-from unittest import TestCase, TestSuite, TextTestRunner
+from unittest import TestCase
+
 from robot.arm.shoulder import Shoulder
 from robot.arm.elbow import Elbow
 from robot.arm.wrist import Wrist
