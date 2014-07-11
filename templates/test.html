@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.row {
+background: #fafafa;
+padding: 10px 0px;
+margin: 10px;
+}
+
+.indicator {
+width: 10px;
+height: 10px;
+margin-left: 10px;
+border-radius: 50%;
+display: inline-block;
+}
+
+.caption {
+margin-left: 10px;
+display: inline-block;
+}
+
+.default {
+background: #aaa;
+}
+
+.warning {
+background: #ff9933;
+}
+
+.success {
+background: #6cc644;
+}
+</style>
+</head>
+
+<body>
+<script src="/js/jquery.js"></script>
+<script>
+function Test(url) {
+
+    var self = this;
+
+    this.template = $('<div class="row">' +
+                      '<div class="indicator default"></div>' +
+                      '<div class="caption method"></div>' +
+                      '<div class="caption">'+url+'</div>' +
+                      '</div>');
+
+    this.render = function render() {
+        return this.template
+    }
+
+    this.done = function done(pass) {
+        var indicator = self.template.find(".indicator");
+
+        indicator.removeClass("default");
+        indicator.removeClass("warning");
+        indicator.removeClass("success");
+
+        if (pass == true) {
+            indicator.addClass("success");
+        } else {
+            indicator.addClass("warning");
+        }
+    }
+
+    this.get = function get() {
+        var method = self.template.find(".method");
+        method.text("GET");
+
+        var request = $.ajax({
+            type: "GET",
+            url: url
+        });
+
+        request.success(function() {
+            self.done(true);
+        });
+
+        request.error(function() {
+            self.done(false);
+        });
+    }
+
+    this.post = function post(data) {
+        var method = self.template.find(".method");
+        method.text("POST");
+
+        var request = $.ajax({
+            type: "POST",
+            data: data,
+            url: url
+        });
+
+        request.success(function() {
+            self.done(true);
+        });
+
+        request.error(function() {
+            self.done(false);
+        });
+    }
+
+    $("body").append(self.render());
+
+}
+
+getUrls = [
+    "/api/fail",
+    "/api/robot",
+    "/api/robot/body",
+    "/api/robot/body/arms",
+    "/api/robot/body/arms/0",
+    "/api/robot/body/arms/1",
+    "/api/robot/body/arms/0/hand",
+    "/api/robot/body/arms/0/hand/fingers",
+    "/api/robot/body/arms/0/hand/fingers/0",
+    "/api/robot/body/arms/1/hand/fingers/1"
+]
+
+for (var i = 0; i < getUrls.length; i++) {
+    var test = new Test(getUrls[i]);
+    test.get();
+}
+
+// For testing speech
+var testSpeech = new Test("/api/speech/");
+testSpeech.post(JSON.stringify({"speech_text": "Text for the robot to say"}));
+
+// For testing api POST to fingers
+var testFinger = new Test("/api/robot/body/arms/0/hand/fingers/0/");
+testFinger.post(JSON.stringify({"position": 2}));
+
+</script>
+</body>
+</html>

@@ -285,28 +285,6 @@ $("#say").click(function() {
 $("#write").click(function() {
     console.log("Write button not implemented");
 });
-
-
-// For testing speech
-$.ajax({
-    type: "POST",
-    url: "/api/speech/",
-    data: JSON.stringify({"speech_text": "Text for the robot to say"})
-}).success(function(data) {
-    console.log(data);
-});
-
-
-// For testing api POST
-$.ajax({
-    type: "POST",
-    url: "/api/robot/body/arms/0/hand/fingers/0/",
-    data: JSON.stringify({"position": 2})
-}).success(function(data) {
-    console.log(data);
-});
-
-
 </script>
 </body>
 </html>

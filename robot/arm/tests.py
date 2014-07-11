@@ -64,7 +64,7 @@ class HandTests(TestCase):
 
     def test_close_hand(self):
         hand = Hand()
-        thumb = Finger(0)
+        thumb = Finger(0, 0)
         for finger in range(4):
             hand.add_finger()
         hand.set_thumb(thumb)
@@ -78,7 +78,7 @@ class HandTests(TestCase):
 class FingerTests(TestCase):
 
     def test_finger_move(self):
-        finger = Finger(0)
+        finger = Finger(0, 0)
         finger.move(-30)
 
         self.assertEqual(finger.get_position(), -30)

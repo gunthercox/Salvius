@@ -90,6 +90,10 @@ class App(Resource):
     def get(self):
         return make_response(render_template('index.html'))
 
+class Test(Resource):
+    def get(self):
+        return make_response(render_template('test.html'))
+
 @app.route('/api/robot/')
 def api_robot():
     serialized = RobotSerializer(robot)
@@ -187,6 +191,7 @@ def static_css(path):
 
 # Setup the Api resource routing
 api.add_resource(App, '/')
+api.add_resource(Test, '/test/')
 
 api.add_resource(Speech, '/api/speech/')
 

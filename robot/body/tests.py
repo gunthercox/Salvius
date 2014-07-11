@@ -17,8 +17,7 @@ class Tests(TestCase):
 
     def test_add_arm(self):
         body = Body()
-        arm = Arm()
-        body.add_arm(arm)
+        arm = body.new_arm()
 
         self.assertEqual(len(body.arms), 1)
 
