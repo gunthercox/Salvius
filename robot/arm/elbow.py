@@ -1,22 +1,19 @@
-from marshmallow import Serializer, fields
+from marshmallow import fields
+from robot.joints import HingeJoint, HingeJointSerializer
 
 
-class Elbow(object):
+class Elbow(HingeJoint):
+    """
+    Elbow extends the basic hinge joint class and
+    sets a limit to its own movement.
+    """
 
-    def __init__(self, angle=0):
-        self.angle = angle
+    def __init__(self):
+        super(Elbow, self).__init__()
 
-    def move(self, degrees):
-        """
-        Moves the elbow relative to its current position.
-        """
-        self.angle += degrees
+        # Number of degrees that the joint is limited to.        
+        self.limit = 180
 
-    def reset(self):
-        self.angle = 0
 
-    def get_angle(self):
-        return self.angle
-
-class ElbowSerializer(Serializer):
-    angle = fields.Integer()
+class ElbowSerializer(HingeJointSerializer):
+    limit = fields.Integer()

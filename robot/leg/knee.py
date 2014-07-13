@@ -1,10 +1,18 @@
-from marshmallow import Serializer, fields
+from marshmallow import fields
+from robot.joints import HingeJoint, HingeJointSerializer
 
-class Knee(object):
+class Knee(HingeJoint):
+    """
+    Knee extends the basic hinge joint class and
+    sets a limit to its own movement.
+    """
 
     def __init__(self):
-        self.angle = 0
+        super(Knee, self).__init__()
+
+        # Number of degrees that the joint is limited to.        
+        self.limit = 180
 
 
-class KneeSerializer(Serializer):
-    angle = fields.Integer()
+class KneeSerializer(HingeJointSerializer):
+    limit = fields.Integer()
