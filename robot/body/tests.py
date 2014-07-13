@@ -23,7 +23,6 @@ class Tests(TestCase):
 
     def test_add_leg(self):
         body = Body()
-        leg = Leg()
-        body.add_leg(leg)
+        leg = body.new_leg()
 
         self.assertEqual(len(body.legs), 1)
