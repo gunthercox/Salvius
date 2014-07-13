@@ -8,6 +8,18 @@ from robot.arm.hand import Hand, Finger
 
 class ShoulderTests(TestCase):
 
+    def test_shoulder_rotate(self):
+        shoulder = Shoulder()
+        shoulder.rotate(-10)
+
+        self.assertEqual(shoulder.get_rotation(), -10)
+
+    def test_shoulder_extend(self):
+        shoulder = Shoulder()
+        shoulder.extend(10)
+
+        self.assertEqual(shoulder.get_angle(), 10)
+
     def test_shoulder_reset(self):
         shoulder = Shoulder()
 

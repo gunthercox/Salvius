@@ -41,7 +41,7 @@ class Arm(object):
 
 
 class ArmSerializer(Serializer):
-    id = fields.Integer()
+    id = fields.UUID()
     href = fields.Method("get_url")
     shoulder = fields.Nested("ShoulderSerializer")
     elbow = fields.Nested("ElbowSerializer")

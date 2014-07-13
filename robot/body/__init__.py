@@ -1,7 +1,7 @@
 from marshmallow import Serializer, fields
 from robot.head import HeadSerializer
 from robot.arm import Arm, ArmSerializer
-from robot.leg import LegSerializer
+from robot.leg import Leg, LegSerializer
 
 
 class Body(object):
@@ -27,8 +27,18 @@ class Body(object):
         self._arms.append(arm)
         return arm
 
-    def add_leg(self, leg):
-        self.legs.append(leg)
+    def new_leg(self):
+        """
+        Adds an arm object to the body.
+        Sets a unique id to reference the listed index of the arm object.
+        """
+        uuid = 0
+        if self._legs:
+            uuid = max(leg.id for leg in self._legs) + 1
+
+        leg = Leg(uuid)
+        self._legs.append(leg)
+        return leg
 
     @property
     def head(self):

@@ -1,11 +1,14 @@
 from marshmallow import Serializer, fields
 
 from robot.body import Body, BodySerializer
-from robot.arm import Arm
 from robot.arm.shoulder import Shoulder
 from robot.arm.elbow import Elbow
 from robot.arm.wrist import Wrist
 from robot.arm.hand import Hand, Finger
+from robot.leg.hip import Hip
+from robot.leg.knee import Knee
+from robot.leg.ankle import Ankle
+from robot.leg.foot import Foot
 
 
 class Robot(object):
@@ -20,7 +23,7 @@ class Robot(object):
 
     def default(self):
         """
-        Creates a basic humanoid robot
+        Creates a basic humanoid robot.
         """
         # Create left arm
         left_arm = self.body.new_arm()
@@ -38,7 +41,7 @@ class Robot(object):
         left_hand.set_parent_id(left_arm.id)
         left_arm.set_hand(left_hand)
 
-        left_thumb = Finger(0, 0)
+        left_thumb = Finger(hand_id=left_arm.id)
         for finger in range(4):
             left_hand.add_finger()
 
@@ -60,11 +63,41 @@ class Robot(object):
         right_hand.set_parent_id(right_arm.id)
         right_arm.set_hand(right_hand)
 
-        right_thumb = Finger(0, 1)
+        right_thumb = Finger(hand_id=right_arm.id)
         for finger in range(4):
             right_hand.add_finger()
 
         right_hand.set_thumb(right_thumb)
+
+        # Create left leg
+        left_leg = self.body.new_leg()
+
+        right_hip = Hip()
+        left_leg.set_hip(right_hip)
+
+        left_knee = Knee()
+        left_leg.set_knee(left_knee)
+
+        right_ankle = Ankle()
+        left_leg.set_ankle(right_ankle)
+
+        right_foot = Foot()
+        left_leg.set_foot(right_foot)
+
+        # Create right leg
+        right_leg = self.body.new_leg()
+
+        right_hip = Hip()
+        right_leg.set_hip(right_hip)
+
+        right_knee = Knee()
+        right_leg.set_knee(right_knee)
+
+        right_ankle = Ankle()
+        right_leg.set_ankle(right_ankle)
+
+        right_foot = Foot()
+        right_leg.set_foot(right_foot)
 
 
 class RobotSerializer(Serializer):

@@ -7,11 +7,13 @@ from robot.leg.foot import Foot, FootSerializer
 
 class Leg(object):
 
-    def __init__(self):
+    def __init__(self, uuid):
         self._hip = None
         self._knee = None
         self._ankle = None
         self._foot = None
+
+        self.id = uuid
 
     def set_hip(self, hip):
         self._hip = hip
@@ -43,8 +45,13 @@ class Leg(object):
 
 
 class LegSerializer(Serializer):
+    id = fields.UUID()
+    href = fields.Method("get_url")
     hip = fields.Nested(HipSerializer)
     knee = fields.Nested(KneeSerializer)
     ankle = fields.Nested(AnkleSerializer)
     foot = fields.Nested(FootSerializer)
+
+    def get_url(self, obj):
+        return "/api/robot/body/legs/" + str(obj.id)
 

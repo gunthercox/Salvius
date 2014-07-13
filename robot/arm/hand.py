@@ -3,11 +3,11 @@ from marshmallow import Serializer, fields
 
 class Finger(object):
 
-    def __init__(self, uuid, hand_id):
+    def __init__(self, uuid=None, hand_id=None):
         self.position = 0
-        self.id = uuid
 
         self.parent_id = hand_id
+        self.id = uuid
 
     def move(self, degrees):
         """
@@ -70,12 +70,14 @@ class Hand(object):
 
 class FingerSerializer(Serializer):
     href = fields.Method("get_url")
-    id = fields.Integer()
+    id = fields.UUID()
     position = fields.Integer()
 
     def get_url(self, obj):
         url = "/api/robot/body/arms/" + str(obj.parent_id) + "/hand"
-        if self.many:
+
+        # Only fingers should be created with an id
+        if obj.id is not None:
             url += "/fingers/" + str(obj.id)
         else:
             url += "/thumb"
