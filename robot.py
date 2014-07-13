@@ -22,7 +22,6 @@ except RuntimeError:
 
 # Create the default robot
 robot = Robot("Salvius")
-robot.default()
 
 # Create flask app
 app = Flask(__name__)
