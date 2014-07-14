@@ -85,6 +85,10 @@ class FingerSerializer(Serializer):
         return url
 
 
+class FingersSerializer(Serializer):
+    fingers = fields.Nested(FingerSerializer, many=True)
+
+
 class HandSerializer(Serializer):
     fingers = fields.Nested(FingerSerializer, many=True)
     thumb = fields.Nested(FingerSerializer)

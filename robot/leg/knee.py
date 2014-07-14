@@ -1,6 +1,7 @@
 from marshmallow import fields
 from robot.joints import HingeJoint, HingeJointSerializer
 
+
 class Knee(HingeJoint):
     """
     Knee extends the basic hinge joint class and

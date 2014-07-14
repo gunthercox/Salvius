@@ -36,11 +36,11 @@ class Leg(object):
         return self._knee
 
     @property
-    def get_ankle(self):
+    def ankle(self):
         return self._ankle
 
     @property
-    def get_foot(self):
+    def foot(self):
         return self._foot
 
 

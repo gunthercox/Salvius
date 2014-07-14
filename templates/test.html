@@ -103,6 +103,25 @@ function Test(url) {
         });
     }
 
+    this.patch = function post(data) {
+        var method = self.template.find(".method");
+        method.text("PATCH");
+
+        var request = $.ajax({
+            type: "PATCH",
+            data: data,
+            url: url
+        });
+
+        request.success(function() {
+            self.done(true);
+        });
+
+        request.error(function() {
+            self.done(false);
+        });
+    }
+
     $("body").append(self.render());
 
 }
@@ -131,7 +150,11 @@ testSpeech.post(JSON.stringify({"speech_text": "Text for the robot to say"}));
 
 // For testing api POST to fingers
 var testFinger = new Test("/api/robot/body/arms/0/hand/fingers/0/");
-testFinger.post(JSON.stringify({"position": 2}));
+testFinger.patch(JSON.stringify({"position": 2}));
+
+// For testing api POST to thumb
+var testThumb = new Test("/api/robot/body/arms/0/hand/thumb/");
+testThumb.patch(JSON.stringify({"position": 2}));
 
 </script>
 </body>

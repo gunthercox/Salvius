@@ -1,6 +1,8 @@
 from marshmallow import Serializer, fields
 
 from robot.body import Body, BodySerializer
+from robot.head import Head
+from robot.torso import Torso
 from robot.arm.shoulder import Shoulder
 from robot.arm.elbow import Elbow
 from robot.arm.wrist import Wrist
@@ -20,6 +22,13 @@ class Robot(object):
         # Create a default humanoid robot if one is not passed in as a parameter
         if body is None:
             self._body = Body()
+
+            # Add a head and torso
+            head = Head
+            self.body.set_head(head)
+
+            torso = Torso()
+            self.body.set_torso(torso)
 
             # Create left arm
             left_arm = self.body.new_arm()
