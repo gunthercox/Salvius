@@ -134,33 +134,74 @@ class ApiThumb(Resource):
 
 
 class ApiLegs(Resource):
+
     def get(self):
         serialized = LegsSerializer(robot.body)
         return jsonify(serialized.data)
 
 
 class ApiLeg(Resource):
+
     def get(self, leg_id):
         serialized = LegSerializer(robot.body.legs[leg_id])
         return jsonify(serialized.data)
 
+    def patch(self, leg_id):
+        json = request.get_json(force=True)
+
+        hip = robot.body.legs[leg_id].hip
+        hip.set_method(json)
+
+        serialized = HipSerializer(hip)
+        return jsonify(serialized.data)
+
+
 class ApiHip(Resource):
+
     def get(self, leg_id):
         serialized = HipSerializer(robot.body.legs[leg_id].hip)
         return jsonify(serialized.data)
 
+    def patch(self, leg_id):
+        json = request.get_json(force=True)
+
+        hip = robot.body.legs[leg_id].hip
+        hip.set_method(json)
+
+        serialized = HipSerializer(hip)
+        return jsonify(serialized.data)
+
 
 class ApiKnee(Resource):
+
     def get(self, leg_id):
         serialized = KneeSerializer(robot.body.legs[leg_id].knee)
         return jsonify(serialized.data)
 
+    def patch(self, leg_id):
+        json = request.get_json(force=True)
+
+        knee = robot.body.legs[leg_id].knee
+        knee.set_method(json)
+
+        serialized = KneeSerializer(knee)
+        return jsonify(serialized.data)
+
 
 class ApiAnkle(Resource):
+
     def get(self, leg_id):
         serialized = AnkleSerializer(robot.body.legs[leg_id].ankle)
         return jsonify(serialized.data)
 
+    def patch(self, leg_id):
+        json = request.get_json(force=True)
+
+        ankle = robot.body.legs[leg_id].ankle
+        ankle.set_method(json)
+
+        serialized = AnkleSerializer(ankle)
+        return jsonify(serialized.data)
 
 class ApiFoot(Resource):
     def get(self, leg_id):

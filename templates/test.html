@@ -132,11 +132,9 @@ getUrls = [
     "/api/robot/body",
     "/api/robot/body/arms",
     "/api/robot/body/arms/0",
-    "/api/robot/body/arms/1",
     "/api/robot/body/arms/0/hand",
     "/api/robot/body/arms/0/hand/fingers",
-    "/api/robot/body/arms/0/hand/fingers/0",
-    "/api/robot/body/arms/1/hand/fingers/1"
+    "/api/robot/body/arms/0/hand/fingers/0"
 ]
 
 for (var i = 0; i < getUrls.length; i++) {
@@ -155,6 +153,12 @@ testFinger.patch(JSON.stringify({"position": 2}));
 // For testing api POST to thumb
 var testThumb = new Test("/api/robot/body/arms/0/hand/thumb/");
 testThumb.patch(JSON.stringify({"position": 2}));
+
+var testAnkleFail = new Test("/api/robot/body/legs/0/ankle/");
+testAnkleFail.patch(JSON.stringify({"position": 2, "angle": 9}));
+
+var testAnkle = new Test("/api/robot/body/legs/0/ankle/");
+testAnkle.patch(JSON.stringify({"tilt": 2, "angle": 9}));
 
 </script>
 </body>
