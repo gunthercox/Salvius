@@ -1,4 +1,5 @@
 from flask import request
+
 from flask.ext.restful import reqparse, Resource
 
 class Speech(Resource):
@@ -25,3 +26,6 @@ class Speech(Resource):
             return json_data, 201
 
         return {"warning": "required value not provided in request"}, 500
+
+    def get(self):
+        return {"warning": "Method not allowed!!!"}, 405

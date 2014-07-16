@@ -59,8 +59,6 @@ class WristTests(TestCase):
 
         wrist.reset()
 
-        print(wrist.get_position())
-
         self.assertTrue(wrist.get_position() == [0, 0, 0])
 
 

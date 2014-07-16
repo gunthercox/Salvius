@@ -33,11 +33,6 @@ class App(View):
         return render_template("index.html")
 
 
-class Test(View):
-    def dispatch_request(self):
-        return render_template("test.html")
-
-
 class ApiRobot(Resource):
     def get(self):
         serialized = RobotSerializer(robot)
@@ -243,7 +238,6 @@ class ApiFoot(Resource):
 
 
 app.add_url_rule("/", view_func=App.as_view("app"))
-app.add_url_rule("/test/", view_func=Test.as_view("test"))
 
 # Setup the Api resource routing
 api.add_resource(ApiRobot, "/api/robot/")
