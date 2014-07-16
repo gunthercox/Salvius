@@ -11,10 +11,11 @@ Rapsberry Pi and several Arduino microcontrollers as a brain.
 > that of a human. The primary goal for Salvius is to 
 > create a humanoid robot that will be able to function
 > dynamically in a domestic environment.
-> - [salviusrobot.blogspot.com](http://salviusrobot.blogspot.com)
+> ~ [salviusrobot.blogspot.com](http://salviusrobot.blogspot.com)
 
 **Key features:**
   - Web based user interface
+  - Easily customizable robots
   - RESTfull API
   - Modular design makes it easy to add controllers via I2C
 
@@ -201,5 +202,3 @@ perform as expected. These tests can also be run manually by running the command
 This project has been made possible with funding from the following sources:
 Jennifer Cox, Adam Iredale, Janet Wise, Glen Zenor, Boris Hofer, 
 Señora Alderperson, Wilbraham Music (Chris Cox), June Cox, Rantz, Yuri Yerofeyev
-
-See http://salviusrobot.blogspot.com/2012/12/support-salvius.html for more information.

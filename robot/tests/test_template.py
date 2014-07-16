@@ -1,5 +1,5 @@
-from unittest import TestCase
 from flask import Flask, request
+from flask.ext.testing import TestCase
 
 from robot import Robot, RobotSerializer
 from robot.body import BodySerializer
@@ -11,6 +11,12 @@ from robot.arm.hand import Hand, HandSerializer
 from robot.arm.hand import Finger, FingerSerializer
 
 class TestRenderTemplates(TestCase):
+
+    def create_app(self):
+        # `create_app` must be define or a NotImplementedError will be raised
+        app = Flask(__name__)
+        app.config['TESTING'] = True
+        return app
 
     def test_test(self):
 

@@ -24,19 +24,20 @@ class Joint(object):
             else:
                 raise Exception("Attribue %s not found" % attribue)
 
-    def set_method(self, data):
+    def set_methods(self, data):
         """
         A setter method which takes a dictionary as a parameter and
-        calls setter methods prefixed with 'set_' if they exist.
+        calls methods if they exist. Only one parametery is can currently
+        be passed into a method.
         """
 
         for key in data.keys():
             method = str(key)
             value = data[key]
 
-            try:
+            if callable(getattr(self, method)):
                 getattr(self, method)(value)
-            except:
+            else:
                 raise Exception("Method %s not implemented" % method)
 
 
