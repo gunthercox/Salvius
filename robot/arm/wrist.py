@@ -1,9 +1,11 @@
 from marshmallow import Serializer, fields
+from robot.joints import Joint
 
 
-class Wrist(object):
+class Wrist(Joint):
 
     def __init__(self):
+        super(Wrist, self).__init__()
         self.roll = 0
         self.pitch = 0
         self.yaw = 0

@@ -79,16 +79,45 @@ class ApiShoulder(Resource):
         serialized = ShoulderSerializer(robot.body.arms[arm_id].shoulder)
         return jsonify(serialized.data)
 
+    def patch(self, arm_id):
+        json = request.get_json(force=True)
+
+        shoulder = robot.body.arms[arm_id].shoulder
+        shoulder.set_attributes(json)
+
+        serialized = ShoulderSerializer(shoulder)
+        return jsonify(serialized.data)
+
 
 class ApiElbow(Resource):
+
     def get(self, arm_id):
         serialized = ElbowSerializer(robot.body.arms[arm_id].elbow)
         return jsonify(serialized.data)
 
+    def patch(self, arm_id):
+        json = request.get_json(force=True)
+
+        elbow = robot.body.arms[arm_id].elbow
+        wrist.set_attributes(json)
+
+        serialized = ElbowSerializer(elbow)
+        return jsonify(serialized.data)
+
 
 class ApiWrist(Resource):
+
     def get(self, arm_id):
         serialized = WristSerializer(robot.body.arms[arm_id].wrist)
+        return jsonify(serialized.data)
+
+    def patch(self, arm_id):
+        json = request.get_json(force=True)
+
+        wrist = robot.body.arms[arm_id].wrist
+        wrist.set_attributes(json)
+
+        serialized = WristSerializer(wrist)
         return jsonify(serialized.data)
 
 
@@ -147,13 +176,17 @@ class ApiLeg(Resource):
         return jsonify(serialized.data)
 
     def patch(self, leg_id):
+        # There is curretly no way to patch to nested items
+        pass
+        '''
         json = request.get_json(force=True)
 
         hip = robot.body.legs[leg_id].hip
-        hip.set_method(json)
+        hip.set_attributes(json)
 
         serialized = HipSerializer(hip)
         return jsonify(serialized.data)
+        '''
 
 
 class ApiHip(Resource):
@@ -166,7 +199,7 @@ class ApiHip(Resource):
         json = request.get_json(force=True)
 
         hip = robot.body.legs[leg_id].hip
-        hip.set_method(json)
+        hip.set_attributes(json)
 
         serialized = HipSerializer(hip)
         return jsonify(serialized.data)
@@ -182,7 +215,7 @@ class ApiKnee(Resource):
         json = request.get_json(force=True)
 
         knee = robot.body.legs[leg_id].knee
-        knee.set_method(json)
+        knee.set_attributes(json)
 
         serialized = KneeSerializer(knee)
         return jsonify(serialized.data)
@@ -198,7 +231,7 @@ class ApiAnkle(Resource):
         json = request.get_json(force=True)
 
         ankle = robot.body.legs[leg_id].ankle
-        ankle.set_method(json)
+        ankle.set_attributes(json)
 
         serialized = AnkleSerializer(ankle)
         return jsonify(serialized.data)

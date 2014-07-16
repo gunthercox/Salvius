@@ -1,9 +1,11 @@
 from marshmallow import Serializer, fields
+from robot.joints import Joint
 
 
-class Shoulder(object):
+class Shoulder(Joint):
 
     def __init__(self, rotation=0, angle=0):
+        super(Shoulder, self).__init__()
         self.rotation = rotation
         self.angle = angle
 

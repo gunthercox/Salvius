@@ -46,6 +46,7 @@ function Test(url) {
                       '<div class="indicator default"></div>' +
                       '<div class="caption method"></div>' +
                       '<div class="caption">'+url+'</div>' +
+                      '<div class="caption data">'+url+'</div>' +
                       '</div>');
 
     this.render = function render() {
@@ -68,6 +69,7 @@ function Test(url) {
 
     this.get = function get() {
         var method = self.template.find(".method");
+        var data = self.template.find(".data");
         method.text("GET");
 
         var request = $.ajax({
@@ -75,7 +77,9 @@ function Test(url) {
             url: url
         });
 
-        request.success(function() {
+        request.success(function(response) {
+            console.log(response);
+            data.text(response);
             self.done(true);
         });
 
@@ -159,6 +163,9 @@ testAnkleFail.patch(JSON.stringify({"position": 2, "angle": 9}));
 
 var testAnkle = new Test("/api/robot/body/legs/0/ankle/");
 testAnkle.patch(JSON.stringify({"tilt": 2, "angle": 9}));
+
+var testLeg = new Test("/api/robot/body/legs/0/");
+testLeg.patch(JSON.stringify({"tilt": 2, "angle": 9}));
 
 </script>
 </body>

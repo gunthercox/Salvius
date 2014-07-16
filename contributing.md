@@ -1,52 +1,31 @@
-# Contributing to this robot's source code
+**Looking to contribute something to this project? Here's how you can help.**
 
-Looking to contribute something to this project? **Here's how you can help.**
-
-Please take a moment to review this document in order to make the contribution
-process easy and effective for everyone involved.
-
-Following these guidelines helps to communicate that you respect the time of
-the developers managing and developing this open source project. In return,
-they should reciprocate that respect in addressing your issue or assessing
-patches and features.
-
-
-## Using the issue tracker
-
-The [issue tracker](https://github.com/gunthercox/salvius/issues) is
-the preferred channel for [bug reports](#bug-reports), [features requests](#feature-requests)
-and [submitting pull requests](#pull-requests), but please respect the following
-restrictions:
-
-* Please **do not** use the issue tracker for personal support requests. Stack
-  Overflow ([`salvius`](http://stackoverflow.com/questions/tagged/salvius) tag) is a better place to get help.
-
-* Please **do not** derail or troll issues. Keep the discussion on topic and
-  respect the opinions of others.
-
-* Please **do not** open issues or pull requests regarding the code in
-  libraries used by this project, open them in their respective repositories.
+Following these guidelines helps ensure that all ideas are communicated
+thoroughly so that any issues, patches and features can be properly assessed.
 
 
 ## Reporting issues
+
+Please **do not** open issues or pull requests regarding the code in
+libraries used by this project, open them in their respective repositories.
 
 A bug is a _demonstrable problem_ that is caused by the code in the repository.
 Good bug reports are extremely helpful, so thanks!
 
 Guidelines for bug reports:
 
-1. **Use the GitHub issue search:** check if the issue has already been
-   reported.
+1. **Isolate the problem:** ideally create a [reduced test
+   case](http://css-tricks.com/6263-reduced-test-cases/) and a runable example.
 
-2. **Isolate the problem:** ideally create a [reduced test
-   case](http://css-tricks.com/6263-reduced-test-cases/) and a live example.
-   [This JS Bin](http://jsbin.com/EBAwOkOK/1) is a helpful template.
-
-3. **Share as much information as possible.** Be sure to include the steps needed to reproduce the bug.
+2. **Share as much information as possible.** Be sure to include the steps needed to reproduce the bug.
 
 
-A good bug report shouldn't leave others needing to chase you up for more information. Please try to be as detailed as possible in your report. What is
-your environment? What steps will reproduce the issue? What device is the issue occuring on? Do other browsers show the bug differently? What would you expect to be the outcome? All these details will help people to fix any potential bugs.
+Try to include information such as:
+- What is your environment? (e.g. Operating system, browser, and versions)
+- What steps will reproduce the issue?
+- What device is the issue occuring on?
+- Do other browsers show the bug differently?
+- What would you expect to be the outcome?
 
 Example:
 
@@ -153,10 +132,10 @@ http://legacy.python.org/dev/peps/pep-0008/
 
 ### Arduino
 
-- Avoid single letter variable names. Make them descriptive
-- Avoid variable names like val or pin. Be more descriptive, like buttonState or switchPin
+- Use descriptive variable names. Avoid single letter variables.
+- Avoid variable names like val or pin. Be more descriptive, like buttonState or switchPin.
 - If you want to define pin names and other quantities which won't change, use const ints. They're less messy than #defines, yet still give you a way to teach the difference between a variable and a constant.
-- Use the wiring/Processing-style variable types, e.g. boolean,char,byte,int,unsigned int,long,unsigned long,float,double,string,array,void when possible, rather than uint8_t, etc. 
+- Use the wiring/Processing-style variable types, e.g. boolean, char, byte, int, unsigned int, long, unsigned long,float,double,string,array,void when possible, rather than uint8_t, etc. 
 
 - Explain the code at the start using a descriptive title block, for example:
 ```
@@ -181,16 +160,14 @@ http://legacy.python.org/dev/peps/pep-0008/
 
 ### JS
 
-- No semicolons (in client-side JS)
-- 2 spaces (no tabs)
-- strict mode
-- "Attractive"
+Adhere to pythonic javascript style:
+http://gist.github.com/gunthercox/e4826c481d9ce64c1ccd
+
 
 ### HTML
 
-- Two spaces for indentation, never tabs
+- Four spaces for indentation, never tabs
 - Double quotes only, never single quotes
-- Always use proper indentation
 - Use tags and elements appropriate for an HTML5 doctype (e.g., self-closing tags)
 
 ### CSS
