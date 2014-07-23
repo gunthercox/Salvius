@@ -26,7 +26,7 @@ configure the robot's api and interface by running the following three lines of 
 
 ```bash
 apt-get install pip
-pip install -r requirements.txt
+pip install -r requirements.md
 chmod a+x robot.py
 ```
 
@@ -180,7 +180,7 @@ A robot with one arm would look like this:
 A specific part of the robot can be accessed by changing the url to narrow the
 objects that are serialized.
 
-The url ```/api/robot/body/arms/arm/0/hand/fingers/finger/0/``` would return
+The url ```/api/robot/body/arms/0/hand/fingers/0/``` would return
 only the serialized representation of the first finger on the first arm attached
 to the robot. This data would be shown as follows, showing only the numeric
 position of that one finger.
@@ -198,7 +198,6 @@ perform as expected. These tests can also be run manually by running the command
 ([unit tests](http://en.wikipedia.org/wiki/Unit_testing)) for more information.
 
 ## Contributors
-
 This project has been made possible with funding from the following sources:
 Jennifer Cox, Adam Iredale, Janet Wise, Glen Zenor, Boris Hofer, 
 Señora Alderperson, Wilbraham Music (Chris Cox), June Cox, Rantz, Yuri Yerofeyev

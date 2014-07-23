@@ -4,27 +4,31 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Interface</title>
-    <link rel="stylesheet" href="css/foundation.css" />
-    <link rel="stylesheet" href="css/salvius.css"></link>
+    <link rel="stylesheet" href="/css/foundation.css" />
+    <link rel="stylesheet" href="/css/salvius.css"></link>
 </head>
 
 <body>
+
+    <div class="panel shutdown hide">
+        <h2 class="danger">Emergency shutdown</h2>
+        <button class="js-terminate">Confirm</button>
+        <button class="js-dismiss">Cancel</button>
+        <p class="warning">WARNING: This operation will deactivate all systems on the robot.</p>
+    </div>
+
+    <div class="panel warnings hide">
+        <h2>Warnings</h2>
+        <button class="js-dismiss-all">Dismiss all</button>
+        <ul class="error-list"></ul>
+    </div>
     
     <div class="columns">&nbsp;</div>
-    
-    <div data-alert id="shutdown" class="alert-box shutdown hide">
-        <h2 style="color:#f00">Emergency Shutdown</h2>
-        <section>
-        <a href="#" class="pushbutton on" id="button">&spades;</a>
-        <span class="led"></span>
-        </section>
-        <p style="color:#F60">WARNING: This operation will deactivate all systems on the robot.</p>
-    </div>
 
     <div class="large-3 columns">
         <div class="row collapse">
             <div class="small-9 columns">
-                <input type="text" placeholder="Text to Speech"/>
+                <input type="text" placeholder="Text to speech"/>
             </div>
             <div class="small-3 columns">
                 <button id="say" class="button prefix">Say</button>
@@ -32,7 +36,7 @@
         </div>
         <div class="row collapse">
             <div class="small-9 columns">
-                <input type="text" placeholder="Text to Handwriting"/>
+                <input type="text" placeholder="Text to handwriting"/>
             </div>
             <div class="small-3 columns">
                 <button id="write" class="button prefix">Write</button>
@@ -93,17 +97,10 @@
                         </li>
                     </ul>
                     <ul class="right">
-                        <li class="has-dropdown">
-                            <a href="#" class="warnings">&#9632;</a>
-                            <ul class="dropdown error-list">
-                                <li id="camError" class="hide">
-                                    <a href="#">Camera input is unavailable.</a>
-                                </li>
-                                <li class="divider"></li>
-                                <li id="apiError" class="hide">
-                                    <a href="#">Arduino api is unavailable.</a>
-                                </li>
-                            </ul>
+                        <li>
+                            <a href="#warnings">
+                                <span class="warning led green"></span> Warnings
+                            </a>
                         </li>
                         <li class="has-dropdown">
                             <a href="#">Options</a>
@@ -116,26 +113,28 @@
             </nav>
         </div>
         <div class="row collapse">
-            <canvas id="cam" class="small-12"/>
-            <div id="txt">0</div>
+            <div class="large-11 columns">
+                <canvas id="cam" class="small-12"/>
+                <div id="txt">0</div>
+            </div>
+            <div class="large-1 columns" style="height: 281px;">
+                <input type="range" class="js-angle-head vertical" min="-100" max="100">
+            </div>
+        </div>
+        <div class="row collapse">
+            <input type="range" class="js-rotate-head horizontal" min="-100" max="100">
         </div>
         <div class="row collapse">
             <div class="large-12 columns">
-                <button class="button small-2 columns rotate-left">&#8592;</button>
-                <button class="button small-2 columns tilt-left">&#8601;</button>
-                
-                <button class="button small-2 columns tilt-up">&#8593;</button>
-                <button class="button small-2 columns tilt-down">&#8595;</button>
-                
-                <button class="button small-2 columns tilt-right">&#8600;</button>
-                <button class="button small-2 columns rotate-right">&#8594;</button>
+                <button class="button small-6 columns tilt-left">&#8601;</button>
+                <button class="button small-6 columns tilt-right">&#8600;</button>
             </div>
         </div>
     </div>
 
     <div class="large-3 columns">
         <div class="row collapse">
-            <input type="text" class="filter" style="display:none" placeholder="Filter available sensors"/>
+            <input type="text" class="filter hide" placeholder="Filter available sensors"/>
         </div>
         <div class="row collapse scroll-table">
             <table style="width:100%">
@@ -151,140 +150,7 @@
         </div>
     </div>
 
-<script src="js/jquery.js"></script>
-<script src="js/foundation/foundation.js"></script>
-<script src="js/foundation/foundation.topbar.js"></script>
-<script type="text/javascript">
-
-$(document).foundation();
-
-// SETTINGS
-var camera_ip = "192.168.1.2";
-var arduino_ip = "192.168.1.177";
-
-$(".camera_ip").val(camera_ip);
-$(".arduino_ip").val(arduino_ip);
-
-var cameraImage = ["http://", camera_ip, "/image.jpg"].join("");
-var arduinoJson = ["http://", arduino_ip].join("");
-
-function error() {
-    // TODO: LOOK INTO EXTENDING THE JQUERY ERROR HANDLER
-    // ALSO, THIS SHOULD CHANGE THE COLOR BACK WHEN THERE ARE NO MORE ERRORS
-    // WHICH REMINDS ME, I NEED TO AUTOMATICALLY RETRY IF A GET FAILS
-    // I WOULD LOVE TO PIPE CONSOLE ERRORS INTO THIS FIELD
-    //$(".warnings").css("color", "#f08a24");
-};
-
-(function($) {
-    $(".warnings").css("color", "#f08a24");
-    // maintain a to the existing function
-    var olderror = $.fn.error;
-    // ...before overwriting the jQuery extension point
-    $.fn.error = function() {
-        // original behavior - use function.apply to preserve context
-        var ret = olderror.apply(this, arguments);
-
-        // stuff I will be extending
-        // that doesn't affect/change
-        // the way .css() works
-        
-
-        // preserve return value (probably the jQuery object...)
-        return ret;
-    };
-})(jQuery);
-
-/* CANVIS CODE FROM http://dwdii.github.io/2011/10/23/Using-HTML5-Canvas-tag-for-Simple-Video-Animation.html
-Known issue: http://stackoverflow.com/questions/13674835/canvas-tainted-by-cross-origin-data */
-var imageUpdateMs = 1;
-var count = 0;
-var newImg;
-
-setTimeout("imageUpdate()", imageUpdateMs );
-
-function imageUpdate() {
-	document.getElementById("txt").innerHTML = count++;
-
-	newImg = new Image();
-	newImg.Id = "cam" + count;
-	newImg.Name = newImg.Id;
-	newImg.onload = imageLoaded;
-	newImg.src = cameraImage;
-}
-
-function imageLoaded() {
-	var context = $("#cam")[0].getContext('2d');
-	context.drawImage(newImg,0,0,640,480,0,0,300,150);
-	setTimeout("imageUpdate()", imageUpdateMs);
-}
- 		
-$.ajax({ 
-    type: 'GET', 
-    url: arduinoJson, 
-    data: { get_param: 'value' }, 
-    dataType: 'json',
-    success: function (data) {
-        $.each(data, function(index, element) {
-            $('.sensorValues').append('<tr><td>' + index + '</td><td>' + element + '</td></tr>');
-        });
-        $(".filter").show();
-    }
-}).error(function() {
-    error();
-    $("#apiError").show();
-});
-
-$('a[href="#shutdown"]').click(function() {
-    $("#shutdown").show();
-});
-
-$('a[href="#configuration"]').click(function() {
-    $("#configuration").show();
-});
-
-$("#post").click(function() {
-    var key = $("#key").val();
-    var value = $("#value").val();
-    var str = [key, value].join("=");
-    $.ajax({
-        type: "POST",
-        url: "http://"+arduino_ip,
-        data: str,
-        contentType: "application/x-www-form-urlencoded; charset=utf-8",
-        success: function(data) {
-            $("#key").val("");
-            $("#value").val("");
-            //TODO: UPDATE TABLE IF NEEDED WHEN POSTING Dx
-            // if key in table table.key.val(key)
-        }
-    }).error(function(data) {
-        $(".error-list").append("<li style='display:list-item'>" +
-          "<a href='#'>Failure to post data</a></li>");
-    });
-});
-
-$("#say").click(function() {
-    var key = "say";
-    var value = $("#value").val();
-    var str = [key, value].join("=");
-    $.ajax({
-        type: "POST",
-        url: "http://"+arduino_ip,
-        data: str,
-        contentType: "application/x-www-form-urlencoded; charset=utf-8"
-    }).success(function(data) {
-        $("#key").val("");
-        $("#value").val("");
-    }).error(function(data) {
-        $(".error-list").append("<li style='display:list-item'>" +
-          "<a href='#'>Failure to post data</a></li>");
-    });
-});
-
-$("#write").click(function() {
-    console.log("Write button not implemented");
-});
-</script>
+<script src="/js/jquery.js"></script>
+<script src="/js/robot.js"></script>
 </body>
 </html>

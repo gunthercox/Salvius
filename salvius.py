@@ -231,10 +231,24 @@ class ApiAnkle(Resource):
         serialized = AnkleSerializer(ankle)
         return jsonify(serialized.data)
 
+
 class ApiFoot(Resource):
     def get(self, leg_id):
         serialized = FootSerializer(robot.body.legs[leg_id].foot)
         return jsonify(serialized.data)
+
+
+class Terminate(Resource):
+    """
+    Endpoint to stop the server on the robot.
+    This will stop commands from being processed,
+    however it will not stop tasks running on parallel controllers.
+    """
+    def post(self):
+        shutdown = request.environ.get('werkzeug.server.shutdown')
+        if shutdown is None:
+            raise RuntimeError('Not running with the Werkzeug Server')
+        shutdown()
 
 
 app.add_url_rule("/", view_func=App.as_view("app"))
@@ -261,6 +275,8 @@ api.add_resource(ApiHip, "/api/robot/body/legs/<int:leg_id>/hip/")
 api.add_resource(ApiKnee, "/api/robot/body/legs/<int:leg_id>/knee/")
 api.add_resource(ApiAnkle, "/api/robot/body/legs/<int:leg_id>/ankle/")
 api.add_resource(ApiFoot, "/api/robot/body/legs/<int:leg_id>/foot/")
+
+api.add_resource(Terminate, "/api/terminate/")
 
 api.add_resource(Speech, "/api/speech/")
 api.add_resource(PiPins, "/api/gpio/")
