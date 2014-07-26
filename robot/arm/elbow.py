@@ -11,7 +11,7 @@ class Elbow(HingeJoint):
     def __init__(self):
         super(Elbow, self).__init__()
 
-        # Number of degrees that the joint is limited to.        
+        # Number of degrees that the joint is limited to.
         self.limit = 180
 
 

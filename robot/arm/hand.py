@@ -22,6 +22,7 @@ class Finger(object):
     def get_position(self):
         return self.position
 
+
 class Hand(object):
 
     def __init__(self):
@@ -92,4 +93,3 @@ class FingersSerializer(Serializer):
 class HandSerializer(Serializer):
     fingers = fields.Nested(FingerSerializer, many=True)
     thumb = fields.Nested(FingerSerializer)
-

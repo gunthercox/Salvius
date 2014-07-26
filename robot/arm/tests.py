@@ -92,4 +92,3 @@ class FingerTests(TestCase):
         finger.move(-30)
 
         self.assertEqual(finger.get_position(), -30)
-

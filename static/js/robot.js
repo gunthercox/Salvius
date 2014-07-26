@@ -14,9 +14,9 @@ function Robot() {
         // Change indicator led based on error count
         var errorCount = $(".error-list").find("li").length;
         if (errorCount > 0) {
-            $(".warning.led").removeClass("green").addClass("red");
+            $(".warning").addClass("error-red");
         } else {
-            $(".warning.led").removeClass("red").addClass("green");
+            $(".warning").removeClass("error-red");
         }
     }
 
@@ -84,10 +84,6 @@ $(".js-terminate").click(function() {
     robot.terminate();
 });
 
-$(".panel").on("click", ".js-dismiss", function() {
-    $(this).parents(".panel").addClass("hide");
-});
-
 $(".error-list").on("click", ".js-dismiss", function() {
     $(this).parents("li").remove();
     robot.error();
@@ -96,18 +92,6 @@ $(".error-list").on("click", ".js-dismiss", function() {
 $(".js-dismiss-all").click(function() {
     $(".error-list li").remove();
     robot.error();
-});
-
-$('a[href="#warnings"]').click(function() {
-    $(".warnings").toggleClass("hide");
-});
-
-$('a[href="#shutdown"]').click(function() {
-    $(".shutdown").removeClass("hide");
-});
-
-$('a[href="#configuration"]').click(function() {
-    $("#configuration").removeClass("hide");
 });
 
 $("#post").click(function() {
@@ -149,6 +133,18 @@ $("#say").click(function() {
 
 $("#write").click(function() {
     console.log("Write button not implemented");
+});
+
+$(".tabs").on("click", ".tab-title", function(event) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    $(this).parents(".tabs").find(".active").removeClass("active");
+    $(this).addClass("active");
+
+    var id = $(this).find("a").attr("href");
+    $(id).parents(".tabs-content").find(".content").removeClass("active");
+    $(id).addClass("active");
 });
 
 var timer = {};

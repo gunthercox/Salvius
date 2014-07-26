@@ -1,6 +1,7 @@
 from unittest import TestCase
 import salvius
 
+
 class Test(TestCase):
 
     def setUp(self):

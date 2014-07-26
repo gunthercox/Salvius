@@ -15,7 +15,8 @@ Guidelines for bug reports:
 1. **Isolate the problem:** ideally create a [reduced test
    case](http://css-tricks.com/6263-reduced-test-cases/) and a runable example.
 
-2. **Share as much information as possible.** Be sure to include the steps needed to reproduce the bug.
+2. **Share as much information as possible.** Be sure to include the
+   steps needed to reproduce the bug.
 
 Try to include information such as:
 - What is your environment? (e.g. Operating system, browser, and versions)
@@ -41,40 +42,34 @@ otherwise you risk spending a lot of time working on something that the
 project's developers might not want to merge into the project.
 
 **IMPORTANT**: By submitting a patch, you agree to allow the project owners to
-license your work under the terms of the [MIT License](LICENSE.md).
+license your work under the terms of the [MIT License](license.md).
 
 ## Code guidelines
-- Please keep your code (indentation, accurate comments, etc.) consistant with the styles used throughout the project.
+- Four spaces for indentation, never tabs
 - Use descriptive variable names. Avoid single letter variables.
-- Avoid variable names like val or pin. Be more descriptive, like buttonState or switchPin.
 
 ### Python
-Python code should comply with the standards established by PEP8
-See the PEP8 documentation here:
-http://legacy.python.org/dev/peps/pep-0008/
+Python code should comply with
+[PEP8](http://legacy.python.org/dev/peps/pep-0008/) standards.
+
+Run pep8 checks with ```pep8 /path/to/dir```
 
 ### Arduino
-- If you want to define pin names and other quantities which won't change, use const ints. They are cleaner than #defines, yet still give you a way to teach the difference between a variable and a constant.
-- Use the wiring/Processing-style variable types, (```boolean, char, byte, int, unsigned int, long, unsigned long, float, double, string, array, void```) when possible, rather than uint8_t, etc.
+Arduino code should follow the guidelines defined at
+[Arduino.cc](http://arduino.cc/en/Reference/StyleGuide).
 
-### JS
-Adhere to pythonic javascript style:
-http://gist.github.com/gunthercox/e4826c481d9ce64c1ccd
-
-### HTML
-- Four spaces for indentation, never tabs
-- Double quotes only, never single quotes
+### Javascript
+Adhere to styleing for
+[pythonic javascript](http://gist.github.com/gunthercox/e4826c481d9ce64c1ccd).
 
 ### CSS
-- Always a space after a property's colon (.e.g, `display: block;` and not `display:block;`)
-- End all lines with a semi-colon
-- One property and value per line
-- For comma-separated selectors, place each selector on it's own line
+Style Sheets should comply with
+[Github's](https://github.com/styleguide/css) css style guide.
+
+### HTML
+- Double quotes only, never single quotes.
 
 ## License
-By contributing your code, you agree to license your contribution under the terms of the MIT License:
+By contributing your code, you agree to license your contribution under
+the terms of the MIT License:
 - http://opensource.org/licenses/mit-license.html
-
-## Thanks
-Thanks to Bootstrap for their wonderful CONTRIBUTING.MD doc.
-It was modified to create this one.

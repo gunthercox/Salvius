@@ -4,44 +4,17 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Interface</title>
-    <link rel="stylesheet" href="/css/foundation.css" />
-    <link rel="stylesheet" href="/css/salvius.css"></link>
+    <link rel="stylesheet" href="/css/foundation.css"/>
+    <link rel="stylesheet" href="/css/font-awesome.css"/>
+    <link rel="stylesheet" href="/css/salvius.css"/>
+    <link rel="stylesheet" href="/css/nav.css"/>
 </head>
 
 <body>
-
-    <div class="panel shutdown hide">
-        <h2 class="danger">Emergency shutdown</h2>
-        <button class="js-terminate">Confirm</button>
-        <button class="js-dismiss">Cancel</button>
-        <p class="warning">WARNING: This operation will deactivate all systems on the robot.</p>
-    </div>
-
-    <div class="panel warnings hide">
-        <h2>Warnings</h2>
-        <button class="js-dismiss-all">Dismiss all</button>
-        <ul class="error-list"></ul>
-    </div>
     
-    <div class="columns">&nbsp;</div>
+    <div class="row">&nbsp;</div>
 
     <div class="large-3 columns">
-        <div class="row collapse">
-            <div class="small-9 columns">
-                <input type="text" placeholder="Text to speech"/>
-            </div>
-            <div class="small-3 columns">
-                <button id="say" class="button prefix">Say</button>
-            </div>
-        </div>
-        <div class="row collapse">
-            <div class="small-9 columns">
-                <input type="text" placeholder="Text to handwriting"/>
-            </div>
-            <div class="small-3 columns">
-                <button id="write" class="button prefix">Write</button>
-            </div>
-        </div>
         <div class="row collapse">
             <div class="small-4 columns">
                 <input type="text" id="key" placeholder="Key"/>
@@ -53,61 +26,14 @@
                 <button id="post" class="button prefix">Post</button>
             </div>
         </div>
-        
-        <div id="configuration" class="row collapse hide">
-            <form><fieldset>
-                <legend>Configuration</legend>
-
-                <label>Camera IP
-                <div class="row collapse">
-                    <div class="small-2 columns">
-                        <span class="prefix">http://</span>
-                    </div>
-                    <div class="small-10 columns">
-                        <input type="text" class="camera_ip" placeholder="0.0.0.0">
-                    </div>
-                </div>
-                </label>
-                <label>Arduino IP
-                <div class="row collapse">
-                    <div class="small-2 columns">
-                        <span class="prefix">http://</span>
-                    </div>
-                    <div class="small-10 columns">
-                        <input type="text" class="arduino_ip" placeholder="0.0.0.0">
-                    </div>
-                </div>
-                </label>
-            </fieldset></form>
-        </div>
-        
     </div>
 
     <div class="large-6 columns">
         <div class="row collapse">
             <nav class="top-bar" data-topbar>
                 <section class="top-bar-section">
-                    <ul class="left">
-                        <li class="has-dropdown">
-                            <a href="#">Settings</a>
-                            <ul class="dropdown">
-                                <li><a href="#configuration">Configuration</a></li>
-                                <li><a href="http://www.routerlogin.net" target="_blank">Router Login</a></li>
-                            </ul>
-                        </li>
-                    </ul>
                     <ul class="right">
-                        <li>
-                            <a href="#warnings">
-                                <span class="warning led green"></span> Warnings
-                            </a>
-                        </li>
-                        <li class="has-dropdown">
-                            <a href="#">Options</a>
-                            <ul class="dropdown">
-                                <li><a href="#shutdown">Shutdown</a></li>
-                            </ul>
-                        </li>
+                        <li><a class="toggle-shutdown">Shutdown</a></li>
                     </ul>
                 </section>
             </nav>
@@ -122,7 +48,12 @@
             </div>
         </div>
         <div class="row collapse">
-            <input type="range" class="js-rotate-head horizontal" min="-100" max="100">
+            <div class="large-11 columns">
+                <input type="range" class="js-rotate-head horizontal" min="-100" max="100">
+            </div>
+            <div class="large-1 columns">
+                <div class="bend"></div>
+            </div>
         </div>
         <div class="row collapse">
             <div class="large-12 columns">
@@ -134,23 +65,152 @@
 
     <div class="large-3 columns">
         <div class="row collapse">
-            <input type="text" class="filter hide" placeholder="Filter available sensors"/>
-        </div>
-        <div class="row collapse scroll-table">
-            <table style="width:100%">
-                <thead>
-                    <tr>
-                        <th class="center">Sensor</th>
-                        <th class="center">Value</th>
-                    </tr>
-                </thead>
-                <tbody class="sensorValues">
-                </tbody>
-            </table>
+            <ul class="tabs" data-tab>
+                <li class="tab-title small-6 active"><a href="#arm">Arm</a></li>
+                <li class="tab-title small-6"><a href="#leg">Leg</a></li>
+            </ul>
+            <div class="tabs-content">
+                <div class="content active" id="arm">
+                    <p>First panel content goes here...</p>
+                </div>
+                <div class="content" id="leg">
+                    <p>Second panel content goes here...</p>
+                </div>
+            </div>
         </div>
     </div>
 
+
+
+
+<nav class="menu slide-menu-left">
+    <div class="row">
+        <div class="large-12 columns">
+            <h2>Warnings</h2>
+            <button class="small-6 columns js-dismiss-all">Dismiss all</button>
+            <button class="small-6 columns js-close">Close</button>
+            <ul class="error-list"></ul>
+        </div>
+    </div>
+</nav>
+
+<nav class="menu slide-menu-right sensor-menu">
+    <div class="row collapse">
+        <input type="text" class="filter hide" placeholder="Filter available sensors"/>
+    </div>
+    <div class="row collapse scroll-table">
+        <table style="width:100%">
+            <thead>
+                <tr>
+                    <th class="center">Sensor</th>
+                    <th class="center">Value</th>
+                </tr>
+            </thead>
+            <tbody class="sensorValues">
+            </tbody>
+        </table>
+    </div>
+</nav>
+
+<nav class="menu slide-menu-right configuration-menu">
+    <div class="row collapse">
+        <form><fieldset>
+            <legend>Configuration</legend>
+
+            <label>Camera IP
+            <div class="row collapse">
+                <div class="small-2 columns">
+                    <span class="prefix">http://</span>
+                </div>
+                <div class="small-10 columns">
+                    <input type="text" class="camera_ip" placeholder="0.0.0.0">
+                </div>
+            </div>
+            </label>
+            <label>Arduino IP
+            <div class="row collapse">
+                <div class="small-2 columns">
+                    <span class="prefix">http://</span>
+                </div>
+                <div class="small-10 columns">
+                    <input type="text" class="arduino_ip" placeholder="0.0.0.0">
+                </div>
+            </div>
+            </label>
+
+            <a href="http://www.routerlogin.net" target="_blank">Router login</a>
+        </fieldset></form>
+    </div>
+    <div class="row">
+        <button class="small-12 columns js-close">Close</button>
+    </div>
+</nav>
+
+<nav class="menu slide-menu-top shutdown-menu">
+    <div class="row collapse">
+        <span class="danger">Emergency shutdown</span>
+        <button class="js-terminate">Confirm</button>
+        <button class="js-close">Cancel</button>
+        <span class="warning">WARNING: This operation will deactivate all systems on the robot.</span>
+    </div>
+</nav>
+
+<nav class="menu slide-menu-top speech-menu">
+    <div class="row collapse">
+        <div class="small-9 columns">
+            <input type="text" placeholder="Text to speech"/>
+        </div>
+        <div class="small-3 columns">
+            <button id="say" class="button prefix">Say</button>
+        </div>
+    </div>
+</nav>
+
+<nav class="menu slide-menu-top writing-menu">
+    <div class="row collapse">
+        <div class="small-9 columns">
+            <input type="text" placeholder="Text to handwriting"/>
+        </div>
+        <div class="small-3 columns">
+            <button id="write" class="button prefix">Write</button>
+        </div>
+    </div>
+</nav>
+
+
+
+
+<div class="icon-bar six-up">
+  <a class="item toggle-slide-left">
+    <i class="fa fa-warning warning"></i>
+    <label>Warnings</label>
+  </a>
+  <a href="#" class="item toggle-sensors">
+    <i class="fa fa-compass"></i>
+    <label>Sensors</label>
+  </a>
+  <a class="item js-capture-photo">
+    <i class="fa fa-camera"></i>
+    <label>Capture</label>
+  </a>
+  <a class="item toggle-speech">
+    <i class="fa fa-microphone"></i>
+    <label>Speech</label>
+  </a>
+  <a class="item toggle-writing">
+    <i class="fa fa-pencil"></i>
+    <label>Write</label>
+  </a>
+  <a class="item toggle-configuration">
+    <i class="fa fa-cog"></i>
+    <label>Settings</label>
+  </a>
+</div>
+
 <script src="/js/jquery.js"></script>
 <script src="/js/robot.js"></script>
+
+<script src="/js/nav.js"></script>
+
 </body>
 </html>

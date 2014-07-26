@@ -1,6 +1,7 @@
 from unittest import TestCase
 from robot.joints import Joint
 
+
 class TestObject(Joint):
     """
     This is a test object for other tests

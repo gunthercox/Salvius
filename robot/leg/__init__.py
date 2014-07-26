@@ -54,4 +54,3 @@ class LegSerializer(Serializer):
 
     def get_url(self, obj):
         return "/api/robot/body/legs/" + str(obj.id)
-

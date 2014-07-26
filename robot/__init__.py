@@ -103,7 +103,6 @@ class Robot(object):
 
             right_foot = Foot()
             right_leg.set_foot(right_foot)
-            
 
     @property
     def body(self):

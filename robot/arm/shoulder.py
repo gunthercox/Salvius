@@ -19,7 +19,7 @@ class Shoulder(Joint):
         self.rotation += degrees
 
     def extend(self, degrees):
-        self.angle +=degrees
+        self.angle += degrees
 
     def reset(self):
         self.rotation = 0

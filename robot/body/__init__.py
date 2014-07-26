@@ -68,8 +68,10 @@ class BodySerializer(Serializer):
     arms = fields.Nested(ArmSerializer, many=True)
     legs = fields.Nested(LegSerializer, many=True)
 
+
 class ArmsSerializer(Serializer):
     arms = fields.Nested(ArmSerializer, many=True)
+
 
 class LegsSerializer(Serializer):
     legs = fields.Nested(LegSerializer, many=True)

@@ -58,6 +58,10 @@ text-align: center;
     content: "\d7";
 }
 
+.error-red {
+    color: #f60!important;
+}
+
 .led {
 	width: 8px;
 	height: 8px;

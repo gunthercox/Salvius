@@ -2,6 +2,7 @@ from flask import request
 
 from flask.ext.restful import reqparse, Resource
 
+
 class Speech(Resource):
     """
     Process:

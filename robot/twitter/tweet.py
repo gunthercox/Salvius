@@ -30,5 +30,5 @@ for robot in robots:
     if debug == True:
         print(msg)
     else:
-        sleep(3600-time()%3600)
+        sleep(3600-time() % 3600)
         t.statuses.update(status=msg)

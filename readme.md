@@ -197,6 +197,11 @@ perform as expected. These tests can also be run manually by running the command
 ```nosetests``` from within the repository's root directory. See 
 ([unit tests](http://en.wikipedia.org/wiki/Unit_testing)) for more information.
 
+## Notes
+
+**SSH into Rapsberry Pi:** ```ssh pi@192.168.1.4``` (Your local ip may differ)
+The default password is ```password```
+
 ## Contributors
 This project has been made possible with funding from the following sources:
 Jennifer Cox, Adam Iredale, Janet Wise, Glen Zenor, Boris Hofer, 

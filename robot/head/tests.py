@@ -1,6 +1,7 @@
 from unittest import TestCase
 from robot.head import Head, Neck
 
+
 class Tests(TestCase):
 
     def test_set_camera_url(self):

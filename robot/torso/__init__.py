@@ -1,5 +1,6 @@
 from marshmallow import Serializer, fields
 
+
 class Torso(object):
 
     def __init__(self):

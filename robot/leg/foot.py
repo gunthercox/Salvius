@@ -1,8 +1,9 @@
 from marshmallow import Serializer, fields
 
+
+'''
 # Toes are commented out because they are not a part of the Salvius humanoid model.
 # Please submit a support ticket if interest in this feature exists.
-'''
 class Toes(object):
 
     def __init__(self):
@@ -12,12 +13,11 @@ class Toes(object):
         self.position = position
 '''
 
-
 class Foot(object):
 
     def __init__(self):
-        self.sensors = []
         #self.toes = []
+        self.sensors = []
 
     #def add_toes(self, toe):
         #self.toes.append(toe)
