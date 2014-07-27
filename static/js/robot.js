@@ -1,45 +1,120 @@
-function Robot() {
+var Robot = Robot || {};
 
-    var self = this;
+// Not being used yet, need to switch to use this.
+Robot.settings = function () {
+    var camera_ip = "192.168.1.2";
+    var arduino_ip = "192.168.1.177";
+    var camera_image_url = ["http://", camera_ip, "/image.jpg"].join("");
+    var arduino_api_url =  "http://" + arduino_ip;
 
-    this.error = function handleError(error) {
-        var error = error || "";
+    return {
+       camera_ip: camera_ip,
+       arduino_ip: arduino_ip,
+       camera_image_url: camera_image_url,
+       arduino_api_url: arduino_api_url
+    };
+}();
 
-        if (error != "") {
-            var template = $('<li class="message">' + error +
-            '<span class="js-dismiss close"></span></li>');
-            $(".error-list").append(template);
-        }
+Robot.loading = $('<div class="center"><i class="fa fa-spinner fa-spin"></i> Loading...</div>');
 
-        // Change indicator led based on error count
-        var errorCount = $(".error-list").find("li").length;
-        if (errorCount > 0) {
-            $(".warning").addClass("error-red");
-        } else {
-            $(".warning").removeClass("error-red");
-        }
+Robot.timers = {
+    "rotationDelay": 0,
+    "rotationReset": 0,
+    "angleDelay": 0,
+    "angleReset": 0
+};
+
+Robot.error = function error(error) {
+    var error = error || "";
+
+    if (error != "") {
+        var template = $('<li class="message">' + error +
+        '<span class="js-dismiss close"></span></li>');
+        $(".error-list").append(template);
     }
 
-    this.terminate = function terminate() {
-        var request = new XMLHttpRequest();
-        request.open("POST", "/api/terminate/", true);
-        request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-        request.send({});
+    // Change indicator led based on error count
+    var errorCount = $(".error-list").find("li").length;
+    if (errorCount > 0) {
+        $(".js-warning").addClass("warning");
+    } else {
+        $(".js-warning").removeClass("warning");
     }
-
 }
 
-var robot = new Robot();
+Robot.snapshot = function snapshot() {
+    var check = confirm("Save camera image?");
+    if (check == true) {
+        window.open(Robot.settings.camera_image_url, "_blank");
+    }
+}
 
-// SETTINGS
-var camera_ip = "192.168.1.2";
-var arduino_ip = "192.168.1.177";
+Robot.terminate = function terminate() {
+    var request = new XMLHttpRequest();
+    request.open("POST", "/api/terminate/", true);
+    request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+    request.send({});
+}
 
-$(".camera_ip").val(camera_ip);
-$(".arduino_ip").val(arduino_ip);
+Robot.renderArmControl = function renderArmControl(container, arm_id) {
+    var loading = Robot.loading.clone();
+    $(container).append(loading);
+    var control = $('<div class="panel"></div>');
+    $.ajax({
+        type: "GET",
+        url: "/api/robot/body/arms/" + arm_id
+    }).success(function(arm) {
+        if (arm.shoulder) {
+            var row = $('<div>Shoulder <input type="number" min="0" max="100"></div>');
+            row.find("input").val(arm.shoulder.angle);
+            row.find("input").data("url", arm.href + "/shoulder/");
+            $(control).append(row);
+        }
+        if (arm.elbow) {
+            var row = $('<div>Elbow <input type="number" min="0" max="100"></div>');
+            row.find("input").val(arm.elbow.angle);
+            row.find("input").data("url", arm.href + "/elbow/");
+            $(control).append(row);
+        }
+        if (arm.wrist) {
+            var row = $('<div>Wrist <input type="number" min="0" max="100"></div>');
+            row.find("input").val(arm.wrist.pitch);
+            row.find("input").data("url", arm.href + "/wrist/");
+            $(control).append(row);
+        }
+        $(container).html(control);
+        loading.remove();
+    }).error(function() {
+        Robot.error("Unable to load arm id " + arm_id);
+    });
 
-var cameraImage = ["http://", camera_ip, "/image.jpg"].join("");
-var arduinoJson = ["http://", arduino_ip].join("");
+    control.on("input change", "input", function() {
+        var value = $(this).val();
+        value = JSON.stringify({ "angle": value })
+        var data = $(this).data();
+
+        $.ajax({
+            type: "PATCH",
+            url: data.url,
+            data: value,
+            contentType: "application/json"
+        });
+    });
+}
+
+Robot.renderLegControl = function renderLegControl(container, leg_id) {
+    $(container).empty();
+    $(container).append('<p>Not yet implemented. Id: ' + leg_id + '</p>');
+}
+
+Robot.renderArmControl(".js-arm-control-left", 0);
+Robot.renderArmControl(".js-arm-control-right", 1);
+
+Robot.renderLegControl(".js-leg-control-left", 0);
+Robot.renderLegControl(".js-leg-control-right", 1);
+
+$(".camera_ip").val(Robot.settings.camera_ip);
+$(".arduino_ip").val(Robot.settings.arduino_ip);
 
 /* CANVIS CODE FROM http://dwdii.github.io/2011/10/23/Using-HTML5-Canvas-tag-for-Simple-Video-Animation.html
 Known issue: http://stackoverflow.com/questions/13674835/canvas-tainted-by-cross-origin-data */
@@ -56,7 +131,7 @@ function imageUpdate() {
 	newImg.Id = "cam" + count;
 	newImg.Name = newImg.Id;
 	newImg.onload = imageLoaded;
-	newImg.src = cameraImage;
+	newImg.src = Robot.settings.camera_image_url;
 }
 
 function imageLoaded() {
@@ -67,31 +142,30 @@ function imageLoaded() {
 	
 $.ajax({ 
     type: "GET", 
-    url: arduinoJson, 
+    url: Robot.settings.arduino_api_url, 
     data: { get_param: "value" }, 
-    dataType: 'json',
-    success: function (data) {
-        $.each(data, function(index, element) {
-            $(".sensorValues").append("<tr><td>" + index + "</td><td>" + element + "</td></tr>");
-        });
-        $(".filter").removeClass("hide");
-    }
+    dataType: 'json'
+}).success(function(data) {
+    $.each(data, function(index, element) {
+        $(".sensorValues").append("<tr><td>" + index + "</td><td>" + element + "</td></tr>");
+    });
+    $(".filter").removeClass("hide");
 }).error(function() {
-    robot.error("Arduino api is unavailable.");
+    Robot.error("Arduino api is unavailable.");
 });
 
 $(".js-terminate").click(function() {
-    robot.terminate();
+    Robot.terminate();
 });
 
 $(".error-list").on("click", ".js-dismiss", function() {
     $(this).parents("li").remove();
-    robot.error();
+    Robot.error();
 });
 
 $(".js-dismiss-all").click(function() {
     $(".error-list li").remove();
-    robot.error();
+    Robot.error();
 });
 
 $("#post").click(function() {
@@ -102,15 +176,14 @@ $("#post").click(function() {
         type: "POST",
         url: "http://" + arduino_ip,
         data: str,
-        contentType: "application/x-www-form-urlencoded; charset=utf-8",
-        success: function(data) {
-            $("#key").val("");
-            $("#value").val("");
-            //TODO: UPDATE TABLE IF NEEDED WHEN POSTING Dx
-            // if key in table table.key.val(key)
-        }
+        contentType: "application/x-www-form-urlencoded; charset=utf-8"
+    }).success(function(data) {
+        $("#key").val("");
+        $("#value").val("");
+        //TODO: UPDATE TABLE IF NEEDED WHEN POSTING Dx
+        // if key in table table.key.val(key)
     }).error(function(data) {
-        robot.error("Failure to post data.");
+        Robot.error("Failure to post data.");
     });
 });
 
@@ -127,7 +200,7 @@ $("#say").click(function() {
         $("#key").val("");
         $("#value").val("");
     }).error(function(data) {
-        robot.error("Failure to post data");
+        Robot.error("Failure to post data");
     });
 });
 
@@ -135,39 +208,36 @@ $("#write").click(function() {
     console.log("Write button not implemented");
 });
 
+$(".js-capture-photo").click(function() {
+    Robot.snapshot();
+});
+
 $(".tabs").on("click", ".tab-title", function(event) {
     event.preventDefault();
     event.stopPropagation();
 
-    $(this).parents(".tabs").find(".active").removeClass("active");
+    $(this).siblings().removeClass("active");
     $(this).addClass("active");
 
     var id = $(this).find("a").attr("href");
-    $(id).parents(".tabs-content").find(".content").removeClass("active");
+    $(id).siblings().removeClass("active");
     $(id).addClass("active");
 });
-
-var timer = {};
-
-timer.rotationDelay = 0;
-timer.rotationReset = 0;
-timer.angleDelay = 0;
-timer.angleReset = 0;
 
 $(".js-rotate-head").on("input change", function() {
     var input = $(this);
     var value = input.val();
     value = parseInt(value);
 
-    clearTimeout(timer.rotationReset);
+    clearTimeout(Robot.timers.rotationReset);
 
     function zero() {
 
-        if (timer.rotationReset) {
-            clearTimeout(timer.rotationReset);
+        if (Robot.timers.rotationReset) {
+            clearTimeout(Robot.timers.rotationReset);
         }
 
-        timer.rotationReset = setTimeout(function() {
+        Robot.timers.rotationReset = setTimeout(function() {
             if (value > 0) {
                 value -= 1;
                 input.val(value);
@@ -182,11 +252,11 @@ $(".js-rotate-head").on("input change", function() {
         }, 100);
     }
 
-    if (timer.rotationDelay) {
-        clearTimeout(timer.rotationDelay);
+    if (Robot.timers.rotationDelay) {
+        clearTimeout(Robot.timers.rotationDelay);
     }
 
-    timer.rotationDelay = setTimeout(zero, 1000);
+    Robot.timers.rotationDelay = setTimeout(zero, 1000);
 });
 
 $(".js-angle-head").on("input change", function() {
@@ -194,15 +264,15 @@ $(".js-angle-head").on("input change", function() {
     var value = input.val();
     value = parseInt(value);
 
-    clearTimeout(timer.angleReset);
+    clearTimeout(Robot.timers.angleReset);
 
     function zero() {
 
-        if (timer.angleReset) {
-            clearTimeout(timer.angleReset);
+        if (Robot.timers.angleReset) {
+            clearTimeout(Robot.timers.angleReset);
         }
 
-        timer.angleReset = setTimeout(function() {
+        Robot.timers.angleReset = setTimeout(function() {
             if (value > 0) {
                 value -= 1;
                 input.val(value);
@@ -217,10 +287,10 @@ $(".js-angle-head").on("input change", function() {
         }, 100);
     }
 
-    if (timer.angleDelay) {
-        clearTimeout(timer.angleDelay);
+    if (Robot.timers.angleDelay) {
+        clearTimeout(Robot.timers.angleDelay);
     }
 
-    timer.angleDelay = setTimeout(zero, 1000);
+    Robot.timers.angleDelay = setTimeout(zero, 1000);
 });
 

@@ -11,74 +11,97 @@
 </head>
 
 <body>
-    
-    <div class="row">&nbsp;</div>
 
-    <div class="large-3 columns">
-        <div class="row collapse">
-            <div class="small-4 columns">
-                <input type="text" id="key" placeholder="Key"/>
-            </div>
-            <div class="small-4 columns">
-                <input type="text" id="value" placeholder="Value"/>
-            </div>
-            <div class="small-4 columns">
-                <button id="post" class="button prefix">Post</button>
-            </div>
+<div class="row">&nbsp;</div>
+
+<div class="large-3 columns">
+    <div class="row collapse">
+        <div class="small-4 columns">
+            <input type="text" id="key" placeholder="Key"/>
+        </div>
+        <div class="small-4 columns">
+            <input type="text" id="value" placeholder="Value"/>
+        </div>
+        <div class="small-4 columns">
+            <button id="post" class="prefix">Post</button>
         </div>
     </div>
+</div>
 
-    <div class="large-6 columns">
-        <div class="row collapse">
-            <nav class="top-bar" data-topbar>
-                <section class="top-bar-section">
-                    <ul class="right">
-                        <li><a class="toggle-shutdown">Shutdown</a></li>
-                    </ul>
-                </section>
-            </nav>
+<div class="large-6 columns">
+    <div class="row collapse">
+        <nav class="top-bar" data-topbar>
+            <section class="top-bar-section">
+                <ul class="right">
+                    <li><a class="toggle-shutdown">Shutdown</a></li>
+                </ul>
+            </section>
+        </nav>
+    </div>
+    <div class="row collapse">
+        <div class="large-11 columns">
+            <canvas id="cam" class="small-12"/>
+            <div id="txt">0</div>
         </div>
-        <div class="row collapse">
-            <div class="large-11 columns">
-                <canvas id="cam" class="small-12"/>
-                <div id="txt">0</div>
-            </div>
-            <div class="large-1 columns" style="height: 281px;">
-                <input type="range" class="js-angle-head vertical" min="-100" max="100">
-            </div>
-        </div>
-        <div class="row collapse">
-            <div class="large-11 columns">
-                <input type="range" class="js-rotate-head horizontal" min="-100" max="100">
-            </div>
-            <div class="large-1 columns">
-                <div class="bend"></div>
-            </div>
-        </div>
-        <div class="row collapse">
-            <div class="large-12 columns">
-                <button class="button small-6 columns tilt-left">&#8601;</button>
-                <button class="button small-6 columns tilt-right">&#8600;</button>
-            </div>
+        <div class="large-1 columns" style="height: 281px;">
+            <input type="range" class="js-angle-head vertical" min="-100" max="100">
         </div>
     </div>
+    <div class="row collapse">
+        <div class="large-11 columns">
+            <input type="range" class="js-rotate-head horizontal" min="-100" max="100">
+        </div>
+        <div class="large-1 columns">
+            <div class="bend"></div>
+        </div>
+    </div>
+    <div class="row collapse">
+        <div class="large-11 columns">
+            <button class="small-6 columns tilt-left">&#8601;</button>
+            <button class="small-6 columns tilt-right">&#8600;</button>
+        </div>
+        <div class="large-1 columns"></div>
+    </div>
+</div>
 
-    <div class="large-3 columns">
-        <div class="row collapse">
-            <ul class="tabs" data-tab>
-                <li class="tab-title small-6 active"><a href="#arm">Arm</a></li>
-                <li class="tab-title small-6"><a href="#leg">Leg</a></li>
-            </ul>
-            <div class="tabs-content">
-                <div class="content active" id="arm">
-                    <p>First panel content goes here...</p>
+<div class="large-3 columns">
+    <div class="row collapse">
+        <ul class="tabs">
+            <li class="tab-title small-6 js-nested-tabs-outer active"><a href="#arm">Arm</a></li>
+            <li class="tab-title small-6 js-nested-tabs-outer"><a href="#leg">Leg</a></li>
+        </ul>
+        <div class="tabs-content">
+            <div class="content active" id="arm">
+
+                <ul class="tabs">
+                    <li class="tab-title small-6 active"><a href="#leftarm">Left</a></li>
+                    <li class="tab-title small-6"><a href="#rightarm">Right</a></li>
+                </ul>
+                <div class="tabs-content">
+                    <div class="content js-arm-control-left active" id="leftarm"></div>
+                    <div class="content js-arm-control-right" id="rightarm"></div>
                 </div>
-                <div class="content" id="leg">
-                    <p>Second panel content goes here...</p>
+
+            </div>
+            <div class="content" id="leg">
+
+                <ul class="tabs">
+                    <li class="tab-title small-6 active"><a href="#leftleg">Left</a></li>
+                    <li class="tab-title small-6"><a href="#rightleg">Right</a></li>
+                </ul>
+                <div class="tabs-content">
+                    <div class="content active" id="leftleg">
+                        <div class="panel js-leg-control-left"></div>
+                    </div>
+                    <div class="content" id="rightleg">
+                        <div class="panel js-leg-control-right"></div>
+                    </div>
                 </div>
+
             </div>
         </div>
     </div>
+</div>
 
 
 
@@ -95,10 +118,12 @@
 </nav>
 
 <nav class="menu slide-menu-right sensor-menu">
-    <div class="row collapse">
-        <input type="text" class="filter hide" placeholder="Filter available sensors"/>
+    <div class="row">
+        <div class="large-12 columns">
+            <input type="search" class="filter hide" placeholder="Filter available sensors">
+        </div>
     </div>
-    <div class="row collapse scroll-table">
+    <div class="large-12 columns scroll-table">
         <table style="width:100%">
             <thead>
                 <tr>
@@ -113,45 +138,48 @@
 </nav>
 
 <nav class="menu slide-menu-right configuration-menu">
-    <div class="row collapse">
-        <form><fieldset>
-            <legend>Configuration</legend>
+    <div class="row">
+        <div class="small-12 columns">
+            <h2>Configuration</h2>
 
-            <label>Camera IP
+            <label>Camera IP</label>
             <div class="row collapse">
                 <div class="small-2 columns">
                     <span class="prefix">http://</span>
                 </div>
                 <div class="small-10 columns">
-                    <input type="text" class="camera_ip" placeholder="0.0.0.0">
+                    <input type="url" class="camera_ip" placeholder="0.0.0.0">
                 </div>
             </div>
-            </label>
-            <label>Arduino IP
+
+            <label>Arduino IP</label>
             <div class="row collapse">
                 <div class="small-2 columns">
                     <span class="prefix">http://</span>
                 </div>
                 <div class="small-10 columns">
-                    <input type="text" class="arduino_ip" placeholder="0.0.0.0">
+                    <input type="url" class="arduino_ip" placeholder="0.0.0.0">
                 </div>
             </div>
-            </label>
 
             <a href="http://www.routerlogin.net" target="_blank">Router login</a>
-        </fieldset></form>
-    </div>
-    <div class="row">
-        <button class="small-12 columns js-close">Close</button>
+            <button class="small-12 columns js-close">Close</button>
+        </div>
     </div>
 </nav>
 
 <nav class="menu slide-menu-top shutdown-menu">
     <div class="row collapse">
-        <span class="danger">Emergency shutdown</span>
-        <button class="js-terminate">Confirm</button>
-        <button class="js-close">Cancel</button>
-        <span class="warning">WARNING: This operation will deactivate all systems on the robot.</span>
+        <div class="small-4 columns">
+            <h3 class="danger">Emergency shutdown</h3>
+        </div>
+        <div class="small-4 columns">
+            <button class="js-terminate">Confirm</button>
+            <button class="js-close">Cancel</button>
+        </div>
+        <div class="small-4 columns">
+            <span class="warning">WARNING: This operation will deactivate all systems on the robot.</span>
+        </div>
     </div>
 </nav>
 
@@ -161,7 +189,7 @@
             <input type="text" placeholder="Text to speech"/>
         </div>
         <div class="small-3 columns">
-            <button id="say" class="button prefix">Say</button>
+            <button id="say" class="prefix">Say</button>
         </div>
     </div>
 </nav>
@@ -172,17 +200,15 @@
             <input type="text" placeholder="Text to handwriting"/>
         </div>
         <div class="small-3 columns">
-            <button id="write" class="button prefix">Write</button>
+            <button id="write" class="prefix">Write</button>
         </div>
     </div>
 </nav>
 
 
-
-
 <div class="icon-bar six-up">
   <a class="item toggle-slide-left">
-    <i class="fa fa-warning warning"></i>
+    <i class="fa fa-warning js-warning"></i>
     <label>Warnings</label>
   </a>
   <a href="#" class="item toggle-sensors">
