@@ -46,6 +46,7 @@ class HingeJoint(Joint):
     def __init__(self, angle=0):
         super(HingeJoint, self).__init__()
         self.angle = angle
+        #self.type = "hinge_joint"
 
     def move(self, degrees):
         """

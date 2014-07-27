@@ -67,19 +67,19 @@ Robot.renderArmControl = function renderArmControl(container, arm_id) {
         if (arm.shoulder) {
             var row = $('<div>Shoulder <input type="number" min="0" max="100"></div>');
             row.find("input").val(arm.shoulder.angle);
-            row.find("input").data("url", arm.href + "/shoulder/");
+            row.find("input").data("url", arm.shoulder.href);
             $(control).append(row);
         }
         if (arm.elbow) {
             var row = $('<div>Elbow <input type="number" min="0" max="100"></div>');
             row.find("input").val(arm.elbow.angle);
-            row.find("input").data("url", arm.href + "/elbow/");
+            row.find("input").data("url", arm.elbow.href);
             $(control).append(row);
         }
         if (arm.wrist) {
             var row = $('<div>Wrist <input type="number" min="0" max="100"></div>');
             row.find("input").val(arm.wrist.pitch);
-            row.find("input").data("url", arm.href + "/wrist/");
+            row.find("input").data("url", arm.wrist.href);
             $(control).append(row);
         }
         $(container).html(control);
@@ -98,6 +98,8 @@ Robot.renderArmControl = function renderArmControl(container, arm_id) {
             url: data.url,
             data: value,
             contentType: "application/json"
+        }).error(function() {
+            Robot.error("Unable to update arm field.");
         });
     });
 }

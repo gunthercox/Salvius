@@ -2,6 +2,7 @@ from unittest import TestCase
 from flask import json, jsonify
 import salvius
 
+
 class Test(TestCase):
 
     def setUp(self):
@@ -13,8 +14,8 @@ class Test(TestCase):
         Test status code 405 from improper JSON on post to raw.
         """
         response = self.app.post('/api/robot/',
-                                data="not a json",
-                                content_type='application/json')
+                                 data="not a json",
+                                 content_type='application/json')
         self.assertEqual(response.status_code, 405)
 
     def test_get_robot(self):
@@ -88,7 +89,7 @@ class Test(TestCase):
 
     def test_one_invalid_field_ankle(self):
         """
-        Test that patching one valid and one invalid field fails.        
+        Test that patching one valid and one invalid field fails.
         """
         data = '{"position": 2, "angle": 9}'
         url = "/api/robot/body/legs/0/ankle/"
@@ -97,5 +98,4 @@ class Test(TestCase):
             self.app.patch(url, data=data, content_type='application/json')
             self.fail("An Exception should have ben raised")
         except Exception as error:
-            self.assertEquals( "Attribue position not found", str(error))
-
+            self.assertEquals("Attribue position not found", str(error))

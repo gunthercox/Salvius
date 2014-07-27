@@ -14,6 +14,16 @@ class Elbow(HingeJoint):
         # Number of degrees that the joint is limited to.
         self.limit = 180
 
+        self.parent_id = None
+
+    def set_parent_id(self, uuid):
+        self.parent_id = uuid
+
 
 class ElbowSerializer(HingeJointSerializer):
     limit = fields.Integer()
+
+    href = fields.Method("get_url")
+
+    def get_url(self, obj):
+        return "/api/robot/body/arms/" + str(obj.parent_id) + "/elbow/"

@@ -14,4 +14,3 @@ class Test(TestCase):
         response = self.app.post("/api/speech/", data=data, content_type='application/json')
 
         self.assertTrue("Testing robot speech" in response.data.decode())
-

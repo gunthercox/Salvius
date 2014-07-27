@@ -34,12 +34,15 @@ class Robot(object):
             left_arm = self.body.new_arm()
 
             left_shoulder = Shoulder()
+            left_shoulder.set_parent_id(left_arm.id)
             left_arm.set_shoulder(left_shoulder)
 
-            leftElbow = Elbow()
-            left_arm.set_elbow(leftElbow)
+            left_elbow = Elbow()
+            left_elbow.set_parent_id(left_arm.id)
+            left_arm.set_elbow(left_elbow)
 
             left_wrist = Wrist()
+            left_wrist.set_parent_id(left_arm.id)
             left_arm.set_wrist(left_wrist)
 
             left_hand = Hand()
@@ -56,12 +59,15 @@ class Robot(object):
             right_arm = self.body.new_arm()
 
             right_shoulder = Shoulder()
+            right_shoulder.set_parent_id(right_arm.id)
             right_arm.set_shoulder(right_shoulder)
 
-            leftElbow = Elbow()
-            right_arm.set_elbow(leftElbow)
+            right_elbow = Elbow()
+            right_elbow.set_parent_id(right_arm.id)
+            right_arm.set_elbow(right_elbow)
 
             right_wrist = Wrist()
+            right_wrist.set_parent_id(right_arm.id)
             right_arm.set_wrist(right_wrist)
 
             right_hand = Hand()

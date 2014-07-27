@@ -4,20 +4,21 @@ from random import choice
 
 import settings
 
+
 debug = settings.DEBUG
 
 auth = OAuth(
-    consumer_key = settings.TWITTER["CONSUMER_KEY"],
-    consumer_secret = settings.TWITTER["CONSUMER_SECRET"],
-    token = settings.TWITTER["TOKEN"],
-    token_secret = settings.TWITTER["TOKEN_SECRET"]
+    consumer_key=settings.TWITTER["CONSUMER_KEY"],
+    consumer_secret=settings.TWITTER["CONSUMER_SECRET"],
+    token=settings.TWITTER["TOKEN"],
+    token_secret=settings.TWITTER["TOKEN_SECRET"]
 )
 
 t = Twitter(auth=auth)
 
-# Get screen name of this account 
+# Get screen name of this account
 user = t.account.verify_credentials()["screen_name"]
-    
+
 # Get the list of robots
 robots = t.lists.members(owner_screen_name=user, slug="Robots")["users"]
 
@@ -27,7 +28,7 @@ for robot in robots:
     message = " " + choice(open("messages.txt").readlines())
     msg = ("@" + robot["screen_name"] + message).strip("\n")
 
-    if debug == True:
+    if debug is True:
         print(msg)
     else:
         sleep(3600-time() % 3600)

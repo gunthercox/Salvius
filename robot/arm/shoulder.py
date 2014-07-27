@@ -9,6 +9,11 @@ class Shoulder(Joint):
         self.rotation = rotation
         self.angle = angle
 
+        self.parent_id = None
+
+    def set_parent_id(self, uuid):
+        self.parent_id = uuid
+
     def get_rotation(self):
         return self.rotation
 
@@ -29,3 +34,8 @@ class Shoulder(Joint):
 class ShoulderSerializer(Serializer):
     rotation = fields.Integer()
     angle = fields.Integer()
+
+    href = fields.Method("get_url")
+
+    def get_url(self, obj):
+        return "/api/robot/body/arms/" + str(obj.parent_id) + "/shoulder/"

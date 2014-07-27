@@ -94,7 +94,7 @@ class ApiElbow(Resource):
         json = request.get_json(force=True)
 
         elbow = robot.body.arms[arm_id].elbow
-        wrist.set_attributes(json)
+        elbow.set_attributes(json)
 
         serialized = ElbowSerializer(elbow)
         return jsonify(serialized.data)

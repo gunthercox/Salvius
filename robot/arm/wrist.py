@@ -10,6 +10,11 @@ class Wrist(Joint):
         self.pitch = 0
         self.yaw = 0
 
+        self.parent_id = None
+
+    def set_parent_id(self, uuid):
+        self.parent_id = uuid
+
     def rotate(self, degrees):
         """
         Takes a positive or negative number to rotate the wrist
@@ -42,3 +47,8 @@ class WristSerializer(Serializer):
     roll = fields.Integer()
     pitch = fields.Integer()
     yaw = fields.Integer()
+
+    href = fields.Method("get_url")
+
+    def get_url(self, obj):
+        return "/api/robot/body/arms/" + str(obj.parent_id) + "/wrist/"
