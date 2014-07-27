@@ -39,24 +39,24 @@
         </nav>
     </div>
     <div class="row collapse">
-        <div class="large-11 columns">
+        <div class="small-11 columns">
             <canvas id="cam" class="small-12"/>
             <div id="txt">0</div>
         </div>
-        <div class="large-1 columns" style="height: 281px;">
+        <div class="small-1 columns" style="height: 281px;">
             <input type="range" class="js-angle-head vertical" min="-100" max="100">
         </div>
     </div>
     <div class="row collapse">
-        <div class="large-11 columns">
+        <div class="small-11 columns">
             <input type="range" class="js-rotate-head horizontal" min="-100" max="100">
         </div>
-        <div class="large-1 columns">
+        <div class="small-1 columns">
             <div class="bend"></div>
         </div>
     </div>
     <div class="row collapse">
-        <div class="large-11 columns">
+        <div class="small-11 columns">
             <div class="row collapse">
 
                 <div class="small-2 columns">
@@ -77,7 +77,7 @@
 
             </div>
         </div>
-        <div class="large-1 columns"></div>
+        <div class="small-1 columns"></div>
     </div>
 </div>
 
@@ -107,12 +107,8 @@
                     <li class="tab-title small-6"><a href="#rightleg">Right</a></li>
                 </ul>
                 <div class="tabs-content">
-                    <div class="content active" id="leftleg">
-                        <div class="panel js-leg-control-left"></div>
-                    </div>
-                    <div class="content" id="rightleg">
-                        <div class="panel js-leg-control-right"></div>
-                    </div>
+                    <div class="content js-leg-control-left active" id="leftleg"></div>
+                    <div class="content js-leg-control-right" id="rightleg"></div>
                 </div>
 
             </div>

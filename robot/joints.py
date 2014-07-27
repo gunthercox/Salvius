@@ -46,7 +46,7 @@ class HingeJoint(Joint):
     def __init__(self, angle=0):
         super(HingeJoint, self).__init__()
         self.angle = angle
-        #self.type = "hinge_joint"
+        self.joint_type = "hinge"
 
     def move(self, degrees):
         """
@@ -66,4 +66,5 @@ class HingeJoint(Joint):
 
 class HingeJointSerializer(Serializer):
     angle = fields.Integer()
+    joint_type = fields.String()
 

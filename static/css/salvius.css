@@ -24,12 +24,12 @@ color: white;
 
 .bend {
 width: 58%;
-height: 15px;
+height: 20px;
 border: 4px solid #e3ddd8;
 border-top-width: 0px;
 border-left-width: 0px;
 border-bottom-right-radius: 15px;
-margin-top: -1px;
+margin-top: -6px;
 }
 
 .hide {

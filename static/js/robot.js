@@ -56,39 +56,26 @@ Robot.terminate = function terminate() {
     request.send({});
 }
 
-Robot.renderArmControl = function renderArmControl(container, arm_id) {
-    var loading = Robot.loading.clone();
-    $(container).append(loading);
+Robot.renderLimbControl = function renderLimbControl(container, limb) {
     var control = $('<div class="panel"></div>');
-    $.ajax({
-        type: "GET",
-        url: "/api/robot/body/arms/" + arm_id
-    }).success(function(arm) {
-        if (arm.shoulder) {
-            var row = $('<div>Shoulder <input type="number" min="0" max="100"></div>');
-            row.find("input").val(arm.shoulder.angle);
-            row.find("input").data("url", arm.shoulder.href);
-            $(control).append(row);
-        }
-        if (arm.elbow) {
-            var row = $('<div>Elbow <input type="number" min="0" max="100"></div>');
-            row.find("input").val(arm.elbow.angle);
-            row.find("input").data("url", arm.elbow.href);
-            $(control).append(row);
-        }
-        if (arm.wrist) {
-            var row = $('<div>Wrist <input type="number" min="0" max="100"></div>');
-            row.find("input").val(arm.wrist.pitch);
-            row.find("input").data("url", arm.wrist.href);
-            $(control).append(row);
-        }
-        $(container).html(control);
-        loading.remove();
-    }).error(function() {
-        Robot.error("Unable to load arm id " + arm_id);
-    });
 
-    control.on("input change", "input", function() {
+    var renderable_types = ["elbow", "shoulder", "wrist", "hip", "knee", "ankle"];
+    for (var section in limb) {
+        if ($.inArray(section, renderable_types) > -1) {
+
+            console.log(section, limb[section].joint_type);
+
+            var row = $('<div><label></label><input type="number" min="0" max="100"></div>');
+            row.find("label").text(section);
+            row.find("input").val(limb[section].angle);
+            row.find("input").data("url", limb[section].href);
+            $(control).append(row);
+        }
+    }
+
+    $(container).html(control);
+
+    control.on("input", "input", function() {
         var value = $(this).val();
         value = JSON.stringify({ "angle": value })
         var data = $(this).data();
@@ -104,16 +91,40 @@ Robot.renderArmControl = function renderArmControl(container, arm_id) {
     });
 }
 
-Robot.renderLegControl = function renderLegControl(container, leg_id) {
-    $(container).empty();
-    $(container).append('<p>Not yet implemented. Id: ' + leg_id + '</p>');
+var armClassList = [".js-arm-control-left", ".js-arm-control-right"];
+for (var i = 0; i < armClassList.length; i++) {
+    var loading = Robot.loading.clone();
+    $(armClassList[i]).append(loading);
+}
+var legClassList = [".js-leg-control-left", ".js-leg-control-right"];
+for (var i = 0; i < legClassList.length; i++) {
+    var loading = Robot.loading.clone();
+    $(legClassList[i]).append(loading);
 }
 
-Robot.renderArmControl(".js-arm-control-left", 0);
-Robot.renderArmControl(".js-arm-control-right", 1);
+$.ajax({
+    type: "GET",
+    url: "/api/robot/body/arms/"
+}).success(function(data) {
+    for (var i = 0; i < data.arms.length; i++) {
+        var arm = data.arms[i];
+        Robot.renderLimbControl(armClassList[i], arm);
+    }
+}).error(function() {
+    Robot.error("Unable to load arm data");
+});
 
-Robot.renderLegControl(".js-leg-control-left", 0);
-Robot.renderLegControl(".js-leg-control-right", 1);
+$.ajax({
+    type: "GET",
+    url: "/api/robot/body/legs/"
+}).success(function(data) {
+    for (var i = 0; i < data.legs.length; i++) {
+        var leg = data.legs[i];
+        Robot.renderLimbControl(legClassList[i], leg);
+    }
+}).error(function() {
+    Robot.error("Unable to load leg data");
+});
 
 $(".camera_ip").val(Robot.settings.camera_ip);
 $(".arduino_ip").val(Robot.settings.arduino_ip);
