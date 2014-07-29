@@ -14,7 +14,7 @@
 
 <div class="row">&nbsp;</div>
 
-<div class="large-3 columns">
+<div class="small-6 large-3 columns">
     <div class="row collapse">
         <div class="small-4 columns">
             <input type="text" id="key" placeholder="Key"/>
@@ -59,20 +59,13 @@
         <div class="small-11 columns">
             <div class="row collapse">
 
-                <div class="small-2 columns">
-                    <input type="number" value="2" placeholder="Value"/>
-                </div>
-                <div class="small-3 columns">
-                    <button id="post" class="prefix">&#8601; Tilt</button>
-                </div>
-
-                <div class="small-2 columns"><p></p></div>
+                <div class="small-7 columns"><p></p></div>
 
                 <div class="small-2 columns">
-                    <input type="number" value="2" placeholder="Value"/>
+                    <input type="number" value="2" placeholder="Use positive or negative values"/>
                 </div>
                 <div class="small-3 columns">
-                    <button id="post" class="prefix">Tilt &#8600;</button>
+                    <button id="post" class="prefix">&#8601; Tilt &#8600;</button>
                 </div>
 
             </div>
@@ -81,7 +74,7 @@
     </div>
 </div>
 
-<div class="large-3 columns">
+<div class="small-6 large-3 columns">
     <div class="row collapse">
         <ul class="tabs">
             <li class="tab-title small-6 js-nested-tabs-outer active"><a href="#arm">Arm</a></li>
@@ -157,25 +150,20 @@
 
             <label>Camera IP</label>
             <div class="row collapse">
-                <div class="small-2 columns">
-                    <span class="prefix">http://</span>
-                </div>
-                <div class="small-10 columns">
-                    <input type="url" class="camera_ip" placeholder="0.0.0.0">
+                <div class="small-12 columns">
+                    <input type="url" class="js-camera-url" placeholder="http://0.0.0.0">
                 </div>
             </div>
 
             <label>Arduino IP</label>
             <div class="row collapse">
-                <div class="small-2 columns">
-                    <span class="prefix">http://</span>
-                </div>
-                <div class="small-10 columns">
-                    <input type="url" class="arduino_ip" placeholder="0.0.0.0">
+                <div class="small-12 columns">
+                    <input type="url" class="js-arduino-url" placeholder="http://0.0.0.0">
                 </div>
             </div>
 
             <a href="http://www.routerlogin.net" target="_blank">Router login</a>
+            <hr/>
             <button class="small-12 columns js-close">Close</button>
         </div>
     </div>
@@ -248,7 +236,6 @@
 
 <script src="/js/jquery.js"></script>
 <script src="/js/robot.js"></script>
-
 <script src="/js/nav.js"></script>
 
 </body>

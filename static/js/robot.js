@@ -1,19 +1,6 @@
 var Robot = Robot || {};
 
-// Not being used yet, need to switch to use this.
-Robot.settings = function () {
-    var camera_ip = "192.168.1.2";
-    var arduino_ip = "192.168.1.177";
-    var camera_image_url = ["http://", camera_ip, "/image.jpg"].join("");
-    var arduino_api_url =  "http://" + arduino_ip;
-
-    return {
-       camera_ip: camera_ip,
-       arduino_ip: arduino_ip,
-       camera_image_url: camera_image_url,
-       arduino_api_url: arduino_api_url
-    };
-}();
+Robot.settings = {};
 
 Robot.loading = $('<div class="center"><i class="fa fa-spinner fa-spin"></i> Loading...</div>');
 
@@ -56,6 +43,22 @@ Robot.terminate = function terminate() {
     request.send({});
 }
 
+Robot.loadSensorData = function loadSensorData() {
+    $.ajax({ 
+        type: "GET", 
+        url: Robot.settings.arduino_ip, 
+        data: { get_param: "value" }, 
+        dataType: 'json'
+    }).success(function(data) {
+        $.each(data, function(index, element) {
+            $(".sensorValues").append("<tr><td>" + index + "</td><td>" + element + "</td></tr>");
+        });
+        $(".filter").removeClass("hide");
+    }).error(function() {
+        Robot.error("Arduino api is unavailable");
+    });
+}
+
 Robot.renderLimbControl = function renderLimbControl(container, limb) {
     var control = $('<div class="panel"></div>');
 
@@ -77,16 +80,16 @@ Robot.renderLimbControl = function renderLimbControl(container, limb) {
 
     control.on("input", "input", function() {
         var value = $(this).val();
-        value = JSON.stringify({ "angle": value })
+        value = { "angle": value };
         var data = $(this).data();
 
         $.ajax({
             type: "PATCH",
             url: data.url,
-            data: value,
+            data: JSON.stringify(value),
             contentType: "application/json"
         }).error(function() {
-            Robot.error("Unable to update arm field.");
+            Robot.error("Unable to update limb field");
         });
     });
 }
@@ -126,8 +129,19 @@ $.ajax({
     Robot.error("Unable to load leg data");
 });
 
-$(".camera_ip").val(Robot.settings.camera_ip);
-$(".arduino_ip").val(Robot.settings.arduino_ip);
+$.ajax({
+    type: "GET",
+    url: "/api/settings/"
+}).success(function(data) {
+    Robot.settings.camera_image_url = data.camera_image_url;
+    Robot.settings.arduino_ip = data.arduino_ip;
+
+    $(".js-camera-url").val(Robot.settings.camera_image_url);
+    $(".js-arduino-url").val(Robot.settings.arduino_ip);
+    Robot.loadSensorData();
+}).error(function() {
+    Robot.error("Unable to load settings");
+});
 
 /* CANVIS CODE FROM http://dwdii.github.io/2011/10/23/Using-HTML5-Canvas-tag-for-Simple-Video-Animation.html
 Known issue: http://stackoverflow.com/questions/13674835/canvas-tainted-by-cross-origin-data */
@@ -152,20 +166,6 @@ function imageLoaded() {
 	context.drawImage(newImg,0,0,640,480,0,0,300,150);
 	setTimeout("imageUpdate()", imageUpdateMs);
 }
-	
-$.ajax({ 
-    type: "GET", 
-    url: Robot.settings.arduino_api_url, 
-    data: { get_param: "value" }, 
-    dataType: 'json'
-}).success(function(data) {
-    $.each(data, function(index, element) {
-        $(".sensorValues").append("<tr><td>" + index + "</td><td>" + element + "</td></tr>");
-    });
-    $(".filter").removeClass("hide");
-}).error(function() {
-    Robot.error("Arduino api is unavailable.");
-});
 
 $(".js-terminate").click(function() {
     Robot.terminate();
@@ -307,3 +307,26 @@ $(".js-angle-head").on("input change", function() {
     Robot.timers.angleDelay = setTimeout(zero, 1000);
 });
 
+$(".js-camera-url").on("change", function() {
+    Robot.settings.camera_image_url = $(this).val();
+    $.ajax({
+        type: "PUT",
+        url: "/api/settings/",
+        data: JSON.stringify(Robot.settings),
+        contentType: "application/json"
+    }).error(function() {
+        Robot.error("Error updating settings");
+    });
+});
+
+$(".js-arduino-url").on("change", function() {
+    Robot.settings.arduino_ip = $(this).val();
+    $.ajax({
+        type: "PUT",
+        url: "/api/settings/",
+        data: JSON.stringify(Robot.settings),
+        contentType: "application/json"
+    }).error(function() {
+        Robot.error("Error updating settings");
+    });
+});

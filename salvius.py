@@ -17,6 +17,7 @@ from robot.leg.foot import FootSerializer
 from robot.head import HeadSerializer
 from robot.torso import TorsoSerializer
 from robot.speech import Speech
+from robot.settings import Settings
 from robot.gpio import PiPin, PiPins
 
 
@@ -279,6 +280,7 @@ api.add_resource(ApiFoot, "/api/robot/body/legs/<int:leg_id>/foot/")
 api.add_resource(Terminate, "/api/terminate/")
 
 api.add_resource(Speech, "/api/speech/")
+api.add_resource(Settings, "/api/settings/")
 api.add_resource(PiPins, "/api/gpio/")
 api.add_resource(PiPin, "/api/gpio/<string:pin_id>")
 
