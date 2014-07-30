@@ -1,13 +1,13 @@
 from unittest import TestCase
 from flask import json, jsonify
-import salvius
+from salvius import app
 
 
 class Test(TestCase):
 
     def setUp(self):
-        salvius.app.config['TESTING'] = True
-        self.app = salvius.app.test_client()
+        app.config['TESTING'] = True
+        self.app = app.test_client()
 
     def test_invalid_JSON(self):
         """
