@@ -1,14 +1,15 @@
 from marshmallow import Serializer, fields
+from robot.joints import PivotJoint, PivotJointSerializer
 
 
-class Torso(object):
+class Torso(PivotJoint):
 
     def __init__(self):
-        self.rotation = 0
-
-    def move(self, roataion):
-        self.rotation += roataion
+        super(Torso, self).__init__()
 
 
-class TorsoSerializer(Serializer):
-    rotation = fields.Integer()
+class TorsoSerializer(PivotJointSerializer):
+    href = fields.Method("get_url")
+
+    def get_url(self, obj):
+        return "/api/robot/body/torso/"

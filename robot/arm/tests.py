@@ -54,12 +54,14 @@ class WristTests(TestCase):
         wrist = Wrist()
 
         wrist.rotate(5)
-        wrist.tilt(6)
-        wrist.lean(7)
+        wrist.elevate(6)
+        wrist.slant(7)
 
         wrist.reset()
 
-        self.assertTrue(wrist.get_position() == [0, 0, 0])
+        self.assertEqual(wrist.rotation, 0)
+        self.assertEqual(wrist.elevation, 0)
+        self.assertEqual(wrist.angle, 0)
 
 
 class HandTests(TestCase):

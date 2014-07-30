@@ -71,6 +71,22 @@ class HingeJoint(Joint):
         return self.angle
 
 
+class PivotJoint(Joint):
+    """
+    Represents a joint which permits rotation in two directions
+    Body-joint examples: Torso
+    """
+    def __init__(self, rotation=0):
+        super(PivotJoint, self).__init__(joint_type="pivot")
+        self.rotation = rotation
+
+    def rotate(self, degrees):
+        """
+        Rotates the joint relative to its current position.
+        """
+        self.rotation += degrees
+
+
 class ArticulatedJoint(Joint):
     """
     Represents a joint which permits movement in two planes as well
@@ -96,7 +112,7 @@ class ArticulatedJoint(Joint):
         """
         self.elevation += degrees
 
-    def angle(self, degrees):
+    def slant(self, degrees):
         """
         Angles the joint left or right relative to its current position.
         """
@@ -110,16 +126,20 @@ class ArticulatedJoint(Joint):
         self.elevation = 0
         self.angle = 0
 
-# PivotJoint
 
-
-class HingeJointSerializer(Serializer):
+class JointSerializer(Serializer):
     joint_type = fields.String()
+
+
+class PivotJointSerializer(JointSerializer):
+    rotation = fields.Integer()
+
+
+class HingeJointSerializer(JointSerializer):
     angle = fields.Integer()
 
 
-class ArticulatedJointSerializer(Serializer):
-    joint_type = fields.String()
-    rotaton = fields.Integer()
+class ArticulatedJointSerializer(JointSerializer):
+    rotation = fields.Integer()
     elevation = fields.Integer()
     angle = fields.Integer()

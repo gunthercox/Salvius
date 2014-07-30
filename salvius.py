@@ -1,7 +1,6 @@
 from flask import Flask
-from flask import render_template, jsonify, request
-from flask import g, session, url_for, flash
-from flask import redirect, render_template
+from flask import jsonify, request
+#from flask import g, session, url_for, flash, redirect
 #from flask_oauthlib.client import OAuth
 
 from flask.views import View
@@ -27,7 +26,7 @@ from robot.gpio import PiPin, PiPins
 
 
 # Create flask app
-app = Flask(__name__, static_folder='static', static_url_path='')
+app = Flask(__name__, static_folder="static", static_url_path="")
 api = Api(app)
 #oauth = OAuth(app)
 
@@ -37,6 +36,7 @@ robot = Robot("Salvius")
 
 class App(View):
     def dispatch_request(self):
+        from flask import render_template
         return render_template("index.html")
 
 

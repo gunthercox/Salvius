@@ -28,9 +28,9 @@ class Test(TestCase):
         self.assertTrue("torso" in response.data.decode())
         self.assertTrue("knee" in response.data.decode())
 
-    def test_get_head(self):
-        response = self.app.get("/api/robot/body/head", follow_redirects=True)
-        self.assertTrue("camera" in response.data.decode())
+    def test_get_neck(self):
+        response = self.app.get("/api/robot/body/neck", follow_redirects=True)
+        self.assertTrue("joint_type" in response.data.decode())
 
     def test_get_arms(self):
         response = self.app.get("/api/robot/body/arms", follow_redirects=True)
@@ -79,13 +79,13 @@ class Test(TestCase):
         """
         Test that two fields can be patched to an ankle.
         """
-        data = u'{"tilt": 2, "angle": 9}'
+        data = u'{"rotation": 2, "elevation": 9}'
         url = "/api/robot/body/legs/0/ankle/"
 
         response = self.app.patch(url, data=data, content_type='application/json')
 
-        self.assertTrue("tilt\": 2" in response.data.decode())
-        self.assertTrue("angle\": 9" in response.data.decode())
+        self.assertTrue("rotation\": 2" in response.data.decode())
+        self.assertTrue("elevation\": 9" in response.data.decode())
 
     def test_one_invalid_field_ankle(self):
         """
