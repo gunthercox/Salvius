@@ -1,4 +1,9 @@
-from flask import Flask, render_template, jsonify, request
+from flask import Flask
+from flask import render_template, jsonify, request
+from flask import g, session, url_for, flash
+from flask import redirect, render_template
+#from flask_oauthlib.client import OAuth
+
 from flask.views import View
 from flask.ext.restful import Api, Resource
 
@@ -14,7 +19,7 @@ from robot.leg.hip import HipSerializer
 from robot.leg.knee import KneeSerializer
 from robot.leg.ankle import AnkleSerializer
 from robot.leg.foot import FootSerializer
-from robot.head import HeadSerializer
+from robot.neck import NeckSerializer
 from robot.torso import TorsoSerializer
 from robot.speech import Speech
 from robot.settings import Settings
@@ -24,6 +29,7 @@ from robot.gpio import PiPin, PiPins
 # Create flask app
 app = Flask(__name__, static_folder='static', static_url_path='')
 api = Api(app)
+#oauth = OAuth(app)
 
 # Create the default robot
 robot = Robot("Salvius")
@@ -46,9 +52,9 @@ class ApiBody(Resource):
         return jsonify(serialized.data)
 
 
-class ApiHead(Resource):
+class ApiNeck(Resource):
     def get(self):
-        serialized = HeadSerializer(robot.body.head)
+        serialized = NeckSerializer(robot.body.neck)
         return jsonify(serialized.data)
 
 
@@ -257,7 +263,7 @@ app.add_url_rule("/", view_func=App.as_view("app"))
 # Setup the Api resource routing
 api.add_resource(ApiRobot, "/api/robot/")
 api.add_resource(ApiBody, "/api/robot/body/")
-api.add_resource(ApiHead, "/api/robot/body/head/")
+api.add_resource(ApiNeck, "/api/robot/body/neck/")
 api.add_resource(ApiTorso, "/api/robot/body/torso/")
 
 api.add_resource(ApiArms, "/api/robot/body/arms/")
@@ -285,4 +291,5 @@ api.add_resource(PiPins, "/api/gpio/")
 api.add_resource(PiPin, "/api/gpio/<string:pin_id>")
 
 if __name__ == "__main__":
+    app.secret_key = 'salvius'
     app.run(host="0.0.0.0", port=5000, debug=True)

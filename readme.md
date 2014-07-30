@@ -27,7 +27,7 @@ configure the robot's api and interface by running the following three lines of 
 ```bash
 apt-get install pip
 pip install -r requirements.md
-chmod a+x robot.py
+chmod a+x salvius.py
 ```
 
 To enable I2C communication on the Rapsberry Pi, edit

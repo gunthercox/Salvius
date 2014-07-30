@@ -6,6 +6,9 @@ class Joint(object):
     A base class with methods to be used by other joints.
     """
 
+    def __init__(self, joint_type=""):
+        self.joint_type = joint_type
+
     def set_attribute(self, attribue, value):
         return setattr(self, attribue, value)
 
@@ -42,11 +45,15 @@ class Joint(object):
 
 
 class HingeJoint(Joint):
+    """
+    Represents a joint in which the articular surfaces are molded to
+    each other in such the manner as to permit motion only in one plane.
+    Body-joint examples: Knees, Elbows, Phalanges
+    """
 
     def __init__(self, angle=0):
-        super(HingeJoint, self).__init__()
+        super(HingeJoint, self).__init__(joint_type="hinge")
         self.angle = angle
-        self.joint_type = "hinge"
 
     def move(self, degrees):
         """
@@ -64,7 +71,55 @@ class HingeJoint(Joint):
         return self.angle
 
 
-class HingeJointSerializer(Serializer):
-    angle = fields.Integer()
-    joint_type = fields.String()
+class ArticulatedJoint(Joint):
+    """
+    Represents a joint which permits movement in two planes as well
+    as being able to rotate
+    Body-joint examples: Wrist, Ankles
+    """
 
+    def __init__(self, rotation=0, elevation=0, angle=0):
+        super(ArticulatedJoint, self).__init__(joint_type="articulated")
+        self.rotation = rotation
+        self.elevation = elevation
+        self.angle = angle
+
+    def rotate(self, degrees):
+        """
+        Rotates the joint relative to its current position.
+        """
+        self.rotation += degrees
+
+    def elevate(self, degrees):
+        """
+        Raises or lowers the joint relative to its current position.
+        """
+        self.elevation += degrees
+
+    def angle(self, degrees):
+        """
+        Angles the joint left or right relative to its current position.
+        """
+        self.angle += degrees
+
+    def reset(self):
+        """
+        Zeros the joints current position.
+        """
+        self.rotation = 0
+        self.elevation = 0
+        self.angle = 0
+
+# PivotJoint
+
+
+class HingeJointSerializer(Serializer):
+    joint_type = fields.String()
+    angle = fields.Integer()
+
+
+class ArticulatedJointSerializer(Serializer):
+    joint_type = fields.String()
+    rotaton = fields.Integer()
+    elevation = fields.Integer()
+    angle = fields.Integer()

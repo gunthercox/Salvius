@@ -1,23 +1,17 @@
 from marshmallow import Serializer, fields
-from robot.head import HeadSerializer
+from robot.neck import Neck, NeckSerializer
+from robot.torso import Torso, TorsoSerializer
 from robot.arm import Arm, ArmSerializer
-from robot.torso import TorsoSerializer
 from robot.leg import Leg, LegSerializer
 
 
 class Body(object):
 
     def __init__(self):
-        self._head = None
-        self._torso = None
+        self.neck = Neck()
+        self.torso = Torso()
         self._arms = []
         self._legs = []
-
-    def set_head(self, head):
-        self._head = head
-
-    def set_torso(self, torso):
-        self._torso = torso
 
     def new_arm(self):
         """
@@ -46,14 +40,6 @@ class Body(object):
         return leg
 
     @property
-    def head(self):
-        return self._head
-
-    @property
-    def torso(self):
-        return self._torso
-
-    @property
     def arms(self):
         return self._arms
 
@@ -63,7 +49,7 @@ class Body(object):
 
 
 class BodySerializer(Serializer):
-    head = fields.Nested(HeadSerializer)
+    neck = fields.Nested(NeckSerializer)
     torso = fields.Nested(TorsoSerializer)
     arms = fields.Nested(ArmSerializer, many=True)
     legs = fields.Nested(LegSerializer, many=True)

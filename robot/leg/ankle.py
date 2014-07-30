@@ -1,21 +1,19 @@
 from marshmallow import Serializer, fields
-from robot.joints import Joint
+from robot.joints import ArticulatedJoint, ArticulatedJointSerializer
 
 
-class Ankle(Joint):
+class Ankle(ArticulatedJoint):
 
     def __init__(self):
         super(Ankle, self).__init__()
-        self.angle = 0
-        self.tilt = 0
+        self.parent_id = None
 
-    def set_angle(self, value):
-        self.angle = value
-
-    def set_tilt(self, value):
-        self.tilt = value
+    def set_parent_id(self, uuid):
+        self.parent_id = uuid
 
 
-class AnkleSerializer(Serializer):
-    angle = fields.Integer()
-    tilt = fields.Integer()
+class AnkleSerializer(ArticulatedJointSerializer):
+    href = fields.Method("get_url")
+
+    def get_url(self, obj):
+        return "/api/robot/body/legs/" + str(obj.parent_id) + "/ankle/"
