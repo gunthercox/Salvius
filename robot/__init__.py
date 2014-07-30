@@ -75,6 +75,7 @@ class Robot(object):
             left_leg = self.body.new_leg()
 
             left_hip = Hip()
+            left_hip.set_parent_id(left_leg.id)
             left_leg.set_hip(left_hip)
 
             left_knee = Knee()
@@ -91,6 +92,7 @@ class Robot(object):
             right_leg = self.body.new_leg()
 
             right_hip = Hip()
+            right_hip.set_parent_id(right_leg.id)
             right_leg.set_hip(right_hip)
 
             right_knee = Knee()

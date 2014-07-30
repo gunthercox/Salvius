@@ -12,24 +12,24 @@ class ShoulderTests(TestCase):
         shoulder = Shoulder()
         shoulder.rotate(-10)
 
-        self.assertEqual(shoulder.get_rotation(), -10)
+        self.assertEqual(shoulder.rotation, -10)
 
     def test_shoulder_extend(self):
         shoulder = Shoulder()
-        shoulder.extend(10)
+        shoulder.slant(10)
 
-        self.assertEqual(shoulder.get_angle(), 10)
+        self.assertEqual(shoulder.angle, 10)
 
     def test_shoulder_reset(self):
         shoulder = Shoulder()
 
         shoulder.rotate(-10)
-        shoulder.extend(10)
+        shoulder.slant(10)
 
         shoulder.reset()
 
-        self.assertEqual(shoulder.get_rotation(), 0)
-        self.assertEqual(shoulder.get_angle(), 0)
+        self.assertEqual(shoulder.rotation, 0)
+        self.assertEqual(shoulder.angle, 0)
 
 
 class ElbowTests(TestCase):

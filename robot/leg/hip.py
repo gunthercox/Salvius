@@ -1,15 +1,19 @@
 from marshmallow import Serializer, fields
-from robot.joints import Joint
+from robot.joints import OrthogonalJoint, OrthogonalJointSerializer
 
 
-class Hip(Joint):
+class Hip(OrthogonalJoint):
 
     def __init__(self):
         super(Hip, self).__init__()
-        self.angle = 0
-        self.position = 0
+        self.parent_id = None
+
+    def set_parent_id(self, uuid):
+        self.parent_id = uuid
 
 
-class HipSerializer(Serializer):
-    angle = fields.Integer()
-    position = fields.Integer()
+class HipSerializer(OrthogonalJointSerializer):
+    href = fields.Method("get_url")
+
+    def get_url(self, obj):
+        return "/api/robot/body/legs/" + str(obj.parent_id) + "/hip/"

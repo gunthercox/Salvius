@@ -87,9 +87,41 @@ class PivotJoint(Joint):
         self.rotation += degrees
 
 
+class OrthogonalJoint(Joint):
+    """
+    Represents a joint which permits movement on one plane.
+    This joint allows rotation on its axis.
+    Body-joint examples: Shoulder, Hip
+    """
+
+    def __init__(self, rotation=0, angle=0):
+        super(OrthogonalJoint, self).__init__(joint_type="orthogonal")
+        self.rotation = rotation
+        self.angle = angle
+
+    def rotate(self, degrees):
+        """
+        Rotates the joint relative to its current position.
+        """
+        self.rotation += degrees
+
+    def slant(self, degrees):
+        """
+        Angles the joint left or right relative to its current position.
+        """
+        self.angle += degrees
+
+    def reset(self):
+        """
+        Zeros the joints current position.
+        """
+        self.rotation = 0
+        self.angle = 0
+
+
 class ArticulatedJoint(Joint):
     """
-    Represents a joint which permits movement in two planes as well
+    Represents a joint which permits movement on two planes as well
     as being able to rotate
     Body-joint examples: Wrist, Ankles
     """
@@ -136,6 +168,11 @@ class PivotJointSerializer(JointSerializer):
 
 
 class HingeJointSerializer(JointSerializer):
+    angle = fields.Integer()
+
+
+class OrthogonalJointSerializer(JointSerializer):
+    rotation = fields.Integer()
     angle = fields.Integer()
 
 
