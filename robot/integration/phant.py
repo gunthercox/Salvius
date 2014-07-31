@@ -112,10 +112,17 @@ class Phant(object):
     def _get_url(self, command, ext='.json'):
         return '{}/{}/{}{}'.format(self.base_url, command, self.public_key, ext)
 
+    def convert_keys_to_string(self, dictionary):
+        """Recursively converts dictionary keys to strings."""
+        if not isinstance(dictionary, dict):
+            return dictionary
+        return dict((str(k), self.convert_keys_to_string(v)) 
+            for k, v in dictionary.items())
+
     def _get_stat(self, name):
         if not self._stats:
             response = rq.get(self._get_url('output', '/stats.json'))
-            self._stats = response.json()
+            self._stats = self.convert_keys_to_string(response.json())
 
         return self._stats[name]
 
