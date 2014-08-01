@@ -1,5 +1,5 @@
 from marshmallow import Serializer, fields
-from robot.joints import PivotJoint, PivotJointSerializer
+from humanoid.joints import PivotJoint, PivotJointSerializer
 
 
 class Torso(PivotJoint):

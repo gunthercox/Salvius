@@ -1,8 +1,8 @@
 from marshmallow import Serializer, fields
-from robot.neck import Neck, NeckSerializer
-from robot.torso import Torso, TorsoSerializer
-from robot.arm import Arm, ArmSerializer
-from robot.leg import Leg, LegSerializer
+from humanoid.neck import Neck, NeckSerializer
+from humanoid.torso import Torso, TorsoSerializer
+from humanoid.arm import Arm, ArmSerializer
+from humanoid.leg import Leg, LegSerializer
 
 
 class Body(object):

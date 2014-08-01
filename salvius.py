@@ -1,34 +1,32 @@
 from flask import Flask
 from flask import jsonify, request
-#from flask import g, session, url_for, flash, redirect
-#from flask_oauthlib.client import OAuth
-
 from flask.views import View
 from flask.ext.restful import Api, Resource
 
-from robot import Robot, RobotSerializer
-from robot.body import BodySerializer, ArmsSerializer, LegsSerializer
-from robot.arm import ArmSerializer
-from robot.arm.shoulder import ShoulderSerializer
-from robot.arm.elbow import ElbowSerializer
-from robot.arm.wrist import WristSerializer
-from robot.arm.hand import HandSerializer, FingersSerializer, FingerSerializer
-from robot.leg import LegSerializer
-from robot.leg.hip import HipSerializer
-from robot.leg.knee import KneeSerializer
-from robot.leg.ankle import AnkleSerializer
-from robot.leg.foot import FootSerializer
-from robot.neck import NeckSerializer
-from robot.torso import TorsoSerializer
-from robot.speech import Speech
-from robot.settings import Settings
+from humanoid import Robot, RobotSerializer
+from humanoid.body import BodySerializer, ArmsSerializer, LegsSerializer
+from humanoid.arm import ArmSerializer
+from humanoid.arm.shoulder import ShoulderSerializer
+from humanoid.arm.elbow import ElbowSerializer
+from humanoid.arm.wrist import WristSerializer
+from humanoid.arm.hand import HandSerializer, FingersSerializer, FingerSerializer
+from humanoid.leg import LegSerializer
+from humanoid.leg.hip import HipSerializer
+from humanoid.leg.knee import KneeSerializer
+from humanoid.leg.ankle import AnkleSerializer
+from humanoid.leg.foot import FootSerializer
+from humanoid.neck import NeckSerializer
+from humanoid.torso import TorsoSerializer
+
+from humanoid.speech import Speech
+from humanoid.settings import Settings
+
 from robot.gpio import PiPin, PiPins
 
 
 # Create flask app
 app = Flask(__name__, static_folder="static", static_url_path="")
 api = Api(app)
-#oauth = OAuth(app)
 
 # Create the default robot
 robot = Robot("Salvius")
@@ -284,9 +282,9 @@ api.add_resource(ApiAnkle, "/api/robot/body/legs/<int:leg_id>/ankle/")
 api.add_resource(ApiFoot, "/api/robot/body/legs/<int:leg_id>/foot/")
 
 api.add_resource(Terminate, "/api/terminate/")
+api.add_resource(Settings, "/api/settings/")
 
 api.add_resource(Speech, "/api/speech/")
-api.add_resource(Settings, "/api/settings/")
 api.add_resource(PiPins, "/api/gpio/")
 api.add_resource(PiPin, "/api/gpio/<string:pin_id>")
 

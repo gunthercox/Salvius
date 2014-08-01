@@ -1,5 +1,5 @@
 from unittest import TestCase
-from robot.torso import Torso
+from humanoid.torso import Torso
 
 
 class Tests(TestCase):

@@ -1,5 +1,5 @@
 from marshmallow import fields
-from robot.joints import HingeJoint, HingeJointSerializer
+from humanoid.joints import HingeJoint, HingeJointSerializer
 
 
 class Knee(HingeJoint):

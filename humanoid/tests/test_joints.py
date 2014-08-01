@@ -1,5 +1,5 @@
 from unittest import TestCase
-from robot.joints import Joint
+from humanoid.joints import Joint
 
 
 class TestObject(Joint):

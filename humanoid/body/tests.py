@@ -1,10 +1,10 @@
 from unittest import TestCase
 
-from robot.neck import Neck
-from robot.torso import Torso
-from robot.body import Body
-from robot.arm import Arm
-from robot.leg import Leg
+from humanoid.neck import Neck
+from humanoid.torso import Torso
+from humanoid.body import Body
+from humanoid.arm import Arm
+from humanoid.leg import Leg
 
 
 class Tests(TestCase):

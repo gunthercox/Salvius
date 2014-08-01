@@ -1,9 +1,9 @@
 from unittest import TestCase
 
-from robot.arm.shoulder import Shoulder
-from robot.arm.elbow import Elbow
-from robot.arm.wrist import Wrist
-from robot.arm.hand import Hand, Finger
+from humanoid.arm.shoulder import Shoulder
+from humanoid.arm.elbow import Elbow
+from humanoid.arm.wrist import Wrist
+from humanoid.arm.hand import Hand, Finger
 
 
 class ShoulderTests(TestCase):

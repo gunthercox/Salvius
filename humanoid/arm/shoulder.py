@@ -1,5 +1,5 @@
 from marshmallow import Serializer, fields
-from robot.joints import OrthogonalJoint, OrthogonalJointSerializer
+from humanoid.joints import OrthogonalJoint, OrthogonalJointSerializer
 
 
 class Shoulder(OrthogonalJoint):

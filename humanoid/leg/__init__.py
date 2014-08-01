@@ -1,8 +1,8 @@
 from marshmallow import Serializer, fields
-from robot.leg.hip import Hip, HipSerializer
-from robot.leg.knee import Knee, KneeSerializer
-from robot.leg.ankle import Ankle, AnkleSerializer
-from robot.leg.foot import Foot, FootSerializer
+from humanoid.leg.hip import Hip, HipSerializer
+from humanoid.leg.knee import Knee, KneeSerializer
+from humanoid.leg.ankle import Ankle, AnkleSerializer
+from humanoid.leg.foot import Foot, FootSerializer
 
 
 class Leg(object):

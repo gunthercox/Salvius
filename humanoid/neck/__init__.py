@@ -1,5 +1,5 @@
 from marshmallow import Serializer, fields
-from robot.joints import ArticulatedJoint, ArticulatedJointSerializer
+from humanoid.joints import ArticulatedJoint, ArticulatedJointSerializer
 
 
 class Neck(ArticulatedJoint):
