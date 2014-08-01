@@ -1,0 +1,3 @@
+[submodule "jsondb"]
+	path = jsondb
+	url = https://github.com/gunthercox/jsondb.git
