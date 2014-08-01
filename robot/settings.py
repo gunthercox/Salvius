@@ -1,44 +1,22 @@
 from flask.ext.restful import Resource, request
-import json
+from jsondb.db import Database
 
 
 class Settings(Resource):
 
     def __init__(self):
         super(Settings, self).__init__()
-
-        self.db = "settings.db"
+        self.db = Database("settings.db")
 
     def get(self):
-        db = open(self.db, "r")
-        content = db.read()
-        obj = json.loads(content)
-        db.close()
-
-        return obj
+        return self.db.data()
 
     def patch(self):
-        json_data = request.get_json(force=True)
-
-        db = open(self.db, "r")
-        content = db.read()
-
-        obj = json.loads(content)
-
-        for key in json_data:
-            obj[key] = json_data[key]
-
-        db.close()
-
-        with open(self.db, "w") as settings:
-            json.dump(obj, settings)
-
-        return obj, 201
+        json = request.get_json(force=True)
+        self.db.data(dictionary=json)
+        return self.db.data(), 201
 
     def put(self):
-        json_data = request.get_json(force=True)
-
-        with open(self.db, "w") as settings:
-            json.dump(json_data, settings)
-
-        return json_data, 201
+        json = request.get_json(force=True)
+        self.db.data(dictionary=json)
+        return self.db.data(), 201
