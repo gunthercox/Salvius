@@ -1,26 +1,14 @@
 from marshmallow import Serializer, fields
+from humanoid.joints import CompliantJoint, CompliantJointSerializer
 
 
-class Finger(object):
+class Finger(CompliantJoint):
 
     def __init__(self, uuid=None, hand_id=None):
-        self.position = 0
+        super(Finger, self).__init__()
 
         self.parent_id = hand_id
         self.id = uuid
-
-    def move(self, degrees):
-        """
-        Moves a finger a number of degrees relative to the
-        current position.
-        """
-        self.position += degrees
-
-    def reset(self):
-        self.position = 0
-
-    def get_position(self):
-        return self.position
 
 
 class Hand(object):
@@ -69,8 +57,7 @@ class Hand(object):
         self._thumb.move(100)
 
 
-class FingerSerializer(Serializer):
-    href = fields.Method("get_url")
+class FingerSerializer(CompliantJointSerializer):
     id = fields.UUID()
     position = fields.Integer()
 

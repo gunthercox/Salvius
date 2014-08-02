@@ -2,7 +2,6 @@ from marshmallow import Serializer, fields
 from humanoid.leg.hip import Hip, HipSerializer
 from humanoid.leg.knee import Knee, KneeSerializer
 from humanoid.leg.ankle import Ankle, AnkleSerializer
-from humanoid.leg.foot import Foot, FootSerializer
 
 
 class Leg(object):
@@ -11,7 +10,6 @@ class Leg(object):
         self._hip = None
         self._knee = None
         self._ankle = None
-        self._foot = None
 
         self.id = uuid
 
@@ -23,9 +21,6 @@ class Leg(object):
 
     def set_ankle(self, ankle):
         self._ankle = ankle
-
-    def set_foot(self, foot):
-        self._foot = foot
 
     @property
     def hip(self):
@@ -39,18 +34,12 @@ class Leg(object):
     def ankle(self):
         return self._ankle
 
-    @property
-    def foot(self):
-        return self._foot
-
 
 class LegSerializer(Serializer):
     id = fields.UUID()
-    href = fields.Method("get_url")
     hip = fields.Nested(HipSerializer)
     knee = fields.Nested(KneeSerializer)
     ankle = fields.Nested(AnkleSerializer)
-    foot = fields.Nested(FootSerializer)
 
     def get_url(self, obj):
         return "/api/robot/body/legs/" + str(obj.id)

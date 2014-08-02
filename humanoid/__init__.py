@@ -8,7 +8,6 @@ from humanoid.arm.hand import Hand, Finger
 from humanoid.leg.hip import Hip
 from humanoid.leg.knee import Knee
 from humanoid.leg.ankle import Ankle
-from humanoid.leg.foot import Foot
 
 
 class Robot(object):
@@ -79,14 +78,12 @@ class Robot(object):
             left_leg.set_hip(left_hip)
 
             left_knee = Knee()
+            left_knee.set_parent_id(left_leg.id)
             left_leg.set_knee(left_knee)
 
             left_ankle = Ankle()
             left_ankle.set_parent_id(left_leg.id)
             left_leg.set_ankle(left_ankle)
-
-            left_foot = Foot()
-            left_leg.set_foot(left_foot)
 
             # Create right leg
             right_leg = self.body.new_leg()
@@ -96,14 +93,13 @@ class Robot(object):
             right_leg.set_hip(right_hip)
 
             right_knee = Knee()
+            right_knee.set_parent_id(right_leg.id)
             right_leg.set_knee(right_knee)
 
             right_ankle = Ankle()
             right_ankle.set_parent_id(right_leg.id)
             right_leg.set_ankle(right_ankle)
 
-            right_foot = Foot()
-            right_leg.set_foot(right_foot)
 
     @property
     def body(self):

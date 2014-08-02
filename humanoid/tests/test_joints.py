@@ -4,11 +4,10 @@ from humanoid.joints import Joint
 
 class TestObject(Joint):
     """
-    This is a test object for other tests
-    to use. This object extends the `Joint`
-    object which has setter methods used to
-    deserialize data from patch requests to
-    the robot's api.
+    This is a test object for other tests to use.
+    This object extends the `Joint` object which
+    has setter methods used to deserialize data
+    from patch requests to the robot's api.
     """
 
     def __init__(self):
@@ -22,7 +21,7 @@ class TestObject(Joint):
         self.name = value
 
 
-class Tests(TestCase):
+class JointTests(TestCase):
 
     def test_set_attribute(self):
         obj = TestObject()

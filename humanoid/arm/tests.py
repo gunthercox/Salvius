@@ -83,8 +83,8 @@ class HandTests(TestCase):
 
         hand.close()
 
-        self.assertEqual(hand.fingers[0].get_position(), 100)
-        self.assertEqual(hand.thumb.get_position(), 100)
+        self.assertEqual(hand.fingers[0].tension, 100)
+        self.assertEqual(hand.thumb.tension, 100)
 
 
 class FingerTests(TestCase):
@@ -93,4 +93,4 @@ class FingerTests(TestCase):
         finger = Finger(0, 0)
         finger.move(-30)
 
-        self.assertEqual(finger.get_position(), -30)
+        self.assertEqual(finger.tension, -30)

@@ -13,7 +13,6 @@ class Neck(ArticulatedJoint):
 
 
 class NeckSerializer(ArticulatedJointSerializer):
-    href = fields.Method("get_url")
 
     def get_url(self, obj):
         return "/api/robot/body/neck/"

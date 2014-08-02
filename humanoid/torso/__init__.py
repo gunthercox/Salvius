@@ -9,7 +9,6 @@ class Torso(PivotJoint):
 
 
 class TorsoSerializer(PivotJointSerializer):
-    href = fields.Method("get_url")
 
     def get_url(self, obj):
         return "/api/robot/body/torso/"

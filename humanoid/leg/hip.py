@@ -13,7 +13,6 @@ class Hip(OrthogonalJoint):
 
 
 class HipSerializer(OrthogonalJointSerializer):
-    href = fields.Method("get_url")
 
     def get_url(self, obj):
         return "/api/robot/body/legs/" + str(obj.parent_id) + "/hip/"

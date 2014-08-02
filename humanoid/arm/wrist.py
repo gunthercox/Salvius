@@ -13,7 +13,6 @@ class Wrist(ArticulatedJoint):
 
 
 class WristSerializer(ArticulatedJointSerializer):
-    href = fields.Method("get_url")
 
     def get_url(self, obj):
         return "/api/robot/body/arms/" + str(obj.parent_id) + "/wrist/"

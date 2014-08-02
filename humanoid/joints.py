@@ -159,8 +159,31 @@ class ArticulatedJoint(Joint):
         self.angle = 0
 
 
+class CompliantJoint(Joint):
+    """
+    The compliant joint type represents a body-joint structure where there are
+    several joints linked together which will change shape based on the objects
+    that the effector encounters.
+    Body-joint example: Fingers
+    """
+
+    def __init__(self, rotation=0, elevation=0, angle=0):
+        super(CompliantJoint, self).__init__(joint_type="compliant")
+        self.tension = 0
+
+    def move(self, degrees):
+        """
+        Moves the joint relative to its current position.
+        """
+        self.tension += degrees
+
+
 class JointSerializer(Serializer):
     joint_type = fields.String()
+    href = fields.Method("get_url")
+
+    def get_url(self, obj):
+        raise NotImplementedError()
 
 
 class PivotJointSerializer(JointSerializer):
@@ -180,3 +203,7 @@ class ArticulatedJointSerializer(JointSerializer):
     rotation = fields.Integer()
     elevation = fields.Integer()
     angle = fields.Integer()
+
+
+class CompliantJointSerializer(JointSerializer):
+    tension = fields.Integer()

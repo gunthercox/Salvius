@@ -23,7 +23,5 @@ class Elbow(HingeJoint):
 class ElbowSerializer(HingeJointSerializer):
     limit = fields.Integer()
 
-    href = fields.Method("get_url")
-
     def get_url(self, obj):
         return "/api/robot/body/arms/" + str(obj.parent_id) + "/elbow/"
