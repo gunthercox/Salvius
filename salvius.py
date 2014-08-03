@@ -3,6 +3,8 @@ from flask.ext.restful import Api
 from humanoid import Robot
 from humanoid import views
 
+from humanoid.torso import Torso
+
 
 # Create flask app
 app = Flask(__name__, static_folder="static", static_url_path="")
@@ -15,7 +17,7 @@ app.add_url_rule("/", view_func=views.App.as_view("app"))
 api.add_resource(views.ApiRobot, "/api/robot/")
 api.add_resource(views.ApiBody, "/api/robot/body/")
 api.add_resource(views.ApiNeck, "/api/robot/body/neck/")
-api.add_resource(views.ApiTorso, "/api/robot/body/torso/")
+api.add_resource(Torso, "/api/robot/body/torso/")
 
 api.add_resource(views.ApiArms, "/api/robot/body/arms/")
 api.add_resource(views.ApiArm, "/api/robot/body/arms/<int:arm_id>/")
