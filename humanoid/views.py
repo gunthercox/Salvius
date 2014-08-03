@@ -14,7 +14,6 @@ from humanoid.leg.hip import HipSerializer
 from humanoid.leg.knee import KneeSerializer
 from humanoid.leg.ankle import AnkleSerializer
 from humanoid.neck import NeckSerializer
-from humanoid.torso import TorsoSerializer
 
 from humanoid.speech import Speech
 from humanoid.settings import Settings
@@ -42,12 +41,6 @@ class ApiBody(Resource):
 class ApiNeck(Resource):
     def get(self):
         serialized = NeckSerializer(robot.body.neck)
-        return jsonify(serialized.data)
-
-
-class ApiTorso(Resource):
-    def get(self):
-        serialized = TorsoSerializer(robot.body.torso)
         return jsonify(serialized.data)
 
 

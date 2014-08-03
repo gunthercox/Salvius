@@ -1,3 +1,4 @@
+from flask import abort
 from flask.ext.restful import Resource
 from flask.ext.restful import marshal, fields, request
 from flask.ext.restful import fields as Fields
@@ -23,6 +24,9 @@ class Joint(Resource):
             "href": Fields.String
         }
 
+        # Fields that can be modified through requests
+        self.allowed_fields = []
+
     @property
     def joint_type(self):
         return self.data["joint_type"]
@@ -34,11 +38,24 @@ class Joint(Resource):
     def get(self):
         return marshal(self.data, self.fields)
 
+    def patch(self):
+        data = request.get_json(force=True)
+
+
+        for key in data.keys():
+            if key not in self.allowed_fields:
+                abort(405)
+
+        for key in data.keys():
+            self.data[key] = data[key]
+
+        return marshal(self.data, self.fields), 201
+
 
 class PivotJoint(Joint):
     """
     Represents a joint which permits rotation in two directions
-    Body-joint examples: Torso
+    Body-joint examples: Torso 
     """
 
     def __init__(self):
@@ -47,6 +64,8 @@ class PivotJoint(Joint):
         self.data["rotation"] = 0
 
         self.fields["rotation"] = Fields.Integer
+
+        self.allowed_fields.append("rotation")
 
     def rotate(self, degrees):
         """
