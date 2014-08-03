@@ -6,18 +6,12 @@ from humanoid import RobotSerializer
 from humanoid.body import BodySerializer, ArmsSerializer, LegsSerializer
 from humanoid.arm import ArmSerializer
 from humanoid.arm.shoulder import ShoulderSerializer
-from humanoid.arm.elbow import ElbowSerializer
 from humanoid.arm.wrist import WristSerializer
 from humanoid.arm.hand import HandSerializer, FingersSerializer, FingerSerializer
 from humanoid.leg import LegSerializer
-from humanoid.leg.hip import HipSerializer
-from humanoid.leg.knee import KneeSerializer
-
-
-from humanoid.speech import Speech
-from humanoid.settings import Settings
 
 from robot import robot
+
 
 class App(View):
     def dispatch_request(self):
@@ -61,22 +55,6 @@ class ApiShoulder(Resource):
         shoulder.set_attributes(json)
 
         serialized = ShoulderSerializer(shoulder)
-        return jsonify(serialized.data)
-
-
-class ApiElbow(Resource):
-
-    def get(self, arm_id):
-        serialized = ElbowSerializer(robot.body.arms[arm_id].elbow)
-        return jsonify(serialized.data)
-
-    def patch(self, arm_id):
-        json = request.get_json(force=True)
-
-        elbow = robot.body.arms[arm_id].elbow
-        elbow.set_attributes(json)
-
-        serialized = ElbowSerializer(elbow)
         return jsonify(serialized.data)
 
 
@@ -153,47 +131,6 @@ class ApiLeg(Resource):
     def patch(self, leg_id):
         # There is curretly no way to patch to nested items
         pass
-        '''
-        json = request.get_json(force=True)
-
-        hip = robot.body.legs[leg_id].hip
-        hip.set_attributes(json)
-
-        serialized = HipSerializer(hip)
-        return jsonify(serialized.data)
-        '''
-
-
-class ApiHip(Resource):
-
-    def get(self, leg_id):
-        serialized = HipSerializer(robot.body.legs[leg_id].hip)
-        return jsonify(serialized.data)
-
-    def patch(self, leg_id):
-        json = request.get_json(force=True)
-
-        hip = robot.body.legs[leg_id].hip
-        hip.set_attributes(json)
-
-        serialized = HipSerializer(hip)
-        return jsonify(serialized.data)
-
-
-class ApiKnee(Resource):
-
-    def get(self, leg_id):
-        serialized = KneeSerializer(robot.body.legs[leg_id].knee)
-        return jsonify(serialized.data)
-
-    def patch(self, leg_id):
-        json = request.get_json(force=True)
-
-        knee = robot.body.legs[leg_id].knee
-        knee.set_attributes(json)
-
-        serialized = KneeSerializer(knee)
-        return jsonify(serialized.data)
 
 
 class Terminate(Resource):

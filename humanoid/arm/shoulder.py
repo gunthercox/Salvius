@@ -1,4 +1,3 @@
-from marshmallow import Serializer, fields
 from humanoid.joints import OrthogonalJoint, OrthogonalJointSerializer
 
 

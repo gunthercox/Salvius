@@ -1,11 +1,19 @@
 from flask import Flask
 from flask.ext.restful import Api
-from humanoid import Robot
+
 from humanoid import views
 
-from humanoid.torso import Torso
 from humanoid.neck import Neck
+from humanoid.torso import Torso
+
+from humanoid.arm.elbow import Elbow
+
+from humanoid.leg.hip import Hip
+from humanoid.leg.knee import Knee
 from humanoid.leg.ankle import Ankle
+
+from humanoid.speech import Speech
+from humanoid.settings import Settings
 
 
 # Create flask app
@@ -24,7 +32,7 @@ api.add_resource(Torso, "/api/robot/body/torso/")
 api.add_resource(views.ApiArms, "/api/robot/body/arms/")
 api.add_resource(views.ApiArm, "/api/robot/body/arms/<int:arm_id>/")
 api.add_resource(views.ApiShoulder, "/api/robot/body/arms/<int:arm_id>/shoulder/")
-api.add_resource(views.ApiElbow, "/api/robot/body/arms/<int:arm_id>/elbow/")
+api.add_resource(Elbow, "/api/robot/body/arms/<int:arm_id>/elbow/")
 api.add_resource(views.ApiWrist, "/api/robot/body/arms/<int:arm_id>/wrist/")
 api.add_resource(views.ApiHand, "/api/robot/body/arms/<int:arm_id>/hand/")
 api.add_resource(views.ApiFingers, "/api/robot/body/arms/<int:arm_id>/hand/fingers/")
@@ -33,13 +41,13 @@ api.add_resource(views.ApiThumb, "/api/robot/body/arms/<int:arm_id>/hand/thumb/"
 
 api.add_resource(views.ApiLegs, "/api/robot/body/legs/")
 api.add_resource(views.ApiLeg, "/api/robot/body/legs/<int:leg_id>/")
-api.add_resource(views.ApiHip, "/api/robot/body/legs/<int:leg_id>/hip/")
-api.add_resource(views.ApiKnee, "/api/robot/body/legs/<int:leg_id>/knee/")
+api.add_resource(Hip, "/api/robot/body/legs/<int:leg_id>/hip/")
+api.add_resource(Knee, "/api/robot/body/legs/<int:leg_id>/knee/")
 api.add_resource(Ankle, "/api/robot/body/legs/<int:leg_id>/ankle/")
 
 api.add_resource(views.Terminate, "/api/terminate/")
-api.add_resource(views.Settings, "/api/settings/")
-api.add_resource(views.Speech, "/api/speech/")
+api.add_resource(Settings, "/api/settings/")
+api.add_resource(Speech, "/api/speech/")
 
 if __name__ == "__main__":
     app.config.update(

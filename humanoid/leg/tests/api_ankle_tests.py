@@ -27,21 +27,6 @@ class AnkleApiTests(TestCase):
         self.assertTrue("rotation\": 2" in response.data.decode())
         self.assertTrue("elevation\": 9" in response.data.decode())
 
-    def test_patch_two_fields_ankle(self):
-        """
-        Test that two fields can be patched to an ankle.
-        """
-        data = u'{"rotation": 2, "elevation": 9}'
-        url = "/api/robot/body/legs/0/ankle/"
-        content_type = "application/json"
-
-        response = self.app.patch(url, data=data, content_type=content_type)
-
-        print(response.data.decode())
-
-        self.assertTrue('rotation": 2' in response.data.decode())
-        self.assertTrue('elevation": 9' in response.data.decode())
-
     def test_one_invalid_field_ankle(self):
         """
         Test that patching one valid and one invalid field fails.
@@ -51,7 +36,5 @@ class AnkleApiTests(TestCase):
         content_type = "application/json"
 
         response = self.app.patch(url, data=data, content_type=content_type)
-
-        print(response.data.decode())
 
         self.assertTrue("405" in response.data.decode())

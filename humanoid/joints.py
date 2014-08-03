@@ -109,6 +109,7 @@ class HingeJoint(Joint2):
         self.data["angle"] = angle
 
         self.fields["angle"] = fields.Integer
+        self.fields["limits"] = fields.List(fields.Integer)
 
         self.allowed_fields.append("angle")
 
@@ -118,6 +119,10 @@ class HingeJoint(Joint2):
         # TODO: Possible removal of all reset and move classes
         """
         self.data["angle"] += degrees
+
+    @property
+    def limits(self):
+        return self.data["limits"]
 
     @property
     def angle(self):
@@ -265,12 +270,13 @@ class JointSerializer(Serializer):
     href = lame.String()
 
 
-class PivotJointSerializer(JointSerializer):
-    rotation = lame.Integer()
-
-
 class HingeJointSerializer(JointSerializer):
     angle = lame.Integer()
+    limits = lame.List(lame.Integer, attribute="limits")
+
+
+class PivotJointSerializer(JointSerializer):
+    rotation = lame.Integer()
 
 
 class OrthogonalJointSerializer(JointSerializer):

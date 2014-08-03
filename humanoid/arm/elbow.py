@@ -1,18 +1,19 @@
 from marshmallow import fields
+from flask.ext.restful import marshal, request
 from humanoid.joints import HingeJoint, HingeJointSerializer
 
 
 class Elbow(HingeJoint):
     """
     Elbow extends the basic hinge joint class and
-    sets a limit to its own movement.
+    sets a limit to its range of movement.
     """
 
     def __init__(self):
         super(Elbow, self).__init__()
 
-        # Number of degrees that the joint is limited to.
-        self.limit = 180
+        # Limits = [lower, upper]
+        self.data["limits"] = [0, 50]
 
         self.parent_id = None
 
@@ -22,6 +23,19 @@ class Elbow(HingeJoint):
         self.parent_id = uuid
         self.data["href"] = "/api/robot/body/arms/" + str(uuid) + "/elbow/"
 
+    def get(self, arm_id):
+        return marshal(self.data, self.fields)
+
+    def patch(self, arm_id):
+        data = request.get_json(force=True)
+
+        self.validate_fields(data)
+
+        for key in data.keys():
+            self.data[key] = data[key]
+
+        return marshal(self.data, self.fields), 201
+
 
 class ElbowSerializer(HingeJointSerializer):
-    limit = fields.Integer()
+    pass

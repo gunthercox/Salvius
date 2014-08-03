@@ -1,4 +1,5 @@
-from marshmallow import fields
+from flask.ext.restful import marshal, request
+
 from humanoid.joints import HingeJoint, HingeJointSerializer
 
 
@@ -12,7 +13,7 @@ class Knee(HingeJoint):
         super(Knee, self).__init__()
 
         # Number of degrees that the joint is limited to.
-        self.limit = 180
+        self.data["limits"] = [0, 50]
 
         self.parent_id = None
 
@@ -22,6 +23,23 @@ class Knee(HingeJoint):
         self.parent_id = uuid
         self.data["href"] = "/api/robot/body/legs/" + str(uuid) + "/knee/"
 
+    def get(self, leg_id):
+        self.data["href"] = "/api/robot/body/legs/" + str(leg_id) + "/knee/"
+        # TODO: Create arm and leg representation in database,
+        # An error will be thrown if the arm or leg does not exist in the db.
+
+        return marshal(self.data, self.fields)
+
+    def patch(self, leg_id):
+        data = request.get_json(force=True)
+
+        self.validate_fields(data)
+
+        for key in data.keys():
+            self.data[key] = data[key]
+
+        return marshal(self.data, self.fields), 201
+
 
 class KneeSerializer(HingeJointSerializer):
-    limit = fields.Integer()
+    pass

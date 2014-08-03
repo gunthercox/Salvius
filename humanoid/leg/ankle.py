@@ -1,4 +1,4 @@
-from flask.ext.restful import marshal, fields, request
+from flask.ext.restful import marshal, request
 
 from humanoid.joints import ArticulatedJoint, ArticulatedJointSerializer
 
@@ -16,6 +16,10 @@ class Ankle(ArticulatedJoint):
         self.data["href"] = "/api/robot/body/legs/" + str(uuid) + "/ankle/"
 
     def get(self, leg_id):
+        self.data["href"] = "/api/robot/body/legs/" + str(leg_id) + "/ankle/"
+        # TODO: Create arm and leg representation in database,
+        # An error will be thrown if the arm or leg does not exist in the db.
+
         return marshal(self.data, self.fields)
 
     def patch(self, leg_id):
