@@ -16,12 +16,12 @@ class Knee(HingeJoint):
 
         self.parent_id = None
 
+        self.data["href"] = "/api/robot/body/legs/" + str(self.parent_id) + "/knee/"
+
     def set_parent_id(self, uuid):
         self.parent_id = uuid
+        self.data["href"] = "/api/robot/body/legs/" + str(uuid) + "/knee/"
 
 
 class KneeSerializer(HingeJointSerializer):
     limit = fields.Integer()
-
-    def get_url(self, obj):
-        return "/api/robot/body/legs/" + str(obj.parent_id) + "/knee/"

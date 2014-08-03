@@ -1,4 +1,54 @@
-from marshmallow import Serializer, fields
+from flask import abort
+from flask.ext.restful import Resource
+from flask.ext.restful import marshal, fields, request
+
+# Marshmallow may be depricated in the future
+from marshmallow import Serializer
+from marshmallow import fields as lame
+
+
+class Joint2(Resource):
+    """
+    Represents a joint which permits rotation in two directions
+    Body-joint examples: Torso
+    """
+
+    def __init__(self, joint_type):
+        super(Joint2, self).__init__()
+        self.data = {}
+        self.data["joint_type"] = joint_type
+
+        self.fields = {
+            "joint_type": fields.String,
+            "href": fields.String
+        }
+
+        # Fields that can be modified through requests
+        self.allowed_fields = []
+
+    @property
+    def joint_type(self):
+        return self.data["joint_type"]
+
+    @property
+    def href(self):
+        return self.data["href"]
+
+    def get(self):
+        return marshal(self.data, self.fields)
+
+    def patch(self):
+        data = request.get_json(force=True)
+
+
+        for key in data.keys():
+            if key not in self.allowed_fields:
+                abort(405)
+
+        for key in data.keys():
+            self.data[key] = data[key]
+
+        return marshal(self.data, self.fields), 201
 
 
 class Joint(object):
@@ -25,6 +75,7 @@ class Joint(object):
             if hasattr(self, attribue):
                 self.set_attribute(attribue, data[attribue])
             else:
+                # abort(422) # Unprocessable entity
                 raise Exception("Attribue %s not found" % attribue)
 
     def set_methods(self, data):
@@ -44,7 +95,7 @@ class Joint(object):
                 raise Exception("Method %s not implemented" % method)
 
 
-class HingeJoint(Joint):
+class HingeJoint(Joint2):
     """
     Represents a joint in which the articular surfaces are molded to
     each other in such the manner as to permit motion only in one plane.
@@ -53,38 +104,43 @@ class HingeJoint(Joint):
 
     def __init__(self, angle=0):
         super(HingeJoint, self).__init__(joint_type="hinge")
-        self.angle = angle
+        self.data["angle"] = angle
 
     def move(self, degrees):
         """
         Moves the joint relative to its current position.
         """
-        self.angle += degrees
+        self.data["angle"] += degrees
 
-    def reset(self):
-        """
-        Zeros the joints current position.
-        """
-        self.angle = 0
-
-    def get_angle(self):
-        return self.angle
+    @property
+    def angle(self):
+        return self.data["angle"]
 
 
-class PivotJoint(Joint):
+class PivotJoint(Joint2):
     """
-    Represents a joint which permits rotation in two directions
-    Body-joint examples: Torso
+    Represents a joint which permits rotation in two directions.
+    Body-joint examples: Torso 
     """
+
     def __init__(self, rotation=0):
         super(PivotJoint, self).__init__(joint_type="pivot")
-        self.rotation = rotation
+        self.data["rotation"] = rotation
+
+        self.fields["rotation"] = fields.Integer
+
+        self.allowed_fields.append("rotation")
 
     def rotate(self, degrees):
         """
         Rotates the joint relative to its current position.
         """
-        self.rotation += degrees
+        print(self.data)
+        self.data["rotation"] += degrees
+
+    @property
+    def rotation(self):
+        return self.data["rotation"]
 
 
 class OrthogonalJoint(Joint):
@@ -179,31 +235,28 @@ class CompliantJoint(Joint):
 
 
 class JointSerializer(Serializer):
-    joint_type = fields.String()
-    href = fields.Method("get_url")
-
-    def get_url(self, obj):
-        raise NotImplementedError()
+    joint_type = lame.String()
+    href = lame.String()
 
 
 class PivotJointSerializer(JointSerializer):
-    rotation = fields.Integer()
+    rotation = lame.Integer()
 
 
 class HingeJointSerializer(JointSerializer):
-    angle = fields.Integer()
+    angle = lame.Integer()
 
 
 class OrthogonalJointSerializer(JointSerializer):
-    rotation = fields.Integer()
-    angle = fields.Integer()
+    rotation = lame.Integer()
+    angle = lame.Integer()
 
 
 class ArticulatedJointSerializer(JointSerializer):
-    rotation = fields.Integer()
-    elevation = fields.Integer()
-    angle = fields.Integer()
+    rotation = lame.Integer()
+    elevation = lame.Integer()
+    angle = lame.Integer()
 
 
 class CompliantJointSerializer(JointSerializer):
-    tension = fields.Integer()
+    tension = lame.Integer()

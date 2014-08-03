@@ -20,17 +20,6 @@ class ShoulderTests(TestCase):
 
         self.assertEqual(shoulder.angle, 10)
 
-    def test_shoulder_reset(self):
-        shoulder = Shoulder()
-
-        shoulder.rotate(-10)
-        shoulder.slant(10)
-
-        shoulder.reset()
-
-        self.assertEqual(shoulder.rotation, 0)
-        self.assertEqual(shoulder.angle, 0)
-
 
 class ElbowTests(TestCase):
 
@@ -38,30 +27,21 @@ class ElbowTests(TestCase):
         elbow = Elbow()
         elbow.move(-20)
 
-        self.assertEqual(elbow.get_angle(), -20)
-
-    def test_elbow_reset(self):
-        elbow = Elbow()
-        elbow.move(-20)
-        elbow.reset()
-
-        self.assertEqual(elbow.get_angle(), 0)
+        self.assertEqual(elbow.angle, -20)
 
 
 class WristTests(TestCase):
 
-    def test_wrist_reset(self):
+    def test_wrist_move(self):
         wrist = Wrist()
 
         wrist.rotate(5)
         wrist.elevate(6)
         wrist.slant(7)
 
-        wrist.reset()
-
-        self.assertEqual(wrist.rotation, 0)
-        self.assertEqual(wrist.elevation, 0)
-        self.assertEqual(wrist.angle, 0)
+        self.assertEqual(wrist.rotation, 5)
+        self.assertEqual(wrist.elevation, 6)
+        self.assertEqual(wrist.angle, 7)
 
 
 class HandTests(TestCase):
