@@ -4,6 +4,8 @@ from humanoid import Robot
 from humanoid import views
 
 from humanoid.torso import Torso
+from humanoid.neck import Neck
+from humanoid.leg.ankle import Ankle
 
 
 # Create flask app
@@ -16,7 +18,7 @@ app.add_url_rule("/", view_func=views.App.as_view("app"))
 # Setup the Api resource routing
 api.add_resource(views.ApiRobot, "/api/robot/")
 api.add_resource(views.ApiBody, "/api/robot/body/")
-api.add_resource(views.ApiNeck, "/api/robot/body/neck/")
+api.add_resource(Neck, "/api/robot/body/neck/")
 api.add_resource(Torso, "/api/robot/body/torso/")
 
 api.add_resource(views.ApiArms, "/api/robot/body/arms/")
@@ -33,7 +35,7 @@ api.add_resource(views.ApiLegs, "/api/robot/body/legs/")
 api.add_resource(views.ApiLeg, "/api/robot/body/legs/<int:leg_id>/")
 api.add_resource(views.ApiHip, "/api/robot/body/legs/<int:leg_id>/hip/")
 api.add_resource(views.ApiKnee, "/api/robot/body/legs/<int:leg_id>/knee/")
-api.add_resource(views.ApiAnkle, "/api/robot/body/legs/<int:leg_id>/ankle/")
+api.add_resource(Ankle, "/api/robot/body/legs/<int:leg_id>/ankle/")
 
 api.add_resource(views.Terminate, "/api/terminate/")
 api.add_resource(views.Settings, "/api/settings/")

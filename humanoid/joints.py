@@ -1,4 +1,3 @@
-from flask import abort
 from flask.ext.restful import Resource
 from flask.ext.restful import marshal, fields, request
 
@@ -26,6 +25,12 @@ class Joint2(Resource):
         # Fields that can be modified through requests
         self.allowed_fields = []
 
+    def validate_fields(self, data):
+        from flask import abort
+        for key in data.keys():
+            if key not in self.allowed_fields:
+                abort(405)
+
     @property
     def joint_type(self):
         return self.data["joint_type"]
@@ -40,10 +45,7 @@ class Joint2(Resource):
     def patch(self):
         data = request.get_json(force=True)
 
-
-        for key in data.keys():
-            if key not in self.allowed_fields:
-                abort(405)
+        self.validate_fields(data)
 
         for key in data.keys():
             self.data[key] = data[key]
@@ -106,9 +108,14 @@ class HingeJoint(Joint2):
         super(HingeJoint, self).__init__(joint_type="hinge")
         self.data["angle"] = angle
 
+        self.fields["angle"] = fields.Integer
+
+        self.allowed_fields.append("angle")
+
     def move(self, degrees):
         """
         Moves the joint relative to its current position.
+        # TODO: Possible removal of all reset and move classes
         """
         self.data["angle"] += degrees
 
@@ -143,7 +150,7 @@ class PivotJoint(Joint2):
         return self.data["rotation"]
 
 
-class OrthogonalJoint(Joint):
+class OrthogonalJoint(Joint2):
     """
     Represents a joint which permits movement on one plane.
     This joint allows rotation on its axis.
@@ -152,30 +159,37 @@ class OrthogonalJoint(Joint):
 
     def __init__(self, rotation=0, angle=0):
         super(OrthogonalJoint, self).__init__(joint_type="orthogonal")
-        self.rotation = rotation
-        self.angle = angle
+        self.data["rotation"] = rotation
+        self.data["angle"] = angle
+
+        self.fields["rotation"] = fields.Integer
+        self.fields["angle"] = fields.Integer
+
+        self.allowed_fields.append("rotation")
+        self.allowed_fields.append("angle")
 
     def rotate(self, degrees):
         """
         Rotates the joint relative to its current position.
         """
-        self.rotation += degrees
+        self.data["rotation"] += degrees
 
     def slant(self, degrees):
         """
         Angles the joint left or right relative to its current position.
         """
-        self.angle += degrees
+        self.data["angle"] += degrees
 
-    def reset(self):
-        """
-        Zeros the joints current position.
-        """
-        self.rotation = 0
-        self.angle = 0
+    @property
+    def rotation(self):
+        return self.data["rotation"]
+
+    @property
+    def angle(self):
+        return self.data["angle"]
 
 
-class ArticulatedJoint(Joint):
+class ArticulatedJoint(Joint2):
     """
     Represents a joint which permits movement on two planes as well
     as being able to rotate
@@ -184,35 +198,47 @@ class ArticulatedJoint(Joint):
 
     def __init__(self, rotation=0, elevation=0, angle=0):
         super(ArticulatedJoint, self).__init__(joint_type="articulated")
-        self.rotation = rotation
-        self.elevation = elevation
-        self.angle = angle
+        self.data["rotation"] = rotation
+        self.data["elevation"] = elevation
+        self.data["angle"] = angle
+
+        self.fields["rotation"] = fields.Integer
+        self.fields["elevation"] = fields.Integer
+        self.fields["angle"] = fields.Integer
+
+        self.allowed_fields.append("rotation")
+        self.allowed_fields.append("elevation")
+        self.allowed_fields.append("angle")
 
     def rotate(self, degrees):
         """
         Rotates the joint relative to its current position.
         """
-        self.rotation += degrees
+        self.data["rotation"] += degrees
 
     def elevate(self, degrees):
         """
         Raises or lowers the joint relative to its current position.
         """
-        self.elevation += degrees
+        self.data["elevation"] += degrees
 
     def slant(self, degrees):
         """
         Angles the joint left or right relative to its current position.
         """
-        self.angle += degrees
+        self.data["angle"] += degrees
 
-    def reset(self):
-        """
-        Zeros the joints current position.
-        """
-        self.rotation = 0
-        self.elevation = 0
-        self.angle = 0
+    @property
+    def rotation(self):
+        return self.data["rotation"]
+
+    @property
+    def elevation(self):
+        return self.data["elevation"]
+
+    @property
+    def angle(self):
+        return self.data["angle"]
 
 
 class CompliantJoint(Joint):

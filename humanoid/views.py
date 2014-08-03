@@ -12,8 +12,7 @@ from humanoid.arm.hand import HandSerializer, FingersSerializer, FingerSerialize
 from humanoid.leg import LegSerializer
 from humanoid.leg.hip import HipSerializer
 from humanoid.leg.knee import KneeSerializer
-from humanoid.leg.ankle import AnkleSerializer
-from humanoid.neck import NeckSerializer
+
 
 from humanoid.speech import Speech
 from humanoid.settings import Settings
@@ -35,12 +34,6 @@ class ApiRobot(Resource):
 class ApiBody(Resource):
     def get(self):
         serialized = BodySerializer(robot.body)
-        return jsonify(serialized.data)
-
-
-class ApiNeck(Resource):
-    def get(self):
-        serialized = NeckSerializer(robot.body.neck)
         return jsonify(serialized.data)
 
 
@@ -200,22 +193,6 @@ class ApiKnee(Resource):
         knee.set_attributes(json)
 
         serialized = KneeSerializer(knee)
-        return jsonify(serialized.data)
-
-
-class ApiAnkle(Resource):
-
-    def get(self, leg_id):
-        serialized = AnkleSerializer(robot.body.legs[leg_id].ankle)
-        return jsonify(serialized.data)
-
-    def patch(self, leg_id):
-        json = request.get_json(force=True)
-
-        ankle = robot.body.legs[leg_id].ankle
-        ankle.set_attributes(json)
-
-        serialized = AnkleSerializer(ankle)
         return jsonify(serialized.data)
 
 

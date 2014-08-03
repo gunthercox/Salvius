@@ -10,9 +10,8 @@ class Neck(ArticulatedJoint):
 
     def __init__(self):
         super(Neck, self).__init__()
+        self.data["href"] = "/api/robot/body/neck/"
 
 
 class NeckSerializer(ArticulatedJointSerializer):
-
-    def get_url(self, obj):
-        return "/api/robot/body/neck/"
+    pass

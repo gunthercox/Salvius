@@ -1,5 +1,5 @@
 from unittest import TestCase
-from flask import json, jsonify
+from flask import json
 from salvius import app
 
 
@@ -75,28 +75,3 @@ class Test(TestCase):
 
         self.assertTrue("position" in response.data.decode())
         self.assertTrue("4" in response.data.decode())
-
-    def test_patch_two_fields_ankle(self):
-        """
-        Test that two fields can be patched to an ankle.
-        """
-        data = u'{"rotation": 2, "elevation": 9}'
-        url = "/api/robot/body/legs/0/ankle/"
-
-        response = self.app.patch(url, data=data, content_type='application/json')
-
-        self.assertTrue("rotation\": 2" in response.data.decode())
-        self.assertTrue("elevation\": 9" in response.data.decode())
-
-    def test_one_invalid_field_ankle(self):
-        """
-        Test that patching one valid and one invalid field fails.
-        """
-        data = '{"position": 2, "angle": 9}'
-        url = "/api/robot/body/legs/0/ankle/"
-
-        try:
-            self.app.patch(url, data=data, content_type='application/json')
-            self.fail("An Exception should have ben raised")
-        except Exception as error:
-            self.assertEquals("Attribue position not found", str(error))

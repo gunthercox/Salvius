@@ -8,11 +8,12 @@ class Wrist(ArticulatedJoint):
         super(Wrist, self).__init__()
         self.parent_id = None
 
+        self.data["href"] = "/api/robot/body/arms/" + str(self.parent_id) + "/wrist/"
+
     def set_parent_id(self, uuid):
         self.parent_id = uuid
+        self.data["href"] = "/api/robot/body/arms/" + str(self.parent_id) + "/wrist/"
 
 
 class WristSerializer(ArticulatedJointSerializer):
-
-    def get_url(self, obj):
-        return "/api/robot/body/arms/" + str(obj.parent_id) + "/wrist/"
+    pass
