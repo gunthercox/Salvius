@@ -22,4 +22,7 @@ class Settings(Resource):
         return self.db.data(), 201
 
     def delete(self):
-        raise NotImplementedError("This has not been created yet")
+        json = request.get_json(force=True)
+        for key in json.keys():
+            self.db.delete(key)
+        return self.db.data(), 201

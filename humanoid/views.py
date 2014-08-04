@@ -86,21 +86,6 @@ class ApiFingers(Resource):
         return jsonify(serialized.data)
 
 
-class ApiFinger(Resource):
-
-    def get(self, arm_id, finger_id):
-        finger = robot.body.arms[arm_id].hand.fingers[finger_id]
-        serialized = FingerSerializer(finger)
-        return jsonify(serialized.data)
-
-    def patch(self, arm_id, finger_id):
-        value = request.get_json(force=True)["position"]
-        finger = robot.body.arms[arm_id].hand.fingers[finger_id]
-        finger.move(value)
-        serialized = FingerSerializer(finger)
-        return jsonify(serialized.data)
-
-
 class ApiThumb(Resource):
 
     def get(self, arm_id):

@@ -1,3 +1,4 @@
+from flask.ext.restful import marshal, request
 from marshmallow import Serializer, fields
 from humanoid.joints import CompliantJoint, CompliantJointSerializer
 
@@ -6,9 +7,57 @@ class Finger(CompliantJoint):
 
     def __init__(self, uuid=None, hand_id=None):
         super(Finger, self).__init__()
-
         self.parent_id = hand_id
         self.id = uuid
+
+        self.data["href"] = "/api/robot/body/arms/" + str(self.parent_id) + "/hand/fingers/" + str(self.id)
+
+    def get(self, arm_id, finger_id):
+        self.data["href"] = "/api/robot/body/arms/" + str(arm_id) + "/hand/fingers/" + str(finger_id)
+        # TODO: Create arm and leg representation in database,
+        # An error will be thrown if the arm or leg does not exist in the db.
+
+        return marshal(self.data, self.fields)
+
+    def patch(self, arm_id, finger_id):
+        data = request.get_json(force=True)
+
+        self.validate_fields(data)
+
+        for key in data.keys():
+            self.data[key] = data[key]
+
+        return marshal(self.data, self.fields), 201
+
+
+class Thumb(CompliantJoint):
+    """
+    Thumbs work very similar to fingers, however they have aditional attributes
+    which allow them to be opposable.
+    """
+
+    def __init__(self, hand_id=None):
+        super(Thumb, self).__init__()
+        self.parent_id = hand_id
+
+        self.data["href"] = "/api/robot/body/arms/" + str(self.parent_id) + "/hand/thumb/"
+
+    def get(self, arm_id):
+        self.data["href"] = "/api/robot/body/arms/" + str(arm_id) + "/hand/thumb/"
+        # TODO: Create arm and leg representation in database,
+        # An error will be thrown if the arm or leg does not exist in the db.
+
+        return marshal(self.data, self.fields)
+
+    def patch(self, arm_id):
+        data = request.get_json(force=True)
+
+        self.validate_fields(data)
+
+        for key in data.keys():
+            self.data[key] = data[key]
+
+        return marshal(self.data, self.fields), 201
 
 
 class Hand(object):

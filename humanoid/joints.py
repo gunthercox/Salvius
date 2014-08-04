@@ -6,14 +6,14 @@ from marshmallow import Serializer
 from marshmallow import fields as lame
 
 
-class Joint2(Resource):
+class Joint(Resource):
     """
     Represents a joint which permits rotation in two directions
     Body-joint examples: Torso
     """
 
     def __init__(self, joint_type):
-        super(Joint2, self).__init__()
+        super(Joint, self).__init__()
         self.data = {}
         self.data["joint_type"] = joint_type
 
@@ -53,51 +53,7 @@ class Joint2(Resource):
         return marshal(self.data, self.fields), 201
 
 
-class Joint(object):
-    """
-    A base class with methods to be used by other joints.
-    """
-
-    def __init__(self, joint_type=""):
-        self.joint_type = joint_type
-
-    def set_attribute(self, attribue, value):
-        return setattr(self, attribue, value)
-
-    def set_attributes(self, data):
-        """
-        A method which takes a dictionary as a parameter and
-        sets attribute values with if they exist.
-        """
-
-        for attribue in data.keys():
-            attribue = str(attribue)
-            print(attribue, data[attribue])
-
-            if hasattr(self, attribue):
-                self.set_attribute(attribue, data[attribue])
-            else:
-                # abort(422) # Unprocessable entity
-                raise Exception("Attribue %s not found" % attribue)
-
-    def set_methods(self, data):
-        """
-        A setter method which takes a dictionary as a parameter and
-        calls methods if they exist. Only one parametery is can currently
-        be passed into a method.
-        """
-
-        for key in data.keys():
-            method = str(key)
-            value = data[key]
-
-            if callable(getattr(self, method)):
-                getattr(self, method)(value)
-            else:
-                raise Exception("Method %s not implemented" % method)
-
-
-class HingeJoint(Joint2):
+class HingeJoint(Joint):
     """
     Represents a joint in which the articular surfaces are molded to
     each other in such the manner as to permit motion only in one plane.
@@ -129,7 +85,7 @@ class HingeJoint(Joint2):
         return self.data["angle"]
 
 
-class PivotJoint(Joint2):
+class PivotJoint(Joint):
     """
     Represents a joint which permits rotation in two directions.
     Body-joint examples: Torso 
@@ -155,7 +111,7 @@ class PivotJoint(Joint2):
         return self.data["rotation"]
 
 
-class OrthogonalJoint(Joint2):
+class OrthogonalJoint(Joint):
     """
     Represents a joint which permits movement on one plane.
     This joint allows rotation on its axis.
@@ -194,7 +150,7 @@ class OrthogonalJoint(Joint2):
         return self.data["angle"]
 
 
-class ArticulatedJoint(Joint2):
+class ArticulatedJoint(Joint):
     """
     Represents a joint which permits movement on two planes as well
     as being able to rotate
@@ -254,15 +210,30 @@ class CompliantJoint(Joint):
     Body-joint example: Fingers
     """
 
-    def __init__(self, rotation=0, elevation=0, angle=0):
+    def __init__(self, tension=0):
         super(CompliantJoint, self).__init__(joint_type="compliant")
-        self.tension = 0
+        self.data["tension"] = tension
+
+        self.fields["tension"] = fields.Integer
+
+        self.allowed_fields.append("tension")
 
     def move(self, degrees):
         """
         Moves the joint relative to its current position.
         """
-        self.tension += degrees
+        self.data["tension"] += degrees
+
+    @property
+    def tension(self):
+        """
+        Angles the joint left or right relative to its current position.
+        """
+        return self.data["tension"]
+
+    @property
+    def rotation(self):
+        return self.data["rotation"]
 
 
 class JointSerializer(Serializer):
