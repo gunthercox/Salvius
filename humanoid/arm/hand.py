@@ -97,14 +97,6 @@ class Hand(object):
     def thumb(self):
         return self._thumb
 
-    def close(self):
-        """
-        Closes all of the hands fingers to make a fist shape.
-        """
-        for finger in self._fingers:
-            finger.move(100)
-        self._thumb.move(100)
-
 
 class FingerSerializer(CompliantJointSerializer):
     id = fields.UUID()

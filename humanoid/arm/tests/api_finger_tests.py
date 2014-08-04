@@ -11,7 +11,7 @@ class ApiTests(TestCase):
     def test_finger_count(self):
         response = self.app.get("/api/robot/body/arms/0/hand/fingers", follow_redirects=True)
         data = response.data.decode()
-        print(data)
+
         self.assertEqual(data.count('href'), 4)
 
     def test_patch_finger(self):

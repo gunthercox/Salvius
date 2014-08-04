@@ -2,7 +2,7 @@ from unittest import TestCase
 from salvius import app
 
 
-class ApiTests(TestCase):
+class ApiArmTests(TestCase):
 
     def setUp(self):
         app.config['TESTING'] = True

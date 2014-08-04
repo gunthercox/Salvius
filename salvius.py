@@ -6,6 +6,7 @@ from humanoid import views
 from humanoid.neck import Neck
 from humanoid.torso import Torso
 
+from humanoid.arm.shoulder import Shoulder
 from humanoid.arm.elbow import Elbow
 from humanoid.arm.wrist import Wrist
 from humanoid.arm.hand import Finger
@@ -35,7 +36,7 @@ api.add_resource(Torso, "/api/robot/body/torso/")
 
 api.add_resource(views.ApiArms, "/api/robot/body/arms/")
 api.add_resource(views.ApiArm, "/api/robot/body/arms/<int:arm_id>/")
-api.add_resource(views.ApiShoulder, "/api/robot/body/arms/<int:arm_id>/shoulder/")
+api.add_resource(Shoulder, "/api/robot/body/arms/<int:arm_id>/shoulder/")
 api.add_resource(Elbow, "/api/robot/body/arms/<int:arm_id>/elbow/")
 api.add_resource(Wrist, "/api/robot/body/arms/<int:arm_id>/wrist/")
 api.add_resource(views.ApiHand, "/api/robot/body/arms/<int:arm_id>/hand/")

@@ -1,7 +1,6 @@
 from flask.ext.restful import Resource
 from flask.ext.restful import marshal, fields, request
 
-# Marshmallow may be depricated in the future
 from marshmallow import Serializer
 from marshmallow import fields as lame
 
@@ -72,7 +71,6 @@ class HingeJoint(Joint):
     def move(self, degrees):
         """
         Moves the joint relative to its current position.
-        # TODO: Possible removal of all reset and move classes
         """
         self.data["angle"] += degrees
 

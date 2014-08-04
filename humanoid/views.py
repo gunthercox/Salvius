@@ -5,9 +5,7 @@ from flask.ext.restful import Resource
 from humanoid import RobotSerializer
 from humanoid.body import BodySerializer, ArmsSerializer, LegsSerializer
 from humanoid.arm import ArmSerializer
-from humanoid.arm.shoulder import ShoulderSerializer
-from humanoid.arm.wrist import WristSerializer
-from humanoid.arm.hand import HandSerializer, FingersSerializer, FingerSerializer
+from humanoid.arm.hand import HandSerializer, FingersSerializer
 from humanoid.leg import LegSerializer
 
 from robot import robot
@@ -43,37 +41,6 @@ class ApiArm(Resource):
         return jsonify(serialized.data)
 
 
-class ApiShoulder(Resource):
-    def get(self, arm_id):
-        serialized = ShoulderSerializer(robot.body.arms[arm_id].shoulder)
-        return jsonify(serialized.data)
-
-    def patch(self, arm_id):
-        json = request.get_json(force=True)
-
-        shoulder = robot.body.arms[arm_id].shoulder
-        shoulder.set_attributes(json)
-
-        serialized = ShoulderSerializer(shoulder)
-        return jsonify(serialized.data)
-
-
-class ApiWrist(Resource):
-
-    def get(self, arm_id):
-        serialized = WristSerializer(robot.body.arms[arm_id].wrist)
-        return jsonify(serialized.data)
-
-    def patch(self, arm_id):
-        json = request.get_json(force=True)
-
-        wrist = robot.body.arms[arm_id].wrist
-        wrist.set_attributes(json)
-
-        serialized = WristSerializer(wrist)
-        return jsonify(serialized.data)
-
-
 class ApiHand(Resource):
     def get(self, arm_id):
         serialized = HandSerializer(robot.body.arms[arm_id].hand)
@@ -83,20 +50,6 @@ class ApiHand(Resource):
 class ApiFingers(Resource):
     def get(self, arm_id):
         serialized = FingersSerializer(robot.body.arms[arm_id].hand)
-        return jsonify(serialized.data)
-
-
-class ApiThumb(Resource):
-
-    def get(self, arm_id):
-        serialized = FingerSerializer(robot.body.arms[arm_id].hand.thumb)
-        return jsonify(serialized.data)
-
-    def patch(self, arm_id):
-        value = request.get_json(force=True)["position"]
-        thumb = robot.body.arms[arm_id].hand.thumb
-        thumb.move(value)
-        serialized = FingerSerializer(thumb)
         return jsonify(serialized.data)
 
 

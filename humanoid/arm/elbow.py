@@ -24,6 +24,7 @@ class Elbow(HingeJoint):
         self.data["href"] = "/api/robot/body/arms/" + str(uuid) + "/elbow/"
 
     def get(self, arm_id):
+        self.data["href"] = "/api/robot/body/arms/" + str(arm_id) + "/elbow/"
         return marshal(self.data, self.fields)
 
     def patch(self, arm_id):
