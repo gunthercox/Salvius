@@ -24,9 +24,3 @@ class Tests(TestCase):
         arm = body.new_arm()
 
         self.assertEqual(len(body.arms), 1)
-
-    def test_add_leg(self):
-        body = Body()
-        leg = body.new_leg()
-
-        self.assertEqual(len(body.legs), 1)

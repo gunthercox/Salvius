@@ -1,6 +1,6 @@
 from flask.ext.restful import marshal, request
 
-from humanoid.joints import ArticulatedJoint, ArticulatedJointSerializer
+from humanoid.joints import ArticulatedJoint
 
 
 class Ankle(ArticulatedJoint):
@@ -29,7 +29,3 @@ class Ankle(ArticulatedJoint):
             self.data[key] = data[key]
 
         return marshal(self.data, self.fields), 201
-
-
-class AnkleSerializer(ArticulatedJointSerializer):
-    pass

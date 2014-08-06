@@ -2,7 +2,7 @@ from marshmallow import Serializer, fields
 from humanoid.neck import Neck, NeckSerializer
 from humanoid.torso import Torso, TorsoSerializer
 from humanoid.arm import Arm, ArmSerializer
-from humanoid.leg import Leg, LegSerializer
+from humanoid.leg import Legs
 
 
 class Body(object):
@@ -11,7 +11,7 @@ class Body(object):
         self.neck = Neck()
         self.torso = Torso()
         self._arms = []
-        self._legs = []
+        self._legs = Legs()
 
     def new_arm(self):
         """
@@ -26,38 +26,21 @@ class Body(object):
         self._arms.append(arm)
         return arm
 
-    def new_leg(self):
-        """
-        Adds an arm object to the body.
-        Sets a unique id to reference the listed index of the arm object.
-        """
-        uuid = 0
-        if self._legs:
-            uuid = max(leg.id for leg in self._legs) + 1
-
-        leg = Leg(uuid)
-        self._legs.append(leg)
-        return leg
-
     @property
     def arms(self):
         return self._arms
 
     @property
     def legs(self):
-        return self._legs
+        return self._legs.get()
 
 
 class BodySerializer(Serializer):
     neck = fields.Nested(NeckSerializer)
     torso = fields.Nested(TorsoSerializer)
     arms = fields.Nested(ArmSerializer, many=True)
-    legs = fields.Nested(LegSerializer, many=True)
+    legs = fields.String()
 
 
 class ArmsSerializer(Serializer):
     arms = fields.Nested(ArmSerializer, many=True)
-
-
-class LegsSerializer(Serializer):
-    legs = fields.Nested(LegSerializer, many=True)

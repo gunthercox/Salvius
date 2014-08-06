@@ -6,6 +6,8 @@ from humanoid import views
 from humanoid.neck import Neck
 from humanoid.torso import Torso
 
+from humanoid.leg import Legs, Leg
+
 from humanoid.arm.shoulder import Shoulder
 from humanoid.arm.elbow import Elbow
 from humanoid.arm.wrist import Wrist
@@ -44,8 +46,8 @@ api.add_resource(views.ApiFingers, "/api/robot/body/arms/<int:arm_id>/hand/finge
 api.add_resource(Finger, "/api/robot/body/arms/<int:arm_id>/hand/fingers/<int:finger_id>/")
 api.add_resource(Thumb, "/api/robot/body/arms/<int:arm_id>/hand/thumb/")
 
-api.add_resource(views.ApiLegs, "/api/robot/body/legs/")
-api.add_resource(views.ApiLeg, "/api/robot/body/legs/<int:leg_id>/")
+api.add_resource(Legs, "/api/robot/body/legs/")
+api.add_resource(Leg, "/api/robot/body/legs/<int:leg_id>/")
 api.add_resource(Hip, "/api/robot/body/legs/<int:leg_id>/hip/")
 api.add_resource(Knee, "/api/robot/body/legs/<int:leg_id>/knee/")
 api.add_resource(Ankle, "/api/robot/body/legs/<int:leg_id>/ankle/")
@@ -54,6 +56,8 @@ api.add_resource(views.Terminate, "/api/terminate/")
 api.add_resource(Settings, "/api/settings/")
 api.add_resource(Speech, "/api/speech/")
 api.add_resource(Writing, "/api/writing/")
+
+api.add_resource(views.ApiBase, "/api/")
 
 if __name__ == "__main__":
     app.config.update(

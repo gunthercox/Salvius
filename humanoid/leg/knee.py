@@ -1,6 +1,6 @@
 from flask.ext.restful import marshal, request
 
-from humanoid.joints import HingeJoint, HingeJointSerializer
+from humanoid.joints import HingeJoint
 
 
 class Knee(HingeJoint):
@@ -39,7 +39,3 @@ class Knee(HingeJoint):
             self.data[key] = data[key]
 
         return marshal(self.data, self.fields), 201
-
-
-class KneeSerializer(HingeJointSerializer):
-    pass

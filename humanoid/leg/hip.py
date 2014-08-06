@@ -1,6 +1,6 @@
 from flask.ext.restful import marshal, request
 
-from humanoid.joints import OrthogonalJoint, OrthogonalJointSerializer
+from humanoid.joints import OrthogonalJoint
 
 
 class Hip(OrthogonalJoint):
@@ -31,7 +31,3 @@ class Hip(OrthogonalJoint):
             self.data[key] = data[key]
 
         return marshal(self.data, self.fields), 201
-
-
-class HipSerializer(OrthogonalJointSerializer):
-    pass

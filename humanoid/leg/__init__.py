@@ -1,45 +1,74 @@
-from marshmallow import Serializer, fields
-from humanoid.leg.hip import Hip, HipSerializer
-from humanoid.leg.knee import Knee, KneeSerializer
-from humanoid.leg.ankle import Ankle, AnkleSerializer
+from flask.ext.restful import Resource
+from flask.ext.restful import marshal, fields, request
+
+from humanoid.leg.hip import Hip
+from humanoid.leg.knee import Knee
+from humanoid.leg.ankle import Ankle
+from humanoid.joints import ArticulatedJointSerializer, HingeJointSerializer, OrthogonalJointSerializer
+
+from jsondb.db import Database
 
 
-class Leg(object):
+class Leg(Resource):
 
-    def __init__(self, uuid):
-        self._hip = None
-        self._knee = None
-        self._ankle = None
+    def __init__(self):
+        self._hip = Hip()
+        self._knee = Knee()
+        self._ankle = Ankle()
 
-        self.id = uuid
+        self.data = {}
 
-    def set_hip(self, hip):
-        self._hip = hip
+        self.fields = {
+            "id": fields.Integer,
+            "href": fields.String,
+            "hip": fields.Nested(self._hip.fields),
+            "knee": fields.Nested(self._knee.fields),
+            "ankle": fields.Nested(self._ankle.fields)
+        }
 
-    def set_knee(self, knee):
-        self._knee = knee
+    def get(self, leg_id):
+        self.data["id"] = leg_id
+        self.data["href"] = "/api/robot/body/legs/" + str(leg_id) + "/"
+        self.data["hip"] = dict(self._hip.get(leg_id=leg_id))
+        self.data["knee"] = dict(self._knee.get(leg_id=leg_id))
+        self.data["ankle"] = dict(self._ankle.get(leg_id=leg_id))
 
-    def set_ankle(self, ankle):
-        self._ankle = ankle
+        return marshal(self.data, self.fields)
 
-    @property
-    def hip(self):
-        return self._hip
+    def patch(self):
+        data = request.get_json(force=True)
 
-    @property
-    def knee(self):
-        return self._knee
+        self.validate_fields(data)
 
-    @property
-    def ankle(self):
-        return self._ankle
+        for key in data.keys():
+            self.data[key] = data[key]
+
+        return marshal(self.data, self.fields), 201
 
 
-class LegSerializer(Serializer):
-    id = fields.UUID()
-    hip = fields.Nested(HipSerializer)
-    knee = fields.Nested(KneeSerializer)
-    ankle = fields.Nested(AnkleSerializer)
+class Legs(Resource):
 
-    def get_url(self, obj):
-        return "/api/robot/body/legs/" + str(obj.id)
+    def __init__(self):
+        self.leg = Leg()
+        self.db = Database("settings.db")
+
+        self.fields = {
+            "href": fields.Url("legs", absolute=True),
+            "leg": fields.Nested(self.leg.fields)
+        }
+
+    def get(self):
+        legs = self.db.data(key="legs")
+
+        if not legs:
+            return
+
+        leg_list = []
+
+        for leg in legs:
+            data = {}
+            leg_id = leg["leg"]["id"]
+            data["leg"] = dict(self.leg.get(leg_id))
+            leg_list.append(data)
+
+        return marshal(leg_list, self.fields)

@@ -70,37 +70,6 @@ class Robot(object):
 
             right_hand.set_thumb(right_thumb)
 
-            # Create left leg
-            left_leg = self.body.new_leg()
-
-            left_hip = Hip()
-            left_hip.set_parent_id(left_leg.id)
-            left_leg.set_hip(left_hip)
-
-            left_knee = Knee()
-            left_knee.set_parent_id(left_leg.id)
-            left_leg.set_knee(left_knee)
-
-            left_ankle = Ankle()
-            left_ankle.set_parent_id(left_leg.id)
-            left_leg.set_ankle(left_ankle)
-
-            # Create right leg
-            right_leg = self.body.new_leg()
-
-            right_hip = Hip()
-            right_hip.set_parent_id(right_leg.id)
-            right_leg.set_hip(right_hip)
-
-            right_knee = Knee()
-            right_knee.set_parent_id(right_leg.id)
-            right_leg.set_knee(right_knee)
-
-            right_ankle = Ankle()
-            right_ankle.set_parent_id(right_leg.id)
-            right_leg.set_ankle(right_ankle)
-
-
     @property
     def body(self):
         return self._body
