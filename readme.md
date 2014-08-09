@@ -81,7 +81,13 @@ directory with the following dictionary pointing to your Twitter keys and tokens
 # Set DEBUG flag to true for testing
 DEBUG = True
 
-# Twitter api
+# Phant API
+PHANT = {
+    'PUBLIC_KEY': '',
+    'PRIVATE_KEY': ''
+}
+
+# Twitter API
 TWITTER = {
     'CONSUMER_KEY': '',
     'CONSUMER_SECRET': '',

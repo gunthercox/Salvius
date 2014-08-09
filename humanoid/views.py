@@ -10,7 +10,7 @@ from humanoid.arm.hand import HandSerializer, FingersSerializer
 from humanoid import Robot
 
 
-robot = Robot("Salvius")
+robot = Robot()
 
 class App(View):
     def dispatch_request(self):
