@@ -87,6 +87,11 @@ PHANT = {
     'PRIVATE_KEY': ''
 }
 
+GITHUB = {
+    'USERNAME': '',
+    'PASSWORD': ''
+}
+
 # Twitter API
 TWITTER = {
     'CONSUMER_KEY': '',

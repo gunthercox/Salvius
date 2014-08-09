@@ -1,9 +1,9 @@
 from unittest import TestCase
-#from robot.link import _twitter 
+#from robot.link import _phant 
 
 class Tests(TestCase):
 
-    def test_twitter(self):
+    def test_phant(self):
         assert True
 
     def test_api(self):
