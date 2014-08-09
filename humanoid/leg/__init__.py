@@ -59,21 +59,19 @@ class Legs(Robot):
 
         self.fields = {
             "href": fields.Url("legs", absolute=True),
-            "leg": fields.Nested(self.leg.fields)
+            "legs": fields.List(fields.Nested(self.leg.fields))
         }
 
     def get(self):
         legs = self.db.data(key="legs")
 
-        if not legs:
-            return
-
         leg_list = []
 
         for leg in legs:
-            data = {}
             leg_id = leg["leg"]["id"]
-            data["leg"] = dict(self.leg.get(leg_id))
-            leg_list.append(data)
+            leg_list.append(dict(self.leg.get(leg_id)))
 
-        return marshal(leg_list, self.fields)
+        data = {}
+        data["legs"] = leg_list
+
+        return marshal(data, self.fields)
