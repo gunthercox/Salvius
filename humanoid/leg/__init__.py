@@ -24,6 +24,14 @@ class Leg(Robot):
         }
 
     def get(self, leg_id):
+        from flask.ext.restful import abort
+
+        legs = self.db.data(key="legs")    
+
+        # Make sure the leg exists
+        if not any(leg["leg"]["id"] == leg_id for leg in legs):
+            abort(404, message="Leg id {} does not exist in database".format(leg_id))
+
         self.data["id"] = leg_id
         self.data["href"] = "/api/robot/body/legs/" + str(leg_id) + "/"
         self.data["hip"] = dict(self._hip.get(leg_id=leg_id))
