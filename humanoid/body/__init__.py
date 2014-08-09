@@ -1,6 +1,7 @@
 from marshmallow import Serializer, fields
-from humanoid.neck import Neck, NeckSerializer
-from humanoid.torso import Torso, TorsoSerializer
+
+from humanoid.neck import Neck
+from humanoid.torso import Torso
 from humanoid.arm import Arm, ArmSerializer
 from humanoid.leg import Legs
 
@@ -8,8 +9,8 @@ from humanoid.leg import Legs
 class Body(object):
 
     def __init__(self):
-        self.neck = Neck()
-        self.torso = Torso()
+        self._neck = Neck()
+        self._torso = Torso()
         self._arms = []
         self._legs = Legs()
 
@@ -27,8 +28,16 @@ class Body(object):
         return arm
 
     @property
+    def neck(self):
+        return self._neck.get()
+
+    @property
     def arms(self):
         return self._arms
+
+    @property
+    def torso(self):
+        return self._torso.get()
 
     @property
     def legs(self):
@@ -36,8 +45,8 @@ class Body(object):
 
 
 class BodySerializer(Serializer):
-    neck = fields.Nested(NeckSerializer)
-    torso = fields.Nested(TorsoSerializer)
+    neck = fields.String()
+    torso = fields.String()
     arms = fields.Nested(ArmSerializer, many=True)
     legs = fields.String()
 

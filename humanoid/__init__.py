@@ -5,9 +5,6 @@ from humanoid.arm.shoulder import Shoulder
 from humanoid.arm.elbow import Elbow
 from humanoid.arm.wrist import Wrist
 from humanoid.arm.hand import Hand, Finger
-from humanoid.leg.hip import Hip
-from humanoid.leg.knee import Knee
-from humanoid.leg.ankle import Ankle
 
 
 class Robot(object):

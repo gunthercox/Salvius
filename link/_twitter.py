@@ -87,3 +87,27 @@ def run():
         follow(user_name)
         favorite(mention)
 
+def generate_activity_data():
+    """
+    Counts the activity frequency for each day of the week.
+    """
+
+    from twitter import TwitterStream
+
+    timeline = t.statuses.user_timeline(count=500)
+    daily_sum = {
+        "Sun": 0,
+        "Mon": 0,
+        "Tue": 0,
+        "Wed": 0,
+        "Thu": 0,
+        "Fri": 0,
+        "Sat": 0,
+    }
+    for post in timeline:
+        day = post["created_at"].split(" ")[0]
+        daily_sum[day] += 1
+        
+    print(daily_sum)
+
+generate_activity_data()

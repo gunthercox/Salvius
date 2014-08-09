@@ -1,4 +1,4 @@
-from robot.integration.phant import Phant
+from phant import Phant
 
 def phant():
     from robot.integration.settings import PHANT

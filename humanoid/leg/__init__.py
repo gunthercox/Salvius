@@ -1,17 +1,14 @@
-from flask.ext.restful import Resource
+from humanoid.robot import Robot
 from flask.ext.restful import marshal, fields, request
 
 from humanoid.leg.hip import Hip
 from humanoid.leg.knee import Knee
 from humanoid.leg.ankle import Ankle
-from humanoid.joints import ArticulatedJointSerializer, HingeJointSerializer, OrthogonalJointSerializer
 
-from jsondb.db import Database
-
-
-class Leg(Resource):
+class Leg(Robot):
 
     def __init__(self):
+        super(Leg, self).__init__()
         self._hip = Hip()
         self._knee = Knee()
         self._ankle = Ankle()
@@ -46,11 +43,11 @@ class Leg(Resource):
         return marshal(self.data, self.fields), 201
 
 
-class Legs(Resource):
+class Legs(Robot):
 
     def __init__(self):
+        super(Legs, self).__init__()
         self.leg = Leg()
-        self.db = Database("settings.db")
 
         self.fields = {
             "href": fields.Url("legs", absolute=True),

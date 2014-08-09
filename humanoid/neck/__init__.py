@@ -1,5 +1,4 @@
-from marshmallow import Serializer, fields
-from humanoid.joints import ArticulatedJoint, ArticulatedJointSerializer
+from humanoid.joints import ArticulatedJoint
 
 
 class Neck(ArticulatedJoint):
@@ -11,7 +10,3 @@ class Neck(ArticulatedJoint):
     def __init__(self):
         super(Neck, self).__init__()
         self.data["href"] = "/api/robot/body/neck/"
-
-
-class NeckSerializer(ArticulatedJointSerializer):
-    pass
