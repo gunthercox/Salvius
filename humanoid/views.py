@@ -18,6 +18,68 @@ class App(View):
         return render_template("index.html")
 
 
+def get_token(code):
+    import requests
+    from link.settings import GITHUB
+    from jsondb.db import Database
+
+    data = {
+        "client_id": GITHUB["CLIENT_ID"],
+        "client_secret": GITHUB["CLIENT_SECRET"],
+        "code": code
+    }
+
+    headers = {"Accept": "application/json"}
+
+    response = requests.post("https://github.com/login/oauth/access_token",
+                             data=data, headers=headers)
+    token_json = response.json()
+
+    # Save the value in the databse
+    db = Database("settings.db")
+    db.data(key="github_access_token", value=token_json["access_token"])
+
+    return token_json["access_token"]
+
+
+class Connect(View):
+
+    def __init__(self):
+        super(Connect, self).__init__()
+        from jsondb.db import Database
+
+        self.db = Database("settings.db")
+
+    def make_authorization_url(self):
+        # Generate a random string for the state parameter
+        # Save it for use later to prevent xsrf attacks
+        from uuid import uuid4
+        from link.settings import GITHUB
+        import urllib
+
+        state = str(uuid4())
+        #save_created_state(state)
+        #print("___STATE___", state)
+        params = {
+            "client_id": GITHUB["CLIENT_ID"],
+            "scope": "repo, user",
+            "state": state
+        }
+        url = "https://github.com/login/oauth/authorize?"
+        url += urllib.urlencode(params)
+        return url
+
+    def dispatch_request(self):
+        from flask import render_template
+        from link._github import GitHub
+
+        github = GitHub()
+        github.is_authorize = self.db.data(key=github.token_key) is not None
+        github.authorize_url = self.make_authorization_url()
+
+        return render_template("connect.html", github=github)
+
+
 class ApiBase(Resource):
     def get(self):
         from flask import url_for

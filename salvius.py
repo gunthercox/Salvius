@@ -27,8 +27,22 @@ from humanoid.settings import Settings
 app = Flask(__name__, static_folder="static", static_url_path="")
 api = Api(app)
 
+@app.route('/connect/github/')
+def callback():
+    """
+    OAuth callback from GitHub
+    """
+    from flask import request, redirect
+    from humanoid.views import get_token
+
+    code = request.args.get("code", "")
+    print("___THE TOKEN IS:___", get_token(code))
+
+    return redirect('/connect/')
+
 
 app.add_url_rule("/", view_func=views.App.as_view("app"))
+app.add_url_rule("/connect/", view_func=views.Connect.as_view("connect"))
 
 # Setup the Api resource routing
 api.add_resource(views.ApiRobot, "/api/robot/")

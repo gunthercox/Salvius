@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Connect</title>
+    <link rel="stylesheet" href="/css/bootstrap.css"/>
+    <link rel="stylesheet" href="/css/bootstrap-social.css"/>
+    <link rel="stylesheet" href="/css/font-awesome.css"/>
+</head>
+
+<body>
+    <div class="container">
+
+        <h1>Connected accounts</h1>
+        <p class="lead">
+            Connect Salvius to online networks to study human-machine interaction
+        </p>
+        <hr>
+
+        <div class="row">
+            <div class="col-sm-4">
+                <a href="{{ github.authorize_url }}" class="btn btn-block btn-lg btn-social btn-github">
+                    <i class="fa fa-github"></i> Connect to GitHub
+                    {% if github.is_authorized %}
+                    <i class="fa fa-check-circle pull-right"></i>
+                    {% endif %}
+                </a>
+                <a class="btn btn-block btn-lg btn-social btn-twitter">
+                    <i class="fa fa-twitter"></i> Connect to Twitter
+                    <i class="fa fa-check-circle pull-right"></i>
+                </a>
+            </div>
+
+            <div class="col-sm-8">
+                <p class="lead text-justify">
+                    This page is used to initiate the process of creating OAuth authorization tokens which allow the robot to access
+                    information on various networks. OAuth essentially allows access tokens to be issued to third-party clients by an authorization server, with the approval of the resource owner, or end-user. The client then uses the access token to access the protected resources hosted by the resource server. OAuth is commonly used as a way for web surfers to log into third party web sites using their Google, Facebook or Twitter accounts, without worrying about their access credentials being compromised.
+                </p>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
