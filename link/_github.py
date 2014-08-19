@@ -1,16 +1,4 @@
-import urllib2
-import base64
-import json
-
-from settings import GITHUB
-
-
-def basic_auth(username, password):
-    """
-    Encode the username and password.
-    Note: options for oauth2 authentication are available.
-    """
-    return base64.encodestring('%s:%s' % (username, password)).replace('\n', '')
+import requests
 
 class GitHub(object):
 
@@ -18,15 +6,30 @@ class GitHub(object):
         from jsondb.db import Database
 
         self.db = Database("settings.db")
-        self.token_key = "github_access_token"
-        self.is_authorized = self.db.data(key=self.token_key) is not None
+        self.token_key = "github_token"
         self.authorize_url = None
+
+    def make_authorization_url(self):
+        # Generate a random string for the state parameter
+        # Save it for use later to prevent xsrf attacks
+        from uuid import uuid4
+        from link.settings import GITHUB
+        import urllib
+
+        state = str(uuid4())
+        params = {
+            "client_id": GITHUB["CLIENT_ID"],
+            "scope": "repo, user",
+            "state": state
+        }
+        url = "https://github.com/login/oauth/authorize?"
+        url += urllib.urlencode(params)
+        return url
 
     def star_repo(self, repo_url):
         """
         PUT /user/starred/:owner/:repo
         """
-        import requests
         token = self.db.data(key=self.token_key)
 
         headers = {
@@ -38,14 +41,17 @@ class GitHub(object):
 
         response = requests.put(repo_url, headers=headers)
 
-    def follow_user(self, user_url, username, password):
+    def follow_user(self, user_url):
         """
         PUT /user/following/:username
         """
-        opener = urllib2.build_opener(urllib2.HTTPHandler)
-        request = urllib2.Request(repo_url, data='')
-        auth = basic_auth(GITHUB["USERNAME"], GITHUB["PASSWORD"])
-        request.add_header("Authorization", "Basic %s" % auth)
-        request.add_header('Content-Type', 'application/json')
-        request.get_method = lambda: 'PUT'
-        url = opener.open(request)
+        token = self.db.data(key=self.token_key)
+
+        headers = {
+            "Authorization": "token %s" % token,
+            "Accept": "application/vnd.github.v3+json",
+            "Content-Type": "application/json",
+            "Content-Length": 0
+        }
+
+        response = requests.put(repo_url, headers=headers)

@@ -1,5 +1,8 @@
 from flask import Flask
 from flask.ext.restful import Api
+from flask_oauth import OAuth
+
+from link import settings
 
 from humanoid import views
 
@@ -26,20 +29,208 @@ from humanoid.settings import Settings
 # Create flask app
 app = Flask(__name__, static_folder="static", static_url_path="")
 api = Api(app)
+oauth = OAuth()
+
+twitter = oauth.remote_app("twitter",
+    base_url="https://api.twitter.com/1/",
+    authorize_url="https://api.twitter.com/oauth/authenticate",
+    request_token_url="://api.twitter.com/oauth/request_token",
+    access_token_url="https://api.twitter.com/oauth/access_token",
+    consumer_key=settings.TWITTER["CONSUMER_KEY"],
+    consumer_secret=settings.TWITTER["CONSUMER_SECRET"]
+)
+
+google = oauth.remote_app("google",
+    base_url="https://www.google.com/accounts/",
+    authorize_url="https://accounts.google.com/o/oauth2/auth",
+    request_token_url=None,
+    request_token_params={"scope": "https://www.googleapis.com/auth/userinfo.email",
+                        "response_type": "code"},
+    access_token_url="https://accounts.google.com/o/oauth2/token",
+    access_token_method="POST",
+    access_token_params={"grant_type": "authorization_code"},
+    consumer_key=settings.GOOGLE["CLIENT_ID"],
+    consumer_secret=settings.GOOGLE["CLIENT_SECRET"]
+)
+
+disqus = oauth.remote_app("disqus",
+    base_url="https://disqus.com/api/3.0/",
+    authorize_url="https://disqus.com/api/oauth/2.0/authorize/",
+    request_token_url=None,
+    access_token_url="https://disqus.com/api/oauth/2.0/access_token/",
+    consumer_key=settings.DISQUS["API_KEY"],
+    consumer_secret=settings.DISQUS["API_SECRET"]
+)
+
+@app.route("/twitter/authorized")
+@twitter.authorized_handler
+def twitter_authorized(resp):
+    from flask import session, url_for, request, flash, redirect
+    next_url = request.args.get("next") or url_for("connect")
+    if resp is None:
+        flash("You denied the request to sign in.")
+        return redirect(next_url)
+ 
+    session['twitter_token'] = (
+        resp['oauth_token'],
+        resp['oauth_token_secret']
+    )
+    session['twitter_user'] = resp['screen_name']
+    flash('You were signed in as %s' % resp['screen_name'])
+    return redirect(next_url)
+
+
+@app.route("/connect/twitter")
+def connect_twitter():
+    from flask import session, url_for, request, redirect
+
+    if "login" in request.args:
+        url = url_for(".twitter_authorized", next=request.args.get("home") or request.referrer or None)
+        resp = twitter.authorize(callback=url)
+        return resp
+
+    if "logout" in request.args:
+        if session.has_key("twitter_user"):
+            del session["twitter_user"]
+
+        if session.has_key("twitter_oauthtok"):
+            del session["twitter_oauthtok"]
+
+        if session.has_key("twitter_token"):
+            del session["twitter_token"]
+
+    return redirect(request.args.get("next") or url_for("connect"))
+
+
+@twitter.tokengetter
+def get_twitter_token(token=None):
+    from flask import session
+    return session.get('twitter_token')
+
 
 @app.route('/connect/github/')
-def callback():
+def connect_github():
     """
     OAuth callback from GitHub
     """
-    from flask import request, redirect
-    from humanoid.views import get_token
+    from flask import session, url_for, request, flash, redirect
+    import requests
+    from link.settings import GITHUB
+    from jsondb.db import Database
 
-    code = request.args.get("code", "")
-    print("___THE TOKEN IS:___", get_token(code))
+    # needs to be changed
+    if "logout" not in request.args:
+
+        code = request.args.get("code", "")
+
+        data = {
+            "client_id": GITHUB["CLIENT_ID"],
+            "client_secret": GITHUB["CLIENT_SECRET"],
+            "code": code
+        }
+
+        headers = {"Accept": "application/json"}
+
+        response = requests.post("https://github.com/login/oauth/access_token",
+                                 data=data, headers=headers)
+        token_json = response.json()
+
+        # Save the value in the databse
+        db = Database("settings.db")
+        db.data(key="github_token", value=token_json["access_token"])
+
+        # Save the value in the session
+        session["github_user"] = "gunthercox"
+        session["github_token"] = token_json["access_token"]
+
+    if "logout" in request.args:
+        if session.has_key("github_user"):
+            del session["github_user"]
+
+        if session.has_key("github_token"):
+            del session["github_token"]
 
     return redirect('/connect/')
 
+
+@app.route("/google/authorized")
+@google.authorized_handler
+def google_authorized(resp):
+    from flask import session, url_for, request, flash, redirect
+    next_url = request.args.get("next") or url_for("connect")
+    if resp is None:
+        flash("You denied the request to sign in.")
+        return redirect(next_url)
+ 
+    session["google_token"] = resp["access_token"], ""
+
+    flash("A Google account has been connected.")
+    return redirect(next_url)
+
+@app.route("/connect/google")
+def connect_google():
+    from flask import session, url_for, request, redirect
+
+    if "login" in request.args:
+        callback = url_for(".google_authorized", _external=True)
+        return google.authorize(callback=callback)
+
+    if "logout" in request.args:
+        if session.has_key("google_user"):
+            del session["google_user"]
+
+        if session.has_key("google_oauthtok"):
+            del session["google_oauthtok"]
+
+        if session.has_key("google_token"):
+            del session["google_token"]
+
+    return redirect(request.args.get("next") or url_for("connect"))
+
+@google.tokengetter
+def get_google_token():
+    return session.get("google_token")
+
+
+@app.route("/disqus/authorized")
+@disqus.authorized_handler
+def disqus_authorized(resp):
+    from flask import session, url_for, request, flash, redirect
+    next_url = request.args.get("next") or url_for("connect")
+    if resp is None:
+        flash("You denied the request to sign in.")
+        return redirect(next_url)
+ 
+    session["disqus_token"] = resp["access_token"], ""
+
+    flash("A Disqus account has been connected.")
+    return redirect(next_url)
+
+@app.route("/connect/disqus")
+def connect_disqus():
+    from flask import session, url_for, request, redirect
+
+    if "login" in request.args:
+        callback = url_for(".disqus_authorized", _external=True)
+        return disqus.authorize(callback=callback)
+
+    if "logout" in request.args:
+        if session.has_key("disqus_token"):
+            del session["disqus_token"]
+
+    return redirect(request.args.get("next") or url_for("connect"))
+
+@disqus.tokengetter
+def get_disqus_token():
+    return session.get("disqus_token")
+
+
+@app.route('/test/')
+def get_tokens():
+    # Delete this method later
+    from flask import session
+    print(session)
+    return "Check console"
 
 app.add_url_rule("/", view_func=views.App.as_view("app"))
 app.add_url_rule("/connect/", view_func=views.Connect.as_view("connect"))

@@ -83,21 +83,21 @@ DEBUG = True
 
 # Phant API
 PHANT = {
-    'PUBLIC_KEY': '',
-    'PRIVATE_KEY': ''
+    "PUBLIC_KEY": "",
+    "PRIVATE_KEY": ""
 }
 
 GITHUB = {
-    'USERNAME': '',
-    'PASSWORD': ''
+    "CLIENT_ID": "",
+    "CLIENT_SECRET": ""
 }
 
 # Twitter API
 TWITTER = {
-    'CONSUMER_KEY': '',
-    'CONSUMER_SECRET': '',
-    'TOKEN': '',
-    'TOKEN_SECRET': ''
+    "CONSUMER_KEY": "",
+    "CONSUMER_SECRET": "",
+    "TOKEN": "",
+    "TOKEN_SECRET": ""
 }
 ```
 
