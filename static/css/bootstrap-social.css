@@ -97,7 +97,7 @@
 .btn-yahoo.disabled,.btn-yahoo[disabled],fieldset[disabled] .btn-yahoo,.btn-yahoo.disabled:hover,.btn-yahoo[disabled]:hover,fieldset[disabled] .btn-yahoo:hover,.btn-yahoo.disabled:focus,.btn-yahoo[disabled]:focus,fieldset[disabled] .btn-yahoo:focus,.btn-yahoo.disabled:active,.btn-yahoo[disabled]:active,fieldset[disabled] .btn-yahoo:active,.btn-yahoo.disabled.active,.btn-yahoo[disabled].active,fieldset[disabled] .btn-yahoo.active{background-color:#720e9e;border-color:rgba(0,0,0,0.2)}
 .btn-yahoo .badge{color:#720e9e;background-color:#fff}
 
-.btn-disqus{color:#fff;background-color:#2e9fff;border-color:rgba(0,0,0,0.2)}
+.btn-disqus{color:#fff;background-color:#6abafd;border-color:rgba(0,0,0,0.2)}
 .btn-disqus:hover,.btn-disqus:focus,.btn-disqus:active,.btn-yahoo.active,.open>.dropdown-toggle.btn-disqus{color:#fff;background-color:#2e9fff;border-color:rgba(0,0,0,0.2)}
 .btn-disqus:active,.btn-disqus.active,.open>.dropdown-toggle.btn-disqus{background-image:none}
 .btn-disqus.disabled,.btn-disqus[disabled],fieldset[disabled] .btn-disqus,.btn-disqus.disabled:hover,.btn-disqus[disabled]:hover,fieldset[disabled] .btn-disqus:hover,.btn-disqus.disabled:focus,.btn-disqus[disabled]:focus,fieldset[disabled] .btn-disqus:focus,.btn-disqus.disabled:active,.btn-disqus[disabled]:active,fieldset[disabled] .btn-disqus:active,.btn-disqus.disabled.active,.btn-disqus[disabled].active,fieldset[disabled] .btn-disqus.active{background-color:#2e9fff;border-color:rgba(0,0,0,0.2)}

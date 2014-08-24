@@ -62,7 +62,7 @@ disqus = oauth.remote_app("disqus",
     consumer_secret=settings.DISQUS["API_SECRET"]
 )
 
-@app.route("/twitter/authorized")
+@app.route("/twitter/authorized/")
 @twitter.authorized_handler
 def twitter_authorized(resp):
     from flask import session, url_for, request, flash, redirect
@@ -80,7 +80,7 @@ def twitter_authorized(resp):
     return redirect(next_url)
 
 
-@app.route("/connect/twitter")
+@app.route("/connect/twitter/")
 def connect_twitter():
     from flask import session, url_for, request, redirect
 
@@ -93,9 +93,6 @@ def connect_twitter():
         if session.has_key("twitter_user"):
             del session["twitter_user"]
 
-        if session.has_key("twitter_oauthtok"):
-            del session["twitter_oauthtok"]
-
         if session.has_key("twitter_token"):
             del session["twitter_token"]
 
@@ -105,10 +102,10 @@ def connect_twitter():
 @twitter.tokengetter
 def get_twitter_token(token=None):
     from flask import session
-    return session.get('twitter_token')
+    return session.get("twitter_token")
 
 
-@app.route('/connect/github/')
+@app.route("/connect/github/")
 def connect_github():
     """
     OAuth callback from GitHub
@@ -153,7 +150,7 @@ def connect_github():
     return redirect('/connect/')
 
 
-@app.route("/google/authorized")
+@app.route("/google/authorized/")
 @google.authorized_handler
 def google_authorized(resp):
     from flask import session, url_for, request, flash, redirect
@@ -167,7 +164,7 @@ def google_authorized(resp):
     flash("A Google account has been connected.")
     return redirect(next_url)
 
-@app.route("/connect/google")
+@app.route("/connect/google/")
 def connect_google():
     from flask import session, url_for, request, redirect
 
@@ -192,7 +189,7 @@ def get_google_token():
     return session.get("google_token")
 
 
-@app.route("/disqus/authorized")
+@app.route("/disqus/authorized/")
 @disqus.authorized_handler
 def disqus_authorized(resp):
     from flask import session, url_for, request, flash, redirect
@@ -206,7 +203,7 @@ def disqus_authorized(resp):
     flash("A Disqus account has been connected.")
     return redirect(next_url)
 
-@app.route("/connect/disqus")
+@app.route("/connect/disqus/")
 def connect_disqus():
     from flask import session, url_for, request, redirect
 

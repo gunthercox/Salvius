@@ -41,14 +41,15 @@ class Body(object):
 
     @property
     def legs(self):
-        return self._legs.get()
+        legs = self._legs.get()["legs"]
+        return legs
 
 
 class BodySerializer(Serializer):
-    neck = fields.String()
-    torso = fields.String()
+    neck = fields.Raw()
+    torso = fields.Raw()
     arms = fields.Nested(ArmSerializer, many=True)
-    legs = fields.String()
+    legs = fields.Raw()
 
 
 class ArmsSerializer(Serializer):

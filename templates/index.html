@@ -40,8 +40,10 @@
     </div>
     <div class="row collapse">
         <div class="small-11 columns">
-            <canvas id="cam" class="small-12"/>
-            <div id="txt">0</div>
+            <canvas id="cam" class="small-12">
+                <p>Canvas is not supported by this device.</p>
+                <div id="txt">0</div>
+            </canvas>
         </div>
         <div class="small-1 columns" style="height: 281px;">
             <input type="range" class="js-angle-head vertical" min="-100" max="100">
@@ -59,13 +61,10 @@
         <div class="small-11 columns">
             <div class="row collapse">
 
-                <div class="small-8 columns"><p></p></div>
+                <div class="small-11 columns"><p></p></div>
 
                 <div class="small-1 columns">
                     <input type="number" value="2" placeholder="Use positive or negative values"/>
-                </div>
-                <div class="small-3 columns">
-                    <button id="post" class="prefix">&#8601; Tilt &#8600;</button>
                 </div>
 
             </div>
