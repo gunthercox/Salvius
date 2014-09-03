@@ -1,6 +1,6 @@
 flask==0.10.1
 flask-restful==0.2.12
-Flask-OAuth==0.12.0
+Flask-OAuthlib==0.7.0
 marshmallow==0.7.0
 RPi.GPIO==0.5.6
 phant==0.3.0

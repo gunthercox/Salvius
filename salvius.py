@@ -1,6 +1,6 @@
 from flask import Flask
 from flask.ext.restful import Api
-from flask_oauth import OAuth
+from flask_oauthlib.client import OAuth
 
 from link import settings
 
@@ -31,11 +31,11 @@ app = Flask(__name__, static_folder="static", static_url_path="")
 api = Api(app)
 oauth = OAuth()
 
-twitter = oauth.remote_app("twitter",
-    base_url="https://api.twitter.com/1/",
-    authorize_url="https://api.twitter.com/oauth/authenticate",
-    request_token_url="://api.twitter.com/oauth/request_token",
-    access_token_url="https://api.twitter.com/oauth/access_token",
+twitter = oauth.remote_app('twitter',
+    base_url='https://api.twitter.com/1/',
+    request_token_url='https://api.twitter.com/oauth/request_token',
+    access_token_url='https://api.twitter.com/oauth/access_token',
+    authorize_url='https://api.twitter.com/oauth/authenticate',
     consumer_key=settings.TWITTER["CONSUMER_KEY"],
     consumer_secret=settings.TWITTER["CONSUMER_SECRET"]
 )
@@ -44,11 +44,9 @@ google = oauth.remote_app("google",
     base_url="https://www.google.com/accounts/",
     authorize_url="https://accounts.google.com/o/oauth2/auth",
     request_token_url=None,
-    request_token_params={"scope": "https://www.googleapis.com/auth/userinfo.email",
-                        "response_type": "code"},
+    request_token_params={"scope": "https://www.googleapis.com/auth/userinfo.email"},
     access_token_url="https://accounts.google.com/o/oauth2/token",
     access_token_method="POST",
-    access_token_params={"grant_type": "authorization_code"},
     consumer_key=settings.GOOGLE["CLIENT_ID"],
     consumer_secret=settings.GOOGLE["CLIENT_SECRET"]
 )
@@ -70,7 +68,7 @@ def twitter_authorized(resp):
     if resp is None:
         flash("You denied the request to sign in.")
         return redirect(next_url)
- 
+
     session['twitter_token'] = (
         resp['oauth_token'],
         resp['oauth_token_secret']
@@ -85,9 +83,7 @@ def connect_twitter():
     from flask import session, url_for, request, redirect
 
     if "login" in request.args:
-        url = url_for(".twitter_authorized", next=request.args.get("home") or request.referrer or None)
-        resp = twitter.authorize(callback=url)
-        return resp
+        return twitter.authorize(callback=url_for("twitter_authorized", next=request.args.get("next") or request.referrer or None))
 
     if "logout" in request.args:
         if session.has_key("twitter_user"):
@@ -158,7 +154,7 @@ def google_authorized(resp):
     if resp is None:
         flash("You denied the request to sign in.")
         return redirect(next_url)
- 
+
     session["google_token"] = resp["access_token"], ""
 
     flash("A Google account has been connected.")
@@ -169,8 +165,7 @@ def connect_google():
     from flask import session, url_for, request, redirect
 
     if "login" in request.args:
-        callback = url_for(".google_authorized", _external=True)
-        return google.authorize(callback=callback)
+        return google.authorize(callback=url_for('google_authorized', _external=True))
 
     if "logout" in request.args:
         if session.has_key("google_user"):
@@ -186,6 +181,7 @@ def connect_google():
 
 @google.tokengetter
 def get_google_token():
+    from flask import session
     return session.get("google_token")
 
 
@@ -226,11 +222,13 @@ def get_disqus_token():
 def get_tokens():
     # Delete this method later
     from flask import session
-    print(session)
-    return "Check console"
+    cookie = str(dict(session))
+    return cookie
 
 app.add_url_rule("/", view_func=views.App.as_view("app"))
 app.add_url_rule("/connect/", view_func=views.Connect.as_view("connect"))
+
+app.add_url_rule("/api/", view_func=views.ApiBase.as_view("api"))
 
 # Setup the Api resource routing
 api.add_resource(views.ApiRobot, "/api/robot/")
@@ -258,8 +256,6 @@ api.add_resource(views.Terminate, "/api/terminate/")
 api.add_resource(Settings, "/api/settings/")
 api.add_resource(Speech, "/api/speech/")
 api.add_resource(Writing, "/api/writing/")
-
-api.add_resource(views.ApiBase, "/api/")
 
 if __name__ == "__main__":
     app.config.update(

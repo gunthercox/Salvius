@@ -36,17 +36,23 @@ class Connect(View):
         return render_template("connect.html", github=github)
 
 
-class ApiBase(Resource):
-    def get(self):
-        from flask import url_for
+class ApiBase(View):
+
+    def dispatch_request(self):
+        from flask import render_template, url_for
         from salvius import app
-        output = {}
+        from humanoid.browsable_api import BrowsableApi
+        output = []
         for rule in app.url_map.iter_rules():
             if not rule.arguments:
+                endpoint = str(rule.endpoint)
                 url = url_for(rule.endpoint)
-                output[str(rule.endpoint)] = url
+                obj = BrowsableApi(endpoint, url)
+                output.append(obj)
 
-        return jsonify(output)
+        #return jsonify(output)
+
+        return render_template("browsable_api.html", endpoints=output)
 
 
 class ApiRobot(Resource):
