@@ -44,7 +44,7 @@ google = oauth.remote_app("google",
     base_url="https://www.google.com/accounts/",
     authorize_url="https://accounts.google.com/o/oauth2/auth",
     request_token_url=None,
-    request_token_params={"scope": "https://www.googleapis.com/auth/userinfo.email"},
+    request_token_params={"scope": "email"},
     access_token_url="https://accounts.google.com/o/oauth2/token",
     access_token_method="POST",
     consumer_key=settings.GOOGLE["CLIENT_ID"],
@@ -52,10 +52,11 @@ google = oauth.remote_app("google",
 )
 
 disqus = oauth.remote_app("disqus",
-    base_url="https://disqus.com/api/3.0/",
+    base_url="https://disqus.com/api/2.0/",
     authorize_url="https://disqus.com/api/oauth/2.0/authorize/",
     request_token_url=None,
     access_token_url="https://disqus.com/api/oauth/2.0/access_token/",
+    access_token_method="POST",
     consumer_key=settings.DISQUS["API_KEY"],
     consumer_secret=settings.DISQUS["API_SECRET"]
 )
@@ -111,9 +112,13 @@ def connect_github():
     from link.settings import GITHUB
     from jsondb.db import Database
 
-    # needs to be changed
-    if "logout" not in request.args:
+    if "logout" in request.args:
+        if session.has_key("github_user"):
+            del session["github_user"]
 
+        if session.has_key("github_token"):
+            del session["github_token"]
+    else:
         code = request.args.get("code", "")
 
         data = {
@@ -133,17 +138,14 @@ def connect_github():
         db.data(key="github_token", value=token_json["access_token"])
 
         # Save the value in the session
-        session["github_user"] = "gunthercox"
         session["github_token"] = token_json["access_token"]
 
-    if "logout" in request.args:
-        if session.has_key("github_user"):
-            del session["github_user"]
+        # Save the username
+        token = "token " + token_json["access_token"]
+        user = requests.get("https://api.github.com/user", headers={"Authorization": token})
+        session["github_user"] = user.json()["name"]
 
-        if session.has_key("github_token"):
-            del session["github_token"]
-
-    return redirect('/connect/')
+    return redirect("/connect/")
 
 
 @app.route("/google/authorized/")
@@ -156,6 +158,9 @@ def google_authorized(resp):
         return redirect(next_url)
 
     session["google_token"] = resp["access_token"], ""
+
+    user = google.get('https://www.googleapis.com/userinfo/v2/me')
+    session["google_user"] = user.data["name"]
 
     flash("A Google account has been connected.")
     return redirect(next_url)
@@ -195,6 +200,7 @@ def disqus_authorized(resp):
         return redirect(next_url)
  
     session["disqus_token"] = resp["access_token"], ""
+    session["disqus_user"] = resp["username"]
 
     flash("A Disqus account has been connected.")
     return redirect(next_url)
@@ -204,7 +210,7 @@ def connect_disqus():
     from flask import session, url_for, request, redirect
 
     if "login" in request.args:
-        callback = url_for(".disqus_authorized", _external=True)
+        callback = url_for("disqus_authorized", _external=True)
         return disqus.authorize(callback=callback)
 
     if "logout" in request.args:

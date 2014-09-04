@@ -38,7 +38,7 @@
                     <div class="col-xs-8">
                         {% if "github_token" in session %}
                             <a href="{{ url_for('connect_github') + '?logout' }}" class="btn btn-block btn-lg btn-social btn-github">
-                                <i class="fa fa-github"></i> Connected as {{session['github_user']}}
+                                <i class="fa fa-github"></i> Connected as {{ session["github_user"] }}
                                 <i class="fa fa-check-circle pull-right"></i>
                             </a>
                         {% else %}
@@ -59,7 +59,7 @@
                     <div class="col-xs-8">
                         {% if "twitter_user" in session %}
                             <a href="{{ url_for('connect_twitter') + '?logout' }}" class="btn btn-block btn-lg btn-social btn-twitter">
-                                <i class="fa fa-twitter"></i> Connected as {{session['twitter_user']}}
+                                <i class="fa fa-twitter"></i> Connected as {{ session["twitter_user"] }}
                                 <i class="fa fa-check-circle pull-right"></i>
                             </a>
                         {% else %}
@@ -80,7 +80,7 @@
                     <div class="col-xs-8">
                         {% if "google_token" in session %}
                             <a href="{{ url_for('connect_google') + '?logout' }}" class="btn btn-block btn-lg btn-social btn-google-plus">
-                                <i class="fa fa-google-plus"></i> Connected to Google
+                                <i class="fa fa-google-plus"></i> Connected as {{ session["google_user"] }}
                                 <i class="fa fa-check-circle pull-right"></i>
                             </a>
                         {% else %}
@@ -101,7 +101,7 @@
                     <div class="col-xs-8">
                         {% if "disqus_token" in session %}
                             <a href="{{ url_for('connect_disqus') + '?logout' }}" class="btn btn-block btn-lg btn-social btn-disqus">
-                                <img src="/images/disqus.svg"/> Connected to Disqus
+                                <img src="/images/disqus.svg"/> Connected as {{ session["disqus_user"] }}
                                 <i class="fa fa-check-circle pull-right"></i>
                             </a>
                         {% else %}
