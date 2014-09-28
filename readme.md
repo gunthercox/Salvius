@@ -54,6 +54,8 @@ Use the following to run the robot's server.
 python robot.py runserver
 ```
 
+**Note:** Code for the Arduino borads can be found at: https://github.com/gunthercox/salvius.arduino
+
 ## Features
 
 ### Text to speech
@@ -211,6 +213,10 @@ perform as expected. These tests can also be run manually by running the command
 
 **SSH into Rapsberry Pi:** ```ssh pi@192.168.1.4``` (Your local ip may differ)
 The default password is ```password```
+
+After cloning this repository you may have to use
+```git submodule update --init --recursive```
+to get the latest version of the submodules.
 
 ## Contributors
 This project has been made possible with funding from the following sources:
