@@ -28,10 +28,11 @@ class Connect(View):
 
     def dispatch_request(self):
         from flask import render_template, url_for
+        from flask import current_app as app
         from link._github import GitHub
 
         github = GitHub()
-        github.authorize_url = github.make_authorization_url()
+        github.authorize_url = github.make_authorization_url(app.config['GITHUB'])
 
         return render_template("connect.html", github=github)
 

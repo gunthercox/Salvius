@@ -9,16 +9,15 @@ class GitHub(object):
         self.token_key = "github_token"
         self.authorize_url = None
 
-    def make_authorization_url(self):
+    def make_authorization_url(self, github):
         # Generate a random string for the state parameter
         # Save it for use later to prevent xsrf attacks
         from uuid import uuid4
-        from link.settings import GITHUB
         import urllib
 
         state = str(uuid4())
         params = {
-            "client_id": GITHUB["CLIENT_ID"],
+            "client_id": github["CLIENT_ID"],
             "scope": "repo, user",
             "state": state
         }

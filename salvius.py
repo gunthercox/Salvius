@@ -2,8 +2,6 @@ from flask import Flask
 from flask.ext.restful import Api
 from flask_oauthlib.client import OAuth
 
-from link import settings
-
 from humanoid import views
 
 from humanoid.neck import Neck
@@ -25,6 +23,7 @@ from humanoid.speech import Speech
 from humanoid.writing import Writing
 from humanoid.settings import Settings
 
+import settings
 
 # Create flask app
 app = Flask(__name__, static_folder="static", static_url_path="")
@@ -109,7 +108,6 @@ def connect_github():
     """
     from flask import session, url_for, request, flash, redirect
     import requests
-    from link.settings import GITHUB
     from jsondb.db import Database
 
     if "logout" in request.args:
@@ -122,8 +120,8 @@ def connect_github():
         code = request.args.get("code", "")
 
         data = {
-            "client_id": GITHUB["CLIENT_ID"],
-            "client_secret": GITHUB["CLIENT_SECRET"],
+            "client_id": settings.GITHUB["CLIENT_ID"],
+            "client_secret": settings.GITHUB["CLIENT_SECRET"],
             "code": code
         }
 
@@ -274,4 +272,5 @@ if __name__ == "__main__":
         SECRET_KEY="development",
         JSON_SORT_KEYS=False
     )
+    app.config['GITHUB'] = settings.GITHUB
     app.run(host="0.0.0.0", port=8000)
