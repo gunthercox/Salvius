@@ -160,7 +160,12 @@ def google_authorized(resp):
     session["google_token"] = resp["access_token"], ""
 
     user = google.get('https://www.googleapis.com/userinfo/v2/me')
+
     session["google_user"] = user.data["name"]
+
+    # Not all google accounts have a username attached to them
+    if not user.data["name"]:
+        session["google_user"] = user.data["email"].split("@")[0]
 
     flash("A Google account has been connected.")
     return redirect(next_url)
