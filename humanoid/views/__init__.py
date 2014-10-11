@@ -37,6 +37,19 @@ class Connect(View):
         return render_template("connect.html", github=github)
 
 
+class PhantExample(View):
+    """
+    This view can be used to track when the robot goes online.
+    * Currently this view is not being used.
+    """
+    def dispatch_request(self):
+        from phant import Phant
+        from salvius.settings import PHANT
+
+        p = Phant(PHANT['PUBLIC_KEY'], 'status', private_key=PHANT['PRIVATE_KEY'])
+        p.log("online")
+
+
 class ApiBase(View):
 
     def dispatch_request(self):

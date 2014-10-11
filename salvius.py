@@ -23,7 +23,22 @@ from humanoid.speech import Speech
 from humanoid.writing import Writing
 from humanoid.settings import Settings
 
-import settings
+class Set(object):
+    """
+    This class is a fix for the fact that a settings.py file is not
+    included in the repo, so when tests are run it throws import erros.
+    """
+    def __init__(self):
+        self.DEBUG = True
+        self.GITHUB = {"CLIENT_ID": "x", "CLIENT_SECRET": "y"}
+        self.TWITTER = {"CONSUMER_KEY": "x", "CONSUMER_SECRET": "y"}
+        self.GOOGLE = {"CLIENT_ID": "x", "CLIENT_SECRET": "y"}
+        self.DISQUS = {"API_KEY": "x", "API_SECRET": "y"}
+        self.PHANT = {"PUBLIC_KEY": "x", "PRIVATE_KEY": "y"}
+try:
+    import settings
+except ImportError:
+    settings = Set()
 
 # Create flask app
 app = Flask(__name__, static_folder="static", static_url_path="")
