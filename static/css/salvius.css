@@ -2,6 +2,10 @@
     background: #f2f2f2;
 }
 
+body {
+    padding-top: 15px;
+}
+
 input[type="range"].horizontal {
 width: 100%;
 }

@@ -12,28 +12,17 @@
 
 <body>
 
-<div class="row">&nbsp;</div>
-
-<div class="small-6 large-3 columns">
-    <div class="row collapse">
-        <div class="small-4 columns">
-            <input type="text" id="key" placeholder="Key"/>
-        </div>
-        <div class="small-4 columns">
-            <input type="text" id="value" placeholder="Value"/>
-        </div>
-        <div class="small-4 columns">
-            <button id="post" class="prefix">Post</button>
-        </div>
-    </div>
-</div>
-
 <div class="large-6 columns">
     <div class="row collapse">
         <nav class="top-bar" data-topbar>
             <section class="top-bar-section">
+                <ul class="left">
+                    <li><a class="js-capture-photo">
+                    <i class="fa fa-camera"></i> Capture
+                    </a></li>
+                </ul>
                 <ul class="right">
-                    <li><a class="toggle-shutdown">Shutdown</a></li>
+                    <li><a class="toggle-shutdown"><i class="fa fa-power-off"></i> Shutdown</a></li>
                 </ul>
             </section>
         </nav>
@@ -70,6 +59,20 @@
             </div>
         </div>
         <div class="small-1 columns"></div>
+    </div>
+</div>
+
+<div class="small-6 large-3 columns">
+    <div class="row collapse">
+        <div class="small-4 columns">
+            <input type="text" id="key" placeholder="Key"/>
+        </div>
+        <div class="small-4 columns">
+            <input type="text" id="value" placeholder="Value"/>
+        </div>
+        <div class="small-4 columns">
+            <button id="post" class="prefix">Post</button>
+        </div>
     </div>
 </div>
 
@@ -206,27 +209,27 @@
 <div class="icon-bar six-up">
   <a class="item toggle-slide-left">
     <i class="fa fa-warning js-warning"></i>
-    <label>Warnings</label>
+    <label class="show-for-medium-up">Warnings</label>
   </a>
   <a href="#" class="item toggle-sensors">
     <i class="fa fa-compass"></i>
-    <label>Sensors</label>
+    <label class="show-for-medium-up">Sensors</label>
   </a>
-  <a class="item js-capture-photo">
-    <i class="fa fa-camera"></i>
-    <label>Capture</label>
+  <a class="item js-listen">
+    <img src="/images/ear.svg">
+    <label class="show-for-medium-up">Listen</label>
   </a>
   <a class="item toggle-speech">
     <i class="fa fa-microphone"></i>
-    <label>Speech</label>
+    <label class="show-for-medium-up">Speech</label>
   </a>
   <a class="item toggle-writing">
     <i class="fa fa-pencil"></i>
-    <label>Write</label>
+    <label class="show-for-medium-up">Write</label>
   </a>
   <a class="item toggle-configuration">
     <i class="fa fa-cog"></i>
-    <label>Settings</label>
+    <label class="show-for-medium-up">Settings</label>
   </a>
 </div>
 
