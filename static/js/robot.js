@@ -15,13 +15,13 @@ Robot.error = function error(error) {
     var error = error || "";
 
     if (error != "") {
-        var template = $('<li class="message">' + error +
-        '<span class="js-dismiss close"></span></li>');
+        var template = $('<div class="alert alert-warning">' + error +
+        '<span class="js-dismiss close"></span></div>');
         $(".error-list").append(template);
     }
 
     // Change indicator led based on error count
-    var errorCount = $(".error-list").find("li").length;
+    var errorCount = $(".error-list").find(".alert").length;
     if (errorCount > 0) {
         $(".js-warning").addClass("warning");
     } else {
@@ -37,10 +37,13 @@ Robot.snapshot = function snapshot() {
 }
 
 Robot.terminate = function terminate() {
+    var message = "WARNING: Emergency shutdown operation will deactivate all systems on the robot."
     var request = new XMLHttpRequest();
-    request.open("POST", "/api/terminate/", true);
-    request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-    request.send({});
+    if (confirm(message)) {
+        request.open("POST", "/api/terminate/", true);
+        request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+        request.send({});
+    }
 }
 
 Robot.loadSensorData = function loadSensorData() {
@@ -60,23 +63,28 @@ Robot.loadSensorData = function loadSensorData() {
 }
 
 Robot.renderLimbControl = function renderLimbControl(container, limb) {
-    var control = $('<div class="panel"></div>');
+
+    $(container).html("");
+
+    var template = $('<li class="list-group-item"></li>');
 
     var renderable_types = ["elbow", "shoulder", "wrist", "hip", "knee", "ankle"];
     for (var section in limb) {
         if ($.inArray(section, renderable_types) > -1) {
 
+            var row = template.clone();
+
             console.log(section, limb[section].joint_type);
 
-            var row = $('<div><label></label><input type="number" min="0" max="100"></div>');
-            row.find("label").text(section);
-            row.find("input").val(limb[section].angle);
-            row.find("input").data("url", limb[section].href);
-            $(control).append(row);
+            var control = $('<div><label></label><input type="number" min="0" max="100"></div>');
+            control.find("label").text(section);
+            control.find("input").val(limb[section].angle);
+            control.find("input").data("url", limb[section].href);
+            row.append(control);
+
+            $(container).append(row);
         }
     }
-
-    $(container).html(control);
 
     control.on("input", "input", function() {
         var value = $(this).val();
@@ -109,6 +117,9 @@ $.ajax({
     type: "GET",
     url: "/api/robot/body/arms/"
 }).success(function(data) {
+
+    console.log(data);
+
     for (var i = 0; i < data.arms.length; i++) {
         var arm = data.arms[i];
         Robot.renderLimbControl(armClassList[i], arm);
@@ -172,12 +183,12 @@ $(".js-terminate").click(function() {
 });
 
 $(".error-list").on("click", ".js-dismiss", function() {
-    $(this).parents("li").remove();
+    $(this).parents(".alert").remove();
     Robot.error();
 });
 
 $(".js-dismiss-all").click(function() {
-    $(".error-list li").remove();
+    $(".error-list .alert").remove();
     Robot.error();
 });
 
@@ -223,6 +234,11 @@ $("#write").click(function() {
 
 $(".js-capture-photo").click(function() {
     Robot.snapshot();
+});
+
+$(".js-listen").click(function() {
+    $(this).toggleClass("btn-default btn-success");
+    // TODO
 });
 
 $(".tabs").on("click", ".tab-title", function(event) {

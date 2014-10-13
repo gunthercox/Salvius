@@ -1,135 +1,90 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Interface</title>
-    <link rel="stylesheet" href="/css/foundation.css"/>
+    <link rel="stylesheet" href="/css/bootstrap.css"/>
     <link rel="stylesheet" href="/css/font-awesome.css"/>
     <link rel="stylesheet" href="/css/salvius.css"/>
-    <link rel="stylesheet" href="/css/nav.css"/>
 </head>
 
 <body>
 
-<div class="large-6 columns">
-    <div class="row collapse">
-        <nav class="top-bar" data-topbar>
-            <section class="top-bar-section">
-                <ul class="left">
-                    <li><a class="js-capture-photo">
-                    <i class="fa fa-camera"></i> Capture
-                    </a></li>
-                </ul>
-                <ul class="right">
-                    <li><a class="toggle-shutdown"><i class="fa fa-power-off"></i> Shutdown</a></li>
-                </ul>
-            </section>
-        </nav>
-    </div>
-    <div class="row collapse">
-        <div class="small-11 columns">
-            <canvas id="cam" class="small-12">
-                <p>Canvas is not supported by this device.</p>
-                <div id="txt">0</div>
-            </canvas>
-        </div>
-        <div class="small-1 columns" style="height: 281px;">
-            <input type="range" class="js-angle-head vertical" min="-100" max="100">
-        </div>
-    </div>
-    <div class="row collapse">
-        <div class="small-11 columns">
-            <input type="range" class="js-rotate-head horizontal" min="-100" max="100">
-        </div>
-        <div class="small-1 columns">
-            <div class="bend"></div>
-        </div>
-    </div>
-    <div class="row collapse">
-        <div class="small-11 columns">
-            <div class="row collapse">
+{% include "nav-top.html" %}
 
-                <div class="small-11 columns"><p></p></div>
+<div class="container">
 
-                <div class="small-1 columns">
+    <div class="row error-list"></div>
+
+    <div class="row">
+
+        <div class="col-sm-6">
+            <div class="row">
+                <a class="btn btn-default navbar-btn js-capture-photo"><i class="fa fa-camera"></i> Capture</a>
+            </div>
+
+            <div class="row">
+                <canvas id="cam" class="col-xs-11">
+                    <p>Canvas is not supported by this device.</p>
+                    <div id="txt">0</div>
+                </canvas>
+                <div class="col-sm-1" style="height: 281px;">
+                    <input type="range" class="js-angle-head vertical" min="-100" max="100">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-11">
+                    <input type="range" class="js-rotate-head horizontal" min="-100" max="100">
+                </div>
+                <div class="col-xs-1">
+                    <div class="bend"></div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-1">
                     <input type="number" value="2" placeholder="Use positive or negative values"/>
                 </div>
-
             </div>
         </div>
-        <div class="small-1 columns"></div>
-    </div>
-</div>
 
-<div class="small-6 large-3 columns">
-    <div class="row collapse">
-        <div class="small-4 columns">
-            <input type="text" id="key" placeholder="Key"/>
-        </div>
-        <div class="small-4 columns">
-            <input type="text" id="value" placeholder="Value"/>
-        </div>
-        <div class="small-4 columns">
-            <button id="post" class="prefix">Post</button>
-        </div>
-    </div>
-</div>
-
-<div class="small-6 large-3 columns">
-    <div class="row collapse">
-        <ul class="tabs">
-            <li class="tab-title small-6 js-nested-tabs-outer active"><a href="#arm">Arm</a></li>
-            <li class="tab-title small-6 js-nested-tabs-outer"><a href="#leg">Leg</a></li>
-        </ul>
-        <div class="tabs-content">
-            <div class="content active" id="arm">
-
-                <ul class="tabs">
-                    <li class="tab-title small-6 active"><a href="#leftarm">Left</a></li>
-                    <li class="tab-title small-6"><a href="#rightarm">Right</a></li>
-                </ul>
-                <div class="tabs-content">
-                    <div class="content js-arm-control-left active" id="leftarm"></div>
-                    <div class="content js-arm-control-right" id="rightarm"></div>
+        <div class="col-xs-6">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading text-center"><b>Left arm</b></div>
+                        <ul class="list-group js-arm-control-left"></ul>
+                    </div>
                 </div>
-
-            </div>
-            <div class="content" id="leg">
-
-                <ul class="tabs">
-                    <li class="tab-title small-6 active"><a href="#leftleg">Left</a></li>
-                    <li class="tab-title small-6"><a href="#rightleg">Right</a></li>
-                </ul>
-                <div class="tabs-content">
-                    <div class="content js-leg-control-left active" id="leftleg"></div>
-                    <div class="content js-leg-control-right" id="rightleg"></div>
+                <div class="col-sm-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading text-center"><b>Right arm</b></div>
+                        <ul class="list-group js-arm-control-right"></ul>
+                    </div>
                 </div>
-
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading text-center"><b>Left leg</b></div>
+                        <ul class="list-group js-leg-control-left"></ul>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading text-center"><b>Right leg</b></div>
+                        <ul class="list-group js-leg-control-right"></ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<nav class="menu slide-menu-left">
-    <div class="row">
-        <div class="large-12 columns">
-            <h2>Warnings</h2>
-            <button class="small-6 columns js-dismiss-all">Dismiss all</button>
-            <button class="small-6 columns js-close">Close</button>
-            <ul class="error-list"></ul>
-        </div>
-    </div>
-</nav>
-
-<nav class="menu slide-menu-right sensor-menu">
-    <div class="row">
-        <div class="large-12 columns">
-            <input type="search" class="filter hide" placeholder="Filter available sensors">
-        </div>
-    </div>
-    <div class="large-12 columns scroll-table">
-        <table style="width:100%">
+    <div class="col-xs-6">
+        <input type="search" class="filter" placeholder="Filter available sensors">
+        <table class="table">
             <thead>
                 <tr>
                     <th class="center">Sensor</th>
@@ -140,102 +95,41 @@
             </tbody>
         </table>
     </div>
-</nav>
 
-<nav class="menu slide-menu-right configuration-menu">
-    <div class="row">
-        <div class="small-12 columns">
-            <h2>Configuration</h2>
+    <div class="col-xs-6">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Text to speech"/>
+            <span class="input-group-btn">
+                <button class="btn btn-default" id="say">Say</button>
+            </span>
+        </div>
+    </div>
 
-            <label>Camera image url</label>
-            <div class="row collapse">
-                <div class="small-12 columns">
-                    <input type="url" class="js-camera-url" placeholder="http://0.0.0.0">
-                </div>
+    <div class="col-xs-6">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Text to handwriting"/>
+            <span class="input-group-btn">
+                <button class="btn btn-default" id="write">Write</button>
+            </span>
+        </div>
+    </div>
+
+    <div class="col-xs-6">
+        <form class="form-inline" role="form">
+            <div class="form-group">
+                <input type="text" class="form-control" id="key" placeholder="Key"/>
+                <input type="text" class="form-control" id="value" placeholder="Value"/>
+                <button id="post" class="btn btn-default">Post</button>
             </div>
-
-            <label>Arduino IP</label>
-            <div class="row collapse">
-                <div class="small-12 columns">
-                    <input type="url" class="js-arduino-url" placeholder="http://0.0.0.0">
-                </div>
-            </div>
-
-            <a href="http://www.routerlogin.net" target="_blank">Router login</a>
-            <hr/>
-            <button class="small-12 columns js-close">Close</button>
-        </div>
+        </form>
     </div>
-</nav>
 
-<nav class="menu slide-menu-top shutdown-menu">
-    <div class="row collapse">
-        <div class="small-4 columns">
-            <h3 class="danger">Emergency shutdown</h3>
-        </div>
-        <div class="small-4 columns">
-            <button class="js-terminate">Confirm</button>
-            <button class="js-close">Cancel</button>
-        </div>
-        <div class="small-4 columns">
-            <span class="warning">WARNING: This operation will deactivate all systems on the robot.</span>
-        </div>
-    </div>
-</nav>
-
-<nav class="menu slide-menu-top speech-menu">
-    <div class="row collapse">
-        <div class="small-9 columns">
-            <input type="text" placeholder="Text to speech"/>
-        </div>
-        <div class="small-3 columns">
-            <button id="say" class="prefix">Say</button>
-        </div>
-    </div>
-</nav>
-
-<nav class="menu slide-menu-top writing-menu">
-    <div class="row collapse">
-        <div class="small-9 columns">
-            <input type="text" placeholder="Text to handwriting"/>
-        </div>
-        <div class="small-3 columns">
-            <button id="write" class="prefix">Write</button>
-        </div>
-    </div>
-</nav>
-
-
-<div class="icon-bar six-up">
-  <a class="item toggle-slide-left">
-    <i class="fa fa-warning js-warning"></i>
-    <label class="show-for-medium-up">Warnings</label>
-  </a>
-  <a href="#" class="item toggle-sensors">
-    <i class="fa fa-compass"></i>
-    <label class="show-for-medium-up">Sensors</label>
-  </a>
-  <a class="item js-listen">
-    <img src="/images/ear.svg">
-    <label class="show-for-medium-up">Listen</label>
-  </a>
-  <a class="item toggle-speech">
-    <i class="fa fa-microphone"></i>
-    <label class="show-for-medium-up">Speech</label>
-  </a>
-  <a class="item toggle-writing">
-    <i class="fa fa-pencil"></i>
-    <label class="show-for-medium-up">Write</label>
-  </a>
-  <a class="item toggle-configuration">
-    <i class="fa fa-cog"></i>
-    <label class="show-for-medium-up">Settings</label>
-  </a>
 </div>
+
+{% include "nav-bottom.html" %}
 
 <script src="/js/jquery.js"></script>
 <script src="/js/robot.js"></script>
-<script src="/js/nav.js"></script>
 
 </body>
 </html>

@@ -3,27 +3,22 @@
 }
 
 body {
-    padding-top: 15px;
+    padding-top: 70px;
+    padding-bottom: 70px;
 }
 
 input[type="range"].horizontal {
-width: 100%;
+    width: 100%;
 }
 
 input[type="range"].vertical {
-width: 100%;
-height: 100%;
--webkit-appearance: slider-vertical;
+    width: 100%;
+    height: 100%;
+    -webkit-appearance: slider-vertical;
 }
 
 ul {
     list-style: none;
-}
-
-/* Foundation overrides */
-.tabs .tab-title.active a {
-background: #333;
-color: white;
 }
 
 .bend {
@@ -34,14 +29,6 @@ border-top-width: 0px;
 border-left-width: 0px;
 border-bottom-right-radius: 15px;
 margin-top: -6px;
-}
-
-.hide {
-    display: none;
-}
-
-.center {
-    text-align: center;
 }
 
 .scroll-table {

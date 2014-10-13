@@ -1,4 +1,3 @@
-from marshmallow import fields
 from flask.ext.restful import marshal, request
 from humanoid.joints import HingeJoint, HingeJointSerializer
 

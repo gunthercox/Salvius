@@ -1,8 +1,4 @@
 from twitter import OAuth, Twitter, TwitterError, TwitterHTTPError
-import settings
-
-
-debug = settings.DEBUG
 
 
 def favorite(tweet):

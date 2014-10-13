@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Connect</title>
+    <link rel="stylesheet" href="/css/bootstrap.css"/>
+    <link rel="stylesheet" href="/css/bootstrap-social.css"/>
+    <link rel="stylesheet" href="/css/font-awesome.css"/>
+    <link rel="stylesheet" href="/css/salvius.css"/>
+    <style>
+    .row-margin {
+        margin-bottom: 10px;
+    }
+    </style>
+</head>
+
+<body>
+
+{% include "nav-top.html" %}
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h2>Configuration</h2>
+
+            <label>Camera image url</label>
+            <div class="row">
+                <div class="col-xs-12">
+                    <input type="url" class="js-camera-url" placeholder="http://0.0.0.0">
+                </div>
+            </div>
+
+            <label>Arduino IP</label>
+            <div class="row">
+                <div class="col-xs-12">
+                    <input type="url" class="js-arduino-url" placeholder="http://0.0.0.0">
+                </div>
+            </div>
+
+            <a href="http://www.routerlogin.net" target="_blank">Router login</a>
+        </div>
+    </div>
+
+</div>
+
+{% include "nav-bottom.html" %}
+
+</body>
+</html>

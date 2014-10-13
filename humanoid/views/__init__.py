@@ -37,6 +37,12 @@ class Connect(View):
         return render_template("connect.html", github=github)
 
 
+class Settings(View):
+    def dispatch_request(self):
+        from flask import render_template
+        return render_template("settings.html")
+
+
 class PhantExample(View):
     """
     This view can be used to track when the robot goes online.

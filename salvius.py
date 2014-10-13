@@ -251,6 +251,7 @@ def get_tokens():
 
 app.add_url_rule("/", view_func=views.App.as_view("app"))
 app.add_url_rule("/connect/", view_func=views.Connect.as_view("connect"))
+app.add_url_rule("/settings/", view_func=views.Settings.as_view("setting"))
 
 app.add_url_rule("/api/", view_func=views.ApiBase.as_view("api"))
 

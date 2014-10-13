@@ -1,17 +1,17 @@
-#Salvius [![Build Status](https://travis-ci.org/gunthercox/salvius.svg?branch=master)](https://travis-ci.org/gunthercox/salvius)
-
-![Project photos](http://i.imgur.com/4sXpuA4.png)
+#Salvius
 
 This repository contains the source code for Salvius, a robot who uses a 
 Rapsberry Pi and several Arduino microcontrollers as a brain.
 
-> Salvius is a robot made out of recycled materials
-> and designed to be able to perform a wide range of
-> tasks by having a body structure that is similar to
-> that of a human. The primary goal for Salvius is to 
-> create a humanoid robot that will be able to function
-> dynamically in a domestic environment.
+[![Build Status](https://travis-ci.org/gunthercox/salvius.svg?branch=master)](https://travis-ci.org/gunthercox/salvius)
+
+> Salvius is a robot made out of recycled materials, designed to be able to
+> perform a wide range of tasks by having a body structure that is similar
+> to that of a human. The primary goal for Salvius is to create a humanoid
+> robot that can function dynamically in a domestic environment.
 > ~ [salviusrobot.blogspot.com](http://salviusrobot.blogspot.com)
+
+![Project photos](http://i.imgur.com/4sXpuA4.png)
 
 **Key features:**
   - Web based user interface
@@ -89,6 +89,7 @@ PHANT = {
     "PRIVATE_KEY": ""
 }
 
+# GitHub API
 GITHUB = {
     "CLIENT_ID": "",
     "CLIENT_SECRET": ""
@@ -106,7 +107,7 @@ TWITTER = {
 ## Modular robot library
 The robot library included in this project can be used to easially build and
 customize robots. The library is **ideal for humanoid** type robots, however it
-could also work well with quadropeds and other types of robots.
+could also work well with quadrupeds and other types of robots.
 
 To build a custom robot you must first create a new robot object. The robot
 object is a container for each of the submodules required to build a robot.
