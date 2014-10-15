@@ -65,12 +65,12 @@ class ApiBase(View):
         output = []
         for rule in app.url_map.iter_rules():
             if not rule.arguments:
-                endpoint = str(rule.endpoint)
                 url = url_for(rule.endpoint)
-                obj = BrowsableApi(endpoint, url)
-                output.append(obj)
-
-        #return jsonify(output)
+                
+                if url.startswith("/api/"):
+                    endpoint = str(rule.endpoint)
+                    obj = BrowsableApi(endpoint, url)
+                    output.append(obj)
 
         return render_template("browsable_api.html", endpoints=output)
 

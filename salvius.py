@@ -3,6 +3,8 @@ from flask.ext.restful import Api
 from flask_oauthlib.client import OAuth
 
 from humanoid import views
+from humanoid.views import chat
+from humanoid.views import sensors
 
 from humanoid.neck import Neck
 from humanoid.torso import Torso
@@ -251,6 +253,8 @@ def get_tokens():
 
 app.add_url_rule("/", view_func=views.App.as_view("app"))
 app.add_url_rule("/connect/", view_func=views.Connect.as_view("connect"))
+app.add_url_rule("/chat/", view_func=chat.Chat.as_view("chat"))
+app.add_url_rule("/sensors/", view_func=sensors.Sensors.as_view("sensors"))
 app.add_url_rule("/settings/", view_func=views.Settings.as_view("setting"))
 
 app.add_url_rule("/api/", view_func=views.ApiBase.as_view("api"))
@@ -281,6 +285,7 @@ api.add_resource(views.Terminate, "/api/terminate/")
 api.add_resource(Settings, "/api/settings/")
 api.add_resource(Speech, "/api/speech/")
 api.add_resource(Writing, "/api/writing/")
+api.add_resource(chat.ChatApi, "/api/chat/")
 
 if __name__ == "__main__":
     app.config.update(
