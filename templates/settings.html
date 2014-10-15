@@ -1,61 +1,39 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Settings</title>
-    <link rel="stylesheet" href="/css/bootstrap.css"/>
-    <link rel="stylesheet" href="/css/bootstrap-social.css"/>
-    <link rel="stylesheet" href="/css/font-awesome.css"/>
-    <link rel="stylesheet" href="/css/salvius.css"/>
-</head>
+{% extends "layout/layout.html" %}
 
-<body>
+{% block title %}Settings{% endblock %}
 
-{% include "nav-top.html" %}
+{% block content %}
+<h2>Configuration</h2>
 
-<div class="container">
+<div class="row">
 
-    <h2>Configuration</h2>
+    <div class="col-sm-8">
+        <form role="form">
+            <div class="checkbox">
+                <label></label>
+                <input type="checkbox"> Debug mode
+            </div>
+            <div class="form-group">
+                <label>Camera image url</label>
+                <input type="url" class="form-control js-camera-url" placeholder="http://0.0.0.0">
+            </div>
+            <div class="form-group">
+                <label>Arduino IP</label>
+                <input type="url" class="form-control js-arduino-url" placeholder="http://0.0.0.0">
+            </div>
+        </form>
+    </div>
 
-    <div class="row">
-
-        <div class="col-sm-8">
-            <form role="form">
-                <div class="checkbox">
-                    <label></label>
-                    <input type="checkbox"> Debug mode
-                </div>
-                <div class="form-group">
-                    <label>Camera image url</label>
-                    <input type="url" class="form-control js-camera-url" placeholder="http://0.0.0.0">
-                </div>
-                <div class="form-group">
-                    <label>Arduino IP</label>
-                    <input type="url" class="form-control js-arduino-url" placeholder="http://0.0.0.0">
-                </div>
-            </form>
-        </div>
-
-        <div class="col-sm-4">
-            <a href="/api/" class="btn btn-default btn-block">
-                <i class="fa fa-flask"></i>
-                <span class="hidden-xs">API</span>
-            </a>
-            <a href="http://www.routerlogin.net" class="btn btn-default btn-block" target="_blank">
-                <i class="fa fa-signal"></i>
-                <span class="hidden-xs">Router login</span>
-            </a>
-        </div>
-
+    <div class="col-sm-4">
+        <a href="/api/" class="btn btn-default btn-block">
+            <i class="fa fa-flask"></i>
+            <span class="hidden-xs">API</span>
+        </a>
+        <a href="http://www.routerlogin.net" class="btn btn-default btn-block" target="_blank">
+            <i class="fa fa-signal"></i>
+            <span class="hidden-xs">Router login</span>
+        </a>
     </div>
 
 </div>
-
-{% include "nav-bottom.html" %}
-
-<script src="/js/jquery.js"></script>
-<script src="/js/robot.js"></script>
-
-</body>
-</html>
+{% endblock %}

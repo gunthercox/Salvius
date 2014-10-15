@@ -1,89 +1,13 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Interface</title>
-    <link rel="stylesheet" href="/css/bootstrap.css"/>
-    <link rel="stylesheet" href="/css/font-awesome.css"/>
-    <link rel="stylesheet" href="/css/salvius.css"/>
-    <style>
-    .chat-log {
-        height: 200px;
-        resize: none;
-        overflow-y: scroll;
-    }
+{% extends "layout/layout.html" %}
 
-    p:nth-child(even) {
-        color: blue;
-    }
+{% block title %}Chat{% endblock %}
 
-    p:nth-child(odd) {
-        color: red;
-    }
-    </style>
-</head>
-
-<body>
-
-{% include "nav-top.html" %}
-
-<div class="container">
-
-    <div class="row">
-        <div class="col-xs-offset-3 col-xs-6">
-            <div class="well chat-log"></div>
-            <br/>
-            <input class="form-control chat-input" placeholder="Type something to begin" autofocus/>
-        </div>
+{% block content %}
+<div class="row">
+    <div class="col-xs-offset-3 col-xs-6">
+        <div class="well chat-log"></div>
+        <br/>
+        <input class="form-control chat-input" placeholder="Type something to begin" autofocus/>
     </div>
-
 </div>
-
-{% include "nav-bottom.html" %}
-
-<script src="/js/jquery.js"></script>
-<script src="/js/robot.js"></script>
-
-<script>
-var chatInput = $(".chat-input");
-var sessionLog = $(".chat-log");
-
-function updateSessionLog(data) {
-
-    console.log(data);
-
-    // If input text was provided
-    if (data.input) {
-        sessionLog.append($('<p></p>').text(data.input));
-    }
-
-    // If response text was provided
-    if (data.response) {
-        sessionLog.append($('<p></p>').text(data.response));
-    }
-
-    // Scroll to the bottom of the log window
-    sessionLog[0].scrollTop = sessionLog[0].scrollHeight;
-}
-
-function respond(text) {
-    $.ajax({
-        type: "POST",
-        url: "/api/chat/",
-        data: JSON.stringify({text: text})
-    }).done(function(data) {
-        updateSessionLog(data);
-    });
-}
-
-chatInput.keyup(function(e) {
-    if (e.keyCode == 13) {
-        var text = $(this).val();
-        respond(text);
-    }
-});
-</script>
-
-</body>
-</html>
+{% endblock %}

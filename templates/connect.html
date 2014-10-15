@@ -1,140 +1,117 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Connect</title>
-    <link rel="stylesheet" href="/css/bootstrap.css"/>
-    <link rel="stylesheet" href="/css/bootstrap-social.css"/>
-    <link rel="stylesheet" href="/css/font-awesome.css"/>
-    <link rel="stylesheet" href="/css/salvius.css"/>
-    <style>
-    .row-margin {
-        margin-bottom: 10px;
-    }
-    </style>
-</head>
+{% extends "layout/layout.html" %}
 
-<body>
+{% block title %}Connect{% endblock %}
 
-{% include "nav-top.html" %}
+{% block content %}
 
-    <div class="container">
+<h1>Connected accounts</h1>
+<p class="lead">
+    Connect Salvius to online networks to study human-machine interaction
+</p>
+<hr>
 
-        <h1>Connected accounts</h1>
-        <p class="lead">
-            Connect Salvius to online networks to study human-machine interaction
-        </p>
-        <hr>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-warning">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
 
-        {% with messages = get_flashed_messages() %}
-          {% if messages %}
-            {% for message in messages %}
-              <div class="alert alert-warning">{{ message }}</div>
-            {% endfor %}
-          {% endif %}
-        {% endwith %}
+<div class="row">
+    <div class="col-sm-6">
 
-        <div class="row">
-            <div class="col-sm-6">
-
-                <div class="row row-margin">
-                    <div class="col-xs-8">
-                        {% if "github_token" in session %}
-                            <a href="{{ url_for('connect_github') + '?logout' }}" class="btn btn-block btn-lg btn-social btn-github">
-                                <i class="fa fa-github"></i> Connected as {{ session["github_user"] }}
-                                <i class="fa fa-check-circle pull-right"></i>
-                            </a>
-                        {% else %}
-                            <a href="{{ github.authorize_url }}" class="btn btn-block btn-lg btn-social btn-github">
-                                <i class="fa fa-github"></i> Connect to GitHub
-                            </a>
-                        {% endif %}
-                    </div>
-                    <div class="col-xs-4">
-                        <button class="btn btn-default btn-block btn-lg">
-                            <span class="hidden-xs hidden-sm">Auto-reply</span>
-                            <span class="label label-default">off</span>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="row row-margin">
-                    <div class="col-xs-8">
-                        {% if "twitter_user" in session %}
-                            <a href="{{ url_for('connect_twitter') + '?logout' }}" class="btn btn-block btn-lg btn-social btn-twitter">
-                                <i class="fa fa-twitter"></i> Connected as {{ session["twitter_user"] }}
-                                <i class="fa fa-check-circle pull-right"></i>
-                            </a>
-                        {% else %}
-                            <a href="{{ url_for('connect_twitter') + '?login' }}" class="btn btn-block btn-lg btn-social btn-twitter">
-                                <i class="fa fa-twitter"></i> Connect to Twitter
-                            </a>
-                        {% endif %}
-                    </div>
-                    <div class="col-xs-4">
-                        <button class="btn btn-default btn-block btn-lg">
-                            <span class="hidden-xs hidden-sm">Auto-reply</span>
-                            <span class="label label-success">on</span>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="row row-margin">
-                    <div class="col-xs-8">
-                        {% if "google_token" in session %}
-                            <a href="{{ url_for('connect_google') + '?logout' }}" class="btn btn-block btn-lg btn-social btn-google-plus">
-                                <i class="fa fa-google-plus"></i> Connected as {{ session["google_user"] }}
-                                <i class="fa fa-check-circle pull-right"></i>
-                            </a>
-                        {% else %}
-                            <a href="{{ url_for('connect_google') + '?login' }}" class="btn btn-block btn-lg btn-social btn-google-plus">
-                                <i class="fa fa-google-plus"></i> Connect to Google
-                            </a>
-                        {% endif %}
-                    </div>
-                    <div class="col-xs-4">
-                        <button class="btn btn-default btn-block btn-lg">
-                            <span class="hidden-xs hidden-sm">Auto-reply</span>
-                            <span class="label label-default">off</span>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="row row-margin">
-                    <div class="col-xs-8">
-                        {% if "disqus_token" in session %}
-                            <a href="{{ url_for('connect_disqus') + '?logout' }}" class="btn btn-block btn-lg btn-social btn-disqus">
-                                <img src="/images/disqus.svg"/> Connected as {{ session["disqus_user"] }}
-                                <i class="fa fa-check-circle pull-right"></i>
-                            </a>
-                        {% else %}
-                            <a href="{{ url_for('connect_disqus') + '?login' }}" class="btn btn-block btn-lg btn-social btn-disqus">
-                                <img src="/images/disqus.svg"/> Connect to Disqus
-                            </a>
-                        {% endif %}
-                    </div>
-                    <div class="col-xs-4">
-                        <button class="btn btn-default btn-block btn-lg">
-                            <span class="hidden-xs hidden-sm">Auto-reply</span>
-                            <span class="label label-default">off</span>
-                        </button>
-                    </div>
-                </div>
-
+        <div class="row row-margin">
+            <div class="col-xs-8">
+                {% if "github_token" in session %}
+                    <a href="{{ url_for('connect_github') + '?logout' }}" class="btn btn-block btn-lg btn-social btn-github">
+                        <i class="fa fa-github"></i> Connected as {{ session["github_user"] }}
+                        <i class="fa fa-check-circle pull-right"></i>
+                    </a>
+                {% else %}
+                    <a href="{{ github.authorize_url }}" class="btn btn-block btn-lg btn-social btn-github">
+                        <i class="fa fa-github"></i> Connect to GitHub
+                    </a>
+                {% endif %}
             </div>
+            <div class="col-xs-4">
+                <button class="btn btn-default btn-block btn-lg">
+                    <span class="hidden-xs hidden-sm">Auto-reply</span>
+                    <span class="label label-default">off</span>
+                </button>
+            </div>
+        </div>
 
-            <div class="col-sm-6">
-                <p class="lead text-justify">
-                    This page is used to initiate the process of creating OAuth authorization tokens which allow the robot to access
-                    information on various networks. OAuth allows access tokens to be issued to third-party clients by an authorization server, with the approval of the resource owner, or end-user. The client then uses the access token to access the protected resources hosted by the resource server. OAuth is commonly used as a way for web surfers to log into third party web sites using their Google, GitHub or Twitter accounts, without worrying about their access credentials being compromised.
-                </p>
+        <div class="row row-margin">
+            <div class="col-xs-8">
+                {% if "twitter_user" in session %}
+                    <a href="{{ url_for('connect_twitter') + '?logout' }}" class="btn btn-block btn-lg btn-social btn-twitter">
+                        <i class="fa fa-twitter"></i> Connected as {{ session["twitter_user"] }}
+                        <i class="fa fa-check-circle pull-right"></i>
+                    </a>
+                {% else %}
+                    <a href="{{ url_for('connect_twitter') + '?login' }}" class="btn btn-block btn-lg btn-social btn-twitter">
+                        <i class="fa fa-twitter"></i> Connect to Twitter
+                    </a>
+                {% endif %}
+            </div>
+            <div class="col-xs-4">
+                <button class="btn btn-default btn-block btn-lg">
+                    <span class="hidden-xs hidden-sm">Auto-reply</span>
+                    <span class="label label-success">on</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="row row-margin">
+            <div class="col-xs-8">
+                {% if "google_token" in session %}
+                    <a href="{{ url_for('connect_google') + '?logout' }}" class="btn btn-block btn-lg btn-social btn-google-plus">
+                        <i class="fa fa-google-plus"></i> Connected as {{ session["google_user"] }}
+                        <i class="fa fa-check-circle pull-right"></i>
+                    </a>
+                {% else %}
+                    <a href="{{ url_for('connect_google') + '?login' }}" class="btn btn-block btn-lg btn-social btn-google-plus">
+                        <i class="fa fa-google-plus"></i> Connect to Google
+                    </a>
+                {% endif %}
+            </div>
+            <div class="col-xs-4">
+                <button class="btn btn-default btn-block btn-lg">
+                    <span class="hidden-xs hidden-sm">Auto-reply</span>
+                    <span class="label label-default">off</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="row row-margin">
+            <div class="col-xs-8">
+                {% if "disqus_token" in session %}
+                    <a href="{{ url_for('connect_disqus') + '?logout' }}" class="btn btn-block btn-lg btn-social btn-disqus">
+                        <img src="/images/disqus.svg"/> Connected as {{ session["disqus_user"] }}
+                        <i class="fa fa-check-circle pull-right"></i>
+                    </a>
+                {% else %}
+                    <a href="{{ url_for('connect_disqus') + '?login' }}" class="btn btn-block btn-lg btn-social btn-disqus">
+                        <img src="/images/disqus.svg"/> Connect to Disqus
+                    </a>
+                {% endif %}
+            </div>
+            <div class="col-xs-4">
+                <button class="btn btn-default btn-block btn-lg">
+                    <span class="hidden-xs hidden-sm">Auto-reply</span>
+                    <span class="label label-default">off</span>
+                </button>
             </div>
         </div>
 
     </div>
 
-{% include "nav-bottom.html" %}
-
-</body>
-</html>
+    <div class="col-sm-6">
+        <p class="lead text-justify">
+            This page is used to initiate the process of creating OAuth authorization tokens which allow the robot to access
+            information on various networks. OAuth allows access tokens to be issued to third-party clients by an authorization server, with the approval of the resource owner, or end-user. The client then uses the access token to access the protected resources hosted by the resource server. OAuth is commonly used as a way for web surfers to log into third party web sites using their Google, GitHub or Twitter accounts, without worrying about their access credentials being compromised.
+        </p>
+    </div>
+</div>
+{% endblock %}

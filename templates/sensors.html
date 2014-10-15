@@ -1,47 +1,25 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sensors</title>
-    <link rel="stylesheet" href="/css/bootstrap.css"/>
-    <link rel="stylesheet" href="/css/bootstrap-social.css"/>
-    <link rel="stylesheet" href="/css/font-awesome.css"/>
-    <link rel="stylesheet" href="/css/salvius.css"/>
-</head>
+{% extends "layout/layout.html" %}
 
-<body>
+{% block title %}Sensors{% endblock %}
 
-{% include "nav-top.html" %}
+{% block content %}
+<h2>Sensors</h2>
 
-<div class="container">
+<div class="row">
+    <div class="col-sm-12">
 
-    <h2>Sensors</h2>
+        <input type="search" class="form-control" placeholder="Filter available sensors">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="text-center">Sensor</th>
+                    <th class="text-center">Value</th>
+                </tr>
+            </thead>
+            <tbody class="sensorValues">
+            </tbody>
+        </table>
 
-    <div class="row">
-        <div class="col-sm-12">
-
-            <input type="search" class="form-control" placeholder="Filter available sensors">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th class="text-center">Sensor</th>
-                        <th class="text-center">Value</th>
-                    </tr>
-                </thead>
-                <tbody class="sensorValues">
-                </tbody>
-            </table>
-
-        </div>
     </div>
-
 </div>
-
-{% include "nav-bottom.html" %}
-
-<script src="/js/jquery.js"></script>
-<script src="/js/robot.js"></script>
-
-</body>
-</html>
+{% endblock %}

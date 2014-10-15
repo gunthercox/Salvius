@@ -2,7 +2,7 @@ var Robot = Robot || {};
 
 Robot.settings = {};
 
-Robot.loading = $('<div class="center"><i class="fa fa-spinner fa-spin"></i> Loading...</div>');
+Robot.loading = $('<div class="center"><i class="fa fa-spin fa-spinner"></i> Loading...</div>');
 
 Robot.timers = {
     "rotationDelay": 0,
@@ -44,6 +44,36 @@ Robot.terminate = function terminate() {
         request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
         request.send({});
     }
+}
+
+
+Robot.updateSessionLog = function updateSessionLog(data) {
+    var sessionLog = $(".chat-log");
+
+    console.log(data);
+
+    // If input text was provided
+    if (data.input) {
+        sessionLog.append($('<p></p>').text(data.input));
+    }
+
+    // If response text was provided
+    if (data.response) {
+        sessionLog.append($('<p></p>').text(data.response));
+    }
+
+    // Scroll to the bottom of the log window
+    sessionLog[0].scrollTop = sessionLog[0].scrollHeight;
+}
+
+Robot.respond = function respond(text) {
+    $.ajax({
+        type: "POST",
+        url: "/api/chat/",
+        data: JSON.stringify({text: text})
+    }).done(function(data) {
+        Robot.updateSessionLog(data);
+    });
 }
 
 Robot.loadSensorData = function loadSensorData() {
@@ -345,4 +375,11 @@ $(".js-arduino-url").on("change", function() {
     }).error(function() {
         Robot.error("Error updating settings");
     });
+});
+
+$(".chat-input").keyup(function(e) {
+    if (e.keyCode == 13) {
+        var text = $(this).val();
+        Robot.respond(text);
+    }
 });

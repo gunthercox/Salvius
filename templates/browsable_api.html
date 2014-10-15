@@ -1,44 +1,28 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Browsable Api</title>
-    <link rel="stylesheet" href="/css/bootstrap.css"/>
-    <link rel="stylesheet" href="/css/font-awesome.css"/>
-    <link rel="stylesheet" href="/css/salvius.css"/>
-</head>
+{% extends "layout/layout.html" %}
 
-<body>
+{% block title %}Browsable Api{% endblock %}
 
-{% include "nav-top.html" %}
+{% block content %}
 
-    <div class="container">
+<h1>Browsable Api</h1>
+<!--p class="lead"></p-->
+<hr>
 
-        <h1>Browsable Api</h1>
-        <!--p class="lead"></p-->
-        <hr>
+<div class="row">
+    <div class="col-xs-12">
 
-        <div class="row">
-            <div class="col-xs-12">
+        <ul class="list-group">
+            {% for endpoint in endpoints %}
+            <li class="list-group-item">
+                <h3 class="list-group-item-heading">{{ endpoint.title }}</h3>
+                <p class="list-group-item-text">
+                    {{ endpoint.endpoint }}
+                    <a href="{{ endpoint.url }}">{{ endpoint.url }}</a>
+                </p>
+            </li>
+            {% endfor %}
+        </ul>
 
-                <ul class="list-group">
-                    {% for endpoint in endpoints %}
-                    <li class="list-group-item">
-                        <h3 class="list-group-item-heading">{{ endpoint.title }}</h3>
-                        <p class="list-group-item-text">
-                            {{ endpoint.endpoint }}
-                            <a href="{{ endpoint.url }}">{{ endpoint.url }}</a>
-                        </p>
-                    </li>
-                    {% endfor %}
-                </ul>
-
-            </div>
-        </div>
     </div>
-
-{% include "nav-bottom.html" %}
-
-</body>
-</html>
+</div>
+{% endblock %}

@@ -1,86 +1,76 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Interface</title>
-    <link rel="stylesheet" href="/css/bootstrap.css"/>
-    <link rel="stylesheet" href="/css/font-awesome.css"/>
-    <link rel="stylesheet" href="/css/salvius.css"/>
-</head>
+{% extends "layout/layout.html" %}
 
-<body>
+{% block title %}Interface{% endblock %}
 
-{% include "nav-top.html" %}
+{% block content %}
+<div class="row error-list"></div>
 
-<div class="container">
+<div class="row">
 
-    <div class="row error-list"></div>
+    <div class="col-sm-6">
+        <div class="row">
+            <a class="btn btn-default navbar-btn js-capture-photo"><i class="fa fa-camera"></i> Capture</a>
+        </div>
 
-    <div class="row">
-
-        <div class="col-sm-6">
-            <div class="row">
-                <a class="btn btn-default navbar-btn js-capture-photo"><i class="fa fa-camera"></i> Capture</a>
-            </div>
-
-            <div class="row">
-                <canvas id="cam" class="col-xs-11">
-                    <p>Canvas is not supported by this device.</p>
-                    <div id="txt">0</div>
-                </canvas>
-                <div class="col-sm-1" style="height: 281px;">
-                    <input type="range" class="js-angle-head vertical" min="-100" max="100">
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-sm-11">
-                    <input type="range" class="js-rotate-head horizontal" min="-100" max="100">
-                </div>
-                <div class="col-xs-1">
-                    <div class="bend"></div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-xs-1">
-                    <input type="number" value="2" placeholder="Use positive or negative values"/>
-                </div>
+        <div class="row">
+            <canvas id="cam" class="col-xs-11">
+                <p>Canvas is not supported by this device.</p>
+                <div id="txt">0</div>
+            </canvas>
+            <div class="col-sm-1" style="height: 281px;">
+                <input type="range" class="js-angle-head vertical" min="-100" max="100">
             </div>
         </div>
 
-        <div class="col-xs-6">
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="panel panel-default">
-                        <div class="panel-heading text-center"><b>Left arm</b></div>
-                        <ul class="list-group js-arm-control-left"></ul>
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="panel panel-default">
-                        <div class="panel-heading text-center"><b>Right arm</b></div>
-                        <ul class="list-group js-arm-control-right"></ul>
-                    </div>
+        <div class="row">
+            <div class="col-sm-11">
+                <input type="range" class="js-rotate-head horizontal" min="-100" max="100">
+            </div>
+            <div class="col-xs-1">
+                <div class="bend"></div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-1">
+                <input type="number" value="2" placeholder="Use positive or negative values"/>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-6">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading text-center"><b>Left arm</b></div>
+                    <ul class="list-group js-arm-control-left"></ul>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="panel panel-default">
-                        <div class="panel-heading text-center"><b>Left leg</b></div>
-                        <ul class="list-group js-leg-control-left"></ul>
-                    </div>
+            <div class="col-sm-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading text-center"><b>Right arm</b></div>
+                    <ul class="list-group js-arm-control-right"></ul>
                 </div>
-                <div class="col-sm-6">
-                    <div class="panel panel-default">
-                        <div class="panel-heading text-center"><b>Right leg</b></div>
-                        <ul class="list-group js-leg-control-right"></ul>
-                    </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading text-center"><b>Left leg</b></div>
+                    <ul class="list-group js-leg-control-left"></ul>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading text-center"><b>Right leg</b></div>
+                    <ul class="list-group js-leg-control-right"></ul>
                 </div>
             </div>
         </div>
     </div>
+
+</div>
+<div class="row">
 
     <div class="col-xs-6">
         <div class="input-group">
@@ -100,22 +90,16 @@
         </div>
     </div>
 
-    <div class="col-xs-6">
-        <form class="form-inline" role="form">
-            <div class="form-group">
-                <input type="text" class="form-control" id="key" placeholder="Key"/>
-                <input type="text" class="form-control" id="value" placeholder="Value"/>
-                <button id="post" class="btn btn-default">Post</button>
-            </div>
-        </form>
-    </div>
-
 </div>
 
-{% include "nav-bottom.html" %}
-
-<script src="/js/jquery.js"></script>
-<script src="/js/robot.js"></script>
-
-</body>
-</html>
+<br/>
+<div class="col-xs-6">
+    <form class="form-inline" role="form">
+        <div class="form-group">
+            <input type="text" class="form-control" id="key" placeholder="Key"/>
+            <input type="text" class="form-control" id="value" placeholder="Value"/>
+            <button id="post" class="btn btn-default">Post</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

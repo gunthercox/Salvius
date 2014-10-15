@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/css/bootstrap.css"/>
+        <link rel="stylesheet" href="/css/bootstrap-social.css"/>
+        <link rel="stylesheet" href="/css/font-awesome.css"/>
+        <link rel="stylesheet" href="/css/robot.css"/>
+        <title>{% block title %}{% endblock %}</title>
+    </head>
+
+    <body>
+
+        {% include "layout/nav-top.html" %}
+
+        <div class="container">
+            {% block content %}{% endblock %}
+        </div>
+
+        {% include "layout/nav-bottom.html" %}
+
+        <script src="/js/jquery.js"></script>
+        <script src="/js/robot.js"></script>
+
+    </body>
+</html>
