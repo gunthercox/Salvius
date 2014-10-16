@@ -85,10 +85,10 @@ ul {
     overflow-y: scroll;
 }
 
-.chat-log p:nth-child(even) {
-    color: blue;
+.chat-log .text:nth-child(even) {
+    color: green;
 }
 
-.chat-log p:nth-child(odd) {
-    color: red;
+.chat-log .text:nth-child(odd) {
+    color: blue;
 }

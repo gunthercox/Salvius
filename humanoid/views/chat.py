@@ -1,7 +1,6 @@
 from flask.views import View
 from flask.ext.restful import Resource
 from flask import request, jsonify
-#from chatterbot import ChatBot
 
 
 class Chat(View):
@@ -20,13 +19,16 @@ class ChatApi(Resource):
         return super(ChatApi, self).__init__()
 
     def post(self):
+        from chatterbot import ChatBot
+
         json_data = request.get_json(force=True)
         key = u'text'
 
+        chatbot = ChatBot()
         data = {}
 
         if key in json_data:
             data["input"] = json_data[key]
-            data["response"] = "blah"
+            data["response"] = chatbot.engram(json_data[key])
 
         return jsonify(data)

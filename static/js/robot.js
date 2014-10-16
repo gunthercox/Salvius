@@ -50,16 +50,14 @@ Robot.terminate = function terminate() {
 Robot.updateSessionLog = function updateSessionLog(data) {
     var sessionLog = $(".chat-log");
 
-    console.log(data);
-
     // If input text was provided
     if (data.input) {
-        sessionLog.append($('<p></p>').text(data.input));
+        sessionLog.append($('<div class="text"></div>').text(data.input));
     }
 
     // If response text was provided
     if (data.response) {
-        sessionLog.append($('<p></p>').text(data.response));
+        sessionLog.append($('<div class="text"></div>').text(data.response));
     }
 
     // Scroll to the bottom of the log window
@@ -267,8 +265,28 @@ $(".js-capture-photo").click(function() {
 });
 
 $(".js-listen").click(function() {
-    $(this).toggleClass("btn-default btn-success");
-    // TODO
+    var control = $(this);
+    var defautlText = control.html();
+    control.toggleClass("btn-default btn-success");
+    control.html("Listening");
+
+    var state = control.hasClass("btn-success");
+
+    var setListening = $.ajax({
+        type: "POST",
+        url: "/api/settings/listening",
+        data: JSON.stringify({listening: state})
+    });
+
+    setListening.done(function(data) {
+        // TODO
+    });
+
+    setListening.error(function() {
+        control.html(defautlText);
+        control.toggleClass("btn-default btn-success");
+        Robot.error("Unable to set listening state to " + state);
+    });
 });
 
 $(".tabs").on("click", ".tab-title", function(event) {
@@ -381,5 +399,6 @@ $(".chat-input").keyup(function(e) {
     if (e.keyCode == 13) {
         var text = $(this).val();
         Robot.respond(text);
+        $(this).val("").focus();
     }
 });

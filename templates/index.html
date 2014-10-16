@@ -9,10 +9,6 @@
 
     <div class="col-sm-6">
         <div class="row">
-            <a class="btn btn-default navbar-btn js-capture-photo"><i class="fa fa-camera"></i> Capture</a>
-        </div>
-
-        <div class="row">
             <canvas id="cam" class="col-xs-11">
                 <p>Canvas is not supported by this device.</p>
                 <div id="txt">0</div>
@@ -32,8 +28,22 @@
         </div>
 
         <div class="row">
-            <div class="col-xs-1">
-                <input type="number" value="2" placeholder="Use positive or negative values"/>
+            <div class="col-xs-2">
+                <input class="form-control" type="number" value="2" placeholder="Use positive or negative values"/>
+            </div>
+
+            <div class="col-xs-3">
+                <a class="btn btn-default btn-block js-listen">
+                    <i class="fa fa-microphone"></i>
+                    <span class="hidden-xs">Listen</span>
+                </a>
+            </div>
+
+            <div class="col-xs-3">
+                <a class="btn btn-default btn-block js-capture-photo">
+                    <i class="fa fa-camera"></i>
+                    <span class="hidden-xs">Capture</span>
+                </a>
             </div>
         </div>
     </div>
@@ -76,7 +86,10 @@
         <div class="input-group">
             <input type="text" class="form-control" placeholder="Text to speech"/>
             <span class="input-group-btn">
-                <button class="btn btn-default" id="say">Say</button>
+                <button class="btn btn-default" id="say">
+                    <i class="fa fa-bullhorn"></i>
+                    <span class="hidden-xs">Say</span>
+                </button>
             </span>
         </div>
     </div>
@@ -85,7 +98,10 @@
         <div class="input-group">
             <input type="text" class="form-control" placeholder="Text to handwriting"/>
             <span class="input-group-btn">
-                <button class="btn btn-default" id="write">Write</button>
+                <button class="btn btn-default" id="write">
+                    <i class="fa fa-pencil"></i>
+                    <span class="hidden-xs">Write</span>
+                </button>
             </span>
         </div>
     </div>
