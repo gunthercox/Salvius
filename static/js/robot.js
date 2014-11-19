@@ -368,17 +368,3 @@ $.ajax({
 }).error(function() {
     robot.error("Unable to load leg data");
 });
-
-$.ajax({
-    type: "GET",
-    url: robot.urls.api_settings
-}).success(function(data) {
-    robot.urls["camera_image_url"] = data.camera_image_url;
-    robot.urls["arduino_ip"] = data.arduino_ip;
-
-    $(".js-camera-url").val(robot.urls.camera_image_url);
-    $(".js-arduino-url").val(robot.urls.arduino_ip);
-    robot.loadSensorData();
-}).error(function() {
-    robot.error("Unable to load settings");
-});
