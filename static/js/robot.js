@@ -312,22 +312,6 @@ Robot.prototype.addEvents = function() {
         });
     });
 
-    $(".js-arduino-url").on("change", function() {
-        robot.urls["arduino_ip"] = $(this).val();
-
-        // TODO: GET DATA FROM PAGE
-        var data = {};
-
-        $.ajax({
-            type: "PUT",
-            url: robot.urls.api_settings,
-            data: JSON.stringify(data),
-            contentType: "application/json"
-        }).error(function() {
-            robot.error("Error updating settings");
-        });
-    });
-
     $(".tabs").on("click", ".tab-title", function(event) {
         event.preventDefault();
         event.stopPropagation();

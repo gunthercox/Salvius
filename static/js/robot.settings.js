@@ -32,8 +32,17 @@ function renderBooleanInput(key, value) {
     $(".js-settings-form").append(control);
 
     input.on("change", function() {
-        // TODO: Save the value in the api
-        // TODO: Revert the value if there is an error saving
+        var data = {};
+        data[key] = $(this)[0].checked;
+
+        $.ajax({
+            type: "PUT",
+            url: robot.urls.api_settings,
+            data: JSON.stringify(data),
+            contentType: "application/json"
+        }).error(function() {
+            robot.error("Error updating settings");
+        });
     });
 }
 
@@ -55,8 +64,17 @@ function renderStringInput(key, value) {
     $(".js-settings-form").append(control);
 
     input.on("change", function() {
-        // TODO: Save the value in the api
-        // TODO: Revert the value if there is an error saving
+        var data = {};
+        data[key] = $(this).val();
+
+        $.ajax({
+            type: "PUT",
+            url: robot.urls.api_settings,
+            data: JSON.stringify(data),
+            contentType: "application/json"
+        }).error(function() {
+            robot.error("Error updating settings");
+        });
     });
 }
 
@@ -77,10 +95,6 @@ function renderObjectInput(key, value) {
 
     $(".js-settings-form").append(control);
 
-    input.on("change", function() {
-        // TODO: Save the value in the api
-        // TODO: Revert the value if there is an error saving
-    });
 }
 
 function renderControl(key, value) {
