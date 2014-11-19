@@ -3,10 +3,12 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        {% block css %}
         <link rel="stylesheet" href="/css/bootstrap.css"/>
         <link rel="stylesheet" href="/css/bootstrap-social.css"/>
         <link rel="stylesheet" href="/css/font-awesome.css"/>
         <link rel="stylesheet" href="/css/robot.css"/>
+        {% endblock %}
         <title>{% block title %}{% endblock %}</title>
     </head>
 
@@ -18,9 +20,11 @@
             {% block content %}{% endblock %}
         </div>
 
+        {% block js %}
         <script src="/js/jquery.js"></script>
         <script src="/js/bootstrap.js"></script>
         <script src="/js/robot.js"></script>
+        {% endblock %}
 
     </body>
 </html>

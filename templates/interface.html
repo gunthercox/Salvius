@@ -9,7 +9,7 @@
 
     <div class="col-sm-6">
         <div class="row">
-            <canvas id="cam" class="col-xs-11">
+            <canvas id="cam" class="col-xs-11" style="background:url('images/placeholder.jpg');">
                 <p>Canvas is not supported by this device.</p>
                 <div id="txt">0</div>
             </canvas>
@@ -118,4 +118,9 @@
         </div>
     </form>
 </div>
+{% endblock %}
+
+{% block js %}
+{{ super() }}
+<script src="/js/robot.camera.js"></script>
 {% endblock %}
