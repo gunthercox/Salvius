@@ -9,7 +9,7 @@ class ApiTests(TestCase):
         self.app = app.test_client()
 
     def test_finger_count(self):
-        response = self.app.get("/api/robot/body/arms/0/hand/fingers", follow_redirects=True)
+        response = self.app.get("/api/arms/0/hand/fingers", follow_redirects=True)
         data = response.data.decode()
 
         self.assertEqual(data.count('href'), 4)
@@ -19,7 +19,7 @@ class ApiTests(TestCase):
         Test that data can be patched to fingers.
         """
         data = '{"tension": 2}'
-        url = "/api/robot/body/arms/0/hand/fingers/0/"
+        url = "/api/arms/0/hand/fingers/0/"
 
         response = self.app.patch(url, data=data, content_type='application/json')
 
@@ -33,7 +33,7 @@ class ApiTests(TestCase):
         Test that data can be patched to a thumb.
         """
         data = '{"tension": 4}'
-        url = "/api/robot/body/arms/0/hand/thumb/"
+        url = "/api/arms/0/hand/thumb/"
 
         response = self.app.patch(url, data=data, content_type='application/json')
 

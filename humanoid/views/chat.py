@@ -29,6 +29,6 @@ class ChatApi(Resource):
 
         if key in json_data:
             data["input"] = json_data[key]
-            data["response"] = chatbot.engram(json_data[key])
+            data["response"] = chatbot.get_response(json_data[key])
 
         return jsonify(data)

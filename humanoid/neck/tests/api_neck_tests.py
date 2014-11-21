@@ -9,5 +9,5 @@ class ApiTests(TestCase):
         self.app = app.test_client()
 
     def test_get_neck(self):
-        response = self.app.get("/api/robot/body/neck", follow_redirects=True)
+        response = self.app.get("/api/neck/", follow_redirects=True)
         self.assertTrue("joint_type" in response.data.decode())

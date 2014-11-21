@@ -2,8 +2,7 @@ from flask import jsonify, request
 from flask.views import View
 from flask.ext.restful import Resource
 
-from humanoid import RobotSerializer
-from humanoid.body import BodySerializer, ArmsSerializer
+from humanoid import RobotSerializer, ArmsSerializer
 from humanoid.arm import ArmSerializer
 from humanoid.arm.hand import HandSerializer, FingersSerializer
 
@@ -15,7 +14,7 @@ robot = Robot()
 class App(View):
     def dispatch_request(self):
         from flask import render_template
-        return render_template("index.html")
+        return render_template("interface.html")
 
 
 class Connect(View):
@@ -43,12 +42,12 @@ class Settings(View):
         return render_template("settings.html")
 
 
-class PhantExample(View):
+class PhantExample(Resource):
     """
     This view can be used to track when the robot goes online.
     * Currently this view is not being used.
     """
-    def dispatch_request(self):
+    def get(self):
         from phant import Phant
         from salvius.settings import PHANT
 
@@ -56,58 +55,33 @@ class PhantExample(View):
         p.log("online")
 
 
-class ApiBase(View):
-
-    def dispatch_request(self):
-        from flask import render_template, url_for
-        from salvius import app
-        from humanoid.browsable_api import BrowsableApi
-        output = []
-        for rule in app.url_map.iter_rules():
-            if not rule.arguments:
-                url = url_for(rule.endpoint)
-                
-                if url.startswith("/api/"):
-                    endpoint = str(rule.endpoint)
-                    obj = BrowsableApi(endpoint, url)
-                    output.append(obj)
-
-        return render_template("browsable_api.html", endpoints=output)
-
-
-class ApiRobot(Resource):
+class ApiBase(Resource):
     def get(self):
         serialized = RobotSerializer(robot)
         return jsonify(serialized.data)
 
 
-class ApiBody(Resource):
-    def get(self):
-        serialized = BodySerializer(robot.body)
-        return jsonify(serialized.data)
-
-
 class ApiArms(Resource):
     def get(self):
-        serialized = ArmsSerializer(robot.body)
+        serialized = ArmsSerializer(robot)
         return jsonify(serialized.data)
 
 
 class ApiArm(Resource):
     def get(self, arm_id):
-        serialized = ArmSerializer(robot.body.arms[arm_id])
+        serialized = ArmSerializer(robot.arms[arm_id])
         return jsonify(serialized.data)
 
 
 class ApiHand(Resource):
     def get(self, arm_id):
-        serialized = HandSerializer(robot.body.arms[arm_id].hand)
+        serialized = HandSerializer(robot.arms[arm_id].hand)
         return jsonify(serialized.data)
 
 
 class ApiFingers(Resource):
     def get(self, arm_id):
-        serialized = FingersSerializer(robot.body.arms[arm_id].hand)
+        serialized = FingersSerializer(robot.arms[arm_id].hand)
         return jsonify(serialized.data)
 
 

@@ -9,14 +9,14 @@ class Hip(OrthogonalJoint):
         super(Hip, self).__init__()
         self.parent_id = None
 
-        self.data["href"] = "/api/robot/body/legs/" + str(self.parent_id) + "/hip/"
+        self.data["href"] = "/api/legs/" + str(self.parent_id) + "/hip/"
 
     def set_parent_id(self, uuid):
         self.parent_id = uuid
-        self.data["href"] = "/api/robot/body/legs/" + str(uuid) + "/hip/"
+        self.data["href"] = "/api/legs/" + str(uuid) + "/hip/"
 
     def get(self, leg_id):
-        self.data["href"] = "/api/robot/body/legs/" + str(leg_id) + "/hip/"
+        self.data["href"] = "/api/legs/" + str(leg_id) + "/hip/"
 
         return marshal(self.data, self.fields)
 

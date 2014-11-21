@@ -17,14 +17,14 @@ class Knee(HingeJoint):
 
         self.parent_id = None
 
-        self.data["href"] = "/api/robot/body/legs/" + str(self.parent_id) + "/knee/"
+        self.data["href"] = "/api/legs/" + str(self.parent_id) + "/knee/"
 
     def set_parent_id(self, uuid):
         self.parent_id = uuid
-        self.data["href"] = "/api/robot/body/legs/" + str(uuid) + "/knee/"
+        self.data["href"] = "/api/legs/" + str(uuid) + "/knee/"
 
     def get(self, leg_id):
-        self.data["href"] = "/api/robot/body/legs/" + str(leg_id) + "/knee/"
+        self.data["href"] = "/api/legs/" + str(leg_id) + "/knee/"
         # TODO: Check if the arm or leg does not exist in the db.
 
         return marshal(self.data, self.fields)

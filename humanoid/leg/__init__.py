@@ -33,7 +33,7 @@ class Leg(Robot):
             abort(404, message="Leg id {} does not exist in database".format(leg_id))
 
         self.data["id"] = leg_id
-        self.data["href"] = "/api/robot/body/legs/" + str(leg_id) + "/"
+        self.data["href"] = "/api/legs/" + str(leg_id) + "/"
         self.data["hip"] = dict(self._hip.get(leg_id=leg_id))
         self.data["knee"] = dict(self._knee.get(leg_id=leg_id))
         self.data["ankle"] = dict(self._ankle.get(leg_id=leg_id))

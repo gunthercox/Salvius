@@ -14,9 +14,6 @@ class Finger(CompliantJoint):
 
     def get(self, arm_id, finger_id):
         self.data["href"] = "/api/robot/body/arms/" + str(arm_id) + "/hand/fingers/" + str(finger_id)
-        # TODO: Create arm and leg representation in database,
-        # An error will be thrown if the arm or leg does not exist in the db.
-
         return marshal(self.data, self.fields)
 
     def patch(self, arm_id, finger_id):
@@ -40,13 +37,10 @@ class Thumb(CompliantJoint):
         super(Thumb, self).__init__()
         self.parent_id = hand_id
 
-        self.data["href"] = "/api/robot/body/arms/" + str(self.parent_id) + "/hand/thumb/"
+        self.data["href"] = "/api/arms/" + str(self.parent_id) + "/hand/thumb/"
 
     def get(self, arm_id):
-        self.data["href"] = "/api/robot/body/arms/" + str(arm_id) + "/hand/thumb/"
-        # TODO: Create arm and leg representation in database,
-        # An error will be thrown if the arm or leg does not exist in the db.
-
+        self.data["href"] = "/api/arms/" + str(arm_id) + "/hand/thumb/"
         return marshal(self.data, self.fields)
 
     def patch(self, arm_id):
@@ -103,7 +97,7 @@ class FingerSerializer(CompliantJointSerializer):
     position = fields.Integer()
 
     def get_url(self, obj):
-        url = "/api/robot/body/arms/" + str(obj.parent_id) + "/hand"
+        url = "/api/arms/" + str(obj.parent_id) + "/hand"
 
         # Only fingers should be created with an id
         if obj.id is not None:

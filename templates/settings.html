@@ -8,20 +8,7 @@
 <div class="row">
 
     <div class="col-sm-8">
-        <form role="form">
-            <div class="checkbox">
-                <label></label>
-                <input type="checkbox"> Debug mode
-            </div>
-            <div class="form-group">
-                <label>Camera image url</label>
-                <input type="url" class="form-control js-camera-url" placeholder="http://0.0.0.0">
-            </div>
-            <div class="form-group">
-                <label>Arduino IP</label>
-                <input type="url" class="form-control js-arduino-url" placeholder="http://0.0.0.0">
-            </div>
-        </form>
+        <form class="js-settings-form"></form>
     </div>
 
     <div class="col-sm-4">
@@ -44,4 +31,9 @@
     </div>
 
 </div>
+{% endblock %}
+
+{% block js %}
+{{ super() }}
+<script src="/js/robot.settings.js"></script>
 {% endblock %}

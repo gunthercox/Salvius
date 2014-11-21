@@ -9,7 +9,7 @@ class ApiWristTests(TestCase):
         self.app = app.test_client()
 
     def test_get_wrist(self):
-        url = "/api/robot/body/arms/0/wrist/"
+        url = "/api/arms/0/wrist/"
         response = self.app.get(url, follow_redirects=True)
 
         self.assertTrue('href": "' + url in response.data.decode())
@@ -20,7 +20,7 @@ class ApiWristTests(TestCase):
         Test that data can be patched to a wrist.
         """
         data = '{"rotation": 2, "angle": -20}'
-        url = "/api/robot/body/arms/0/wrist/"
+        url = "/api/arms/0/wrist/"
         content_type = "application/json"
 
         response = self.app.patch(url, data=data, content_type=content_type)

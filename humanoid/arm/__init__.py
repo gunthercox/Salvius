@@ -48,4 +48,4 @@ class ArmSerializer(Serializer):
     hand = fields.Nested("HandSerializer")
 
     def get_url(self, obj):
-        return "/api/robot/body/arms/" + str(obj.id)
+        return "/api/arms/" + str(obj.id)
