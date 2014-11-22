@@ -5,7 +5,9 @@ from salvius import app
 class ApiTests(TestCase):
 
     def setUp(self):
-        app.config['TESTING'] = True
+        from humanoid import Robot
+        app.config["TESTING"] = True
+        app.config["ROBOT"] = Robot()
         self.app = app.test_client()
 
     def test_finger_count(self):

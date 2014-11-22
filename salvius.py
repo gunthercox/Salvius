@@ -2,14 +2,11 @@ from flask import Flask
 from flask.ext.restful import Api
 from flask_oauthlib.client import OAuth
 
+from humanoid import api as robot_api
 from humanoid import views
-from humanoid.views import chat
-from humanoid.views import sensors
 
 from humanoid.neck import Neck
 from humanoid.torso import Torso
-
-from humanoid.leg import Legs, Leg
 
 from humanoid.arm.shoulder import Shoulder
 from humanoid.arm.elbow import Elbow
@@ -17,13 +14,13 @@ from humanoid.arm.wrist import Wrist
 from humanoid.arm.hand import Finger
 from humanoid.arm.hand import Thumb
 
+from humanoid.leg import Legs, Leg
 from humanoid.leg.hip import Hip
 from humanoid.leg.knee import Knee
 from humanoid.leg.ankle import Ankle
 
-from humanoid.speech import Speech
-from humanoid.writing import Writing
-from humanoid.settings import Settings
+from humanoid import Robot
+
 
 class Set(object):
     """
@@ -254,22 +251,22 @@ def get_tokens():
 app.add_url_rule("/interface/", view_func=views.App.as_view("app"))
 app.add_url_rule("/limbs/", view_func=views.Limbs.as_view("limbs"))
 app.add_url_rule("/connect/", view_func=views.Connect.as_view("connect"))
-app.add_url_rule("/chat/", view_func=chat.Chat.as_view("chat"))
-app.add_url_rule("/sensors/", view_func=sensors.Sensors.as_view("sensors"))
+app.add_url_rule("/chat/", view_func=views.Chat.as_view("communication"))
+app.add_url_rule("/sensors/", view_func=views.Sensors.as_view("sensors"))
 app.add_url_rule("/settings/", view_func=views.Settings.as_view("setting"))
 
 # Setup the Api resource routing
-api.add_resource(views.ApiBase, "/api/")
+api.add_resource(robot_api.Base, "/api/")
 api.add_resource(Neck, "/api/neck/")
 api.add_resource(Torso, "/api/torso/")
 
-api.add_resource(views.ApiArms, "/api/arms/")
-api.add_resource(views.ApiArm, "/api/arms/<int:arm_id>/")
+api.add_resource(robot_api.Arms, "/api/arms/")
+api.add_resource(robot_api.Arm, "/api/arms/<int:arm_id>/")
 api.add_resource(Shoulder, "/api/arms/<int:arm_id>/shoulder/")
 api.add_resource(Elbow, "/api/arms/<int:arm_id>/elbow/")
 api.add_resource(Wrist, "/api/arms/<int:arm_id>/wrist/")
-api.add_resource(views.ApiHand, "/api/arms/<int:arm_id>/hand/")
-api.add_resource(views.ApiFingers, "/api/arms/<int:arm_id>/hand/fingers/")
+api.add_resource(robot_api.Hand, "/api/arms/<int:arm_id>/hand/")
+api.add_resource(robot_api.Fingers, "/api/arms/<int:arm_id>/hand/fingers/")
 api.add_resource(Finger, "/api/arms/<int:arm_id>/hand/fingers/<int:finger_id>/")
 api.add_resource(Thumb, "/api/arms/<int:arm_id>/hand/thumb/")
 
@@ -279,11 +276,11 @@ api.add_resource(Hip, "/api/legs/<int:leg_id>/hip/")
 api.add_resource(Knee, "/api/legs/<int:leg_id>/knee/")
 api.add_resource(Ankle, "/api/legs/<int:leg_id>/ankle/")
 
-api.add_resource(views.Terminate, "/api/terminate/")
-api.add_resource(Settings, "/api/settings/")
-api.add_resource(Speech, "/api/speech/")
-api.add_resource(Writing, "/api/writing/")
-api.add_resource(chat.ChatApi, "/api/chat/")
+api.add_resource(robot_api.Terminate, "/api/terminate/")
+api.add_resource(robot_api.Settings, "/api/settings/")
+api.add_resource(robot_api.Speech, "/api/speech/")
+api.add_resource(robot_api.Writing, "/api/writing/")
+api.add_resource(robot_api.Chat, "/api/chat/")
 
 if __name__ == "__main__":
     app.config.update(
@@ -291,5 +288,6 @@ if __name__ == "__main__":
         SECRET_KEY="development",
         JSON_SORT_KEYS=False
     )
-    app.config['GITHUB'] = settings.GITHUB
+    app.config["GITHUB"] = settings.GITHUB
+    app.config["ROBOT"] = Robot()
     app.run(host="0.0.0.0", port=8000)
