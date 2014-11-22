@@ -3,6 +3,7 @@ window.Robot = window.Robot || {};
 var Robot = function() {
     this.activate();
     this.addEvents();
+    this.mobile = false;
 }
 
 Robot.prototype.urls = Robot.urls || {};
@@ -141,28 +142,6 @@ Robot.prototype.renderLimb = function(data, key, classes) {
     }
 }
 
-Robot.prototype.zeroSlider = function(input, value, timer) {
-    clearTimeout(robot.timers[timer]);
-    function zero() {
-        if (robot.timers[timer]) {
-            clearTimeout(robot.timers[timer]);
-        }
-        robot.timers[timer] = setTimeout(function() {
-            if (value > 0) {
-                value -= 1;
-                input.val(value);
-                zero();
-            }
-            if (value < 0) {
-                value += 1;
-                input.val(value);
-                zero();
-            }
-        }, 100);
-    }
-    setTimeout(zero, 1000);
-}
-
 Robot.prototype.activate = function() {
     this.urls["api_settings"] = "/api/settings/";
     this.urls["api_chat"] = "/api/chat/";
@@ -287,13 +266,13 @@ Robot.prototype.addEvents = function() {
     robot.elements.rotate_head.on("input change", function() {
         var input = $(this);
         var value = parseInt(input.val());
-        robot.zeroSlider(input, value, "rotationReset");
+        // TODO: Send to api
     });
 
     robot.elements.angle_head.on("input change", function() {
         var input = $(this);
         var value = parseInt(input.val());
-        robot.zeroSlider(input, value, "angleReset");
+        // TODO: Send to api
     });
 
     $(".js-camera-url").on("change", function() {
@@ -322,6 +301,13 @@ Robot.prototype.addEvents = function() {
         var id = $(this).find("a").attr("href");
         $(id).siblings().removeClass("active");
         $(id).addClass("active");
+    });
+
+    $(".js-toggle-mobile").click(function(e) {
+        e.preventDefault();
+
+        $(this).find(".fa").toggleClass("fa-spin");
+        robot.mobile = !robot.mobile;
     });
 }
 
