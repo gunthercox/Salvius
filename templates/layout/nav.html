@@ -1,56 +1,69 @@
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<nav class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
     <div class="container">
         <div class="row">
-
-            <div class="col-xs-2">
-                <ul class="nav navbar-nav">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="fa fa-warning js-warning"></i>
-                            <span class="hidden-xs">Warnings</span>
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a class="js-dismiss-all">Dismiss all warnings</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li><a href="#">One more thing</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-            <div class="col-xs-2">
-                <a href="/" class="btn btn-default btn-block navbar-btn">
-                    <i class="fa fa-dashboard"></i>
-                    <span class="hidden-xs">Controls</span>
-                </a>
-            </div>
-            <div class="col-xs-2">
-                <a href="/sensors/" class="btn btn-default btn-block navbar-btn">
-                    <i class="fa fa-compass"></i>
-                    <span class="hidden-xs">Sensors</span>
-                </a>
-            </div>
-            <div class="col-xs-2">
-                <a href="http://gunthercox.github.io/salvius.status/" class="btn btn-default btn-block navbar-btn">
-                    <i class="fa fa-line-chart"></i>
-                    <span class="hidden-xs">Status</span>
-                </a>
-            </div>
-            <div class="col-xs-2">
-                <a href="/chat/" class="btn btn-default btn-block navbar-btn">
-                    <i class="fa fa-comments"></i>
-                    <span class="hidden-xs">Chat</span>
-                </a>
-            </div>
-            <div class="col-xs-2">
-                <a href="/settings/" class="btn btn-default btn-block navbar-btn">
-                    <i class="fa fa-toggle-on"></i>
-                    <span class="hidden-xs">Settings</span>
-                </a>
-            </div>
-
+            <ul class="nav navbar-nav navbar-left">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-warning js-warning"></i>
+                        <span class="hidden-xs">Warnings</span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a class="js-dismiss-all">Dismiss all warnings</a></li>
+                        <li class="divider"></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="http://gunthercox.github.io/salvius.status/">
+                        <i class="fa fa-line-chart"></i>
+                        <span class="hidden-xs">Status</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/interface/">
+                        <i class="fa fa-rocket"></i>
+                        <span class="hidden-xs">Interface</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/limbs/">
+                        <i class="fa fa-code-fork fa-rotate-90"></i>
+                        <span class="hidden-xs">Limbs</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/chat/">
+                        <i class="fa fa-comments"></i>
+                        <span class="hidden-xs">Chat</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/sensors/">
+                        <i class="fa fa-compass"></i>
+                        <span class="hidden-xs">Sensors</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/settings/">
+                        <i class="fa fa-toggle-on"></i>
+                        <span class="hidden-xs">Settings</span>
+                    </a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" class="">
+                        <i class="fa fa-microphone hide"></i>
+                        <i class="fa fa-microphone-slash"></i>
+                        <span class="hidden-xs">Listen</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="js-toggle-mobile">
+                        <i class="fa fa-circle-o-notch"></i>
+                        <span class="hidden-xs">Mobile</span>
+                    </a>
+                </li>
+            </ul>
         </div>
     </div>
 </nav>

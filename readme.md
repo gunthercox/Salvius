@@ -1,4 +1,4 @@
-#Salvius
+# Salvius
 
 This repository contains the source code for Salvius, a robot who uses a 
 Rapsberry Pi and several Arduino microcontrollers as a brain.

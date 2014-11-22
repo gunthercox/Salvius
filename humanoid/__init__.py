@@ -17,7 +17,6 @@ class Robot(Future):
 
     def __init__(self):
         super(Robot, self).__init__()
-        self.name = self.db.data(key="name")
 
         self._neck = Neck()
         self._torso = Torso()
@@ -110,7 +109,6 @@ class ArmsSerializer(Serializer):
 
 
 class RobotSerializer(Serializer):
-    name = fields.String()
     neck = fields.Raw()
     torso = fields.Raw()
     arms = fields.Nested(ArmSerializer, many=True)

@@ -149,7 +149,7 @@ Robot.prototype.activate = function() {
     this.urls["api_arms"] = "/api/arms/";
     this.urls["api_listening"] = "/api/settings/listening";
     this.urls["terminate"] = "/api/terminate/";
-    this.urls["camera_image_url"] = "http://192.0.0.0/";
+    this.urls["camera_image_url"] = "";
     this.urls["ardunio_ip"] = "http://0.0.0.1/";
 
     this.elements["terminate"] = $(".js-terminate");
@@ -266,12 +266,17 @@ Robot.prototype.addEvents = function() {
     robot.elements.rotate_head.on("input change", function() {
         var input = $(this);
         var value = parseInt(input.val());
+
+        // Display the value of the slider
+        input.parent().find("output").text(value);
+
         // TODO: Send to api
     });
 
     robot.elements.angle_head.on("input change", function() {
         var input = $(this);
         var value = parseInt(input.val());
+
         // TODO: Send to api
     });
 
@@ -310,31 +315,3 @@ Robot.prototype.addEvents = function() {
         robot.mobile = !robot.mobile;
     });
 }
-
-var robot = new Robot();
-
-var armClassList = [".js-arm-control-left", ".js-arm-control-right"];
-for (var i = 0; i < armClassList.length; i++) {
-    robot.loading($(armClassList[i]));
-}
-$.ajax({
-    type: "GET",
-    url: robot.urls.api_arms
-}).success(function(data) {
-    robot.renderLimb(data, "arms", armClassList);
-}).error(function() {
-    robot.error("Unable to load arm data");
-});
-
-var legClassList = [".js-leg-control-left", ".js-leg-control-right"];
-for (var i = 0; i < legClassList.length; i++) {
-    robot.loading($(legClassList[i]));
-}
-$.ajax({
-    type: "GET",
-    url: robot.urls.api_legs
-}).success(function(data) {
-    robot.renderLimb(data, "legs", legClassList);
-}).error(function() {
-    robot.error("Unable to load leg data");
-});

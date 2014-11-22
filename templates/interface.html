@@ -6,117 +6,52 @@
 <div class="row error-list"></div>
 
 <div class="row">
-
-    <div class="col-sm-6">
-        <div class="row">
-            <canvas id="cam" class="col-xs-11" style="background:url('images/placeholder.jpg');">
+    <div style="width: 80%; margin: 0px auto">
+        <!-- 16:9 aspect ratio -->
+        <div class="embed-responsive embed-responsive-16by9">
+            <canvas id="cam" class="embed-responsive-item">
                 <p>Canvas is not supported by this device.</p>
                 <div id="txt">0</div>
             </canvas>
-            <div class="col-sm-1" style="height: 281px;">
-                <input type="range" class="js-angle-head vertical" min="-100" max="100">
-            </div>
-        </div>
 
-        <div class="row">
-            <div class="col-sm-11">
-                <input type="range" class="js-rotate-head horizontal" min="-100" max="100">
-            </div>
-            <div class="col-xs-1">
-                <div class="bend"></div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-xs-2">
-                <input class="form-control" type="number" value="2" placeholder="Use positive or negative values"/>
-            </div>
-
-            <div class="col-xs-3">
-                <a class="btn btn-default btn-block js-listen">
-                    <i class="fa fa-microphone"></i>
-                    <span class="hidden-xs">Listen</span>
-                </a>
-            </div>
-
-            <div class="col-xs-3">
-                <a class="btn btn-default btn-block js-capture-photo">
-                    <i class="fa fa-camera"></i>
-                    <span class="hidden-xs">Capture</span>
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-xs-6">
-        <div class="row">
-            <div class="col-sm-6">
-                <div class="panel panel-default">
-                    <div class="panel-heading text-center"><b>Left arm</b></div>
-                    <ul class="list-group js-arm-control-left"></ul>
+            <div class="sidebar-left">
+                <div class="control">
+                    <a class="js-front-back-tilt">
+                        <i class="fa fa-arrows-v"></i><br/>
+                        <span class="readout">0</span>
+                    </a>
+                </div>
+                <div class="control">
+                    <a class="js-left-right-tilt">
+                        <i class="fa fa-expand"></i><br/>
+                        <span class="readout">0</span>
+                    </a>
+                </div>
+                <div class="control" style="height: 200px;">
+                    <input type="range" class="js-angle-head vertical" min="-180" max="180" style="margin: 0px auto">
                 </div>
             </div>
-            <div class="col-sm-6">
-                <div class="panel panel-default">
-                    <div class="panel-heading text-center"><b>Right arm</b></div>
-                    <ul class="list-group js-arm-control-right"></ul>
+
+            <div class="sidebar-right">
+                <div class="control">
+                    <a class="js-capture-photo">
+                        <i class="fa fa-camera"></i>
+                        <span class="hide">Capture</span>
+                    </a>
                 </div>
             </div>
+
         </div>
+
+
         <div class="row">
-            <div class="col-sm-6">
-                <div class="panel panel-default">
-                    <div class="panel-heading text-center"><b>Left leg</b></div>
-                    <ul class="list-group js-leg-control-left"></ul>
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="panel panel-default">
-                    <div class="panel-heading text-center"><b>Right leg</b></div>
-                    <ul class="list-group js-leg-control-right"></ul>
-                </div>
+            <div class="col-sm-12">
+                <input type="range" min="0" max="360" value="180" class="js-rotate-head horizontal">
+                <output class="text-center">180</output>
             </div>
         </div>
+
     </div>
-
-</div>
-<div class="row">
-
-    <div class="col-xs-6">
-        <div class="input-group">
-            <input type="text" class="form-control" placeholder="Text to speech"/>
-            <span class="input-group-btn">
-                <button class="btn btn-default" id="say">
-                    <i class="fa fa-bullhorn"></i>
-                    <span class="hidden-xs">Say</span>
-                </button>
-            </span>
-        </div>
-    </div>
-
-    <div class="col-xs-6">
-        <div class="input-group">
-            <input type="text" class="form-control" placeholder="Text to handwriting"/>
-            <span class="input-group-btn">
-                <button class="btn btn-default" id="write">
-                    <i class="fa fa-pencil"></i>
-                    <span class="hidden-xs">Write</span>
-                </button>
-            </span>
-        </div>
-    </div>
-
-</div>
-
-<br/>
-<div class="col-xs-6">
-    <form class="form-inline" role="form">
-        <div class="form-group">
-            <input type="text" class="form-control" id="key" placeholder="Key"/>
-            <input type="text" class="form-control" id="value" placeholder="Value"/>
-            <button id="post" class="btn btn-default">Post</button>
-        </div>
-    </form>
 </div>
 {% endblock %}
 

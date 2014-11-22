@@ -3,32 +3,74 @@
 }
 
 body {
-    padding-top: 70px;
-    padding-bottom: 70px;
-}
-
-input[type="range"].horizontal {
-    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 90px;
 }
 
 input[type="range"].vertical {
-    width: 100%;
-    height: 100%;
     -webkit-appearance: slider-vertical;
+    width: 10px;
+    height: 100%;
+    outline: none;
+
+    background-color: #222;
+}
+
+input[type="range"].horizontal {
+    -webkit-appearance: none;
+
+    width: 100%;
+    height: 10px;
+    outline: none;
+    background-color: #222;
+    vertical-align: middle;
+
+    margin-bottom: 10px;
+}
+
+input[type='range']::-webkit-slider-thumb {
+-webkit-appearance: none !important;
+border-radius: 20px;
+background-color: #2FA875;
+border: 1px solid #000;
+height: 40px;
+width: 40px;
 }
 
 ul {
     list-style: none;
 }
 
-.bend {
-    width: 58%;
-    height: 20px;
-    border: 4px solid #e3ddd8;
-    border-top-width: 0px;
-    border-left-width: 0px;
-    border-bottom-right-radius: 15px;
-    margin-top: -6px;
+output {
+    color: #000;
+    text-shadow: -1px 0 #fff, 0 1px #fff, 1px 0 #fff, 0 -1px #fff;
+}
+
+.navbar-nav .fa {
+    font-size: 30px;
+}
+
+.navbar-nav li {
+    border-left: 1px solid #000;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color: #2FA875;
+    text-align: center;
+}
+
+.navbar-inverse .navbar-nav>.open>a,
+.navbar-inverse .navbar-nav>.open>a:hover,
+.navbar-inverse .navbar-nav>.open>a:focus,
+.navbar-inverse .navbar-nav>li>a:hover,
+.navbar-inverse .navbar-nav>li>a:focus {
+    color: rgb(52, 143, 226);
+}
+
+.navbar-inverse .navbar-nav > li > a > span {
+    display: block;
+    font-size: 10px;
+    letter-spacing: 3px;
 }
 
 .scroll-table {
@@ -92,3 +134,58 @@ ul {
 .chat-log .text:nth-child(odd) {
     color: blue;
 }
+
+
+
+.readout {
+    font-size: 10px;
+}
+
+.sidebar-right {
+    background: #222;
+    width: 40px;
+    height: 100%;
+    position: absolute;
+    right: 0;
+}
+
+.sidebar-left {
+    background: #222;
+    width: 40px;
+    height: 100%;
+    position: absolute;
+    left: 0;
+}
+
+.sidebar-right .control,
+.sidebar-left .control {
+    text-align: center;
+    border-bottom: 1px solid #000;
+    padding-top: 5px;
+}
+
+.sidebar-right .control a,
+.sidebar-left .control a {
+    color: #2FA875;
+    font-size: 30px;
+    line-height: 0;
+}
+
+
+/* Temp fix to stop BS collapse - remove all bellow later: */
+.navbar-collapse.collapse {
+display: block!important;
+}
+
+.navbar-nav>li, .navbar-nav {
+float: left !important;
+}
+
+.navbar-nav.navbar-right:last-child {
+margin-right: -15px !important;
+}
+
+.navbar-right {
+float: right!important;
+}
+

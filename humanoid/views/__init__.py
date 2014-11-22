@@ -36,6 +36,12 @@ class Connect(View):
         return render_template("connect.html", github=github)
 
 
+class Limbs(View):
+    def dispatch_request(self):
+        from flask import render_template
+        return render_template("limbs.html")
+
+
 class Settings(View):
     def dispatch_request(self):
         from flask import render_template

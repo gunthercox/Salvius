@@ -251,7 +251,8 @@ def get_tokens():
     cookie = str(dict(session))
     return cookie
 
-app.add_url_rule("/", view_func=views.App.as_view("app"))
+app.add_url_rule("/interface/", view_func=views.App.as_view("app"))
+app.add_url_rule("/limbs/", view_func=views.Limbs.as_view("limbs"))
 app.add_url_rule("/connect/", view_func=views.Connect.as_view("connect"))
 app.add_url_rule("/chat/", view_func=chat.Chat.as_view("chat"))
 app.add_url_rule("/sensors/", view_func=sensors.Sensors.as_view("sensors"))
