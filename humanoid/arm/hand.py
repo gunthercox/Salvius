@@ -10,10 +10,10 @@ class Finger(CompliantJoint):
         self.parent_id = hand_id
         self.id = uuid
 
-        self.data["href"] = "/api/robot/body/arms/" + str(self.parent_id) + "/hand/fingers/" + str(self.id)
+        self.data["href"] = "/robot/body/arms/" + str(self.parent_id) + "/hand/fingers/" + str(self.id)
 
     def get(self, arm_id, finger_id):
-        self.data["href"] = "/api/robot/body/arms/" + str(arm_id) + "/hand/fingers/" + str(finger_id)
+        self.data["href"] = "/robot/body/arms/" + str(arm_id) + "/hand/fingers/" + str(finger_id)
         return marshal(self.data, self.fields)
 
     def patch(self, arm_id, finger_id):
@@ -37,10 +37,10 @@ class Thumb(CompliantJoint):
         super(Thumb, self).__init__()
         self.parent_id = hand_id
 
-        self.data["href"] = "/api/arms/" + str(self.parent_id) + "/hand/thumb/"
+        self.data["href"] = "/arms/" + str(self.parent_id) + "/hand/thumb/"
 
     def get(self, arm_id):
-        self.data["href"] = "/api/arms/" + str(arm_id) + "/hand/thumb/"
+        self.data["href"] = "/arms/" + str(arm_id) + "/hand/thumb/"
         return marshal(self.data, self.fields)
 
     def patch(self, arm_id):
@@ -97,7 +97,7 @@ class FingerSerializer(CompliantJointSerializer):
     position = fields.Integer()
 
     def get_url(self, obj):
-        url = "/api/arms/" + str(obj.parent_id) + "/hand"
+        url = "/arms/" + str(obj.parent_id) + "/hand"
 
         # Only fingers should be created with an id
         if obj.id is not None:

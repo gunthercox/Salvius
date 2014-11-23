@@ -18,7 +18,7 @@ class AnkleLegsTests(TestCase):
         self.app = app.test_client()
 
     def test_get_leg(self):
-        url = "/api/legs/"
+        url = "/legs/"
         response = self.app.get(url, follow_redirects=True)
 
         self.assertFalse("null" in response.data.decode())
@@ -45,7 +45,7 @@ class AnkleLegTests(TestCase):
         self.app = app.test_client()
 
     def test_get_leg(self):
-        url = "/api/legs/0/"
+        url = "/legs/0/"
         response = self.app.get(url, follow_redirects=True)
 
         self.assertFalse("null" in response.data.decode())
@@ -56,7 +56,7 @@ class AnkleLegTests(TestCase):
         self.assertTrue("id" in response.data.decode())
 
     def test_cannot_get_leg_that_does_not_exits(self):
-        url = "/api/legs/4200/"
+        url = "/legs/4200/"
         response = self.app.get(url, follow_redirects=True)
 
         self.assertFalse("null" in response.data.decode())

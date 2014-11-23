@@ -18,14 +18,14 @@ class SettingsTest(TestCase):
         self.app = app.test_client()
 
     def test_get_settings(self):
-        response = self.app.get("/api/settings", follow_redirects=True)
+        response = self.app.get("/settings/", follow_redirects=True)
 
         self.assertTrue("{" in response.data.decode())
         self.assertTrue("}" in response.data.decode())
 
     def test_patch_settings(self):
         data = '{"test": true}'
-        url = "/api/settings/"
+        url = "/settings/"
         content_type = "application/json"
 
         response = self.app.patch(url, data=data, content_type=content_type)
@@ -37,7 +37,7 @@ class SettingsTest(TestCase):
 
     def test_delete_settings(self):
         data = '{"test": true}'
-        url = "/api/settings/"
+        url = "/settings/"
         content_type = "application/json"
 
         self.app.patch(url, data=data, content_type=content_type)

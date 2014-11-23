@@ -16,14 +16,14 @@ class Elbow(HingeJoint):
 
         self.parent_id = None
 
-        self.data["href"] = "/api/arms/" + str(self.parent_id) + "/elbow/"
+        self.data["href"] = "/".join(["", "arms", str(self.parent_id), self.endpoint, ""])
 
     def set_parent_id(self, uuid):
         self.parent_id = uuid
-        self.data["href"] = "/api/arms/" + str(uuid) + "/elbow/"
+        self.data["href"] = "/".join(["", "arms", str(uuid),  self.endpoint, ""])
 
     def get(self, arm_id):
-        self.data["href"] = "/api/arms/" + str(arm_id) + "/elbow/"
+        self.data["href"] = "/".join(["", "arms", str(arm_id), self.endpoint, ""])
         return marshal(self.data, self.fields)
 
     def patch(self, arm_id):

@@ -13,7 +13,7 @@ class TorsoApiTest(TestCase):
         """
         Test that torso data can be retrieved.
         """
-        url = "/api/torso/"
+        url = "/torso/"
         response = self.app.get(url, follow_redirects=True)
         self.assertTrue("href" in response.data.decode())
         self.assertTrue("pivot" in response.data.decode())
@@ -22,7 +22,7 @@ class TorsoApiTest(TestCase):
         """
         Test that data can be patched to the torso.
         """
-        url = "/api/torso/"
+        url = "/torso/"
         data = '{"rotation": 2}'
         content_type = "application/json"
 
@@ -35,7 +35,7 @@ class TorsoApiTest(TestCase):
         """
         Test that invalid data cannot be patched to the torso.
         """
-        url = "/api/torso/"
+        url = "/torso/"
         data = '{"rotation": 2, "invalid": "yes"}'
         content_type = "application/json"
 

@@ -9,7 +9,7 @@ class ApiShoulderTests(TestCase):
         self.app = app.test_client()
 
     def test_get_shoulder(self):
-        url = "/api/arms/0/shoulder/"
+        url = "/arms/0/shoulder/"
         response = self.app.get(url, follow_redirects=True)
 
         print(response.data.decode())
@@ -22,7 +22,7 @@ class ApiShoulderTests(TestCase):
         Test that data can be patched to a shoulder.
         """
         data = '{"rotation": -50}'
-        url = "/api/arms/0/shoulder/"
+        url = "/arms/0/shoulder/"
         content_type = "application/json"
 
         response = self.app.patch(url, data=data, content_type=content_type)

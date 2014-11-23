@@ -5,9 +5,9 @@ from salvius import app
 class ApiTests(TestCase):
 
     def setUp(self):
-        app.config['TESTING'] = True
+        app.config["TESTING"] = True
         self.app = app.test_client()
 
     def test_get_neck(self):
-        response = self.app.get("/api/neck/", follow_redirects=True)
+        response = self.app.get("/neck/", follow_redirects=True)
         self.assertTrue("joint_type" in response.data.decode())

@@ -9,14 +9,14 @@ class Wrist(ArticulatedJoint):
         super(Wrist, self).__init__()
         self.parent_id = None
 
-        self.data["href"] = "/api/arms/" + str(self.parent_id) + "/wrist/"
+        self.data["href"] = "/arms/" + str(self.parent_id) + "/wrist/"
 
     def set_parent_id(self, uuid):
         self.parent_id = uuid
-        self.data["href"] = "/api/arms/" + str(self.parent_id) + "/wrist/"
+        self.data["href"] = "/arms/" + str(self.parent_id) + "/wrist/"
 
     def get(self, arm_id):
-        self.data["href"] = "/api/arms/" + str(arm_id) + "/wrist/"
+        self.data["href"] = "/arms/" + str(arm_id) + "/wrist/"
 
         return marshal(self.data, self.fields)
 

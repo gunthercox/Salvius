@@ -9,14 +9,14 @@ class Ankle(ArticulatedJoint):
         super(Ankle, self).__init__()
         self.parent_id = None
 
-        self.data["href"] = "/api/legs/" + str(self.parent_id) + "/ankle/"
+        self.data["href"] = "/legs/" + str(self.parent_id) + "/ankle/"
 
     def set_parent_id(self, uuid):
         self.parent_id = uuid
-        self.data["href"] = "/api/legs/" + str(uuid) + "/ankle/"
+        self.data["href"] = "/legs/" + str(uuid) + "/ankle/"
 
     def get(self, leg_id):
-        self.data["href"] = "/api/legs/" + str(leg_id) + "/ankle/"
+        self.data["href"] = "/legs/" + str(leg_id) + "/ankle/"
 
         return marshal(self.data, self.fields)
 
