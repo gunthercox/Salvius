@@ -54,15 +54,15 @@ Use the following to run the robot's server.
 python robot.py runserver
 ```
 
-**Note:** Code for the Arduino borads can be found at: https://github.com/gunthercox/salvius.arduino
-
-## Features
+**Note:** Code for the Arduino boards can be found at: https://github.com/gunthercox/salvius.arduino
 
 ### Text to speech
+
 The robot uses a speech synthesis library to convert processed text into verbal sounds.
 Checkout the repo for this library here: https://github.com/jscrane/TTS
 
 ### Speech recognition
+
 This is still a bit of a work in progress, at best a few small words can be recognised.
 
 ### Handwriting
@@ -71,7 +71,8 @@ The robot can hold a pen and write when given a string of text.
 The robot's handwriting is based on a grid in which each letter is created as a
 result of horizontal and vertical lines.
 
-### Communication experiment
+### Social
+
 I've included a package which allows the robot to tweet randomly selected 
 messages to Twitter accounts. For now the robot cannot reply to users, however 
 I have plans to add this feature. To use this feature you will need to register 
@@ -79,16 +80,7 @@ your app on https://dev.twitter.com/apps to get the token and secret keys.
 You will then need to create a file ```settings.py``` in the ```twitter``` 
 directory with the following dictionary pointing to your Twitter keys and tokens.
 
-```python
-# Set DEBUG flag to true for testing
-DEBUG = True
-
-# Phant API
-PHANT = {
-    "PUBLIC_KEY": "",
-    "PRIVATE_KEY": ""
-}
-
+```
 # GitHub API
 GITHUB = {
     "CLIENT_ID": "",
@@ -101,6 +93,12 @@ TWITTER = {
     "CONSUMER_SECRET": "",
     "TOKEN": "",
     "TOKEN_SECRET": ""
+}
+
+# Phant API
+PHANT = {
+    "PUBLIC_KEY": "",
+    "PRIVATE_KEY": ""
 }
 ```
 

@@ -28,7 +28,6 @@ class Set(object):
     included in the repo, so when tests are run it throws import erros.
     """
     def __init__(self):
-        self.DEBUG = True
         self.GITHUB = {"CLIENT_ID": "x", "CLIENT_SECRET": "y"}
         self.TWITTER = {"CONSUMER_KEY": "x", "CONSUMER_SECRET": "y"}
         self.GOOGLE = {"CLIENT_ID": "x", "CLIENT_SECRET": "y"}
@@ -121,8 +120,8 @@ def connect_github():
     OAuth callback from GitHub
     """
     from flask import session, url_for, request, flash, redirect
+    from flask import current_app as app
     import requests
-    from jsondb.db import Database
 
     if "logout" in request.args:
         if session.has_key("github_user"):
@@ -146,7 +145,7 @@ def connect_github():
         token_json = response.json()
 
         # Save the value in the databse
-        db = Database("settings.db")
+        db = app.config["ROBOT"].db
         db.data(key="github_token", value=token_json["access_token"])
 
         # Save the value in the session
@@ -239,7 +238,6 @@ def connect_disqus():
 @disqus.tokengetter
 def get_disqus_token():
     return session.get("disqus_token")
-
 
 @app.route('/test/')
 def get_tokens():

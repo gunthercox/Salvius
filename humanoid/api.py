@@ -86,9 +86,9 @@ class Settings(Resource):
 
     def __init__(self):
         super(Settings, self).__init__()
-        from jsondb.db import Database
+        from flask import current_app as app
 
-        self.db = Database("settings.db")
+        self.db = app.config["ROBOT"].db
 
     def get(self):
         return self.db.data()
