@@ -67,12 +67,12 @@ class Fingers(Resource):
 class Chat(Resource):
 
     def post(self):
-        from chatterbot import ChatBot
+        from flask import current_app as app
 
         json_data = request.get_json(force=True)
         key = u'text'
 
-        chatbot = ChatBot()
+        chatbot = app.config['ROBOT'].chatbot
         data = {}
 
         if key in json_data:
