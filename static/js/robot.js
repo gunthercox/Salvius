@@ -66,14 +66,19 @@ Robot.prototype.updateSessionLog = function(data) {
     this.elements.session_log[0].scrollTop = this.elements.session_log[0].scrollHeight;
 }
 
-Robot.prototype.respond = function(text) {
+Robot.prototype.respond = function(text, $statusIndicator) {
     var robot = this;
+    var origional =  $statusIndicator;
+    var container = $statusIndicator.parent();
+    robot.loading(container);
+
     $.ajax({
         type: "POST",
         url: robot.urls.api_chat,
         data: JSON.stringify({text: text})
     }).done(function(data) {
         robot.updateSessionLog(data);
+        container.html(origional);
     });
 }
 
@@ -254,7 +259,8 @@ Robot.prototype.addEvents = function() {
     robot.elements.chat_input.keyup(function(e) {
         if (e.keyCode == 13) {
             var text = $(this).val();
-            robot.respond(text);
+            var indicator = $(this).parent().find(".fa");
+            robot.respond(text, indicator);
             $(this).val("").focus();
         }
     });
