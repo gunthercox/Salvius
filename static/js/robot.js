@@ -148,12 +148,12 @@ Robot.prototype.renderLimb = function(data, key, classes) {
 }
 
 Robot.prototype.activate = function() {
-    this.urls["api_settings"] = "/api/settings/";
-    this.urls["api_chat"] = "/api/chat/";
-    this.urls["api_legs"] = "/api/legs/";
-    this.urls["api_arms"] = "/api/arms/";
-    this.urls["api_listening"] = "/api/settings/listening";
-    this.urls["terminate"] = "/api/terminate/";
+    this.urls["api_settings"] = "/settings/";
+    this.urls["api_chat"] = "/chat/";
+    this.urls["api_legs"] = "/legs/";
+    this.urls["api_arms"] = "/arms/";
+    this.urls["api_listening"] = "/settings/listening";
+    this.urls["terminate"] = "/terminate/";
     this.urls["camera_image_url"] = "";
     this.urls["ardunio_ip"] = "http://0.0.0.1/";
 
