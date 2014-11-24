@@ -1,6 +1,5 @@
 from flask.ext.restful import Resource
 from flask.ext.restful import marshal, fields, request
-
 from humanoid.joints import CompliantJoint
 
 
@@ -43,7 +42,6 @@ class Thumb(CompliantJoint):
         from flask import url_for
 
         self.data["href"] = url_for("thumb", arm_id=arm_id)
-        self.data["href"] = "/arms/" + str(self.parent_id) + "/hand/thumb/"
 
         return marshal(self.data, self.fields)
 
@@ -62,16 +60,23 @@ class Hand(Resource):
 
     def __init__(self, arm_id):
         super(Hand, self).__init__()
-        from humanoid.arm.hand import Thumb
+        from humanoid.arm.hand import Finger, Thumb
 
         self.parent_id = arm_id
 
         self._fingers = []
         self._thumb = Thumb(arm_id)
 
+        for finger in range(4):
+            try:
+                uuid = max(finger.id for finger in self.fingers) + 1
+            except ValueError:
+                uuid = 0
+            self._fingers.append(Finger(uuid, arm_id))
+
         self.fields = {
-            #"fingers": fields.Nested(self._fingers.fields),
-            "thumb": fields.Nested(self._thumb.fields)
+            "fingers": fields.List(fields.Raw()),
+            "thumb": fields.Nested(self.thumb.fields)
         }
 
         self.data = {}
@@ -80,21 +85,17 @@ class Hand(Resource):
         from flask import current_app as app
 
         robot = app.config["ROBOT"]
-        self.data["thumb"] = dict(robot._arms[arm_id]._hand._thumb.get(arm_id))
+
+        finger_output = []
+        id_count = 0
+        for finger in robot.arms[arm_id].hand.fingers:
+            finger_output.append(finger.get(arm_id, id_count))
+            id_count += 1
+
+        self.data["fingers"] = finger_output
+        self.data["thumb"] = dict(self.thumb.get(arm_id))
 
         return marshal(self.data, self.fields)
-
-    def add_finger(self):
-        """
-        Adds a finger to the hand.
-        Sets a unique id to reference the listed index of the object.
-        """
-        uuid = 0
-        if self._fingers:
-            uuid = max(finger.id for finger in self._fingers) + 1
-
-        finger = Finger(uuid, self.parent_id)
-        self._fingers.append(finger)
 
     @property
     def fingers(self):

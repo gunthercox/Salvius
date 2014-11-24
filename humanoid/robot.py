@@ -31,49 +31,18 @@ class Robot(object):
             arm_id = leg["leg"]["id"]
             self._arms.append(Arm(arm_id))
 
-        '''
-        for finger in range(4):
-            left_hand.add_finger()
-
-        for finger in range(4):
-            right_hand.add_finger()
-        '''
-
-    def new_arm(self):
-        """
-        Adds an arm object to the body.
-        Sets a unique id to reference the listed index of the arm object.
-        """
-        uuid = 0
-        if self._arms:
-            uuid = max(arm.id for arm in self._arms) + 1
-
-        arm = Arm(uuid)
-        self._arms.append(arm)
-        return arm
-
     @property
     def neck(self):
-        return self._neck.get()
+        return self._neck
 
     @property
     def arms(self):
-        output = []
-        id_count = 0
-        for arm in self._arms:
-            output.append(arm.get(id_count))
-            id_count += 1
-        return output
+        return self._arms
 
     @property
     def torso(self):
-        return self._torso.get()
+        return self._torso
 
     @property
     def legs(self):
-        output = []
-        id_count = 0
-        for leg in self._legs:
-            output.append(leg.get(id_count))
-            id_count += 1
-        return output
+        return self._legs

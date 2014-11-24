@@ -20,9 +20,23 @@ class Robot(Resource):
         from flask import current_app as app
         robot = app.config["ROBOT"]
 
-        self.data["neck"] = robot.neck
-        self.data["torso"] = robot.torso
-        self.data["arms"] = robot.arms
-        self.data["legs"] = robot.legs
+        self.data["neck"] = robot.neck.get()
+        self.data["torso"] = robot.torso.get()
+
+        arm_output = []
+        id_count = 0
+        for arm in robot.arms:
+            arm_output.append(arm.get(id_count))
+            id_count += 1
+
+        self.data["arms"] = arm_output
+
+        leg_output = []
+        id_count = 0
+        for leg in robot._legs:
+            leg_output.append(leg.get(id_count))
+            id_count += 1
+
+        self.data["legs"] = leg_output
 
         return marshal(self.data, self.fields)

@@ -22,10 +22,10 @@ class Arm(Resource):
         self.fields = {
             "id": fields.Integer,
             "href": fields.String,
-            "shoulder": fields.Nested(self._shoulder.fields),
-            "elbow": fields.Nested(self._elbow.fields),
-            "wrist": fields.Nested(self._wrist.fields),
-            "hand": fields.Nested(self._hand.fields)
+            "shoulder": fields.Nested(self.shoulder.fields),
+            "elbow": fields.Nested(self.elbow.fields),
+            "wrist": fields.Nested(self.wrist.fields),
+            "hand": fields.Nested(self.hand.fields)
         }
 
     def get(self, arm_id):
@@ -36,27 +36,15 @@ class Arm(Resource):
         self.data["id"] = arm_id
         self.data["href"] = "/arms/" + str(arm_id) + "/"
         self.data["shoulder"] = dict(robot._arms[arm_id]._shoulder.get(arm_id))
-        self.data["elbow"] = dict(robot._arms[arm_id]._elbow.get(arm_id))
-        self.data["wrist"] = dict(robot._arms[arm_id]._wrist.get(arm_id))
-        #self.data["hand"] = dict(robot._arms[arm_id]._hand.get(arm_id))
+        self.data["elbow"] = dict(robot.arms[arm_id].elbow.get(arm_id))
+        self.data["wrist"] = dict(robot.arms[arm_id].wrist.get(arm_id))
+        self.data["hand"] = dict(robot.arms[arm_id].hand.get(arm_id))
 
         return marshal(self.data, self.fields)
 
-    def set_shoulder(self, shoulder):
-        self._shoulder = shoulder
-
-    def set_elbow(self, elbow):
-        self._elbow = elbow
-
-    def set_wrist(self, wrist):
-        self._wrist = wrist
-
-    def set_hand(self, hand):
-        self._hand = hand
-
     @property
     def shoulder(self):
-        return self._shoulder.get(self.id)
+        return self._shoulder
 
     @property
     def elbow(self):
