@@ -1,10 +1,6 @@
 from flask import jsonify, request
 from flask.ext.restful import Resource
 
-from humanoid import RobotSerializer, ArmsSerializer
-from humanoid.arm import ArmSerializer
-from humanoid.arm.hand import HandSerializer, FingersSerializer
-
 
 class PhantExample(Resource):
     """
@@ -17,51 +13,6 @@ class PhantExample(Resource):
 
         p = Phant(PHANT['PUBLIC_KEY'], 'status', private_key=PHANT['PRIVATE_KEY'])
         p.log("online")
-
-
-class Base(Resource):
-    def get(self):
-        from flask import current_app as app
-
-        robot = app.config['ROBOT']
-        serialized = RobotSerializer(robot)
-        return jsonify(serialized.data)
-
-
-class Arms(Resource):
-    def get(self):
-        from flask import current_app as app
-
-        robot = app.config['ROBOT']
-        serialized = ArmsSerializer(robot)
-        return jsonify(serialized.data)
-
-
-class Arm(Resource):
-    def get(self, arm_id):
-        from flask import current_app as app
-
-        robot = app.config['ROBOT']
-        serialized = ArmSerializer(robot.arms[arm_id])
-        return jsonify(serialized.data)
-
-
-class Hand(Resource):
-    def get(self, arm_id):
-        from flask import current_app as app
-
-        robot = app.config['ROBOT']
-        serialized = HandSerializer(robot.arms[arm_id].hand)
-        return jsonify(serialized.data)
-
-
-class Fingers(Resource):
-    def get(self, arm_id):
-        from flask import current_app as app
-
-        robot = app.config['ROBOT']
-        serialized = FingersSerializer(robot.arms[arm_id].hand)
-        return jsonify(serialized.data)
 
 
 class Chat(Resource):

@@ -9,19 +9,14 @@ class Knee(HingeJoint):
     sets a limit to its own movement.
     """
 
-    def __init__(self):
+    def __init__(self, uuid):
         super(Knee, self).__init__()
 
         # Number of degrees that the joint is limited to.
         self.data["limits"] = [0, 50]
-
-        self.parent_id = None
+        self.parent_id = uuid
 
         self.data["href"] = "/legs/" + str(self.parent_id) + "/knee/"
-
-    def set_parent_id(self, uuid):
-        self.parent_id = uuid
-        self.data["href"] = "/legs/" + str(uuid) + "/knee/"
 
     def get(self, leg_id):
         self.data["href"] = "/legs/" + str(leg_id) + "/knee/"

@@ -5,4 +5,4 @@ class Torso(PivotJoint):
 
     def __init__(self):
         super(Torso, self).__init__()
-        self.data["href"] = "/robot/body/torso/"
+        self.data["href"] = "/torso/"

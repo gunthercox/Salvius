@@ -6,16 +6,20 @@ from humanoid import views
 from humanoid import social
 from humanoid.neck import Neck
 from humanoid.torso import Torso
+from humanoid.arm import Arm
 from humanoid.arm.shoulder import Shoulder
 from humanoid.arm.elbow import Elbow
 from humanoid.arm.wrist import Wrist
+from humanoid.arm.hand import Hand
 from humanoid.arm.hand import Finger
 from humanoid.arm.hand import Thumb
-from humanoid.leg import Legs, Leg
+from humanoid.leg import Leg
 from humanoid.leg.hip import Hip
 from humanoid.leg.knee import Knee
 from humanoid.leg.ankle import Ankle
-from humanoid import Robot
+
+from humanoid import Robot as ApiRobot
+from humanoid.robot import Robot
 
 try:
     import settings
@@ -48,21 +52,18 @@ app.add_url_rule("/connect/google/", view_func=social.GoogleConnectView.as_view(
 app.add_url_rule("/connect/disqus/", view_func=social.DisqusConnectView.as_view("connect_disqus"))
 app.add_url_rule("/connect/github/", view_func=social.GitHubConnectView.as_view("connect_github"))
 
-api.add_resource(robot_api.Base, "/")
+api.add_resource(ApiRobot, "/", endpoint="api")
 api.add_resource(Neck, "/neck/")
 api.add_resource(Torso, "/torso/")
 
-api.add_resource(robot_api.Arms, "/arms/")
-api.add_resource(robot_api.Arm, "/arms/<int:arm_id>/")
+api.add_resource(Arm, "/arms/<int:arm_id>/")
 api.add_resource(Shoulder, "/arms/<int:arm_id>/shoulder/")
-api.add_resource(Elbow, "/arms/<int:arm_id>/elbow/")
+api.add_resource(Elbow, "/arms/<int:arm_id>/elbow/", endpoint="elbow")
 api.add_resource(Wrist, "/arms/<int:arm_id>/wrist/")
-api.add_resource(robot_api.Hand, "/arms/<int:arm_id>/hand/")
-api.add_resource(robot_api.Fingers, "/arms/<int:arm_id>/hand/fingers/")
-api.add_resource(Finger, "/arms/<int:arm_id>/hand/fingers/<int:finger_id>/")
-api.add_resource(Thumb, "/arms/<int:arm_id>/hand/thumb/")
+api.add_resource(Hand, "/arms/<int:arm_id>/hand/")
+api.add_resource(Finger, "/arms/<int:arm_id>/hand/fingers/<int:finger_id>/", endpoint="finger")
+api.add_resource(Thumb, "/arms/<int:arm_id>/hand/thumb/", endpoint="thumb")
 
-api.add_resource(Legs, "/legs/")
 api.add_resource(Leg, "/legs/<int:leg_id>/")
 api.add_resource(Hip, "/legs/<int:leg_id>/hip/")
 api.add_resource(Knee, "/legs/<int:leg_id>/knee/")
@@ -75,17 +76,14 @@ api.add_resource(robot_api.Writing, "/writing/")
 api.add_resource(robot_api.Chat, "/chat/")
 
 if __name__ == "__main__":
-    app.config.update(
-        DEBUG=True,
-        SECRET_KEY="development",
-        JSON_SORT_KEYS=False
-    )
-    app.config["ROBOT"] = Robot()
     app.config["GITHUB"] = settings.GITHUB
     app.config["TWITTER"] = settings.TWITTER
     app.config["GOOGLE"] = settings.GOOGLE
     app.config["DISQUS"] = settings.DISQUS
     app.config["PHANT"] = settings.PHANT
+    app.config["ROBOT"] = Robot()
+    app.config["DEBUG"] = True
+    app.config["SECRET_KEY"] = "development"
 
     social.oauth.init_app(app)
 

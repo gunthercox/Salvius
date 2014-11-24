@@ -1,18 +1,13 @@
 from flask.ext.restful import marshal, request
-
-from humanoid.joints import ArticulatedJoint, ArticulatedJointSerializer
+from humanoid.joints import ArticulatedJoint
 
 
 class Wrist(ArticulatedJoint):
 
-    def __init__(self):
+    def __init__(self, uuid):
         super(Wrist, self).__init__()
-        self.parent_id = None
-
-        self.data["href"] = "/arms/" + str(self.parent_id) + "/wrist/"
-
-    def set_parent_id(self, uuid):
         self.parent_id = uuid
+
         self.data["href"] = "/arms/" + str(self.parent_id) + "/wrist/"
 
     def get(self, arm_id):
@@ -29,7 +24,3 @@ class Wrist(ArticulatedJoint):
             self.data[key] = data[key]
 
         return marshal(self.data, self.fields), 201
-
-
-class WristSerializer(ArticulatedJointSerializer):
-    pass

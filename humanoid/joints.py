@@ -1,9 +1,6 @@
 from flask.ext.restful import Resource
 from flask.ext.restful import marshal, fields, request
 
-from marshmallow import Serializer
-from marshmallow import fields as lame
-
 
 class Joint(Resource):
     """
@@ -232,32 +229,3 @@ class CompliantJoint(Joint):
     @property
     def rotation(self):
         return self.data["rotation"]
-
-
-class JointSerializer(Serializer):
-    joint_type = lame.String()
-    href = lame.String()
-
-
-class HingeJointSerializer(JointSerializer):
-    angle = lame.Integer()
-    limits = lame.List(lame.Integer, attribute="limits")
-
-
-class PivotJointSerializer(JointSerializer):
-    rotation = lame.Integer()
-
-
-class OrthogonalJointSerializer(JointSerializer):
-    rotation = lame.Integer()
-    angle = lame.Integer()
-
-
-class ArticulatedJointSerializer(JointSerializer):
-    rotation = lame.Integer()
-    elevation = lame.Integer()
-    angle = lame.Integer()
-
-
-class CompliantJointSerializer(JointSerializer):
-    tension = lame.Integer()

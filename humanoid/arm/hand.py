@@ -1,19 +1,21 @@
-from flask.ext.restful import marshal, request
-from marshmallow import Serializer, fields
-from humanoid.joints import CompliantJoint, CompliantJointSerializer
+from flask.ext.restful import Resource
+from flask.ext.restful import marshal, fields, request
+
+from humanoid.joints import CompliantJoint
 
 
 class Finger(CompliantJoint):
 
-    def __init__(self, uuid=None, hand_id=None):
+    def __init__(self, uuid, hand_id):
         super(Finger, self).__init__()
         self.parent_id = hand_id
         self.id = uuid
 
-        self.data["href"] = "/robot/body/arms/" + str(self.parent_id) + "/hand/fingers/" + str(self.id)
+        self.data["href"] = "/arms/" + str(self.parent_id) + "/hand/fingers/" + str(self.id)
 
     def get(self, arm_id, finger_id):
-        self.data["href"] = "/robot/body/arms/" + str(arm_id) + "/hand/fingers/" + str(finger_id)
+        from flask import url_for
+        self.data["href"] = url_for("finger", arm_id=arm_id, finger_id=finger_id)
         return marshal(self.data, self.fields)
 
     def patch(self, arm_id, finger_id):
@@ -29,18 +31,20 @@ class Finger(CompliantJoint):
 
 class Thumb(CompliantJoint):
     """
-    Thumbs work very similar to fingers, however they have aditional attributes
+    Thumbs work very similar to fingers, however they have other attributes
     which allow them to be opposable.
     """
 
-    def __init__(self, hand_id=None):
+    def __init__(self, arm_id):
         super(Thumb, self).__init__()
-        self.parent_id = hand_id
-
-        self.data["href"] = "/arms/" + str(self.parent_id) + "/hand/thumb/"
+        self.parent_id = arm_id
 
     def get(self, arm_id):
-        self.data["href"] = "/arms/" + str(arm_id) + "/hand/thumb/"
+        from flask import url_for
+
+        self.data["href"] = url_for("thumb", arm_id=arm_id)
+        self.data["href"] = "/arms/" + str(self.parent_id) + "/hand/thumb/"
+
         return marshal(self.data, self.fields)
 
     def patch(self, arm_id):
@@ -54,13 +58,31 @@ class Thumb(CompliantJoint):
         return marshal(self.data, self.fields), 201
 
 
-class Hand(object):
+class Hand(Resource):
 
-    def __init__(self):
+    def __init__(self, arm_id):
+        super(Hand, self).__init__()
+        from humanoid.arm.hand import Thumb
+
+        self.parent_id = arm_id
+
         self._fingers = []
-        self._thumb = None
+        self._thumb = Thumb(arm_id)
 
-        self.parent_id = None
+        self.fields = {
+            #"fingers": fields.Nested(self._fingers.fields),
+            "thumb": fields.Nested(self._thumb.fields)
+        }
+
+        self.data = {}
+
+    def get(self, arm_id):
+        from flask import current_app as app
+
+        robot = app.config["ROBOT"]
+        self.data["thumb"] = dict(robot._arms[arm_id]._hand._thumb.get(arm_id))
+
+        return marshal(self.data, self.fields)
 
     def add_finger(self):
         """
@@ -74,15 +96,6 @@ class Hand(object):
         finger = Finger(uuid, self.parent_id)
         self._fingers.append(finger)
 
-    def set_parent_id(self, uuid):
-        self.parent_id = uuid
-
-    def set_thumb(self, thumb):
-        """
-        Takes a finger object as a parameter.
-        """
-        self._thumb = thumb
-
     @property
     def fingers(self):
         return self._fingers
@@ -90,28 +103,3 @@ class Hand(object):
     @property
     def thumb(self):
         return self._thumb
-
-
-class FingerSerializer(CompliantJointSerializer):
-    id = fields.UUID()
-    position = fields.Integer()
-
-    def get_url(self, obj):
-        url = "/arms/" + str(obj.parent_id) + "/hand"
-
-        # Only fingers should be created with an id
-        if obj.id is not None:
-            url += "/fingers/" + str(obj.id)
-        else:
-            url += "/thumb"
-
-        return url
-
-
-class FingersSerializer(Serializer):
-    fingers = fields.Nested(FingerSerializer, many=True)
-
-
-class HandSerializer(Serializer):
-    fingers = fields.Nested(FingerSerializer, many=True)
-    thumb = fields.Nested(FingerSerializer)

@@ -1,15 +1,46 @@
-from marshmallow import Serializer, fields
+from flask.ext.restful import Resource
+from flask.ext.restful import marshal, fields, request
+
+from humanoid.arm.shoulder import Shoulder
+from humanoid.arm.elbow import Elbow
+from humanoid.arm.wrist import Wrist
+from humanoid.arm.hand import Hand
 
 
-class Arm(object):
+class Arm(Resource):
 
     def __init__(self, uuid):
-        self._shoulder = None
-        self._elbow = None
-        self._wrist = None
-        self._hand = None
+        self._shoulder = Shoulder(uuid)
+        self._elbow = Elbow(uuid)
+        self._wrist = Wrist(uuid)
+        self._hand = Hand(uuid)
 
         self.id = uuid
+
+        self.data = {}
+
+        self.fields = {
+            "id": fields.Integer,
+            "href": fields.String,
+            "shoulder": fields.Nested(self._shoulder.fields),
+            "elbow": fields.Nested(self._elbow.fields),
+            "wrist": fields.Nested(self._wrist.fields),
+            "hand": fields.Nested(self._hand.fields)
+        }
+
+    def get(self, arm_id):
+        from flask import current_app as app
+
+        robot = app.config["ROBOT"]
+
+        self.data["id"] = arm_id
+        self.data["href"] = "/arms/" + str(arm_id) + "/"
+        self.data["shoulder"] = dict(robot._arms[arm_id]._shoulder.get(arm_id))
+        self.data["elbow"] = dict(robot._arms[arm_id]._elbow.get(arm_id))
+        self.data["wrist"] = dict(robot._arms[arm_id]._wrist.get(arm_id))
+        #self.data["hand"] = dict(robot._arms[arm_id]._hand.get(arm_id))
+
+        return marshal(self.data, self.fields)
 
     def set_shoulder(self, shoulder):
         self._shoulder = shoulder
@@ -25,7 +56,7 @@ class Arm(object):
 
     @property
     def shoulder(self):
-        return self._shoulder
+        return self._shoulder.get(self.id)
 
     @property
     def elbow(self):
@@ -38,14 +69,3 @@ class Arm(object):
     @property
     def hand(self):
         return self._hand
-
-
-class ArmSerializer(Serializer):
-    id = fields.UUID()
-    shoulder = fields.Nested("ShoulderSerializer")
-    elbow = fields.Nested("ElbowSerializer")
-    wrist = fields.Nested("WristSerializer")
-    hand = fields.Nested("HandSerializer")
-
-    def get_url(self, obj):
-        return "/arms/" + str(obj.id)

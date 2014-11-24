@@ -5,15 +5,11 @@ from humanoid.joints import OrthogonalJoint
 
 class Hip(OrthogonalJoint):
 
-    def __init__(self):
+    def __init__(self, uuid):
         super(Hip, self).__init__()
-        self.parent_id = None
+        self.parent_id = uuid
 
         self.data["href"] = "/legs/" + str(self.parent_id) + "/hip/"
-
-    def set_parent_id(self, uuid):
-        self.parent_id = uuid
-        self.data["href"] = "/legs/" + str(uuid) + "/hip/"
 
     def get(self, leg_id):
         self.data["href"] = "/legs/" + str(leg_id) + "/hip/"

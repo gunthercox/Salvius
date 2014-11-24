@@ -1,5 +1,5 @@
 from flask.ext.restful import marshal, request
-from humanoid.joints import HingeJoint, HingeJointSerializer
+from humanoid.joints import HingeJoint
 
 
 class Elbow(HingeJoint):
@@ -8,22 +8,19 @@ class Elbow(HingeJoint):
     sets a limit to its range of movement.
     """
 
-    def __init__(self):
+    def __init__(self, uuid):
         super(Elbow, self).__init__()
 
         # Limits = [lower, upper]
         self.data["limits"] = [0, 50]
-
-        self.parent_id = None
+        self.parent_id = uuid
 
         self.data["href"] = "/".join(["", "arms", str(self.parent_id), self.endpoint, ""])
 
-    def set_parent_id(self, uuid):
-        self.parent_id = uuid
-        self.data["href"] = "/".join(["", "arms", str(uuid),  self.endpoint, ""])
-
     def get(self, arm_id):
-        self.data["href"] = "/".join(["", "arms", str(arm_id), self.endpoint, ""])
+        from flask import url_for
+        self.data["href"] = url_for("elbow", arm_id=arm_id)
+
         return marshal(self.data, self.fields)
 
     def patch(self, arm_id):
@@ -35,7 +32,3 @@ class Elbow(HingeJoint):
             self.data[key] = data[key]
 
         return marshal(self.data, self.fields), 201
-
-
-class ElbowSerializer(HingeJointSerializer):
-    pass

@@ -1,19 +1,14 @@
 from flask.ext.restful import marshal, request
-
 from humanoid.joints import ArticulatedJoint
 
 
 class Ankle(ArticulatedJoint):
 
-    def __init__(self):
+    def __init__(self, uuid):
         super(Ankle, self).__init__()
-        self.parent_id = None
+        self.parent_id = uuid
 
         self.data["href"] = "/legs/" + str(self.parent_id) + "/ankle/"
-
-    def set_parent_id(self, uuid):
-        self.parent_id = uuid
-        self.data["href"] = "/legs/" + str(uuid) + "/ankle/"
 
     def get(self, leg_id):
         self.data["href"] = "/legs/" + str(leg_id) + "/ankle/"
