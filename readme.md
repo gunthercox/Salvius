@@ -24,9 +24,9 @@ Installing this software on your robot should be easy. Once you have downloaded
 the latest copy into a directory on your Rapsberry Pi, you can download and 
 configure the robot's api and interface by running the following three lines of code.
 
-```bash
+```
 apt-get install pip
-pip install -r requirements.md
+pip install -r requirements.txt
 ```
 
 To enable I2C communication on the Rapsberry Pi, edit
@@ -50,7 +50,7 @@ To test the configuration, run the command ```i2cdetect -y 0``` to display anyth
 ```
 
 Use the following to run the robot's server.
-```bash
+```
 python robot.py runserver
 ```
 
@@ -73,36 +73,12 @@ result of horizontal and vertical lines.
 
 ### Social
 
-I've included a package which allows the robot to tweet randomly selected 
-messages to Twitter accounts. For now the robot cannot reply to users, however 
-I have plans to add this feature. To use this feature you will need to register 
-your app on https://dev.twitter.com/apps to get the token and secret keys. 
-You will then need to create a file ```settings.py``` in the ```twitter``` 
-directory with the following dictionary pointing to your Twitter keys and tokens.
-
-```
-# GitHub API
-GITHUB = {
-    "CLIENT_ID": "",
-    "CLIENT_SECRET": ""
-}
-
-# Twitter API
-TWITTER = {
-    "CONSUMER_KEY": "",
-    "CONSUMER_SECRET": "",
-    "TOKEN": "",
-    "TOKEN_SECRET": ""
-}
-
-# Phant API
-PHANT = {
-    "PUBLIC_KEY": "",
-    "PRIVATE_KEY": ""
-}
-```
+I've included a package which allows the robot to reply to messages sent to it
+through social media sites.
+See https://github.com/gunthercox/ChatterBot for more information.
 
 ## Modular robot library
+
 The robot library included in this project can be used to easially build and
 customize robots. The library is **ideal for humanoid** type robots, however it
 could also work well with quadrupeds and other types of robots.
@@ -122,7 +98,7 @@ to be assembled.
 Environmental effectors such as arms and legs can be added to a the robot's body
 object.
 
-```python
+```
 arm = Arm()
 body.add_arm(arm)
 ```
@@ -130,7 +106,7 @@ body.add_arm(arm)
 Various robots can be constructed following a basic humanod disign. A modified
 robot could, for instance, have only three fingers.
 
-```python
+```
 fingers = [Finger(), Finger(), Finger(), Finger()]
 for finger in fingers:
     hand.add_finger(finger)

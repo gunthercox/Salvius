@@ -11,7 +11,7 @@ class Connect(View):
     def dispatch_request(self):
         from flask import render_template, url_for
         from flask import current_app as app
-        from link._github import GitHub
+        from chaterbot.apis.github import GitHub
 
         #self.db = app.config['ROBOT'].db
 
@@ -19,6 +19,12 @@ class Connect(View):
         github.authorize_url = github.make_authorization_url(app.config['GITHUB'])
 
         return render_template("connect.html", github=github)
+
+
+class Hands(View):
+    def dispatch_request(self):
+        from flask import render_template
+        return render_template("hands.html")
 
 
 class Limbs(View):
