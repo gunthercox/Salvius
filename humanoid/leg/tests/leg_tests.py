@@ -21,6 +21,7 @@ class AnkleLegsTests(TestCase):
         url = "/legs/"
         response = self.app.get(url, follow_redirects=True)
 
+        self.assertEqual("", response.data.decode())
         self.assertFalse("null" in response.data.decode())
         self.assertTrue("hip" in response.data.decode())
         self.assertTrue("knee" in response.data.decode())

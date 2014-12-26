@@ -1,0 +1,154 @@
+{% extends "layout/layout.html" %}
+
+{% block title %}Hands{% endblock %}
+
+{% block content %}
+<style>
+.circle {
+    display: block;
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+    background: #2FA875;
+    position: absolute;
+    margin-top: -50px;
+    margin-left: -50px;
+    border: 10px solid #222;
+}
+</style>
+
+<div class="circle finger"></div>
+<div class="circle finger"></div>
+<div class="circle finger"></div>
+<div class="circle finger"></div>
+
+<script type="text/javascript">
+
+var canvas;
+var ctx;
+var w = 0;
+var h = 0;
+
+var timer;
+var updateStarted = false;
+var touches = [];
+
+
+function update() {
+	if (updateStarted) return;
+	updateStarted = true;
+
+	var nw = window.innerWidth;
+	var nh = window.innerHeight;
+
+	if ((w != nw) || (h != nh)) {
+		w = nw;
+		h = nh;
+		canvas.style.width = w+'px';
+		canvas.style.height = h+'px';
+		canvas.width = w;
+		canvas.height = h;
+	}
+
+	ctx.clearRect(0, 0, w, h);
+
+	var i, len = touches.length;
+	for (i=0; i<len; i++) {
+		var touch = touches[i];
+    var px = touch.pageX;
+    var py = touch.pageY;
+
+		ctx.beginPath();
+		ctx.arc(px, py, 60, 0, 2*Math.PI, true);
+
+		ctx.fillStyle = "#2FA875";
+		ctx.fill();
+
+		ctx.lineWidth = 5.0;
+		ctx.strokeStyle = "#222222";
+		ctx.stroke();
+    //console.log('drawn circle at ' + px +',' + py);
+	}
+
+	updateStarted = false;
+}
+
+function ol() {
+	canvas = document.getElementById('canvas');
+	ctx = canvas.getContext('2d');
+	timer = setInterval(update, 15);
+
+canvas.addEventListener('touchend', function() {
+	ctx.clearRect(0, 0, w, h);
+});
+
+canvas.addEventListener('touchmove', function(event) {
+  event.preventDefault();
+  touches = event.touches;
+});
+
+canvas.addEventListener('touchstart', function(event) {
+  console.log('start');
+});
+};
+
+</script>
+</head>
+<body onload="ol()">
+	
+<canvas id="canvas" width="300" height="300" style="top:0px; left:0px; width: 300px; height: 300px;"></canvas>
+<object id="tuio" type="application/x-tuio">Plugin FAILED to load</object>
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
+
+{% block js %}
+{{ super() }}
+<script src="/js/magictouch.js"></script>
+<script>
+var mouse = {
+    "x": 0,
+    "y": 0,
+    "down": false,
+    "over": null
+};
+
+function move($element) {
+    $element.css("left", mouse.x+"px");
+    $element.css("top", mouse.y+"px");
+}
+
+document.addEventListener("mousemove", function(e) { 
+    mouse.x = e.clientX || e.pageX; 
+    mouse.y = e.clientY || e.pageY;
+
+    if (mouse.down) {
+        console.log(mouse);
+        if (mouse.over) {
+            move(mouse.over);
+        }
+    }
+
+}, false);
+
+$(".finger").on("drag", function() {
+    mouse.down = true;
+    mouse.over = $(this);
+});
+
+$(".finger").on("dragend", function() {
+    mouse.down = false;
+    mouse.over = $(this);
+});
+</script>
+{% endblock %}

@@ -38,6 +38,7 @@ def get_tokens():
     return cookie
 
 app.add_url_rule("/interface/", view_func=views.App.as_view("app"))
+app.add_url_rule("/hands/", view_func=views.Hands.as_view("hands"))
 app.add_url_rule("/limbs/", view_func=views.Limbs.as_view("limbs"))
 app.add_url_rule("/connect/", view_func=views.Connect.as_view("connect"))
 app.add_url_rule("/chat/", view_func=views.Chat.as_view("communication"))

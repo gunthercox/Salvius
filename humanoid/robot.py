@@ -6,10 +6,7 @@ from humanoid.torso import Torso
 from humanoid.arm import Arm
 from humanoid.leg import Leg
 
-from humanoid.arm.shoulder import Shoulder
-from humanoid.arm.elbow import Elbow
-from humanoid.arm.wrist import Wrist
-from humanoid.arm.hand import Hand
+from humanoid.arm.hand import Finger
 
 
 class Robot(object):
@@ -23,13 +20,19 @@ class Robot(object):
         self._arms = []
         self._legs = []
 
+        # Add legs
         for leg in self.db.data(key="legs"):
             leg_id = leg["leg"]["id"]
             self._legs.append(Leg(leg_id))
 
-        for leg in self.db.data(key="legs"):
-            arm_id = leg["leg"]["id"]
+        # Add arms
+        for arm in self.db.data(key="arms"):
+            arm_id = arm["arm"]["id"]
             self._arms.append(Arm(arm_id))
+
+        # Add fingers
+        for arm in self.arms:
+            arm.hand._fingers = [Finger(arm.id, 0), Finger(arm.id, 1), Finger(arm.id, 2), Finger(arm.id, 3)]
 
     @property
     def neck(self):

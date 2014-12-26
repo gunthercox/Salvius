@@ -58,21 +58,14 @@ class Thumb(CompliantJoint):
 
 class Hand(Resource):
 
-    def __init__(self, arm_id):
+    def __init__(self, arm_id, fingers=[]):
         super(Hand, self).__init__()
         from humanoid.arm.hand import Finger, Thumb
 
         self.parent_id = arm_id
 
-        self._fingers = []
+        self._fingers = fingers
         self._thumb = Thumb(arm_id)
-
-        for finger in range(4):
-            try:
-                uuid = max(finger.id for finger in self.fingers) + 1
-            except ValueError:
-                uuid = 0
-            self._fingers.append(Finger(uuid, arm_id))
 
         self.fields = {
             "fingers": fields.List(fields.Raw()),
