@@ -74,13 +74,18 @@ class Speech(Resource):
         return super(Speech, self).__init__()
 
     def post(self):
+        from robot.arduino import Arduino
+
         json_data = request.get_json(force=True)
         speech_text = u'speech_text'
+
+        print ">>>>>>>>>>>>.", json_data
 
         if speech_text in json_data:
             data = json_data[speech_text]
 
-            print(data)
+            text_to_speech_controller = Arduino("text_to_speech")
+            text_to_speech_controller.write(data + "\n")
 
             return json_data, 201
 

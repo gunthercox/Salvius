@@ -186,12 +186,30 @@ perform as expected. These tests can also be run manually by running the command
 
 ## Notes
 
-**SSH into Rapsberry Pi:** ```ssh pi@192.168.1.4``` (Your local ip may differ)
-The default password is ```password```
+#### SSH into Rapsberry Pi
+```ssh pi@192.168.1.4``` (Your local ip may differ).
+The default password is ```password```.
 
+#### Update submodules
 After cloning this repository you may have to use
 ```git submodule update --init --recursive```
 to get the latest version of the submodules.
+
+#### Running on Pi from a flash drive
+`cd` into `/media/user_name/disk_name` to get to the content on the flash drive.
+
+Log in to http://routerlogin.net/ to get a list of the ips of connected devices.
+
+`ssh pi@192.168.1.2`
+
+Mount the flash drive
+`sudo mount -o uid=pi,gid=pi /dev/sda1 /mnt`
+
+Then `cd` into `/mnt/salvius`
+
+Run the server using `python salvius.py runserver`
+
+In a browser navigate to `192.168.1.2:8000`
 
 ## Contributors
 This project has been made possible with funding from the following sources:

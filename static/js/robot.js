@@ -154,6 +154,7 @@ Robot.prototype.activate = function() {
     this.urls["api_arms"] = "/arms/";
     this.urls["api_listening"] = "/settings/listening";
     this.urls["terminate"] = "/terminate/";
+    this.urls["say"] = "/speech/";
     this.urls["camera_image_url"] = "";
     this.urls["ardunio_ip"] = "http://0.0.0.1/";
 
@@ -210,18 +211,21 @@ Robot.prototype.addEvents = function() {
         });
     });
 
-    robot.elements.say.click(function() {
-        var key = "say";
-        var value = $("#value").val();
-        var str = [key, value].join("=");
+    robot.elements.say.click(function(e) {
+        e.preventDefault();
+
+        var value = $(".js-speech-text");
+
+        var request_data = {
+            "speech_text": value.val()
+        };
+
         $.ajax({
             type: "POST",
-            url: robot.urls.arduino_ip,
-            data: str,
-            contentType: "application/x-www-form-urlencoded; charset=utf-8"
+            url: robot.urls.say,
+            data: JSON.stringify(request_data)
         }).success(function(data) {
-            $("#key").val("");
-            $("#value").val("");
+            value.val("");
         }).error(function(data) {
             robot.error("Failure to post data");
         });
