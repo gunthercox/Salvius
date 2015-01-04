@@ -154,6 +154,7 @@ Robot.prototype.renderLimb = function(data, key, classes) {
 }
 
 Robot.prototype.activate = function() {
+    this.urls["api_neck"] = "/neck/";
     this.urls["api_settings"] = "/settings/";
     this.urls["api_chat"] = "/chat/";
     this.urls["api_legs"] = "/legs/";
@@ -279,15 +280,29 @@ Robot.prototype.addEvents = function() {
         robot.snapshot();
     });
 
-    robot.elements.rotate_head.on("input change", function() {
+    robot.elements.rotate_head.on("input change", function(e) {
+        // Display the value of the slider
         var input = $(this);
         var value = parseInt(input.val());
-
-        // Display the value of the slider
         input.parent().find("output").text(value);
+    }).on("input change",  $.debounce(250, function(e) {
 
-        // TODO: Send to api
-    });
+        var input = $(this);
+        var value = parseInt(input.val());
+        var json_data = {
+            "rotate": value
+        };
+
+        $.ajax({
+            type: "PATCH",
+            url: robot.urls["api_neck"],
+            data: JSON.stringify(json_data),
+            contentType: "application/json"
+        }).success(function(data) {
+            console.log(data);
+        });
+
+    }));
 
     robot.elements.angle_head.on("input change", function() {
         var input = $(this);

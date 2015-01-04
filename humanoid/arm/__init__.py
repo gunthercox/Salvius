@@ -6,10 +6,8 @@ from humanoid.arm.elbow import Elbow
 from humanoid.arm.wrist import Wrist
 from humanoid.arm.hand import Hand
 
-from flask.views import MethodView
 
-
-class Arm(MethodView):
+class Arm(Resource):
 
     def __init__(self, uuid=None):
         self._shoulder = Shoulder(uuid)

@@ -46,8 +46,9 @@ app.add_url_rule("/connect/google/", view_func=social.GoogleConnectView.as_view(
 app.add_url_rule("/connect/disqus/", view_func=social.DisqusConnectView.as_view("connect_disqus"))
 app.add_url_rule("/connect/github/", view_func=social.GitHubConnectView.as_view("connect_github"))
 
+app.add_url_rule("/neck/", view_func=Neck.as_view("neck"))
+
 api.add_resource(ApiRobot, "/", endpoint="api")
-api.add_resource(Neck, "/neck/")
 api.add_resource(Torso, "/torso/")
 
 api.add_resource(Arm, "/arms/<int:arm_id>/", endpoint="arms")

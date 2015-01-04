@@ -1,6 +1,8 @@
 from unittest import TestCase
 from salvius import app
 
+from humanoid.neck import Neck
+
 
 class ApiTests(TestCase):
 
@@ -10,4 +12,8 @@ class ApiTests(TestCase):
 
     def test_get_neck(self):
         response = self.app.get("/neck/", follow_redirects=True)
-        self.assertTrue("joint_type" in response.data.decode())
+        self.assertEqual(405, response.status_code)
+
+    def test_patch_neck(self):
+        # TODO
+        self.assertTrue(True)
