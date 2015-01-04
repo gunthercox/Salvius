@@ -1,14 +1,7 @@
-from unittest import TestCase
-from salvius import app
-
-from humanoid.neck import Neck
+from .base_test_case import BaseTestCase
 
 
-class ApiTests(TestCase):
-
-    def setUp(self):
-        app.config["TESTING"] = True
-        self.app = app.test_client()
+class ApiTests(BaseTestCase):
 
     def test_get_neck(self):
         response = self.app.get("/neck/", follow_redirects=True)

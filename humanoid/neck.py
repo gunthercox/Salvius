@@ -27,6 +27,7 @@ class Neck(MethodView):
         """
         Rotate the head clockwise or counter-clockwise.
         """
+        pass
 
     def tilt(self, value):
         """

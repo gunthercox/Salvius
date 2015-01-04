@@ -1,7 +1,5 @@
 from jsondb.db import Database
-from chatterbot import ChatBot
 
-from humanoid.torso import Torso
 from humanoid.arm import Arm
 from humanoid.leg import Leg
 
@@ -12,9 +10,7 @@ class Robot(object):
 
     def __init__(self):
         self.db = Database("settings.db")
-        self.chatbot = ChatBot()
 
-        self._torso = Torso()
         self._arms = []
         self._legs = []
 
@@ -35,10 +31,6 @@ class Robot(object):
     @property
     def arms(self):
         return self._arms
-
-    @property
-    def torso(self):
-        return self._torso
 
     @property
     def legs(self):

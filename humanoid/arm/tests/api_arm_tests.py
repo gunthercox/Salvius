@@ -5,7 +5,7 @@ from salvius import app
 class ApiArmTests(TestCase):
 
     def setUp(self):
-        from humanoid import Robot
+        from humanoid.robotics import Robot
         app.config["TESTING"] = True
         app.config["ROBOT"] = Robot()
         self.app = app.test_client()

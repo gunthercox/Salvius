@@ -289,18 +289,22 @@ Robot.prototype.addEvents = function() {
 
         var input = $(this);
         var value = parseInt(input.val());
+        var previous_value = input.data("previous-value");
         var json_data = {
             "rotate": value
         };
 
-        $.ajax({
-            type: "PATCH",
-            url: robot.urls["api_neck"],
-            data: JSON.stringify(json_data),
-            contentType: "application/json"
-        }).success(function(data) {
-            console.log(data);
-        });
+        // Do not send a request if the value has not changed
+        if (value != previous_value) {
+            $.ajax({
+                type: "PATCH",
+                url: robot.urls["api_neck"],
+                data: JSON.stringify(json_data),
+                contentType: "application/json"
+            });
+        }
+
+        input.data("previous-value", value);
 
     }));
 

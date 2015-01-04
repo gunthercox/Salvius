@@ -1,21 +1,7 @@
-from unittest import TestCase
-from salvius import app
+from .base_test_case import BaseTestCase
 
 
-class SettingsTest(TestCase):
-
-    def setUp(self):
-        import os
-
-        # If a settings file does not exist then create one
-        if not os.path.isfile("settings.db"):
-            content = '{"legs": [{"leg": {"id": 0}}, {"leg": {"id": 1}}]}'
-            test = open("settings.db", "w+")
-            test.write(content)
-            test.close()
-
-        app.config["TESTING"] = True
-        self.app = app.test_client()
+class SettingsTest(BaseTestCase):
 
     def test_get_settings(self):
         response = self.app.get("/settings/", follow_redirects=True)

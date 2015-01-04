@@ -21,6 +21,8 @@ from humanoid.leg.ankle import Ankle
 from humanoid import Robot as ApiRobot
 from humanoid.robotics import Robot
 
+from chatterbot import ChatBot
+
 try:
     import settings
 except ImportError:
@@ -47,9 +49,9 @@ app.add_url_rule("/connect/disqus/", view_func=social.DisqusConnectView.as_view(
 app.add_url_rule("/connect/github/", view_func=social.GitHubConnectView.as_view("connect_github"))
 
 app.add_url_rule("/neck/", view_func=Neck.as_view("neck"))
+app.add_url_rule("/torso/", view_func=Torso.as_view("torso"))
 
 api.add_resource(ApiRobot, "/", endpoint="api")
-api.add_resource(Torso, "/torso/")
 
 api.add_resource(Arm, "/arms/<int:arm_id>/", endpoint="arms")
 api.add_resource(Shoulder, "/arms/<int:arm_id>/shoulder/")
@@ -77,6 +79,7 @@ if __name__ == "__main__":
     app.config["DISQUS"] = settings.DISQUS
     app.config["PHANT"] = settings.PHANT
     app.config["ROBOT"] = Robot()
+    app.config["CHATBOT"] = ChatBot()
     app.config["DEBUG"] = True
     app.config["SECRET_KEY"] = "development"
 

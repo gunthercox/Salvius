@@ -5,6 +5,7 @@ from salvius import app
 class AnkleLegTests(TestCase):
 
     def setUp(self):
+        from humanoid.robotics import Robot
         import os
 
         # If a settings file does not exist then create one
@@ -15,6 +16,7 @@ class AnkleLegTests(TestCase):
             test.close()
 
         app.config["TESTING"] = True
+        app.config["ROBOT"] = Robot()
         self.app = app.test_client()
 
     def test_get_leg(self):

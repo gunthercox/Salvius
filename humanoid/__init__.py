@@ -6,7 +6,6 @@ class Robot(Resource):
 
     def __init__(self):
         self.fields = {
-            "torso": fields.Raw(),
             "arms": fields.List(fields.Raw()),
             "legs": fields.List(fields.Raw())
         }
@@ -16,8 +15,6 @@ class Robot(Resource):
     def get(self):
         from flask import current_app as app
         robot = app.config["ROBOT"]
-
-        self.data["torso"] = robot.torso.get()
 
         arm_output = []
         id_count = 0

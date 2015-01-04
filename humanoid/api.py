@@ -23,7 +23,7 @@ class Chat(Resource):
         json_data = request.get_json(force=True)
         key = u'text'
 
-        chatbot = app.config['ROBOT'].chatbot
+        chatbot = app.config['CHATBOT']
         data = {}
 
         if key in json_data:
