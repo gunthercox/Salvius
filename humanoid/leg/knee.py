@@ -9,7 +9,7 @@ class Knee(HingeJoint):
     sets a limit to its own movement.
     """
 
-    def __init__(self, uuid):
+    def __init__(self, uuid=None):
         super(Knee, self).__init__()
 
         # Number of degrees that the joint is limited to.

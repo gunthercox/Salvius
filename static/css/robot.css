@@ -53,7 +53,8 @@ output {
     border-color: #010101;
     border-radius: 0px;
     color: #2FA875;
-    padding: 15px;
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 
 .navbar-inverse .btn-default .fa {

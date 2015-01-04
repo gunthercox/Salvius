@@ -4,7 +4,7 @@ from humanoid.joints import OrthogonalJoint
 
 class Shoulder(OrthogonalJoint):
 
-    def __init__(self, uuid):
+    def __init__(self, uuid=None):
         super(Shoulder, self).__init__()
         self.parent_id = uuid
 

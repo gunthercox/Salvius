@@ -4,7 +4,7 @@ from humanoid.joints import ArticulatedJoint
 
 class Wrist(ArticulatedJoint):
 
-    def __init__(self, uuid):
+    def __init__(self, uuid=None):
         super(Wrist, self).__init__()
         self.parent_id = uuid
 

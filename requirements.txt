@@ -1,5 +1,5 @@
 chatterbot==0.0.3
 flask==0.10.1
-flask-restful==0.2.12
-Flask-OAuthlib==0.7.0
+flask-restful==0.3.1
+flask-oauthlib==0.7.0
 phant==0.3.0

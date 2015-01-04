@@ -62,19 +62,9 @@ class Settings(Resource):
 
 
 class Speech(Resource):
-    """
-    Process:
-      1. String is posted to the speech api endpoint.
-      2. String is validated to remove any unusual characters.
-        --> Should numbers be converted to words?
-      3. String is sent to an arduino using an I2C connection through the GPIO pins.
-    """
-
-    def __init__(self):
-        return super(Speech, self).__init__()
 
     def post(self):
-        from robot.arduino import Arduino
+        from robotics.arduino import Arduino
 
         json_data = request.get_json(force=True)
         speech_text = u'speech_text'

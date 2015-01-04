@@ -5,7 +5,7 @@ from humanoid.joints import OrthogonalJoint
 
 class Hip(OrthogonalJoint):
 
-    def __init__(self, uuid):
+    def __init__(self, uuid=None):
         super(Hip, self).__init__()
         self.parent_id = uuid
 

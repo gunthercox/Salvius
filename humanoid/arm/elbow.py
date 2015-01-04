@@ -8,7 +8,7 @@ class Elbow(HingeJoint):
     sets a limit to its range of movement.
     """
 
-    def __init__(self, uuid):
+    def __init__(self, uuid=None):
         super(Elbow, self).__init__()
 
         # Limits = [lower, upper]

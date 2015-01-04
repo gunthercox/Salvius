@@ -1,10 +1,14 @@
 from flask.views import View
 
 
-class App(View):
+class TemplateView(View):
+
+    def __init__(self, template_name):
+        self.template_name = template_name
+
     def dispatch_request(self):
         from flask import render_template
-        return render_template("interface.html")
+        return render_template(self.template_name)
 
 
 class Connect(View):
@@ -13,39 +17,7 @@ class Connect(View):
         from flask import current_app as app
         from chaterbot.apis.github import GitHub
 
-        #self.db = app.config['ROBOT'].db
-
         github = GitHub()
-        github.authorize_url = github.make_authorization_url(app.config['GITHUB'])
+        github.authorize_url = github.make_authorization_url(app.config["GITHUB"])
 
         return render_template("connect.html", github=github)
-
-
-class Hands(View):
-    def dispatch_request(self):
-        from flask import render_template
-        return render_template("hands.html")
-
-
-class Limbs(View):
-    def dispatch_request(self):
-        from flask import render_template
-        return render_template("limbs.html")
-
-
-class Sensors(View):
-    def dispatch_request(self):
-        from flask import render_template
-        return render_template("sensors.html")
-
-
-class Chat(View):
-    def dispatch_request(self):
-        from flask import render_template
-        return render_template("chat.html")
-
-
-class Settings(View):
-    def dispatch_request(self):
-        from flask import render_template
-        return render_template("settings.html")

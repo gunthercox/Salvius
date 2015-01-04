@@ -4,7 +4,7 @@ from humanoid.joints import ArticulatedJoint
 
 class Ankle(ArticulatedJoint):
 
-    def __init__(self, uuid):
+    def __init__(self, uuid=None):
         super(Ankle, self).__init__()
         self.parent_id = uuid
 

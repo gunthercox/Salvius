@@ -2,7 +2,7 @@ from flask import Flask
 from flask.ext.restful import Api
 
 from humanoid import api as robot_api
-from humanoid import views
+from humanoid.views import Connect, TemplateView
 from humanoid import social
 from humanoid.neck import Neck
 from humanoid.torso import Torso
@@ -19,7 +19,7 @@ from humanoid.leg.knee import Knee
 from humanoid.leg.ankle import Ankle
 
 from humanoid import Robot as ApiRobot
-from humanoid.robot import Robot
+from humanoid.robotics import Robot
 
 try:
     import settings
@@ -30,20 +30,13 @@ except ImportError:
 app = Flask(__name__, static_folder="static", static_url_path="")
 api = Api(app)
 
-@app.route("/test/")
-def get_tokens():
-    # Delete this method later
-    from flask import session
-    cookie = str(dict(session))
-    return cookie
-
-app.add_url_rule("/interface/", view_func=views.App.as_view("app"))
-app.add_url_rule("/hands/", view_func=views.Hands.as_view("hands"))
-app.add_url_rule("/limbs/", view_func=views.Limbs.as_view("limbs"))
-app.add_url_rule("/connect/", view_func=views.Connect.as_view("connect"))
-app.add_url_rule("/chat/", view_func=views.Chat.as_view("communication"))
-app.add_url_rule("/sensors/", view_func=views.Sensors.as_view("sensors"))
-app.add_url_rule("/configuration/", view_func=views.Settings.as_view("setting"))
+app.add_url_rule("/interface/", view_func=TemplateView.as_view("interface", template_name="interface.html"))
+app.add_url_rule("/hands/", view_func=TemplateView.as_view("hands", template_name="hands.html"))
+app.add_url_rule("/limbs/", view_func=TemplateView.as_view("limbs", template_name="limbs.html"))
+app.add_url_rule("/sensors/", view_func=TemplateView.as_view("sensors", template_name="sensors.html"))
+app.add_url_rule("/chat/", view_func=TemplateView.as_view("communication", template_name="chat.html"))
+app.add_url_rule("/configuration/", view_func=TemplateView.as_view("configuration", template_name="settings.html"))
+app.add_url_rule("/connect/", view_func=Connect.as_view("connect"))
 
 app.add_url_rule("/twitter/authorized/", view_func=social.TwitterAuthorizedView.as_view("twitter_authorized"))
 app.add_url_rule("/google/authorized/", view_func=social.GoogleAuthorizedView.as_view("google_authorized"))
@@ -57,7 +50,7 @@ api.add_resource(ApiRobot, "/", endpoint="api")
 api.add_resource(Neck, "/neck/")
 api.add_resource(Torso, "/torso/")
 
-api.add_resource(Arm, "/arms/<int:arm_id>/")
+api.add_resource(Arm, "/arms/<int:arm_id>/", endpoint="arms")
 api.add_resource(Shoulder, "/arms/<int:arm_id>/shoulder/")
 api.add_resource(Elbow, "/arms/<int:arm_id>/elbow/", endpoint="elbow")
 api.add_resource(Wrist, "/arms/<int:arm_id>/wrist/")

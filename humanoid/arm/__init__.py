@@ -6,10 +6,12 @@ from humanoid.arm.elbow import Elbow
 from humanoid.arm.wrist import Wrist
 from humanoid.arm.hand import Hand
 
+from flask.views import MethodView
 
-class Arm(Resource):
 
-    def __init__(self, uuid):
+class Arm(MethodView):
+
+    def __init__(self, uuid=None):
         self._shoulder = Shoulder(uuid)
         self._elbow = Elbow(uuid)
         self._wrist = Wrist(uuid)
@@ -34,7 +36,7 @@ class Arm(Resource):
         robot = app.config["ROBOT"]
 
         self.data["id"] = arm_id
-        self.data["href"] = "/arms/" + str(arm_id) + "/"
+        self.data["href"] = "/" + self.endpoint + "/" + str(arm_id) + "/"
         self.data["shoulder"] = dict(robot._arms[arm_id]._shoulder.get(arm_id))
         self.data["elbow"] = dict(robot.arms[arm_id].elbow.get(arm_id))
         self.data["wrist"] = dict(robot.arms[arm_id].wrist.get(arm_id))

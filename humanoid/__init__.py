@@ -5,8 +5,6 @@ from flask.ext.restful import marshal, fields
 class Robot(Resource):
 
     def __init__(self):
-        super(Robot, self).__init__()
-
         self.fields = {
             "neck": fields.Raw(),
             "torso": fields.Raw(),

@@ -5,7 +5,7 @@ from humanoid.joints import CompliantJoint
 
 class Finger(CompliantJoint):
 
-    def __init__(self, uuid, hand_id):
+    def __init__(self, uuid=None, hand_id=None):
         super(Finger, self).__init__()
         self.parent_id = hand_id
         self.id = uuid
@@ -34,7 +34,7 @@ class Thumb(CompliantJoint):
     which allow them to be opposable.
     """
 
-    def __init__(self, arm_id):
+    def __init__(self, arm_id=None):
         super(Thumb, self).__init__()
         self.parent_id = arm_id
 
@@ -58,7 +58,7 @@ class Thumb(CompliantJoint):
 
 class Hand(Resource):
 
-    def __init__(self, arm_id, fingers=[]):
+    def __init__(self, arm_id=None, fingers=[]):
         super(Hand, self).__init__()
         from humanoid.arm.hand import Finger, Thumb
 

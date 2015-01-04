@@ -7,7 +7,7 @@ from humanoid.leg.ankle import Ankle
 
 class Leg(Resource):
 
-    def __init__(self, uuid):
+    def __init__(self, uuid=None):
         super(Leg, self).__init__()
         self._hip = Hip(uuid)
         self._knee = Knee(uuid)
