@@ -19,8 +19,14 @@ Robot.prototype.error = function(error) {
     var error = error || "";
 
     if (error != "") {
-        var template = $('<div class="alert alert-warning">' + error +
-        '<span class="js-dismiss close"></span></div>');
+        var template = $(
+            '<div class="alert alert-warning">' + 
+                '<button type="button" class="close" data-dismiss="alert">' +
+                    '<span aria-hidden="true">&times;</span>' +
+                '</button>' +
+                '<p>' + error + '</p>' +
+            '</div>'
+        );
         $(".error-list").append(template);
     }
 
@@ -59,7 +65,7 @@ Robot.prototype.updateSessionLog = function(data) {
 
     // If response text was provided
     if (data.response) {
-        this.elements.session_log.append($('<div class="text"></div>').text(data.response));
+        this.elements.session_log.append($('<div class="text"></div>').text(data.response[0]["text"]));
     }
 
     // Scroll to the bottom of the log window

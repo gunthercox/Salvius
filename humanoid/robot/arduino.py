@@ -47,6 +47,8 @@ class Arduino(object):
         line_data = connection.readlines()
         connection.close()
 
+        print line_data
+
         for line in line_data:
             cleaned_line = self.clean(line, "\r\n")
             lines.append(cleaned_line)

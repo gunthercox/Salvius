@@ -79,8 +79,6 @@ class Speech(Resource):
         json_data = request.get_json(force=True)
         speech_text = u'speech_text'
 
-        print ">>>>>>>>>>>>.", json_data
-
         if speech_text in json_data:
             data = json_data[speech_text]
 

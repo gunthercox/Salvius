@@ -1,52 +1,30 @@
 # Salvius
 
-This repository contains the source code for Salvius, a robot who uses a 
-Rapsberry Pi and several Arduino microcontrollers as a brain.
-
-[![Build Status](https://travis-ci.org/gunthercox/salvius.svg?branch=master)](https://travis-ci.org/gunthercox/salvius)
+Salvius is a humanoid robot made from recycled materials. The robot is designed
+to be as easy as possible for anyone to build on a limited budget.
 
 > Salvius is a robot made out of recycled materials, designed to be able to
 > perform a wide range of tasks by having a body structure that is similar
 > to that of a human. The primary goal for Salvius is to create a humanoid
-> robot that can function dynamically in a domestic environment.
+> robot that can function dynamically in a domestic environment.  
 > ~ [salviusrobot.blogspot.com](http://salviusrobot.blogspot.com)
-
-![Project photos](http://i.imgur.com/4sXpuA4.png)
 
 **Key features:**
   - Web based user interface
   - Easily customizable robots
   - RESTfull API
-  - Modular design makes it easy to add controllers via I2C
+  - Modular design makes it easy to connect controllers via USB
+  - [External status page](http://gunthercox.github.io/salvius.status/)
 
 ## Setup
+
 Installing this software on your robot should be easy. Once you have downloaded 
 the latest copy into a directory on your Rapsberry Pi, you can download and 
-configure the robot's api and interface by running the following three lines of code.
+configure the robot's api and interface by running the following commands.
 
 ```
 apt-get install pip
 pip install -r requirements.txt
-```
-
-To enable I2C communication on the Rapsberry Pi, edit
-```/etc/modprobe.d/raspi-blacklist.conf``` and make sure that the line ```blacklist i2c-bcm2708``` is commented out. Also edit ```/etc/modules``` and make sure that the line ```i2c-dev``` exists somewhere in the file.
-Be sure to **apt-get install** i2c-tools and python-smbus.
-To configure the software, we will add the Pi user to the I2C access group, by running the command sudo adduser pi i2c.
-Reboot after installing the required packages.
-
-To test the configuration, run the command ```i2cdetect -y 0``` to display anything connected. A typical response showing that nothing is connected should look like this:
-
-```
-0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
-00:          -- -- -- -- -- -- -- -- -- -- -- -- --
-10: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-20: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-30: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-40: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-50: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-70: -- -- -- -- -- -- -- --
 ```
 
 Use the following to run the robot's server.
@@ -54,7 +32,10 @@ Use the following to run the robot's server.
 python robot.py runserver
 ```
 
-**Note:** Code for the Arduino boards can be found at: https://github.com/gunthercox/salvius.arduino
+**Note:** Code for the robot's Arduino boards can be found in the
+[salvius.arduino](https://github.com/gunthercox/salvius.arduino) repository.
+You will need to download the code for these boards individually in order to
+enable these features.
 
 ### Text to speech
 
@@ -73,112 +54,11 @@ result of horizontal and vertical lines.
 
 ### Social
 
-I've included a package which allows the robot to reply to messages sent to it
-through social media sites.
-See https://github.com/gunthercox/ChatterBot for more information.
-
-## Modular robot library
-
-The robot library included in this project can be used to easially build and
-customize robots. The library is **ideal for humanoid** type robots, however it
-could also work well with quadrupeds and other types of robots.
-
-To build a custom robot you must first create a new robot object. The robot
-object is a container for each of the submodules required to build a robot.
-
-```
-from robot import Robot
-robot = new Robot("Robot Name")
-```
-
-The robot object provides assess to skill modules that handle capabiliteis such
-as speech, but also component modules which allow physical parts of the robot
-to be assembled.
-
-Environmental effectors such as arms and legs can be added to a the robot's body
-object.
-
-```
-arm = Arm()
-body.add_arm(arm)
-```
-
-Various robots can be constructed following a basic humanod disign. A modified
-robot could, for instance, have only three fingers.
-
-```
-fingers = [Finger(), Finger(), Finger(), Finger()]
-for finger in fingers:
-    hand.add_finger(finger)
-```
-
-Once the physical robot has been constructed, the robot library provides access
-to usefull methods to allow you to control its movements.
-
-The robot object is also serialized to privide a web based endpoint to post data
-to inorder to control the robot. The endpoint's structure reflects how each of
-the robot's components contain their sub-components.
-
-A robot with one arm would look like this:
-
-```json
-{
-  "body": {
-    "arms": [
-      {
-        "elbow": {
-          "angle": 0
-        },
-        "hand": {
-          "fingers": [
-            {
-              "position": 0
-            },
-            {
-              "position": 0
-            },
-            {
-              "position": 0
-            },
-            {
-              "position": 0
-            }
-          ],
-          "thumb": {
-            "position": 0
-          }
-        },
-        "shoulder": {
-          "angle": 0,
-          "rotation": 0
-        },
-        "wrist": {
-          "pitch": 0,
-          "roll": 0,
-          "yaw": 0
-        }
-      }
-    ]
-  },
-  "name": "Robot Name"
-}
-```
-
-A specific part of the robot can be accessed by changing the url to narrow the
-objects that are serialized.
-
-The url ```/api/robot/body/arms/0/hand/fingers/0/``` would return
-only the serialized representation of the first finger on the first arm attached
-to the robot. This data would be shown as follows, showing only the numeric
-position of that one finger.
-
-```json
-{
-  "position": 0
-}
-```
+Salvius uses the [ChatterBot](https://github.com/gunthercox/ChatterBot) library
+to reply to messages sent to it through social media sites.
 
 ## Tests
+
 The code for this project is automatically tested to ensure that class methods
 perform as expected. These tests can also be run manually by running the command
 ```nosetests``` from within the repository's root directory. See 
@@ -187,8 +67,8 @@ perform as expected. These tests can also be run manually by running the command
 ## Notes
 
 #### SSH into Rapsberry Pi
-```ssh pi@192.168.1.4``` (Your local ip may differ).
-The default password is ```password```.
+- ```ssh pi@192.168.1.4``` (Your local ip may differ).
+- The default password is ```password```.
 
 #### Update submodules
 After cloning this repository you may have to use
@@ -196,22 +76,15 @@ After cloning this repository you may have to use
 to get the latest version of the submodules.
 
 #### Running on Pi from a flash drive
-`cd` into `/media/user_name/disk_name` to get to the content on the flash drive.
-
-Log in to http://routerlogin.net/ to get a list of the ips of connected devices.
-
-`ssh pi@192.168.1.2`
-
-Mount the flash drive
-`sudo mount -o uid=pi,gid=pi /dev/sda1 /mnt`
-
-Then `cd` into `/mnt/salvius`
-
-Run the server using `python salvius.py runserver`
-
-In a browser navigate to `192.168.1.2:8000`
+1. `cd` into `/media/user_name/disk_name` to get to the content on the flash drive.
+2. Log in to http://routerlogin.net/ to get a list of the ips of connected devices.
+3. `ssh pi@192.168.1.2`
+4. Mount the flash drive using `sudo mount -o uid=pi,gid=pi /dev/sda1 /mnt`
+5. Then `cd` into `/mnt/salvius`
+6. Run the server using `python salvius.py runserver`
+7. In a browser navigate to `192.168.1.2:8000`
 
 ## Contributors
 This project has been made possible with funding from the following sources:
 Jennifer Cox, Adam Iredale, Janet Wise, Glen Zenor, Boris Hofer, 
-Señora Alderperson, Wilbraham Music (Chris Cox), June Cox, Rantz, Yuri Yerofeyev
+Señora Alderperson, Wilbraham Music, Chris Cox, June Cox, Rantz, Yuri Yerofeyev
