@@ -1,3 +1,4 @@
+from chatterbot import ChatBot
 from flask import Flask
 
 from humanoid import api as robot_api
@@ -13,13 +14,6 @@ from humanoid.arm.hand import Thumb
 from humanoid.leg.hip import Hip
 from humanoid.leg.knee import Knee
 from humanoid.leg.ankle import Ankle
-
-from chatterbot import ChatBot
-
-try:
-    import settings
-except ImportError:
-    pass
 
 # Create flask app
 app = Flask(__name__, static_folder="static", static_url_path="")
@@ -45,25 +39,23 @@ app.add_url_rule("/arms/<string:arm_name>/wrist/", view_func=Wrist.as_view("wris
 app.add_url_rule("/arms/<string:arm_name>/finger/", view_func=Finger.as_view("finger"))
 app.add_url_rule("/arms/<string:arm_name>/thumb/", view_func=Thumb.as_view("thumb"))
 
-app.add_url_rule("/legs/<int:leg_id>/hip/", view_func=Hip.as_view("hip"))
-app.add_url_rule("/legs/<int:leg_id>/knee/", view_func=Knee.as_view("knee"))
-app.add_url_rule("/legs/<int:leg_id>/ankle/", view_func=Ankle.as_view("ankle"))
+app.add_url_rule("/legs/<string:leg_name>/hip/", view_func=Hip.as_view("hip"))
+app.add_url_rule("/legs/<string:leg_name>/knee/", view_func=Knee.as_view("knee"))
+app.add_url_rule("/legs/<string:leg_name>/ankle/", view_func=Ankle.as_view("ankle"))
 
 app.add_url_rule("/neck/", view_func=Neck.as_view("neck"))
 app.add_url_rule("/torso/", view_func=Torso.as_view("torso"))
 
 app.add_url_rule("/terminate/",view_func=robot_api.Terminate.as_view("terminate"))
-app.add_url_rule("/settings/", view_func=robot_api.Settings.as_view("settings"))
 app.add_url_rule("/speech/", view_func=robot_api.Speech.as_view("speech"))
 app.add_url_rule("/writing/", view_func=robot_api.Writing.as_view("writing"))
 app.add_url_rule("/chat/", view_func=robot_api.Chat.as_view("chat"))
 
 if __name__ == "__main__":
-    app.config["GITHUB"] = settings.GITHUB
-    app.config["TWITTER"] = settings.TWITTER
-    app.config["GOOGLE"] = settings.GOOGLE
-    app.config["DISQUS"] = settings.DISQUS
-    app.config["PHANT"] = settings.PHANT
+    app.config["GITHUB"] = None
+    app.config["TWITTER"] = None
+    app.config["GOOGLE"] = None
+    app.config["DISQUS"] = None
     app.config["CHATBOT"] = ChatBot()
     app.config["DEBUG"] = True
     app.config["SECRET_KEY"] = "development"

@@ -106,54 +106,6 @@ Robot.prototype.loadSensorData = function() {
     });
 }
 
-Robot.prototype.renderLimbControl = function(container, limb) {
-
-    $(container).html("");
-
-    var template = $('<li class="list-group-item"></li>');
-
-    var renderable_types = ["elbow", "shoulder", "wrist", "hip", "knee", "ankle"];
-    for (var section in limb) {
-        if ($.inArray(section, renderable_types) > -1) {
-
-            var row = template.clone();
-
-            //console.log(section, limb[section].joint_type);
-
-            var control = $('<div><label></label><input type="number" min="0" max="100"></div>');
-            control.find("label").text(section);
-            control.find("input").val(limb[section].angle);
-            control.find("input").data("url", limb[section].href);
-            row.append(control);
-
-            $(container).append(row);
-        }
-    }
-
-    var robot = this;
-    control.on("input", "input", function() {
-        var value = $(this).val();
-        value = { "angle": value };
-        var data = $(this).data();
-
-        $.ajax({
-            type: "PATCH",
-            url: data.url,
-            data: JSON.stringify(value),
-            contentType: "application/json"
-        }).error(function() {
-            robot.error("Unable to update limb field");
-        });
-    });
-}
-
-Robot.prototype.renderLimb = function(data, key, classes) {
-    for (var i = 0; i < data[key].length; i++) {
-        var limb = data[key][i];
-        this.renderLimbControl(classes[i], limb);
-    }
-}
-
 Robot.prototype.activate = function() {
     this.urls["api_neck"] = "/neck/";
     this.urls["api_settings"] = "/settings/";

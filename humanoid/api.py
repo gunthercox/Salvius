@@ -21,38 +21,6 @@ class Chat(MethodView):
         return jsonify(data)
 
 
-class Settings(MethodView):
-
-    def __init__(self):
-        super(Settings, self).__init__()
-        from flask import current_app as app
-
-        self.db = app.config["ROBOT"].db
-
-    def get(self):
-        from flask import jsonify
-        return jsonify(self.db.data())
-
-    def patch(self):
-        from flask import jsonify
-        json = request.get_json(force=True)
-        self.db.data(dictionary=json)
-        return jsonify(self.db.data()), 201
-
-    def put(self):
-        from flask import jsonify
-        json = request.get_json(force=True)
-        self.db.data(dictionary=json)
-        return jsonify(self.db.data()), 201
-
-    def delete(self):
-        from flask import jsonify
-        json = request.get_json(force=True)
-        for key in json.keys():
-            self.db.delete(key)
-        return jsonify(self.db.data()), 201
-
-
 class Speech(MethodView):
 
     def post(self):

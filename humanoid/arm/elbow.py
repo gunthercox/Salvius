@@ -3,12 +3,12 @@ from flask.views import MethodView
 
 class Elbow(MethodView):
 
-    def get(self):
+    def get(self, arm_name):
         from flask import abort
         # This method not currently supported.
         abort(405)
 
-    def patch(self):
+    def patch(self, arm_name):
         from flask import request, jsonify
 
         data = request.json or {}

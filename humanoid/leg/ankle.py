@@ -3,17 +3,15 @@ from flask.views import MethodView
 
 class Ankle(MethodView):
 
-    def get(self, leg_id):
-        self.data["href"] = "/legs/" + str(leg_id) + "/ankle/"
+    def get(self, arm_name):
+        from flask import abort
+        # This method not currently supported.
+        abort(405)
 
-        return marshal(self.data, self.fields)
-
-    def patch(self, leg_id):
+    def patch(self, leg_name):
+        from flask import request, jsonify
         data = request.get_json(force=True)
 
-        self.validate_fields(data)
-
-        for key in data.keys():
-            self.data[key] = data[key]
+        # TODO
 
         return marshal(self.data, self.fields), 201

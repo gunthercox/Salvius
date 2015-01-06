@@ -7,18 +7,15 @@ class Knee(MethodView):
     sets a limit to its own movement.
     """
 
-    def get(self, leg_id):
-        self.data["href"] = "/legs/" + str(leg_id) + "/knee/"
-        # TODO: Check if the arm or leg does not exist in the db.
+    def get(self, leg_name):
+        from flask import abort
+        # This method not currently supported.
+        abort(405)
 
-        return marshal(self.data, self.fields)
-
-    def patch(self, leg_id):
+    def patch(self, leg_name):
+        from flask import request, jsonify
         data = request.get_json(force=True)
 
-        self.validate_fields(data)
+        # TODO
 
-        for key in data.keys():
-            self.data[key] = data[key]
-
-        return marshal(self.data, self.fields), 201
+        return jsonify(data)

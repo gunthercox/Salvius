@@ -29,13 +29,13 @@ pip install -r requirements.txt
 
 Use the following to run the robot's server.
 ```
-python robot.py runserver
+python salvius.py runserver
 ```
 
 **Note:** Code for the robot's Arduino boards can be found in the
 [salvius.arduino](https://github.com/gunthercox/salvius.arduino) repository.
-You will need to download the code for these boards individually in order to
-enable these features.
+You will need to download the code to these boards individually and connect them
+to the robot in order to enable these features.
 
 ### Text to speech
 
@@ -69,11 +69,6 @@ perform as expected. These tests can also be run manually by running the command
 #### SSH into Rapsberry Pi
 - ```ssh pi@192.168.1.4``` (Your local ip may differ).
 - The default password is ```password```.
-
-#### Update submodules
-After cloning this repository you may have to use
-```git submodule update --init --recursive```
-to get the latest version of the submodules.
 
 #### Running on Pi from a flash drive
 1. `cd` into `/media/user_name/disk_name` to get to the content on the flash drive.

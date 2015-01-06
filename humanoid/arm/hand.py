@@ -3,20 +3,19 @@ from flask.views import MethodView
 
 class Finger(MethodView):
 
-    def get(self):
+    def get(self, arm_name):
         from flask import abort
         # This method not currently supported.
         abort(405)
 
-    def patch(self, arm_id, finger_id):
+    def patch(self, arm_name):
+        from flask import request, jsonify
+
         data = request.get_json(force=True)
 
-        self.validate_fields(data)
+        # TODO
 
-        for key in data.keys():
-            self.data[key] = data[key]
-
-        return marshal(self.data, self.fields), 201
+        return jsonify(data)
 
 
 class Thumb(MethodView):
@@ -25,17 +24,16 @@ class Thumb(MethodView):
     which allow them to be opposable.
     """
 
-    def get(self):
+    def get(self, arm_name):
         from flask import abort
         # This method not currently supported.
         abort(405)
 
-    def patch(self, arm_id):
+    def patch(self, arm_name):
+        from flask import request, jsonify
+
         data = request.get_json(force=True)
 
-        self.validate_fields(data)
+        # TODO
 
-        for key in data.keys():
-            self.data[key] = data[key]
-
-        return marshal(self.data, self.fields), 201
+        return jsonify(data)
