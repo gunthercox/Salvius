@@ -15,39 +15,33 @@
             </ul>
         </div>
         <div class="btn-group">
-            <a href="/interface/" class="btn btn-default">
+            <a href="{{ url_for('interface') }}" class="btn btn-default">
                 <div class="fa fa-desktop"></div>
                 <div class="hidden-xs text-wide">Interface</div>
             </a>
         </div>
         <div class="btn-group">
-            <a href="/limbs/" class="btn btn-default">
+            <a href="{{ url_for('hands') }}" class="btn btn-default">
                 <div class="fa fa-code-fork fa-rotate-90"></div>
                 <div class="hidden-xs text-wide">Limbs</div>
             </a>
         </div>
         <div class="btn-group">
-            <a href="/chat/" class="btn btn-default">
+            <a href="{{ url_for('communication') }}" class="btn btn-default">
                 <div class="fa fa-comments"></div>
-                <div class="hidden-xs text-wide">Chat</div>
+                <div class="hidden-xs text-wide">Communication</div>
             </a>
         </div>
         <div class="btn-group">
-            <a href="/sensors/" class="btn btn-default">
+            <a href="{{ url_for('sensors') }}" class="btn btn-default">
                 <div class="fa fa-compass"></div>
                 <div class="hidden-xs text-wide">Sensors</div>
             </a>
         </div>
         <div class="btn-group">
-            <a href="http://gunthercox.github.io/salvius.status/" class="btn btn-default">
-                <div class="fa fa-line-chart"></div>
-                <div class="hidden-xs text-wide">Status</div>
-            </a>
-        </div>
-        <div class="btn-group">
-            <a href="/configuration/" class="btn btn-default">
-                <div class="fa fa-toggle-on"></div>
-                <div class="hidden-xs text-wide">Settings</div>
+            <a href="{{ url_for('health') }}" class="btn btn-default">
+                <div class="fa fa-stethoscope"></div>
+                <div class="hidden-xs text-wide">Health</div>
             </a>
         </div>
         <div class="btn-group">

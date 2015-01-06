@@ -1,22 +1,11 @@
-from flask.ext.restful import marshal, request
-
-from humanoid.joints import HingeJoint
+from flask.views import MethodView
 
 
-class Knee(HingeJoint):
+class Knee(MethodView):
     """
     Knee extends the basic hinge joint class and
     sets a limit to its own movement.
     """
-
-    def __init__(self, uuid=None):
-        super(Knee, self).__init__()
-
-        # Number of degrees that the joint is limited to.
-        self.data["limits"] = [0, 50]
-        self.parent_id = uuid
-
-        self.data["href"] = "/legs/" + str(self.parent_id) + "/knee/"
 
     def get(self, leg_id):
         self.data["href"] = "/legs/" + str(leg_id) + "/knee/"

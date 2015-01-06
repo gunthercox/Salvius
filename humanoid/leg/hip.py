@@ -1,15 +1,7 @@
-from flask.ext.restful import marshal, request
-
-from humanoid.joints import OrthogonalJoint
+from flask.views import MethodView
 
 
-class Hip(OrthogonalJoint):
-
-    def __init__(self, uuid=None):
-        super(Hip, self).__init__()
-        self.parent_id = uuid
-
-        self.data["href"] = "/legs/" + str(self.parent_id) + "/hip/"
+class Hip(MethodView):
 
     def get(self, leg_id):
         self.data["href"] = "/legs/" + str(leg_id) + "/hip/"

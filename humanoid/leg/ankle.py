@@ -1,14 +1,7 @@
-from flask.ext.restful import marshal, request
-from humanoid.joints import ArticulatedJoint
+from flask.views import MethodView
 
 
-class Ankle(ArticulatedJoint):
-
-    def __init__(self, uuid=None):
-        super(Ankle, self).__init__()
-        self.parent_id = uuid
-
-        self.data["href"] = "/legs/" + str(self.parent_id) + "/ankle/"
+class Ankle(MethodView):
 
     def get(self, leg_id):
         self.data["href"] = "/legs/" + str(leg_id) + "/ankle/"

@@ -81,7 +81,8 @@ Robot.prototype.respond = function(text, $statusIndicator) {
     $.ajax({
         type: "POST",
         url: robot.urls.api_chat,
-        data: JSON.stringify({text: text})
+        data: JSON.stringify({text: text}),
+        contentType: "application/json"
     }).done(function(data) {
         robot.updateSessionLog(data);
         container.html(origional);
@@ -162,8 +163,7 @@ Robot.prototype.activate = function() {
     this.urls["api_listening"] = "/settings/listening";
     this.urls["terminate"] = "/terminate/";
     this.urls["say"] = "/speech/";
-    this.urls["camera_image_url"] = "";
-    this.urls["ardunio_ip"] = "http://0.0.0.1/";
+    this.urls["camera_image_url"] = "http://192.168.1.2/image.jpg";
 
     this.elements["terminate"] = $(".js-terminate");
     this.elements["session_log"] = $(".chat-log");
@@ -230,7 +230,8 @@ Robot.prototype.addEvents = function() {
         $.ajax({
             type: "POST",
             url: robot.urls.say,
-            data: JSON.stringify(request_data)
+            data: JSON.stringify(request_data),
+            contentType: "application/json"
         }).success(function(data) {
             value.val("");
         }).error(function(data) {
@@ -253,7 +254,8 @@ Robot.prototype.addEvents = function() {
         var startListening = $.ajax({
             type: "POST",
             url: robot.urls.api_listening,
-            data: JSON.stringify({listening: state})
+            data: JSON.stringify({listening: state}),
+            contentType: "application/json"
         });
 
         startListening.done(function(data) {
