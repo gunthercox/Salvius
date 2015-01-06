@@ -1,0 +1,38 @@
+{% extends "layout/layout.html" %}
+
+{% block title %}Health{% endblock %}
+
+{% block content %}
+<h2><i class="fa fa-stethoscope"></i> System Health</h2>
+
+<div class="row">
+
+    <div class="jumbotron">
+        <p>
+            This feature is still being developed. In the future, this page will
+            provide a detailed visualization of various performance related
+            metrics recorded by the robot. 
+        </p>
+        <p>
+            <a href="http://gunthercox.github.io/salvius.status/" class="btn btn-primary btn-lg" target="_blank">
+                <span class="hidden-xs text-wide">Remote status page</span>
+                <i class="fa fa-external-link"></i>
+            </a>
+        </p>
+    </div>
+
+    <a class="btn btn-danger btn-block js-terminate">
+        <i class="fa fa-power-off"></i>
+        <span class="hidden-xs">Shutdown</span>
+    </a>
+    <a href="http://www.routerlogin.net" class="btn btn-default btn-block" target="_blank">
+        <i class="fa fa-signal"></i>
+        <span class="hidden-xs">Router login</span>
+    </a>
+    <a href="/connect/" class="btn btn-default btn-block">
+        <i class="fa fa-globe"></i>
+        <span class="hidden-xs">Social connect</span>
+    </a>
+
+</div>
+{% endblock %}

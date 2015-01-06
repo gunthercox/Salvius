@@ -4,33 +4,38 @@
 
 {% block content %}
 <nav class="navbar navbar-inverse">
-    <form class="navbar-form navbar-left">
-        <div class="input-group">
-            <input type="text" class="form-control" placeholder="Text to speech"/>
-            <span class="input-group-btn">
-                <button class="btn btn-default" id="say">
-                    <i class="fa fa-bullhorn"></i>
-                    <span class="hidden-xs">Say</span>
-                </button>
-            </span>
-        </div>
+    <div class="container">
+    <form class="navbar-form">
+        <div class="row">
 
-        <div class="input-group">
-            <input type="text" class="form-control" placeholder="Text to handwriting"/>
-            <span class="input-group-btn">
-                <button class="btn btn-default" id="write">
-                    <i class="fa fa-pencil"></i>
-                    <span class="hidden-xs">Write</span>
-                </button>
-            </span>
-        </div>
+            <div class="col-xs-6">
+                <div class="col-xs-12 input-group">
+                    <input type="text" class="form-control js-speech-text" placeholder="Text to speech"/>
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" id="say">
+                            <i class="fa fa-volume-up"></i>
+                            <span class="hidden-xs">Say</span>
+                        </button>
+                    </span>
+                </div>
+            </div>
 
-        <div class="form-group">
-            <input type="text" class="form-control" id="key" placeholder="Key"/>
-            <input type="text" class="form-control" id="value" placeholder="Value"/>
-            <button id="post" class="btn btn-default">Post</button>
+            <div class="col-xs-6">
+                <!-- Hand writing input has been disabled pending updates to the robot's api. -->
+                <div class="col-xs-12 input-group">
+                    <input type="text" class="form-control" placeholder="Text to handwriting" disabled/>
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" id="write" disabled>
+                            <i class="fa fa-pencil"></i>
+                            <span class="hidden-xs">Write</span>
+                        </button>
+                    </span>
+                </div>
+            </div>
+
         </div>
     </form>
+    </div>
 </nav>
 
 <div class="row">

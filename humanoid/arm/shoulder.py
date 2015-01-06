@@ -1,33 +1,24 @@
-from flask.ext.restful import marshal, request
-from humanoid.joints import OrthogonalJoint, OrthogonalJointSerializer
+from flask.views import MethodView
 
 
-class Shoulder(OrthogonalJoint):
+class Shoulder(MethodView):
 
-    def __init__(self):
-        super(Shoulder, self).__init__()
-        self.parent_id = None
+    def get(self, arm_name):
+        from flask import abort
+        # This method not currently supported.
+        abort(405)
 
-        self.data["href"] = "/arms/" + str(self.parent_id) + "/shoulder/"
+    def patch(self, arm_name):
+        from flask import request, jsonify
 
-    def set_parent_id(self, uuid):
-        self.parent_id = uuid
-        self.data["href"] = "/arms/" + str(uuid) + "/shoulder/"
+        data = request.json or {}
 
-    def get(self, arm_id):
-        self.set_parent_id(arm_id)
-        return marshal(self.data, self.fields)
+        if "rotate" in data:
+            value = data["rotate"]
+            # TODO
 
-    def patch(self, arm_id):
-        data = request.get_json(force=True)
+        if "extend" in data:
+            value = data["extend"]
+            # TODO
 
-        self.validate_fields(data)
-
-        for key in data.keys():
-            self.data[key] = data[key]
-
-        return marshal(self.data, self.fields), 201
-
-
-class ShoulderSerializer(OrthogonalJointSerializer):
-    pass
+        return jsonify(data)

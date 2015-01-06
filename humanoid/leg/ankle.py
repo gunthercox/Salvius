@@ -1,31 +1,17 @@
-from flask.ext.restful import marshal, request
-
-from humanoid.joints import ArticulatedJoint
+from flask.views import MethodView
 
 
-class Ankle(ArticulatedJoint):
+class Ankle(MethodView):
 
-    def __init__(self):
-        super(Ankle, self).__init__()
-        self.parent_id = None
+    def get(self, arm_name):
+        from flask import abort
+        # This method not currently supported.
+        abort(405)
 
-        self.data["href"] = "/legs/" + str(self.parent_id) + "/ankle/"
-
-    def set_parent_id(self, uuid):
-        self.parent_id = uuid
-        self.data["href"] = "/legs/" + str(uuid) + "/ankle/"
-
-    def get(self, leg_id):
-        self.data["href"] = "/legs/" + str(leg_id) + "/ankle/"
-
-        return marshal(self.data, self.fields)
-
-    def patch(self, leg_id):
+    def patch(self, leg_name):
+        from flask import request, jsonify
         data = request.get_json(force=True)
 
-        self.validate_fields(data)
-
-        for key in data.keys():
-            self.data[key] = data[key]
+        # TODO
 
         return marshal(self.data, self.fields), 201

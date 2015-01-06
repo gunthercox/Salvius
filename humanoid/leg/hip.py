@@ -1,31 +1,17 @@
-from flask.ext.restful import marshal, request
-
-from humanoid.joints import OrthogonalJoint
+from flask.views import MethodView
 
 
-class Hip(OrthogonalJoint):
+class Hip(MethodView):
 
-    def __init__(self):
-        super(Hip, self).__init__()
-        self.parent_id = None
+    def get(self, arm_name):
+        from flask import abort
+        # This method not currently supported.
+        abort(405)
 
-        self.data["href"] = "/legs/" + str(self.parent_id) + "/hip/"
-
-    def set_parent_id(self, uuid):
-        self.parent_id = uuid
-        self.data["href"] = "/legs/" + str(uuid) + "/hip/"
-
-    def get(self, leg_id):
-        self.data["href"] = "/legs/" + str(leg_id) + "/hip/"
-
-        return marshal(self.data, self.fields)
-
-    def patch(self, leg_id):
+    def patch(self, leg_name):
+        from flask import request, jsonify
         data = request.get_json(force=True)
 
-        self.validate_fields(data)
+       # TODO
 
-        for key in data.keys():
-            self.data[key] = data[key]
-
-        return marshal(self.data, self.fields), 201
+        return jsonify(data)

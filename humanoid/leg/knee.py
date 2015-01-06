@@ -1,40 +1,21 @@
-from flask.ext.restful import marshal, request
-
-from humanoid.joints import HingeJoint
+from flask.views import MethodView
 
 
-class Knee(HingeJoint):
+class Knee(MethodView):
     """
     Knee extends the basic hinge joint class and
     sets a limit to its own movement.
     """
 
-    def __init__(self):
-        super(Knee, self).__init__()
+    def get(self, leg_name):
+        from flask import abort
+        # This method not currently supported.
+        abort(405)
 
-        # Number of degrees that the joint is limited to.
-        self.data["limits"] = [0, 50]
-
-        self.parent_id = None
-
-        self.data["href"] = "/legs/" + str(self.parent_id) + "/knee/"
-
-    def set_parent_id(self, uuid):
-        self.parent_id = uuid
-        self.data["href"] = "/legs/" + str(uuid) + "/knee/"
-
-    def get(self, leg_id):
-        self.data["href"] = "/legs/" + str(leg_id) + "/knee/"
-        # TODO: Check if the arm or leg does not exist in the db.
-
-        return marshal(self.data, self.fields)
-
-    def patch(self, leg_id):
+    def patch(self, leg_name):
+        from flask import request, jsonify
         data = request.get_json(force=True)
 
-        self.validate_fields(data)
+        # TODO
 
-        for key in data.keys():
-            self.data[key] = data[key]
-
-        return marshal(self.data, self.fields), 201
+        return jsonify(data)

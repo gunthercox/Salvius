@@ -1,117 +1,39 @@
-from flask.ext.restful import marshal, request
-from marshmallow import Serializer, fields
-from humanoid.joints import CompliantJoint, CompliantJointSerializer
+from flask.views import MethodView
 
 
-class Finger(CompliantJoint):
+class Finger(MethodView):
 
-    def __init__(self, uuid=None, hand_id=None):
-        super(Finger, self).__init__()
-        self.parent_id = hand_id
-        self.id = uuid
+    def get(self, arm_name):
+        from flask import abort
+        # This method not currently supported.
+        abort(405)
 
-        self.data["href"] = "/robot/body/arms/" + str(self.parent_id) + "/hand/fingers/" + str(self.id)
+    def patch(self, arm_name):
+        from flask import request, jsonify
 
-    def get(self, arm_id, finger_id):
-        self.data["href"] = "/robot/body/arms/" + str(arm_id) + "/hand/fingers/" + str(finger_id)
-        return marshal(self.data, self.fields)
-
-    def patch(self, arm_id, finger_id):
         data = request.get_json(force=True)
 
-        self.validate_fields(data)
+        # TODO
 
-        for key in data.keys():
-            self.data[key] = data[key]
-
-        return marshal(self.data, self.fields), 201
+        return jsonify(data)
 
 
-class Thumb(CompliantJoint):
+class Thumb(MethodView):
     """
-    Thumbs work very similar to fingers, however they have aditional attributes
+    Thumbs work very similar to fingers, however they have other attributes
     which allow them to be opposable.
     """
 
-    def __init__(self, hand_id=None):
-        super(Thumb, self).__init__()
-        self.parent_id = hand_id
+    def get(self, arm_name):
+        from flask import abort
+        # This method not currently supported.
+        abort(405)
 
-        self.data["href"] = "/arms/" + str(self.parent_id) + "/hand/thumb/"
+    def patch(self, arm_name):
+        from flask import request, jsonify
 
-    def get(self, arm_id):
-        self.data["href"] = "/arms/" + str(arm_id) + "/hand/thumb/"
-        return marshal(self.data, self.fields)
-
-    def patch(self, arm_id):
         data = request.get_json(force=True)
 
-        self.validate_fields(data)
+        # TODO
 
-        for key in data.keys():
-            self.data[key] = data[key]
-
-        return marshal(self.data, self.fields), 201
-
-
-class Hand(object):
-
-    def __init__(self):
-        self._fingers = []
-        self._thumb = None
-
-        self.parent_id = None
-
-    def add_finger(self):
-        """
-        Adds a finger to the hand.
-        Sets a unique id to reference the listed index of the object.
-        """
-        uuid = 0
-        if self._fingers:
-            uuid = max(finger.id for finger in self._fingers) + 1
-
-        finger = Finger(uuid, self.parent_id)
-        self._fingers.append(finger)
-
-    def set_parent_id(self, uuid):
-        self.parent_id = uuid
-
-    def set_thumb(self, thumb):
-        """
-        Takes a finger object as a parameter.
-        """
-        self._thumb = thumb
-
-    @property
-    def fingers(self):
-        return self._fingers
-
-    @property
-    def thumb(self):
-        return self._thumb
-
-
-class FingerSerializer(CompliantJointSerializer):
-    id = fields.UUID()
-    position = fields.Integer()
-
-    def get_url(self, obj):
-        url = "/arms/" + str(obj.parent_id) + "/hand"
-
-        # Only fingers should be created with an id
-        if obj.id is not None:
-            url += "/fingers/" + str(obj.id)
-        else:
-            url += "/thumb"
-
-        return url
-
-
-class FingersSerializer(Serializer):
-    fingers = fields.Nested(FingerSerializer, many=True)
-
-
-class HandSerializer(Serializer):
-    fingers = fields.Nested(FingerSerializer, many=True)
-    thumb = fields.Nested(FingerSerializer)
+        return jsonify(data)

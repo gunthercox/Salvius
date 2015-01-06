@@ -1,41 +1,20 @@
-from flask.ext.restful import marshal, request
-from humanoid.joints import HingeJoint, HingeJointSerializer
+from flask.views import MethodView
 
 
-class Elbow(HingeJoint):
-    """
-    Elbow extends the basic hinge joint class and
-    sets a limit to its range of movement.
-    """
+class Elbow(MethodView):
 
-    def __init__(self):
-        super(Elbow, self).__init__()
+    def get(self, arm_name):
+        from flask import abort
+        # This method not currently supported.
+        abort(405)
 
-        # Limits = [lower, upper]
-        self.data["limits"] = [0, 50]
+    def patch(self, arm_name):
+        from flask import request, jsonify
 
-        self.parent_id = None
+        data = request.json or {}
 
-        self.data["href"] = "/".join(["", "arms", str(self.parent_id), self.endpoint, ""])
+        if "rotate" in data:
+            value = data["rotate"]
+            # TODO
 
-    def set_parent_id(self, uuid):
-        self.parent_id = uuid
-        self.data["href"] = "/".join(["", "arms", str(uuid),  self.endpoint, ""])
-
-    def get(self, arm_id):
-        self.data["href"] = "/".join(["", "arms", str(arm_id), self.endpoint, ""])
-        return marshal(self.data, self.fields)
-
-    def patch(self, arm_id):
-        data = request.get_json(force=True)
-
-        self.validate_fields(data)
-
-        for key in data.keys():
-            self.data[key] = data[key]
-
-        return marshal(self.data, self.fields), 201
-
-
-class ElbowSerializer(HingeJointSerializer):
-    pass
+        return jsonify(data)

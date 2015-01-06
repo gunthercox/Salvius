@@ -1,17 +1,20 @@
 from flask.views import MethodView
 
 
-class Wrist(MethodView):
+class Torso(MethodView):
 
-    def get(self, arm_name):
+    def get(self):
         from flask import abort
         # This method not currently supported.
         abort(405)
 
-    def patch(self, arm_name):
+    def patch(self):
         from flask import request, jsonify
-        data = request.get_json(force=True)
 
-        # TODO
+        data = request.json or {}
+
+        if "rotate" in data:
+            value = data["rotate"]
+            # TODO
 
         return jsonify(data)

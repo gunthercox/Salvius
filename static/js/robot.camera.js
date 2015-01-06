@@ -47,7 +47,7 @@ function init() {
 
       }, false);
   } else {
-    document.getElementById("doEvent").innerHTML = "Not supported on your device or browser.  Sorry."
+    document.getElementById("doEvent").innerHTML = "Not supported on your device or browser. Sorry."
   }
 }
 
