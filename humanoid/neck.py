@@ -15,11 +15,19 @@ class Neck(MethodView):
     def patch(self):
         from flask import request, jsonify
 
-        data = request.json or {}
+        data = request.get_json(force=True)
 
         if "rotate" in data:
             value = data["rotate"]
-            # TODO
+            self.rotate(value)
+
+        if "tilt" in data:
+            value = data["tilt"]
+            self.tilt(value)
+
+        if "lean" in data:
+            value = data["lean"]
+            self.lean(value)
 
         return jsonify(data)
 
@@ -27,17 +35,22 @@ class Neck(MethodView):
         """
         Rotate the head clockwise or counter-clockwise.
         """
-        pass
+        from robotics.arduino import Arduino
+
+        text_to_speech_controller = Arduino("neck_servo")
+        text_to_speech_controller.write(str(value) + "\n")
 
     def tilt(self, value):
         """
         Angle the head forward or backward.
         """
         pass
+        # TODO
 
     def lean(self, value):
         """
         Angle the head to the left or right.
         """
         pass
+        # TODO
         

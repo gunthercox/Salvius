@@ -18,7 +18,7 @@ from humanoid.leg.ankle import Ankle
 # Create flask app
 app = Flask(__name__, static_folder="static", static_url_path="")
 
-app.add_url_rule("/interface/", view_func=TemplateView.as_view("interface", template_name="interface.html"))
+app.add_url_rule("/", view_func=TemplateView.as_view("interface", template_name="interface.html"))
 app.add_url_rule("/hands/", view_func=TemplateView.as_view("hands", template_name="hands.html"))
 app.add_url_rule("/sensors/", view_func=TemplateView.as_view("sensors", template_name="sensors.html"))
 app.add_url_rule("/communication/", view_func=TemplateView.as_view("communication", template_name="chat.html"))
