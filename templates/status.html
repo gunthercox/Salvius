@@ -6,33 +6,111 @@
 <h2><i class="fa fa-stethoscope"></i> System Health</h2>
 
 <div class="row">
+    <div class="col-xs-6 col-sm-4">
+        <div class="alert alert-success">
+            <i class="fa fa-clock-o"></i>
+            <span class="name">Boot time</span>
+            <span class="text-success pull-right js-boot-time"><i class="fa fa-spinner fa-spin"></i></span>
+        </div>
+    </div>
+    <div class="col-xs-6 col-sm-4">
+        <div class="alert alert-success">
+            <i class="fa fa-pie-chart"></i>
+            <span class="name">Disk useage</span>
+            <span class="status pull-right js-disk-useage"><i class="fa fa-spinner fa-spin"></i></span>
+        </div>
+    </div>
+    <div class="col-xs-6 col-sm-4 js-build-status">
+        <a class="link" target="_blank" href="https://travis-ci.org/gunthercox/salvius">
+            <div class="alert alert-info alert-success">
+                <i class="fa fa-trophy"></i>
+                <span class="name">Unit tests</span>
+                <span class="status pull-right">Passing</span>
+            </div>
+        </a>
+    </div>
+</div>
 
-    <div class="jumbotron">
-        <p>
-            This feature is still being developed. In the future, this page will
-            provide a detailed visualization of various performance related
-            metrics recorded by the robot. 
-        </p>
-        <p>
-            <a href="http://gunthercox.github.io/salvius.status/" class="btn btn-primary btn-lg" target="_blank">
-                <span class="hidden-xs text-wide">Remote status page</span>
-                <i class="fa fa-external-link"></i>
-            </a>
-        </p>
+<div class="row">
+    <div class="col-xs-6 col-sm-3">
+        <div class="alert alert-info">
+            <i class="fa fa-database"></i>
+            <span class="name">Virtual memory</span>
+            <span class="status pull-right js-virtual-memory"><i class="fa fa-spinner fa-spin"></i></span>
+        </div>
+    </div>
+    <div class="col-xs-6 col-sm-3">
+        <div class="alert alert-info">
+            <i class="fa fa-save"></i>
+            <span class="name">Swap memory</span>
+            <span class="status pull-right js-swap-memory"><i class="fa fa-spinner fa-spin"></i></span>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-6">
+        <table class="table table-bordered">
+            <tr class="js-cpu-percent-headings text-center"></tr>
+            <tr class="js-cpu-percent-values text-center">
+                <td class="text-center"><i class="fa fa-spinner fa-spin"></i></td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-4">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4>
+                    <i class="fa fa-rocket"></i>
+                    Operating capacity
+                    <span class="pull-right">98%</span>
+                </h4>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success" role="progressbar" style="width: 98%"></div>
+                </div>
+                <p class="text-muted">
+                    <i class="fa fa-info-circle"></i>
+                    The robot's full operating capacity is based on the number
+                    of functioning services and system data. This is a gauge
+                    which measures the robot's overall health.
+                </p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="row">
+
+    <div class="col-xs-4">
+        <a href="/connect/" class="btn btn-default btn-block">
+            <i class="fa fa-globe"></i>
+            <span class="hidden-xs">Social connect</span>
+        </a>
     </div>
 
-    <a class="btn btn-danger btn-block js-terminate">
-        <i class="fa fa-power-off"></i>
-        <span class="hidden-xs">Shutdown</span>
-    </a>
-    <a href="http://www.routerlogin.net" class="btn btn-default btn-block" target="_blank">
-        <i class="fa fa-signal"></i>
-        <span class="hidden-xs">Router login</span>
-    </a>
-    <a href="/connect/" class="btn btn-default btn-block">
-        <i class="fa fa-globe"></i>
-        <span class="hidden-xs">Social connect</span>
-    </a>
+    <div class="col-xs-4">
+        <a href="http://www.routerlogin.net" class="btn btn-default btn-block" target="_blank">
+            <i class="fa fa-signal"></i>
+            <span class="hidden-xs">Router login</span>
+        </a>
+    </div>
+
+    <div class="col-xs-4">
+        <a class="btn btn-danger btn-block js-terminate">
+            <i class="fa fa-power-off"></i>
+            <span class="hidden-xs">Shutdown</span>
+        </a>
+    </div>
 
 </div>
+{% endblock %}
+
+{% block js %}
+{{ super() }}
+<script src="/js/robot.status.js"></script>
+<script>
+robot.renderStatus();
+</script>
 {% endblock %}

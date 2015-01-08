@@ -50,6 +50,7 @@ app.add_url_rule("/terminate/",view_func=robot_api.Terminate.as_view("terminate"
 app.add_url_rule("/speech/", view_func=robot_api.Speech.as_view("speech"))
 app.add_url_rule("/writing/", view_func=robot_api.Writing.as_view("writing"))
 app.add_url_rule("/chat/", view_func=robot_api.Chat.as_view("chat"))
+app.add_url_rule("/api/status/", view_func=robot_api.Status.as_view("status"))
 
 if __name__ == "__main__":
     app.config["GITHUB"] = None

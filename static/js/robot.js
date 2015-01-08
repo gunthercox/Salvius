@@ -92,10 +92,10 @@ Robot.prototype.respond = function(text, $statusIndicator) {
 Robot.prototype.loadSensorData = function() {
     var robot = this;
     $.ajax({
-        type: "GET", 
-        url: robot.urls.arduino_ip, 
-        data: { get_param: "value" }, 
-        dataType: 'json'
+        type: "GET",
+        url: robot.urls.arduino_ip,
+        data: { get_param: "value" },
+        dataType: "json"
     }).success(function(data) {
         $.each(data, function(index, element) {
             $(".sensorValues").append("<tr><td>" + index + "</td><td>" + element + "</td></tr>");
