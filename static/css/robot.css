@@ -48,38 +48,6 @@ output {
     text-shadow: -1px 0 #fff, 0 1px #fff, 1px 0 #fff, 0 -1px #fff;
 }
 
-
-
-.navbar {
-    min-height: 65px;
-}
-
-.navbar-brand {
-    padding: 22px;
-}
-
-.navbar-btn {
-    margin-top: 15px;
-    margin-bottom: 15px;
-}
-
-.navbar-nav>li>a {
-    padding-top: 22px;
-    padding-bottom: 22px;
-}
-
-.dropdown-menu>.active.disabled>a:hover {
-    background: #eeeeee;
-}
-
-/* Font Awesome */
-.nav-icon {
-    padding: 18px!important;
-}
-
-
-
-
 .navbar-inverse .btn-default {
     background: transparent;
     border-top-width: 0px;

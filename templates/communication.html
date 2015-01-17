@@ -3,43 +3,76 @@
 {% block title %}Communication{% endblock %}
 
 {% block content %}
-<div class="row">
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
 
-    <div class="col-xs-12 col-sm-5">
-        <div class="input-group">
-            <input type="text" class="form-control js-speech-text" placeholder="Text to speech"/>
-            <span class="input-group-btn">
-                <button class="btn btn-primary" id="say">
-                    <i class="fa fa-volume-up"></i>
-                    <span class="hidden-xs">Say</span>
-                </button>
-            </span>
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+            <form class="navbar-form navbar-left">
+                <div class="input-group input-lg">
+                    <input type="text" class="form-control js-speech-text" placeholder="Text to speech"/>
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" id="say">
+                            <i class="fa fa-volume-up"></i>
+                            <span class="hidden-xs">Say</span>
+                        </button>
+                    </span>
+                </div>
+
+                <!-- Hand writing input has been disabled pending updates to the robot's api. -->
+                <div class="input-group input-lg">
+                    <input type="text" class="form-control" placeholder="Text to handwriting" disabled/>
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" id="write" disabled>
+                            <i class="fa fa-pencil"></i>
+                            <span class="hidden-xs">Write</span>
+                        </button>
+                    </span>
+                </div>
+                </form>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="/connect/" class="btn btn-default navbar-btn">
+                        <i class="fa fa-globe"></i>
+                        <span>Social connect</span>
+                    </a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle nav-icon" data-toggle="dropdown">
+                        <i class="fa fa-comments fa-2x"></i>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li role="presentation" class="dropdown-header">Communication panel</li>
+                        <li class="disabled">
+                            <a>
+                                This page provides a collection of interfaces<br/>
+                                which allow the robot to communicate with people.<br/>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a class="js-terminate">
+                                <i class="fa fa-power-off"></i>
+                                <span>Stop server</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
         </div>
+
     </div>
-
-    <!-- Hand writing input has been disabled pending updates to the robot's api. -->
-    <div class="col-xs-12 col-sm-5">
-        <div class="input-group">
-            <input type="text" class="form-control" placeholder="Text to handwriting" disabled/>
-            <span class="input-group-btn">
-                <button class="btn btn-primary" id="write" disabled>
-                    <i class="fa fa-pencil"></i>
-                    <span class="hidden-xs">Write</span>
-                </button>
-            </span>
-        </div>
-    </div>
-
-    <div class="col-xs-2 col-sm-2">
-        <a href="/connect/" class="btn btn-default btn-block">
-            <i class="fa fa-globe"></i>
-            <span class="hidden-xs">Social connect</span>
-        </a>
-    </div>
-
-</div>
-
-<br/>
+</nav>
 
 <div class="row">
     <div class="col-sm-offset-3 col-sm-6">

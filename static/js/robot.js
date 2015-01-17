@@ -148,9 +148,7 @@ Robot.prototype.activate = function() {
         });
     });
 
-    robot.elements.say.click(function(e) {
-        e.preventDefault();
-
+    function say() {
         var value = $(".js-speech-text");
 
         var request_data = {
@@ -167,7 +165,19 @@ Robot.prototype.activate = function() {
         }).error(function(data) {
             robot.error("Failure to post data");
         });
+    }
+
+
+    robot.elements.say.click(function(e) {
+        e.preventDefault();
+        say();
     });
+
+    $(".js-speech-text").keypress(function(e) {
+        if(e.which == 13) {
+            say();
+        }
+    });;
 
     robot.elements.write.click(function() {
         console.log("Write button not implemented");

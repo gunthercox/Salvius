@@ -33,8 +33,9 @@ class Speech(MethodView):
         if speech_text in json_data:
             data = json_data[speech_text]
 
-            text_to_speech_controller = Arduino("text_to_speech")
-            text_to_speech_controller.write(data + "\n")
+            text_to_speech = Arduino("/dev/ttyUSB0")
+            #print text_to_speech.list_device_ports()
+            text_to_speech.write(data + "\r\n\n")
 
             return jsonify(json_data), 201
 
