@@ -71,7 +71,7 @@ perform as expected. These tests can also be run manually by running the command
 - The default password is ```password```.
 
 #### Running on Pi from a flash drive
-1. `cd` into `/media/user_name/disk_name` to get to the content on the flash drive.
+1. In Ubuntu `cd` into `/media/user_name/disk_name` to get to the content on the flash drive.
 2. Log in to http://routerlogin.net/ to get a list of the ips of connected devices.
 3. `ssh pi@192.168.1.2`
 4. Mount the flash drive using `sudo mount -o uid=pi,gid=pi /dev/sda1 /mnt`

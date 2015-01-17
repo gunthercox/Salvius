@@ -1,26 +1,30 @@
-/* CANVIS CODE FROM http://dwdii.github.io/2011/10/23/Using-HTML5-Canvas-tag-for-Simple-Video-Animation.html
-Known issue: http://stackoverflow.com/questions/13674835/canvas-tainted-by-cross-origin-data */
-var imageUpdateMs = 1;
+var timer = 100;
 var count = 0;
-var newImg;
+var image;
 
-setTimeout("imageUpdate()", imageUpdateMs);
-
-function imageUpdate() {
-	document.getElementById("txt").innerHTML = count++;
-
-	newImg = new Image();
-	newImg.Id = "cam" + count;
-	newImg.Name = newImg.Id;
-	newImg.onload = imageLoaded;
-	newImg.src = robot.urls.camera_image_url;
+function reload() {
+	image = new Image();
+	image.id = "camimg" + count;
+	image.name = image.id;
+	image.onload = load;
+	image.src = robot.urls.camera_image_url + "?u=" + count;
+	count++;
 }
 
-function imageLoaded() {
-	var context = $("#cam")[0].getContext('2d');
-	context.drawImage(newImg,0,0,640,480,0,0,300,150);
-	setTimeout("imageUpdate()", imageUpdateMs);
+function load() {
+	var drawingCanvas = document.getElementById("cam");
+
+	if (drawingCanvas.getContext) {
+		var context = drawingCanvas.getContext("2d");
+		context.drawImage(image,0,0,640,480,0,0,300,150);
+	}
+
+	setTimeout("reload()", timer);
 }
+
+setTimeout("reload()", timer );
+
+
 
 ///////////////////////////////////////////////////////
 

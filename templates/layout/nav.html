@@ -1,19 +1,9 @@
 <nav class="navbar navbar-inverse navbar-fixed-bottom">
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
 
 
     <div class="btn-group btn-group-justified">
-        <div class="btn-group dropup">
-            <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                <div class="fa fa-warning js-warning"></div>
-                <div class="hidden-xs text-wide">Warnings</div>
-            </button>
-            <ul class="dropdown-menu">
-                <li class="divider"></li>
-                <li><a class="js-dismiss-all">Dismiss all warnings</a></li>
-            </ul>
-        </div>
         <div class="btn-group">
             <a href="{{ url_for('interface') }}" class="btn btn-default">
                 <div class="fa fa-desktop"></div>
@@ -42,13 +32,6 @@
             <a href="{{ url_for('health') }}" class="btn btn-default">
                 <div class="fa fa-stethoscope"></div>
                 <div class="hidden-xs text-wide">Health</div>
-            </a>
-        </div>
-        <div class="btn-group">
-            <a class="btn btn-default">
-                <div class="fa fa-microphone hide"></div>
-                <div class="fa fa-microphone-slash"></div>
-                <div class="hidden-xs text-wide">Listen</div>
             </a>
         </div>
         <div class="btn-group">

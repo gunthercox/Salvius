@@ -2,7 +2,6 @@ window.Robot = window.Robot || {};
 
 var Robot = function() {
     this.activate();
-    this.addEvents();
     this.mobile = false;
 }
 
@@ -89,33 +88,14 @@ Robot.prototype.respond = function(text, $statusIndicator) {
     });
 }
 
-Robot.prototype.loadSensorData = function() {
-    var robot = this;
-    $.ajax({
-        type: "GET",
-        url: robot.urls.arduino_ip,
-        data: { get_param: "value" },
-        dataType: "json"
-    }).success(function(data) {
-        $.each(data, function(index, element) {
-            $(".sensorValues").append("<tr><td>" + index + "</td><td>" + element + "</td></tr>");
-        });
-        $(".filter").removeClass("hide");
-    }).error(function() {
-        robot.error("Arduino api is unavailable");
-    });
-}
-
 Robot.prototype.activate = function() {
     this.urls["api_neck"] = "/neck/";
-    this.urls["api_settings"] = "/settings/";
-    this.urls["api_chat"] = "/chat/";
     this.urls["api_legs"] = "/legs/";
     this.urls["api_arms"] = "/arms/";
-    this.urls["api_listening"] = "/settings/listening";
-    this.urls["terminate"] = "/terminate/";
-    this.urls["say"] = "/speech/";
-    this.urls["camera_image_url"] = "http://192.168.1.2/image.jpg";
+    this.urls["api_chat"] = "/api/chat/";
+    this.urls["speech"] = "/api/speech/";
+    this.urls["terminate"] = "/api/terminate/";
+    this.urls["camera_image_url"] = "http://192.168.1.2/image/jpeg.cgi";
 
     this.elements["terminate"] = $(".js-terminate");
     this.elements["session_log"] = $(".chat-log");
@@ -132,9 +112,7 @@ Robot.prototype.activate = function() {
 
     this.timers["rotationReset"] = 0;
     this.timers["angleReset"] = 0;
-}
 
-Robot.prototype.addEvents = function() {
     var robot = this;
 
     robot.elements.terminate.click(function() {
@@ -181,7 +159,7 @@ Robot.prototype.addEvents = function() {
 
         $.ajax({
             type: "POST",
-            url: robot.urls.say,
+            url: robot.urls.speech,
             data: JSON.stringify(request_data),
             contentType: "application/json"
         }).success(function(data) {
@@ -193,32 +171,6 @@ Robot.prototype.addEvents = function() {
 
     robot.elements.write.click(function() {
         console.log("Write button not implemented");
-    });
-
-    robot.elements.listen.click(function() {
-        var control = $(this);
-        var defautlText = control.html();
-        control.toggleClass("btn-default btn-success");
-        control.html("Listening");
-
-        var state = control.hasClass("btn-success");
-
-        var startListening = $.ajax({
-            type: "POST",
-            url: robot.urls.api_listening,
-            data: JSON.stringify({listening: state}),
-            contentType: "application/json"
-        });
-
-        startListening.done(function(data) {
-            // TODO
-        });
-
-        startListening.error(function() {
-            control.html(defautlText);
-            control.toggleClass("btn-default btn-success");
-            robot.error("Unable to set listening state to " + state);
-        });
     });
 
     robot.elements.chat_input.keyup(function(e) {
@@ -267,22 +219,6 @@ Robot.prototype.addEvents = function() {
         var value = parseInt(input.val());
 
         // TODO: Send to api
-    });
-
-    $(".js-camera-url").on("change", function() {
-        robot.urls["camera_image_url"] = $(this).val();
-
-        // TODO: GET THE DATA
-        var data = {};
-
-        $.ajax({
-            type: "PUT",
-            url: robot.urls.api_settings,
-            data: JSON.stringify(data),
-            contentType: "application/json"
-        }).error(function() {
-            robot.error("Error updating settings");
-        });
     });
 
     $(".tabs").on("click", ".tab-title", function(event) {

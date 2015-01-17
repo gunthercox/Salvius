@@ -16,8 +16,14 @@ Robot.prototype.renderStatus = function() {
         $(".js-boot-time").attr("title", boot_time);
 
         $(".js-disk-useage").text(data["disk_useage"]["percent"] + "%");
-        $(".js-virtual-memory").text(data["virtual_memory"]["percent"] + "%");
-        $(".js-swap-memory").text(data["swap_memory"]["percent"] + "%");
+
+        $(".js-virtual-memory-percent").text(data["virtual_memory"]["percent"] + "%");
+        $(".js-virtual-memory-used").text(data["virtual_memory"]["used"]);
+        $(".js-virtual-memory-total").text(data["virtual_memory"]["total"]);
+
+        $(".js-swap-memory-percent").text(data["swap_memory"]["percent"] + "%");
+        $(".js-swap-memory-used").text(data["swap_memory"]["used"]);
+        $(".js-swap-memory-total").text(data["swap_memory"]["total"]);
 
         $(".js-cpu-percent-values").empty();
 
@@ -36,6 +42,24 @@ Robot.prototype.renderStatus = function() {
 
     }).error(function() {
         robot.error("Unable to connect to status api.");
+    });
+
+    $.ajax({
+        url: "http://api.travis-ci.org/repos?slug=gunthercox%2Fsalvius",
+        jsonp: "callback",
+        cache: true,
+        dataType: "jsonp",
+    }).success(function(data) {
+        var status = $(".js-unit-test-status");
+
+        if (data[0].last_build_status == 0) {
+            status.text("Passing");
+        } else {
+            status.text("Failing");
+        }
+
+    }).error(function() {
+        robot.error("Unable to connect to CI server api.");
     });
 
 }

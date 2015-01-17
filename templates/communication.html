@@ -1,0 +1,54 @@
+{% extends "layout/layout.html" %}
+
+{% block title %}Communication{% endblock %}
+
+{% block content %}
+<div class="row">
+
+    <div class="col-xs-12 col-sm-5">
+        <div class="input-group">
+            <input type="text" class="form-control js-speech-text" placeholder="Text to speech"/>
+            <span class="input-group-btn">
+                <button class="btn btn-primary" id="say">
+                    <i class="fa fa-volume-up"></i>
+                    <span class="hidden-xs">Say</span>
+                </button>
+            </span>
+        </div>
+    </div>
+
+    <!-- Hand writing input has been disabled pending updates to the robot's api. -->
+    <div class="col-xs-12 col-sm-5">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Text to handwriting" disabled/>
+            <span class="input-group-btn">
+                <button class="btn btn-primary" id="write" disabled>
+                    <i class="fa fa-pencil"></i>
+                    <span class="hidden-xs">Write</span>
+                </button>
+            </span>
+        </div>
+    </div>
+
+    <div class="col-xs-2 col-sm-2">
+        <a href="/connect/" class="btn btn-default btn-block">
+            <i class="fa fa-globe"></i>
+            <span class="hidden-xs">Social connect</span>
+        </a>
+    </div>
+
+</div>
+
+<br/>
+
+<div class="row">
+    <div class="col-sm-offset-3 col-sm-6">
+        <div class="well chat-log"></div>
+        <br/>
+        <div class="input-group">
+            <input class="form-control chat-input" placeholder="Type something to begin" autofocus/>
+            <span class="input-group-addon"><i class="fa fa-comment"></i></span>
+        </div>
+    </div>
+</div>
+{% endblock %}

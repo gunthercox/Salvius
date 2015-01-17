@@ -5,6 +5,8 @@
 body {
     padding-top: 10px;
     padding-bottom: 90px;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 input[type="range"].vertical {
@@ -46,6 +48,38 @@ output {
     text-shadow: -1px 0 #fff, 0 1px #fff, 1px 0 #fff, 0 -1px #fff;
 }
 
+
+
+.navbar {
+    min-height: 65px;
+}
+
+.navbar-brand {
+    padding: 22px;
+}
+
+.navbar-btn {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.navbar-nav>li>a {
+    padding-top: 22px;
+    padding-bottom: 22px;
+}
+
+.dropdown-menu>.active.disabled>a:hover {
+    background: #eeeeee;
+}
+
+/* Font Awesome */
+.nav-icon {
+    padding: 18px!important;
+}
+
+
+
+
 .navbar-inverse .btn-default {
     background: transparent;
     border-top-width: 0px;
@@ -55,6 +89,7 @@ output {
     color: #2FA875;
     padding-top: 15px;
     padding-bottom: 15px;
+    text-shadow: 0 1px 0 #000;
 }
 
 .navbar-inverse .btn-default .fa {
@@ -67,8 +102,16 @@ output {
     letter-spacing: 3px;
 }
 
+.btn-group>.btn-group:first-child>.btn {
+    border-left-color: transparent;
+}
+
 .btn-group>.btn-group:not(:last-child)>.btn {
     border-right-color: transparent;
+}
+
+.btn {
+    overflow: hidden;
 }
 
 .led {
