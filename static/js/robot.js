@@ -14,28 +14,24 @@ Robot.prototype.loading = function($container) {
     $container.html(spinner);
 }
 
-Robot.prototype.error = function(error) {
-    var error = error || "";
+Robot.prototype.error = function(message) {
+    var message = message || "Error";
 
-    if (error != "") {
-        var template = $(
-            '<div class="alert alert-warning">' + 
-                '<button type="button" class="close" data-dismiss="alert">' +
-                    '<span aria-hidden="true">&times;</span>' +
-                '</button>' +
-                '<p>' + error + '</p>' +
-            '</div>'
-        );
-        $(".error-list").append(template);
+    // For browsers that do not support notifications
+    if (!Notification) {
+        alert(message);
+        return;
     }
 
-    // Change indicator led based on error count
-    var errorCount = $(".error-list").find(".alert").length;
-    if (errorCount > 0) {
-        $(".js-warning").addClass("warning");
-    } else {
-        $(".js-warning").removeClass("warning");
+    if (Notification.permission !== "granted") {
+        Notification.requestPermission();
     }
+
+    var notification = new Notification('Warning', {
+        icon: "/images/icon.png",
+        body: message,
+    });
+
 }
 
 Robot.prototype.terminate = function() {
@@ -148,7 +144,9 @@ Robot.prototype.activate = function() {
         });
     });
 
-    function say() {
+    robot.elements.say.click(function(e) {
+        e.preventDefault();
+
         var value = $(".js-speech-text");
 
         var request_data = {
@@ -165,19 +163,7 @@ Robot.prototype.activate = function() {
         }).error(function(data) {
             robot.error("Failure to post data");
         });
-    }
-
-
-    robot.elements.say.click(function(e) {
-        e.preventDefault();
-        say();
     });
-
-    $(".js-speech-text").keypress(function(e) {
-        if(e.which == 13) {
-            say();
-        }
-    });;
 
     robot.elements.write.click(function() {
         console.log("Write button not implemented");
