@@ -5,8 +5,9 @@ class Arduino(object):
     with an arduino controller through a serial connection.
     """
 
-    def __init__(self, port):
+    def __init__(self, port, baudrate=9600):
         self.port = port
+        self.baudrate = baudrate
 
     def list_device_ports(self):
         """
@@ -30,7 +31,7 @@ class Arduino(object):
         if not port:
             port = self.port
 
-        connection = serial.Serial(port, 9600, timeout=1)
+        connection = serial.Serial(port, self.baudrate, timeout=1)
         lines = connection.readlines()
         connection.close()
 
@@ -39,8 +40,25 @@ class Arduino(object):
     def write(self, text):
         import serial
 
-        connection = serial.Serial(self.port, 9600, timeout=1)
+        # Ensure that the text is a string and not unicode
+        text = str(text).encode("ascii") + "\n"
+
+        connection = serial.Serial()
+        connection.port = self.port
+        connection.baudrate = self.baudrate
+        connection.timeout = 1.5
+        connection.parity = serial.PARITY_NONE
+        connection.stopbits = serial.STOPBITS_TWO
+        connection.bytesize = serial.EIGHTBITS
+        connection.xonxoff = False
+        connection.rtscts = False
+        connection.dsrdtr = False
+
+        connection.open()
+
+        print connection.readline()
+
         connection.write(text)
         connection.close()
 
-        print "self.read -->", self.read()
+        #print "self.read -->", self.read()

@@ -37,8 +37,8 @@ class Neck(MethodView):
         """
         from robotics.arduino import Arduino
 
-        text_to_speech_controller = Arduino("/dev/ttyUSB0")
-        text_to_speech_controller.write(str(value) + "\n")
+        neck_controller = Arduino("/dev/ttyUSB1")
+        neck_controller.write(value)
 
     def tilt(self, value):
         """

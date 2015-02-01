@@ -35,7 +35,7 @@ class Speech(MethodView):
 
             text_to_speech = Arduino("/dev/ttyUSB0")
             #print text_to_speech.list_device_ports()
-            text_to_speech.write(data + "\r\n\n")
+            text_to_speech.write(data)
 
             return jsonify(json_data), 201
 
