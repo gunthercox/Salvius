@@ -1,4 +1,4 @@
-chatterbot==0.0.3
+chatterbot==0.0.4
 flask==0.10.1
-flask-oauthlib==0.7.0
 psutil==2.2.0
+jsondatabase==0.0.1

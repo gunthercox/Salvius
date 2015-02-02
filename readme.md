@@ -39,8 +39,9 @@ to the robot in order to enable these features.
 
 ### Text to speech
 
-The robot uses a speech synthesis library to convert processed text into verbal sounds.
-Checkout the repo for this library here: https://github.com/jscrane/TTS
+Salvius uses the [Emic 2 Text-to-Speech Module](https://www.sparkfun.com/products/11711)
+to process text into verbal sounds. Code for controling this board is available
+through the [salvius.arduino](https://github.com/gunthercox/salvius.arduino/tree/master/speech_synthesis) package.
 
 ### Speech recognition
 
@@ -52,15 +53,22 @@ The robot can hold a pen and write when given a string of text.
 The robot's handwriting is based on a grid in which each letter is created as a
 result of horizontal and vertical lines.
 
-### Social
+### Communication
 
 Salvius uses the [ChatterBot](https://github.com/gunthercox/ChatterBot) library
-to reply to messages sent to it through social media sites.
+to reply to messages. This package also provides Salvius with the capability to
+interact with people through social media sites.
 
-## Tests
+### Object recognition
 
-The code for this project is automatically tested to ensure that class methods
-perform as expected. These tests can also be run manually by running the command
+This includes face recognition, object tacking and learning to recognise new items.
+Salvius currently does not have the ability to do this, however there is plans
+to implement this in the future.
+
+## Unit testing
+
+The code for this project is automatically tested to ensure that it performs as
+expected. These tests can also be run manually by running the command
 ```nosetests``` from within the repository's root directory. See 
 ([unit tests](http://en.wikipedia.org/wiki/Unit_testing)) for more information.
 

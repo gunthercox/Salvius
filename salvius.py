@@ -1,9 +1,11 @@
 from chatterbot import ChatBot
+from chatterbot.apis.twitter import Twitter
+from chatterbot.apis.github import GitHub
+from jsondb.db import Database
 from flask import Flask
 
 from humanoid import api as robot_api
-from humanoid.views import Connect, TemplateView
-from humanoid import social
+from humanoid.views import TemplateView, Connect, GitHubConnectView, TwitterAuthorizedView
 from humanoid.neck import Neck
 from humanoid.torso import Torso
 from humanoid.arm.shoulder import Shoulder
@@ -15,6 +17,14 @@ from humanoid.leg.hip import Hip
 from humanoid.leg.knee import Knee
 from humanoid.leg.ankle import Ankle
 
+settings_available = False
+
+try:
+    import settings
+    settings_available = True
+except ImportError:
+    pass
+
 # Create flask app
 app = Flask(__name__, static_folder="static", static_url_path="")
 
@@ -23,15 +33,10 @@ app.add_url_rule("/hands/", view_func=TemplateView.as_view("hands", template_nam
 app.add_url_rule("/sensors/", view_func=TemplateView.as_view("sensors", template_name="sensors.html"))
 app.add_url_rule("/communication/", view_func=TemplateView.as_view("communication", template_name="communication.html"))
 app.add_url_rule("/health/", view_func=TemplateView.as_view("health", template_name="health.html"))
-app.add_url_rule("/connect/", view_func=Connect.as_view("connect"))
 
-app.add_url_rule("/twitter/authorized/", view_func=social.TwitterAuthorizedView.as_view("twitter_authorized"))
-app.add_url_rule("/google/authorized/", view_func=social.GoogleAuthorizedView.as_view("google_authorized"))
-app.add_url_rule("/disqus/authorized/", view_func=social.DisqusAuthorizedView.as_view("disqus_authorized"))
-app.add_url_rule("/connect/twitter/", view_func=social.TwitterConnectView.as_view("connect_twitter"))
-app.add_url_rule("/connect/google/", view_func=social.GoogleConnectView.as_view("connect_google"))
-app.add_url_rule("/connect/disqus/", view_func=social.DisqusConnectView.as_view("connect_disqus"))
-app.add_url_rule("/connect/github/", view_func=social.GitHubConnectView.as_view("connect_github"))
+app.add_url_rule("/connect/", view_func=Connect.as_view("connect"))
+app.add_url_rule("/connect/github/", view_func=GitHubConnectView.as_view("connect_github"))
+app.add_url_rule("/connect/twitter/", view_func=TwitterAuthorizedView.as_view("connect_twitter"))
 
 app.add_url_rule("/arms/<string:arm_name>/shoulder/", view_func=Shoulder.as_view("shoulder"))
 app.add_url_rule("/arms/<string:arm_name>/elbow/", view_func=Elbow.as_view("elbow"))
@@ -53,14 +58,19 @@ app.add_url_rule("/api/chat/", view_func=robot_api.Chat.as_view("chat"))
 app.add_url_rule("/api/status/", view_func=robot_api.Status.as_view("status"))
 
 if __name__ == "__main__":
-    app.config["GITHUB"] = None
-    app.config["TWITTER"] = None
-    app.config["GOOGLE"] = None
-    app.config["DISQUS"] = None
     app.config["CHATBOT"] = ChatBot()
+    app.config["DATABASE"] = Database("settings.db")
     app.config["DEBUG"] = True
     app.config["SECRET_KEY"] = "development"
 
-    social.oauth.init_app(app)
+    if settings_available:
+        if hasattr(settings, "GITHUB"):
+            app.config["GITHUB"] = GitHub(settings.GITHUB)
+        if hasattr(settings, "TWITTER"):
+            app.config["TWITTER"] = Twitter(settings.TWITTER)
+        if hasattr(settings, "GOOGLE"):
+            app.config["GOOGLE"] = settings.GOOGLE
+        if hasattr(settings, "DISQUS"):
+            app.config["DISQUS"] = settings.DISQUS
 
     app.run(host="0.0.0.0", port=8000)

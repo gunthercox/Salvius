@@ -23,13 +23,13 @@
 
         <div class="row row-margin">
             <div class="col-xs-8">
-                {% if "github_token" in session %}
+                {% if "github_token" in database %}
                     <a href="{{ url_for('connect_github') + '?logout' }}" class="btn btn-block btn-lg btn-social btn-github">
-                        <i class="fa fa-github"></i> Connected as {{ session["github_user"] }}
+                        <i class="fa fa-github"></i> Connected as {{ database["github_user"] }}
                         <i class="fa fa-check-circle pull-right"></i>
                     </a>
                 {% else %}
-                    <a href="{{ github.authorize_url }}" class="btn btn-block btn-lg btn-social btn-github">
+                    <a href="{{ github.get_authorization_url() }}" class="btn btn-block btn-lg btn-social btn-github">
                         <i class="fa fa-github"></i> Connect to GitHub
                     </a>
                 {% endif %}
@@ -44,13 +44,13 @@
 
         <div class="row row-margin">
             <div class="col-xs-8">
-                {% if "twitter_user" in session %}
+                {% if "twitter_user" in database %}
                     <a href="{{ url_for('connect_twitter') + '?logout' }}" class="btn btn-block btn-lg btn-social btn-twitter">
-                        <i class="fa fa-twitter"></i> Connected as {{ session["twitter_user"] }}
+                        <i class="fa fa-twitter"></i> Connected as {{ database["twitter_user"] }}
                         <i class="fa fa-check-circle pull-right"></i>
                     </a>
                 {% else %}
-                    <a href="{{ url_for('connect_twitter') + '?login' }}" class="btn btn-block btn-lg btn-social btn-twitter">
+                    <a href="{{ twitter.get_authorization_url() }}" class="btn btn-block btn-lg btn-social btn-twitter">
                         <i class="fa fa-twitter"></i> Connect to Twitter
                     </a>
                 {% endif %}
@@ -63,15 +63,15 @@
             </div>
         </div>
 
-        <div class="row row-margin">
+        <!--div class="row row-margin">
             <div class="col-xs-8">
-                {% if "google_token" in session %}
-                    <a href="{{ url_for('connect_google') + '?logout' }}" class="btn btn-block btn-lg btn-social btn-google-plus">
-                        <i class="fa fa-google-plus"></i> Connected as {{ session["google_user"] }}
+                {% if "google_token" in database %}
+                    <a href="" class="btn btn-block btn-lg btn-social btn-google-plus">
+                        <i class="fa fa-google-plus"></i> Connected as {{ database["google_user"] }}
                         <i class="fa fa-check-circle pull-right"></i>
                     </a>
                 {% else %}
-                    <a href="{{ url_for('connect_google') + '?login' }}" class="btn btn-block btn-lg btn-social btn-google-plus">
+                    <a href="" class="btn btn-block btn-lg btn-social btn-google-plus">
                         <i class="fa fa-google-plus"></i> Connect to Google
                     </a>
                 {% endif %}
@@ -86,13 +86,13 @@
 
         <div class="row row-margin">
             <div class="col-xs-8">
-                {% if "disqus_token" in session %}
-                    <a href="{{ url_for('connect_disqus') + '?logout' }}" class="btn btn-block btn-lg btn-social btn-disqus">
-                        <img src="/images/disqus.svg"/> Connected as {{ session["disqus_user"] }}
+                {% if "disqus_token" in database %}
+                    <a href="" class="btn btn-block btn-lg btn-social btn-disqus">
+                        <img src="/images/disqus.svg"/> Connected as {{ database["disqus_user"] }}
                         <i class="fa fa-check-circle pull-right"></i>
                     </a>
                 {% else %}
-                    <a href="{{ url_for('connect_disqus') + '?login' }}" class="btn btn-block btn-lg btn-social btn-disqus">
+                    <a href="" class="btn btn-block btn-lg btn-social btn-disqus">
                         <img src="/images/disqus.svg"/> Connect to Disqus
                     </a>
                 {% endif %}
@@ -103,7 +103,7 @@
                     <span class="label label-default">off</span>
                 </button>
             </div>
-        </div>
+        </div-->
 
     </div>
 
