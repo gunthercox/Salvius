@@ -10,6 +10,17 @@ Robot.prototype.renderStatus = function() {
         url: "/api/status/"
     }).success(function(data) {
 
+        new Chartist.Line('.ct-chart', {
+            labels: new Array(data["api_response_time"].length),
+            series: [
+                data["api_response_time"]
+            ]
+        },
+        {
+            showPoint: false,
+            lineSmooth: false
+        });
+
         var boot_time = moment(data["boot_time"], "YYYY-M-D h:mm:ss%S").calendar();
         var boot_time_from_now = moment(data["boot_time"], "YYYY-M-D h:mm:ss%S").fromNow()
         $(".js-boot-time").text(boot_time_from_now);

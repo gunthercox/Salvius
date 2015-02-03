@@ -4,8 +4,8 @@ from chatterbot.apis.github import GitHub
 from jsondb.db import Database
 from flask import Flask
 
-from humanoid import api as robot_api
-from humanoid.views import TemplateView, Connect, GitHubConnectView, TwitterAuthorizedView
+from humanoid import api
+from humanoid.views import TemplateView, Connect
 from humanoid.neck import Neck
 from humanoid.torso import Torso
 from humanoid.arm.shoulder import Shoulder
@@ -35,8 +35,8 @@ app.add_url_rule("/communication/", view_func=TemplateView.as_view("communicatio
 app.add_url_rule("/health/", view_func=TemplateView.as_view("health", template_name="health.html"))
 
 app.add_url_rule("/connect/", view_func=Connect.as_view("connect"))
-app.add_url_rule("/connect/github/", view_func=GitHubConnectView.as_view("connect_github"))
-app.add_url_rule("/connect/twitter/", view_func=TwitterAuthorizedView.as_view("connect_twitter"))
+app.add_url_rule("/connect/github/", view_func=api.GitHubConnectView.as_view("connect_github"))
+app.add_url_rule("/connect/twitter/", view_func=api.TwitterAuthorizedView.as_view("connect_twitter"))
 
 app.add_url_rule("/arms/<string:arm_name>/shoulder/", view_func=Shoulder.as_view("shoulder"))
 app.add_url_rule("/arms/<string:arm_name>/elbow/", view_func=Elbow.as_view("elbow"))
@@ -51,11 +51,11 @@ app.add_url_rule("/legs/<string:leg_name>/ankle/", view_func=Ankle.as_view("ankl
 app.add_url_rule("/neck/", view_func=Neck.as_view("neck"))
 app.add_url_rule("/torso/", view_func=Torso.as_view("torso"))
 
-app.add_url_rule("/api/terminate/",view_func=robot_api.Terminate.as_view("terminate"))
-app.add_url_rule("/api/speech/", view_func=robot_api.Speech.as_view("speech"))
-app.add_url_rule("/api/writing/", view_func=robot_api.Writing.as_view("writing"))
-app.add_url_rule("/api/chat/", view_func=robot_api.Chat.as_view("chat"))
-app.add_url_rule("/api/status/", view_func=robot_api.Status.as_view("status"))
+app.add_url_rule("/api/terminate/",view_func=api.Terminate.as_view("terminate"))
+app.add_url_rule("/api/speech/", view_func=api.Speech.as_view("speech"))
+app.add_url_rule("/api/writing/", view_func=api.Writing.as_view("writing"))
+app.add_url_rule("/api/chat/", view_func=api.Chat.as_view("chat"))
+app.add_url_rule("/api/status/", view_func=api.Status.as_view("status"))
 
 if __name__ == "__main__":
     app.config["CHATBOT"] = ChatBot()
