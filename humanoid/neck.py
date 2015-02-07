@@ -1,4 +1,5 @@
 from flask.views import MethodView
+from robotics.decorators import analytics
 
 
 class Neck(MethodView):
@@ -7,11 +8,13 @@ class Neck(MethodView):
     motors (one on eiter side on the front of the neck).
     """
 
+    @analytics("api_response_time")
     def get(self):
         from flask import abort
         # This method not currently supported.
         abort(405)
 
+    @analytics("api_response_time")
     def patch(self):
         from flask import request, jsonify
 

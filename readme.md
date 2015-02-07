@@ -78,6 +78,11 @@ expected. These tests can also be run manually by running the command
 - ```ssh pi@192.168.1.4``` (Your local ip may differ).
 - The default password is ```password```.
 
+#### Instlling psutil
+
+The python package `psutil` is used to display various system statistics.
+To use install this package you will need to `apt-get install python-dev`.
+
 #### Running on Pi from a flash drive
 1. In Ubuntu `cd` into `/media/user_name/disk_name` to get to the content on the flash drive.
 2. Log in to http://routerlogin.net/ to get a list of the ips of connected devices.

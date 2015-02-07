@@ -53,6 +53,8 @@ Robot.prototype.snapshot = function() {
 
 Robot.prototype.updateSessionLog = function(data) {
 
+    console.log(data.input, data.response);
+
     // If input text was provided
     if (data.input) {
         this.elements.session_log.append($('<div class="text"></div>').text(data.input));
@@ -60,7 +62,7 @@ Robot.prototype.updateSessionLog = function(data) {
 
     // If response text was provided
     if (data.response) {
-        this.elements.session_log.append($('<div class="text"></div>').text(data.response[0]["text"]));
+        this.elements.session_log.append($('<div class="text"></div>').text(data.response));
     }
 
     // Scroll to the bottom of the log window

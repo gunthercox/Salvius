@@ -10,7 +10,7 @@ Robot.prototype.renderStatus = function() {
         url: "/api/status/"
     }).success(function(data) {
 
-        new Chartist.Line('.ct-chart', {
+        new Chartist.Line(".api-response-time", {
             labels: new Array(data["api_response_time"].length),
             series: [
                 data["api_response_time"]
@@ -19,6 +19,17 @@ Robot.prototype.renderStatus = function() {
         {
             showPoint: false,
             lineSmooth: false
+        });
+
+        new Chartist.Line(".web-response-time", {
+            labels: new Array(data["web_response_time"].length),
+            series: [
+                data["web_response_time"]
+            ]
+        },
+        {
+            showPoint: false,
+            lineSmooth: true
         });
 
         var boot_time = moment(data["boot_time"], "YYYY-M-D h:mm:ss%S").calendar();

@@ -3,9 +3,14 @@ from jsondb.db import Database
 
 class analytics(object):
 
-    def __init__(self):
+    def __init__(self, log_key):
+        """
+        Takes a string parameter that will be used as a
+        key to store logged data under in the database.
+        """
         self.database = Database("settings.db")
         self.start_time = 0
+        self.log_key = log_key
 
     def before(self):
         import time
@@ -16,10 +21,10 @@ class analytics(object):
 
         response_time = int((time.time() - self.start_time) * 1000)
 
-        if not "api_response_time" in self.database:
-            self.database["api_response_time"] = []
+        if not self.log_key in self.database:
+            self.database[self.log_key] = []
 
-        analytics = self.database["api_response_time"]
+        analytics = self.database[self.log_key]
 
         # Only record the last 5 requests
         if len(analytics) == 50:
@@ -27,7 +32,7 @@ class analytics(object):
 
         analytics.append(response_time)
 
-        self.database["api_response_time"] = analytics
+        self.database[self.log_key] = analytics
 
     def __call__(self, wrappedCall):
         @wraps(wrappedCall)

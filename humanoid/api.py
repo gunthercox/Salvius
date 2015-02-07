@@ -5,7 +5,7 @@ from robotics.decorators import analytics
 
 class Chat(MethodView):
 
-    @analytics()
+    @analytics("api_response_time")
     def post(self):
         from flask import current_app as app
         from flask import jsonify
@@ -25,7 +25,7 @@ class Chat(MethodView):
 
 class Speech(MethodView):
 
-    @analytics()
+    @analytics("api_response_time")
     def post(self):
         from flask import jsonify
         from robotics.arduino import Arduino
@@ -44,6 +44,7 @@ class Speech(MethodView):
 
         return jsonify({"warning": "required value not provided in request"}), 500
 
+    @analytics("api_response_time")
     def get(self):
         from flask import abort
         abort(405)
@@ -51,7 +52,7 @@ class Speech(MethodView):
 
 class Writing(MethodView):
 
-    @analytics()
+    @analytics("api_response_time")
     def post(self):
         from flask import jsonify
         json_data = request.get_json(force=True)
@@ -70,14 +71,14 @@ class Writing(MethodView):
 
 class Status(MethodView):
 
-    def get_api_response_times(self):
+    def get_response_times(self, analytics_key):
         from jsondb.db import Database
         database = Database("settings.db")
 
-        if not "api_response_time" in database:
+        if not analytics_key in database:
             return []
 
-        return database["api_response_time"]
+        return database[analytics_key]
 
     def bytes2human(self, n):
         # http://code.activestate.com/recipes/578019
@@ -95,7 +96,7 @@ class Status(MethodView):
                 return '%.1f%s' % (value, s)
         return "%sB" % n
 
-    @analytics()
+    @analytics("api_response_time")
     def get(self):
         from flask import jsonify
         import psutil
@@ -147,14 +148,15 @@ class Status(MethodView):
         data["swap_memory"]["used"] = self.bytes2human(swap_memory.used)
 
         # API response times
-        data["api_response_time"] = self.get_api_response_times()
+        data["api_response_time"] = self.get_response_times("api_response_time")
+        data["web_response_time"] = self.get_response_times("web_response_time")
 
         return jsonify(data)
 
 
 class GitHubConnectView(MethodView):
 
-    @analytics()
+    @analytics("api_response_time")
     def get(self):
         """
         OAuth callback from GitHub
@@ -196,7 +198,7 @@ class GitHubConnectView(MethodView):
 
 class TwitterAuthorizedView(MethodView):
 
-    @analytics()
+    @analytics("api_response_time")
     def get(self):
         from flask import flash, redirect
         from flask import current_app as app
