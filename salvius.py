@@ -56,6 +56,7 @@ app.add_url_rule("/api/speech/", view_func=api.Speech.as_view("speech"))
 app.add_url_rule("/api/writing/", view_func=api.Writing.as_view("writing"))
 app.add_url_rule("/api/chat/", view_func=api.Chat.as_view("chat"))
 app.add_url_rule("/api/status/", view_func=api.Status.as_view("status"))
+app.add_url_rule("/api/device_ports/", view_func=api.DevicePorts.as_view("device_ports"))
 
 if __name__ == "__main__":
     app.config["CHATBOT"] = ChatBot()

@@ -93,7 +93,7 @@ Robot.prototype.activate = function() {
     this.urls["api_chat"] = "/api/chat/";
     this.urls["speech"] = "/api/speech/";
     this.urls["terminate"] = "/api/terminate/";
-    this.urls["camera_image_url"] = "http://192.168.1.4/image/jpeg.cgi";
+    this.urls["camera_image_url"] = "http://192.168.1.2/image/jpeg.cgi";
 
     this.elements["terminate"] = $(".js-terminate");
     this.elements["session_log"] = $(".chat-log");

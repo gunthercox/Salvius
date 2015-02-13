@@ -40,7 +40,7 @@ class Neck(MethodView):
         """
         from robotics.arduino import Arduino
 
-        neck_controller = Arduino("/dev/ttyUSB1")
+        neck_controller = Arduino("/dev/ttyUSB0")
         neck_controller.write(value)
 
     def tilt(self, value):

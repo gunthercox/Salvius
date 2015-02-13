@@ -5,7 +5,7 @@ class Arduino(object):
     with an arduino controller through a serial connection.
     """
 
-    def __init__(self, port, baudrate=9600):
+    def __init__(self, port=None, baudrate=9600):
         self.port = port
         self.baudrate = baudrate
 

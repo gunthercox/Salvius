@@ -36,7 +36,7 @@ class Speech(MethodView):
         if speech_text in json_data:
             data = json_data[speech_text]
 
-            text_to_speech = Arduino("/dev/ttyUSB0")
+            text_to_speech = Arduino("/dev/ttyUSB1")
             #print text_to_speech.list_device_ports()
             text_to_speech.write(data)
 
@@ -230,6 +230,22 @@ class TwitterAuthorizedView(MethodView):
 
         return redirect("/connect/")
 
+
+
+class DevicePorts(MethodView):
+
+    @analytics("api_response_time")
+    def get(self):
+        """
+        Display a list of device ports for easy debugging.
+        """
+        from robotics.arduino import Arduino
+        from flask import jsonify
+
+        arduino = Arduino()
+
+        data = arduino.list_device_ports()
+        return jsonify({"results": data})
 
 class Terminate(MethodView):
     """
