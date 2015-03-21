@@ -1,0 +1,45 @@
+<div class="row">
+    <div style="width: 80%; margin: 0px auto">
+        <!-- 16:9 aspect ratio -->
+        <div class="embed-responsive embed-responsive-16by9">
+            <canvas id="cam" class="embed-responsive-item"></canvas>
+
+            <div class="sidebar-left">
+                <div class="control">
+                    <a class="js-front-back-tilt">
+                        <i class="fa fa-arrows-v"></i><br/>
+                        <span class="readout">0</span>
+                    </a>
+                </div>
+                <div class="control">
+                    <a class="js-left-right-tilt">
+                        <i class="fa fa-expand"></i><br/>
+                        <span class="readout">0</span>
+                    </a>
+                </div>
+                <div class="control" style="height: 200px;">
+                    <input type="range" class="js-angle-head vertical" min="-180" max="180" style="margin: 0px auto">
+                </div>
+            </div>
+
+            <div class="sidebar-right">
+                <div class="control">
+                    <a class="js-capture-photo">
+                        <i class="fa fa-camera"></i>
+                        <span class="hide">Capture</span>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="row">
+            <div class="col-sm-12">
+                <input type="range" min="0" max="180" value="90" class="js-rotate-head horizontal">
+                <output class="text-center">180</output>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,100 @@
+body {
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+    height: 100%;
+}
+
+#panel {
+    background: #fff;
+}
+
+.toggle-menu {
+    border: 1px solid #ccc;
+    color: #5d5d5d;
+    font-size: 45px;
+    padding: 3px 14px;
+    border-radius: 6px;
+}
+
+.slideout-menu {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 0;
+    width: 256px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    display: none;
+}
+
+.slideout-panel {
+    position:relative;
+    z-index: 1;
+}
+
+.slideout-open,
+.slideout-open body,
+.slideout-open .slideout-panel {
+    overflow: hidden;
+}
+
+.slideout-open .slideout-menu {
+    display: block;
+}
+
+.menu {
+    background-color: #1D1F20;
+    background-image: linear-gradient(170deg, #222, #3A3A3A);
+}
+
+.menu a {
+    color: #2FA875;
+    font-size: 18px;
+}
+
+.menu-section {
+    margin: 25px 0;
+}
+
+.menu-section-title {
+    text-transform: uppercase;
+    color: #9a9a9a;
+    font-weight: 200;
+    font-size: 13px;
+    letter-spacing: 1px;
+    padding: 0 20px;
+    margin:0;
+}
+
+.menu-section-list {
+    padding:0;
+    margin: 10px 0;
+    list-style:none;
+}
+
+.menu-section-list a {
+    display: block;
+    padding: 10px 20px;
+}
+
+.menu-section-list a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    text-decoration: none;
+}
+
+.menu,
+.slideout-menu {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 0;
+    width: 250px;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    display: none;
+}

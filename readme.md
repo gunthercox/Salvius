@@ -14,7 +14,7 @@ to be as easy as possible for anyone to build on a limited budget.
   - Easily customizable robots
   - RESTfull API
   - Modular design makes it easy to connect controllers via USB
-  - [External status page](http://gunthercox.github.io/salvius.status/)
+  - [External status page](http://salvius.github.io/status)
 
 ## Setup
 

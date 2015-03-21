@@ -29,10 +29,6 @@ except ImportError:
 app = Flask(__name__, static_folder="static", static_url_path="")
 
 app.add_url_rule("/", view_func=TemplateView.as_view("interface", template_name="interface.html"))
-app.add_url_rule("/hands/", view_func=TemplateView.as_view("hands", template_name="hands.html"))
-app.add_url_rule("/sensors/", view_func=TemplateView.as_view("sensors", template_name="sensors.html"))
-app.add_url_rule("/communication/", view_func=TemplateView.as_view("communication", template_name="communication.html"))
-app.add_url_rule("/health/", view_func=TemplateView.as_view("health", template_name="health.html"))
 
 app.add_url_rule("/connect/", view_func=Connect.as_view("connect"))
 app.add_url_rule("/connect/github/", view_func=api.GitHubConnectView.as_view("connect_github"))

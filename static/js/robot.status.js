@@ -5,12 +5,11 @@ var Robot = Robot || {};
 Robot.prototype.renderStatus = function() {
     var robot = this;
 
-
     $.ajax({
         type: "GET",
         url: "/api/device_ports/"
     }).success(function(data) {
-        $(".usb-devices").empty().text(data.results.length)
+        $(".usb-devices").empty().text(data.results.length);
     });
 
     $.ajax({
