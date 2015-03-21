@@ -66,8 +66,16 @@ Robot.prototype.renderStatus = function() {
             $(".js-cpu-percent-values").append(block);
         }
 
-        //data["net_io_counter"]
-        //data["disk_io_counters"]
+        new Chartist.Pie(".disk-io-counters", {
+            labels: [data.disk_io_counters.read_mb, data.disk_io_counters.write_mb],
+            series: [data.disk_io_counters.read, data.disk_io_counters.write]
+        });
+
+        new Chartist.Pie(".net-io-counters", {
+            labels: [data.net_io_counters.received_mb, data.net_io_counters.sent_mb],
+            series: [data.net_io_counters.received, data.net_io_counters.sent]
+        });
+        //data["disk_io_counters"]["packets_recv"]
 
     }).error(function() {
         robot.error("Unable to connect to status api.");

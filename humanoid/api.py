@@ -120,16 +120,20 @@ class Status(MethodView):
         data["disk_useage"]["used"] = self.bytes2human(disk_useage.used)
 
         data["disk_io_counters"] = {}
-        data["disk_io_counters"]["read"] = self.bytes2human(disk_io_counters.read_bytes)
-        data["disk_io_counters"]["write"] = self.bytes2human(disk_io_counters.write_bytes)
+        data["disk_io_counters"]["read"] = disk_io_counters.read_bytes
+        data["disk_io_counters"]["write"] = disk_io_counters.write_bytes
+        data["disk_io_counters"]["read_mb"] = self.bytes2human(disk_io_counters.read_bytes)
+        data["disk_io_counters"]["write_mb"] = self.bytes2human(disk_io_counters.write_bytes)
         data["disk_io_counters"]["read_time"] = disk_io_counters.read_time
         data["disk_io_counters"]["write_time"] = disk_io_counters.write_time
         data["disk_io_counters"]["write_count"] = disk_io_counters.write_count
 
         # net_io_counters also supports dropin, dropout, errout
         data["net_io_counters"] = {}
-        data["net_io_counters"]["received"] = self.bytes2human(net_io_counters.bytes_recv)
-        data["net_io_counters"]["sent"] = self.bytes2human(net_io_counters.bytes_sent)
+        data["net_io_counters"]["received"] = net_io_counters.bytes_recv
+        data["net_io_counters"]["sent"] = net_io_counters.bytes_sent
+        data["net_io_counters"]["received_mb"] = self.bytes2human(net_io_counters.bytes_recv)
+        data["net_io_counters"]["sent_mb"] = self.bytes2human(net_io_counters.bytes_sent)
         data["net_io_counters"]["packets_recv"] = net_io_counters.packets_recv
         data["net_io_counters"]["packets_sent"] = net_io_counters.packets_sent
 
