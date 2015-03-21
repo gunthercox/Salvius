@@ -3,6 +3,7 @@ from chatterbot.apis.twitter import Twitter
 from chatterbot.apis.github import GitHub
 from jsondb.db import Database
 from flask import Flask
+from flask.ext.cors import CORS
 
 from humanoid import api
 from humanoid.views import TemplateView, Connect
@@ -27,6 +28,7 @@ except ImportError:
 
 # Create flask app
 app = Flask(__name__, static_folder="static", static_url_path="")
+cors = CORS(app)
 
 app.add_url_rule("/", view_func=TemplateView.as_view("interface", template_name="interface.html"))
 

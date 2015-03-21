@@ -2,3 +2,4 @@ chatterbot==0.1.1
 flask==0.10.1
 psutil==2.2.1
 jsondatabase==0.0.3
+flask-cors
