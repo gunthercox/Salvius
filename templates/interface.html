@@ -4,22 +4,17 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+        <title>Interface</title>
+
         <link rel="stylesheet" href="/css/bootstrap.css"/>
         <link rel="stylesheet" href="/css/bootstrap-social.css"/>
         <link rel="stylesheet" href="/css/font-awesome.css"/>
         <link rel="stylesheet" href="/css/chartist.css"/>
         <link rel="stylesheet" href="/css/robot.css"/>
-        <link rel="stylesheet" href="/css/slideout.css"/>
-
-        <title>Interface</title>
     </head>
 
     <body>
-        {% include "navigation.html" %}
-
-        <main class="container-fluid" id="panel">
-            <span class="toggle-menu"><i class="fa fa-bars"></i></span>
-
+        <main class="container-fluid">
             <div class="tab-content">
                 <div class="tab-pane active" id="interface">{% include "camera.html" %}</div>
                 <div class="tab-pane" id="hands">{% include "hands.html" %}</div>
@@ -29,6 +24,8 @@
             </div>
         </main>
 
+        {% include "nav.html" %}
+
         <script src="/js/jquery.js"></script>
         <script src="/js/jquery.ba-throttle-debounce.js"></script>
         <script src="/js/chartist.js"></script>
@@ -37,7 +34,6 @@
         <script src="/js/robot.js"></script>
         <script src="/js/robot.status.js"></script>
         <script src="/js/robot.camera.js"></script>
-        <script src="/js/slideout.js"></script>
         <script src="/js/events.js"></script>
     </body>
 </html>

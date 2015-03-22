@@ -56,14 +56,18 @@ Robot.prototype.renderStatus = function() {
 
         $(".js-cpu-percent-values").empty();
 
+        var $cpu_table_headings = $(".js-cpu-percent-headings");
+        var $cpu_table_values = $(".js-cpu-percent-values");
+        $cpu_table_headings.empty();
+        $cpu_table_values.empty();
         for (var i = 0; i < data["cpu_percent"].length; i++) {
             var head = $('<th class="text-center"></th>');
             head.text("CPU " + i);
-            $(".js-cpu-percent-headings").append(head);
+            $cpu_table_headings.append(head);
 
             var block = $('<td></td>');
             block.text(data["cpu_percent"][i] + "%");
-            $(".js-cpu-percent-values").append(block);
+            $cpu_table_values.append(block);
         }
 
         new Chartist.Pie(".disk-io-counters", {
@@ -98,5 +102,4 @@ Robot.prototype.renderStatus = function() {
     }).error(function() {
         robot.error("Unable to connect to CI server api.");
     });
-
 }

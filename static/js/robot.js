@@ -42,6 +42,11 @@ Robot.prototype.error = function(message) {
         body: message,
     });
 
+    notification.onshow(function() {
+        setTimeout(function() {
+            notification.cancel();
+        }, '5000');
+    });
 }
 
 Robot.prototype.terminate = function() {
