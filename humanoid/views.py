@@ -10,18 +10,13 @@ class TemplateView(View):
     @analytics("web_response_time")
     def dispatch_request(self):
         from flask import render_template
-        return render_template(self.template_name)
+        #from flask import current_app as app
 
-
-class Connect(View):
-
-    @analytics("web_response_time")
-    def dispatch_request(self):
-        from flask import render_template
-        from flask import current_app as app
-
-        return render_template("connect.html",
+        '''
+        return render_template(self.template_name,
             github=app.config["GITHUB"],
             twitter=app.config["TWITTER"],
             database=app.config["DATABASE"]
         )
+        '''
+        return render_template(self.template_name)

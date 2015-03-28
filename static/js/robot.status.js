@@ -102,4 +102,4 @@ Robot.prototype.renderStatus = function() {
     }).error(function() {
         robot.error("Unable to connect to CI server api.");
     });
-}
+};

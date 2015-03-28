@@ -6,7 +6,7 @@ from flask import Flask
 from flask.ext.cors import CORS
 
 from humanoid import api
-from humanoid.views import TemplateView, Connect
+from humanoid.views import TemplateView
 from humanoid.neck import Neck
 from humanoid.torso import Torso
 from humanoid.arm.shoulder import Shoulder
@@ -32,7 +32,6 @@ cors = CORS(app)
 
 app.add_url_rule("/", view_func=TemplateView.as_view("interface", template_name="interface.html"))
 
-app.add_url_rule("/connect/", view_func=Connect.as_view("connect"))
 app.add_url_rule("/connect/github/", view_func=api.GitHubConnectView.as_view("connect_github"))
 app.add_url_rule("/connect/twitter/", view_func=api.TwitterAuthorizedView.as_view("connect_twitter"))
 

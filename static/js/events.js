@@ -16,6 +16,16 @@ $('a[href="#health"]').on("shown.bs.tab", function() {
     robot.renderStatus();
 });
 
+$('a[href="#interface"]').on("show.bs.tab", function(e) {
+    // Start updating the camera image when the tab is shown
+    Robot.Camera.streaming(true);
+});
+
+$('a[href="#interface"]').on("hide.bs.tab", function() {
+    // Stop updating the camera image when the tab is not shown
+    Robot.Camera.streaming(false);
+});
+
 $(".js-toggle-mobile").click(function(e) {
     e.preventDefault();
 

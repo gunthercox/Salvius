@@ -1,28 +1,66 @@
-var timer = 100;
-var count = 0;
-var image;
+window.Robot = window.Robot || {};
 
-function reload() {
-	image = new Image();
-	image.id = "camimg" + count;
-	image.name = image.id;
-	image.onload = load;
-	image.src = robot.urls.camera_image_url + "?u=" + count;
-	count++;
-}
+var Robot = Robot || {};
 
-function load() {
-	var drawingCanvas = document.getElementById("cam");
+var Camera = function() {
+    this.timer = null;
+    this.count = 0;
+    this.image = null;
 
-	if (drawingCanvas.getContext) {
-		var context = drawingCanvas.getContext("2d");
-		context.drawImage(image,0,0,640,480,0,0,300,150);
-	}
+    this.drawingCanvas = document.getElementById("cam");
+};
 
-	setTimeout("reload()", timer);
-}
+Camera.prototype.streaming = function(on) {
+    var camera = this;
 
-setTimeout("reload()", timer );
+    console.log("camera streaming:", on);
+
+    /*var updatetimer = function() {
+        //do stuff
+
+        console.log(0);
+
+        // By the way, can just pass in the function name instead of an anonymous
+        // function unless if you want to pass parameters or change the value of 'this'
+        camera.timer = setTimeout(updatetimer, 1000);
+    };*/
+
+    if (on) {
+    	//updatetimer();
+    } else {
+        // Since the timeout is assigned to a variable, we can successfully clear it now
+    	//clearTimeout(camera.timer);
+        //clearTimeout(camera.timeout);
+    }
+
+    function reload() {
+	    camera.image = new Image();
+	    //camera.image.id = "c" + camera.count;
+	    //camera.image.name = image.id;
+	    camera.image.onload = load;
+	    camera.image.src = robot.urls.camera_image_url + "?u=" + camera.count;
+	    camera.count++;
+    }
+
+    function load() {
+	    if (camera.drawingCanvas.getContext) {
+		    var context = camera.drawingCanvas.getContext("2d");
+		    context.drawImage(camera.image,0,0,640,480,0,0,300,150);
+	    }
+
+	    setTimeout(reload, camera.timer);
+    }
+
+    setTimeout(reload, camera.timer);
+
+
+};
+
+Robot.Camera = Robot.Camera || new Camera();
+
+
+
+
 
 
 

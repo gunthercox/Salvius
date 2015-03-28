@@ -197,7 +197,7 @@ class GitHubConnectView(MethodView):
 
             flash("You connected to GitHub as %s" % user.json()["name"])
 
-        return redirect("/connect/")
+        return redirect("/")
 
 
 class TwitterAuthorizedView(MethodView):
@@ -232,7 +232,7 @@ class TwitterAuthorizedView(MethodView):
             app.config["DATABASE"]["twitter_user"] = username
             flash("You connected to Twitter as %s" % username)
 
-        return redirect("/connect/")
+        return redirect("/")
 
 
 
