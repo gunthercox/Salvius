@@ -47,6 +47,7 @@ app.add_url_rule("/legs/<string:leg_name>/ankle/", view_func=Ankle.as_view("ankl
 
 app.add_url_rule("/neck/", view_func=Neck.as_view("neck"))
 app.add_url_rule("/torso/", view_func=Torso.as_view("torso"))
+#app.add_url_rule("/camera/", view_func=api.Camera.as_view("camera"))
 
 app.add_url_rule("/api/terminate/",view_func=api.Terminate.as_view("terminate"))
 app.add_url_rule("/api/speech/", view_func=api.Speech.as_view("speech"))

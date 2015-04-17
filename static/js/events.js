@@ -127,3 +127,20 @@ $(".js-angle-head").on("input change", function() {
 
     // TODO: Send to api
 });
+
+$(".js-soundboard").on("click", "button", function() {
+    var request_data = {
+        "speech_text": $(this).text()
+    };
+
+    $.ajax({
+        type: "POST",
+        url: robot.urls.speech,
+        data: JSON.stringify(request_data),
+        contentType: "application/json"
+    }).success(function(data) {
+        value.val("");
+    }).error(function(data) {
+        robot.error("Failed to post data");
+    });
+});
