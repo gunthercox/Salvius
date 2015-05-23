@@ -72,9 +72,18 @@ expected. These tests can also be run manually by running the command
 ```nosetests``` from within the repository's root directory. See 
 ([unit tests](http://en.wikipedia.org/wiki/Unit_testing)) for more information.
 
+## Humanoid Implementation
+
+**Salvius is built in compliance with the [ESDHR Standard for Humanoid Robots](https://docs.google.com/document/d/1kLIT6YXfhJEgOr0qnIzIyuPmO9281X-MAqK7zRCZhhQ/pub).**
+
+The current implementation status is described below.
+
+Salvius is a humanoid robot built from recycled parts. The parts used to build Salvius have been salvaged from broken home appliances, and donated by friends and businesses. This aspect of the project has resulted in various advantages and roadblocks along the way. Many parts for the robot can easily be salvaged from existing electronic devices and hardware. However, due to the nature of accepting donated parts, it is not always possible to acquire multiples of anything.
+
 ## Notes
 
 #### SSH into Rapsberry Pi
+
 - ```ssh pi@192.168.1.4``` (Your local ip may differ).
 - The default password is ```password```.
 
@@ -84,6 +93,7 @@ The python package `psutil` is used to display various system statistics.
 To use install this package you will need to `apt-get install python-dev`.
 
 #### Running on Pi from a flash drive
+
 1. In Ubuntu `cd` into `/media/user_name/disk_name` to get to the content on the flash drive.
 2. Log in to http://routerlogin.net/ to get a list of the ips of connected devices.
 3. `ssh pi@192.168.1.2`
