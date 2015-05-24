@@ -2,6 +2,10 @@ from flask import request
 from flask.views import MethodView
 from robotics.decorators import analytics
 
+from flask import Response
+from flask import stream_with_context
+import requests
+
 
 class Chat(MethodView):
 
@@ -22,6 +26,14 @@ class Chat(MethodView):
 
         return jsonify(data)
 
+
+class Camera(MethodView):
+
+    def get(self):
+        from flask import current_app as app
+        url = app.config["CAMERA_URL"]
+        req = requests.get(url, stream=True)
+        return Response(stream_with_context(req.iter_content()), content_type = req.headers['content-type'])
 
 class Speech(MethodView):
 

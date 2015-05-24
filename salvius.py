@@ -58,7 +58,8 @@ app.add_url_rule("/api/status/", view_func=api.Status.as_view("status"))
 app.add_url_rule("/api/device_ports/", view_func=api.DevicePorts.as_view("device_ports"))
 
 if __name__ == "__main__":
-    app.config["CHATBOT"] = ChatBot()
+    app.config["CAMERA_URL"] = "http://192.168.1.2"
+    app.config["CHATBOT"] = ChatBot("Salvius")
     app.config["DATABASE"] = Database("settings.db")
     app.config["DEBUG"] = True
     app.config["SECRET_KEY"] = "development"
