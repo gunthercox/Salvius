@@ -47,7 +47,8 @@ app.add_url_rule("/legs/<string:leg_name>/ankle/", view_func=Ankle.as_view("ankl
 
 app.add_url_rule("/neck/", view_func=Neck.as_view("neck"))
 app.add_url_rule("/torso/", view_func=Torso.as_view("torso"))
-#app.add_url_rule("/camera/", view_func=api.Camera.as_view("camera"))
+
+app.add_url_rule("/camera/", view_func=api.Camera.as_view("camera"))
 
 app.add_url_rule("/api/terminate/",view_func=api.Terminate.as_view("terminate"))
 app.add_url_rule("/api/speech/", view_func=api.Speech.as_view("speech"))
@@ -57,7 +58,8 @@ app.add_url_rule("/api/status/", view_func=api.Status.as_view("status"))
 app.add_url_rule("/api/device_ports/", view_func=api.DevicePorts.as_view("device_ports"))
 
 if __name__ == "__main__":
-    app.config["CHATBOT"] = ChatBot()
+    app.config["CAMERA_URL"] = "http://192.168.1.2"
+    app.config["CHATBOT"] = ChatBot("Salvius")
     app.config["DATABASE"] = Database("settings.db")
     app.config["DEBUG"] = True
     app.config["SECRET_KEY"] = "development"
