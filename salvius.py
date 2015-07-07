@@ -6,7 +6,6 @@ from flask import Flask
 from flask.ext.cors import CORS
 
 from humanoid import api
-from humanoid.views import TemplateView
 from humanoid.neck import Neck
 from humanoid.torso import Torso
 from humanoid.arm.shoulder import Shoulder
@@ -30,8 +29,6 @@ except ImportError:
 app = Flask(__name__, static_folder="static", static_url_path="")
 cors = CORS(app)
 
-app.add_url_rule("/", view_func=TemplateView.as_view("interface", template_name="interface.html"))
-
 app.add_url_rule("/connect/github/", view_func=api.GitHubConnectView.as_view("connect_github"))
 app.add_url_rule("/connect/twitter/", view_func=api.TwitterAuthorizedView.as_view("connect_twitter"))
 
@@ -47,7 +44,6 @@ app.add_url_rule("/legs/<string:leg_name>/ankle/", view_func=Ankle.as_view("ankl
 
 app.add_url_rule("/neck/", view_func=Neck.as_view("neck"))
 app.add_url_rule("/torso/", view_func=Torso.as_view("torso"))
-#app.add_url_rule("/camera/", view_func=api.Camera.as_view("camera"))
 
 app.add_url_rule("/api/terminate/",view_func=api.Terminate.as_view("terminate"))
 app.add_url_rule("/api/speech/", view_func=api.Speech.as_view("speech"))

@@ -1,5 +1,13 @@
 var robot = new Robot();
 
+var $camera = $('#cam');
+
+$camera.networkCamera({
+    'url': 'https://www.google.com/logos/doodles/2015/fourth-of-july-2015-5118459331477504.2-hp.jpg',
+    //'ip': 'http://192.168.1.2/image/jpeg.cgi',
+    'streaming': true
+});
+
 $(".tabs").on("click", ".tab-title", function(event) {
     event.preventDefault();
     event.stopPropagation();
@@ -12,18 +20,19 @@ $(".tabs").on("click", ".tab-title", function(event) {
     $(id).addClass("active");
 });
 
-$('a[href="#health"]').on("shown.bs.tab", function() {
+$('a[href="#health"]').on("shown.bs.tab", function(e) {
     robot.renderStatus();
 });
 
-$('a[href="#interface"]').on("show.bs.tab", function(e) {
-    // Start updating the camera image when the tab is shown
-    Robot.Camera.streaming(true);
-});
+$('.navbar [data-toggle="tab"]').on("show.bs.tab", function(e) {
+    var href = $(this).attr("href");
 
-$('a[href="#interface"]').on("hide.bs.tab", function() {
-    // Stop updating the camera image when the tab is not shown
-    Robot.Camera.streaming(false);
+    // Only stream the camera feed when the tab is shown
+    if (href == "#interface") {
+        $camera.networkCamera('stream');
+    } else {
+        $camera.networkCamera('pause');
+    }
 });
 
 $(".js-toggle-mobile").click(function(e) {
@@ -144,3 +153,51 @@ $(".js-soundboard").on("click", "button", function() {
         robot.error("Failed to post data");
     });
 });
+
+
+///////////////////////////////////////////////////////
+
+
+init();
+
+function init() {
+  if (window.DeviceOrientationEvent) {
+    // Listen for the deviceorientation event and handle the raw data
+    window.addEventListener("deviceorientation", function(eventData) {
+
+      // gamma is the left-to-right tilt in degrees, where right is positive
+      var tiltLR = eventData.gamma;
+      
+      // beta is the front-to-back tilt in degrees, where front is positive
+      var tiltFB = eventData.beta;
+      
+      // alpha is the compass direction the device is facing in degrees
+      var dir = eventData.alpha
+      
+      // call our orientation event handler
+      deviceOrientationHandler(tiltLR, tiltFB, dir);
+
+      }, false);
+  } else {
+    document.getElementById("doEvent").innerHTML = "Not supported on your device or browser. Sorry."
+  }
+}
+
+function deviceOrientationHandler(tiltLR, tiltFB, dir) {
+
+    if (robot.mobile == false) {
+        return;
+    }
+
+    var direction = Math.round(dir);
+    var tiltLeftRight = Math.round(tiltLR);
+    var tiltFrontBack = Math.round(tiltFB);
+
+    robot.elements.rotate_head.val(direction);
+    robot.elements.rotate_head.change();
+
+    robot.elements.angle_head.val(tiltLeftRight);
+    $(".js-front-back-tilt").find(".readout").text(tiltLeftRight);
+
+    $(".js-left-right-tilt").find(".readout").text(tiltFrontBack);
+}
