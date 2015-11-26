@@ -3,53 +3,6 @@ from flask.views import MethodView
 from robotics.decorators import analytics
 
 
-class Chat(MethodView):
-
-    @analytics("api_response_time")
-    def post(self):
-        from flask import current_app as app
-        from flask import jsonify
-
-        json_data = request.get_json(force=True)
-        key = u'text'
-
-        chatbot = app.config['CHATBOT']
-        data = {}
-
-        if key in json_data:
-            data["input"] = json_data[key]
-            data["response"] = chatbot.get_response(json_data[key])
-
-        return jsonify(data)
-
-
-class Speech(MethodView):
-
-    @analytics("api_response_time")
-    def post(self):
-        from flask import jsonify
-        from robotics.arduino import Arduino
-
-        json_data = request.get_json(force=True)
-        speech_text = u'speech_text'
-
-        if speech_text in json_data:
-            data = json_data[speech_text]
-
-            text_to_speech = Arduino("/dev/ttyUSB0")
-            #print text_to_speech.list_device_ports()
-            text_to_speech.write(data)
-
-            return jsonify(json_data), 201
-
-        return jsonify({"warning": "required value not provided in request"}), 500
-
-    @analytics("api_response_time")
-    def get(self):
-        from flask import abort
-        abort(405)
-
-
 class Writing(MethodView):
 
     @analytics("api_response_time")
@@ -157,30 +110,3 @@ class Status(MethodView):
 
         return jsonify(data)
 
-
-class DevicePorts(MethodView):
-
-    @analytics("api_response_time")
-    def get(self):
-        """
-        Display a list of device ports for easy debugging.
-        """
-        from robotics.arduino import Arduino
-        from flask import jsonify
-
-        arduino = Arduino()
-
-        data = arduino.list_device_ports()
-        return jsonify({"results": data})
-
-class Terminate(MethodView):
-    """
-    Endpoint to stop the server on the robot.
-    This will stop commands from being processed,
-    however it will not stop tasks running on parallel controllers.
-    """
-    def post(self):
-        shutdown = request.environ.get("werkzeug.server.shutdown")
-        if shutdown is None:
-            raise RuntimeError("Not running with the Werkzeug Server")
-        shutdown()

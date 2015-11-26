@@ -3,18 +3,16 @@
 Salvius is a humanoid robot made from recycled materials. The robot is designed
 to be as easy as possible for anyone to build on a limited budget.
 
-> Salvius is a robot made out of recycled materials, designed to be able to
-> perform a wide range of tasks by having a body structure that is similar
-> to that of a human. The primary goal for Salvius is to create a humanoid
-> robot that can function dynamically in a domestic environment.  
-> ~ [salviusrobot.blogspot.com](http://salviusrobot.blogspot.com)
+Salvius is a robot made out of recycled materials, designed to be able to
+perform a wide range of tasks by having a body structure that is similar
+to that of a human. The primary goal for Salvius is to create a humanoid
+robot that can function dynamically in a domestic environment.  
 
 **Key features:**
   - Web based user interface
   - Easily customizable robots
   - RESTfull API
-  - Modular design makes it easy to connect controllers via USB
-  - [External status page](http://salvius.github.io/status)
+  - Modular design makes it easy to connect new hardware
 
 ## Setup
 

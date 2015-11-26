@@ -1,13 +1,13 @@
 import time
 import zorg
 
-from communication import Conversation, ApiDriver
 
 def test():
     #print "x"
     time.sleep(1)
 
 def work(salvius):
+
     while True:
         #print salvius.camera_one.get_url()
         test()
@@ -19,6 +19,7 @@ robot = zorg.robot({
     "connections": {
         "camera": {
             "adaptor": "zorg_network_camera.Camera",
+            "url": "http://192.168.1.6/image.jpg"
         },
         "chatterbot": {
             "adaptor": "communication.Conversation"
@@ -30,12 +31,15 @@ robot = zorg.robot({
     "devices": {
         "camera_one": {
             "connection": "camera",
-            "driver": "zorg_network_camera.Feed",
-            "url": "http://192.168.1.6/image.jpg",
+            "driver": "zorg_network_camera.Feed"
+        },
+        "camera_ocr": {
+            "connection": "camera",
+            "driver": "zorg_network_camera.OCR"
         },
         "communication": {
             "connection": "chatterbot",
-            "driver": "communication.ApiDriver",
+            "driver": "communication.ApiDriver"
         },
     },
     "work": work,
