@@ -65,13 +65,6 @@ This includes face recognition, object tacking and learning to recognise new ite
 Salvius currently does not have the ability to do this, however there is plans
 to implement this in the future.
 
-## Unit testing
-
-The code for this project is automatically tested to ensure that it performs as
-expected. These tests can also be run manually by running the command
-```nosetests``` from within the repository's root directory. See 
-([unit tests](http://en.wikipedia.org/wiki/Unit_testing)) for more information.
-
 ## Humanoid Implementation
 
 **Salvius is built in compliance with the [ESDHR Standard for Humanoid Robots](https://docs.google.com/document/d/1kLIT6YXfhJEgOr0qnIzIyuPmO9281X-MAqK7zRCZhhQ/pub).**
