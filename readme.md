@@ -11,7 +11,7 @@ robot that can function dynamically in a domestic environment.
 **Key features:**
   - Web based user interface
   - Easily customizable robots
-  - RESTfull API
+  - REST API
   - Modular design makes it easy to connect new hardware
 
 ## Setup
@@ -21,7 +21,7 @@ the latest copy into a directory on your Rapsberry Pi, you can download and
 configure the robot's api and interface by running the following commands.
 
 ```
-apt-get install pip
+sudo apt-get install pip
 pip install -r requirements.txt
 ```
 
@@ -63,14 +63,6 @@ This includes face recognition, object tacking and learning to recognise new ite
 Salvius currently does not have the ability to do this, however there is plans
 to implement this in the future.
 
-## Humanoid Implementation
-
-**Salvius is built in compliance with the [ESDHR Standard for Humanoid Robots](https://docs.google.com/document/d/1kLIT6YXfhJEgOr0qnIzIyuPmO9281X-MAqK7zRCZhhQ/pub).**
-
-The current implementation status is described below.
-
-Salvius is a humanoid robot built from recycled parts. The parts used to build Salvius have been salvaged from broken home appliances, and donated by friends and businesses. This aspect of the project has resulted in various advantages and roadblocks along the way. Many parts for the robot can easily be salvaged from existing electronic devices and hardware. However, due to the nature of accepting donated parts, it is not always possible to acquire multiples of anything.
-
 ## Notes
 
 #### SSH into Rapsberry Pi
@@ -81,7 +73,7 @@ Salvius is a humanoid robot built from recycled parts. The parts used to build S
 #### Instlling psutil
 
 The python package `psutil` is used to display various system statistics.
-To use install this package you will need to `apt-get install python-dev`.
+To use install this package you will need to run `sudo apt-get install python-dev`.
 
 #### Running on Pi from a flash drive
 

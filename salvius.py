@@ -2,16 +2,14 @@ import time
 import zorg
 
 
-def test():
-    #print "x"
-    time.sleep(1)
-
 def work(salvius):
 
-    while True:
-        #print salvius.camera_one.get_url()
-        test()
+    robot.touch_sensor.send(
+        category='server',
+        action='started'
+    )
 
+    while True:
         time.sleep(1)
 
 robot = zorg.robot({
@@ -23,7 +21,16 @@ robot = zorg.robot({
         },
         "chatterbot": {
             "adaptor": "communication.Conversation"
-        }
+        },
+        "serial": {
+            "adaptor": "zorg_emic.Serial",
+            "port": "/dev/ttyAMA0",
+        },
+        "analytics": {
+            "adaptor": "iot_analytics.apps.zorg.GoogleAnalytics",
+            "property_id": "UA-12573345-12",
+            "client_id": "salvius",
+        },
         #"raspberry_pi": {
             # "adaptor": "zorg-raspi.RasPi",
         #},
@@ -41,6 +48,14 @@ robot = zorg.robot({
             "connection": "chatterbot",
             "driver": "communication.ApiDriver"
         },
+        "speech": {
+            "connection": "serial",
+            "driver": "zorg_emic.Emic2",
+        },
+        "touch_sensor": {
+            "connection": "analytics",
+            "driver": "iot_analytics.apps.zorg.drivers.Event",
+        }
     },
     "work": work,
 })
