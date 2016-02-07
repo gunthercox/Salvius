@@ -4,13 +4,19 @@ import zorg
 
 def work(salvius):
 
-    robot.touch_sensor.send(
-        category='server',
-        action='started'
-    )
+    salvius.speech_synthesis.start()
+    salvius.speech_synthesis.set_voice(1)
+
+    salvius.speech_recognition.start()
 
     while True:
-        time.sleep(1)
+        try:
+            recognized_speech = salvius.speech_recognition.get_words()
+            if recognized_speech:
+                print(recognized_speech)
+            time.sleep(1)
+        except (KeyboardInterrupt, EOFError, SystemExit):
+            break
 
 robot = zorg.robot({
     "name": "Salvius",
@@ -20,11 +26,16 @@ robot = zorg.robot({
             "url": "http://192.168.1.6/image.jpg"
         },
         "chatterbot": {
-            "adaptor": "communication.Conversation"
+            "adaptor": "communication.Conversation",
+            "io_adapter": "chatterbot.adapters.io.JsonAdapter"
         },
         "serial": {
             "adaptor": "zorg_emic.Serial",
             "port": "/dev/ttyAMA0",
+        },
+        "speech_recognition": {
+            "adaptor": "speech.SpeechRecognition",
+            "recognizer_function": "recognize_sphinx"
         },
         "analytics": {
             "adaptor": "iot_analytics.apps.zorg.GoogleAnalytics",
@@ -52,6 +63,14 @@ robot = zorg.robot({
             "connection": "serial",
             "driver": "zorg_emic.Emic2",
         },
+        "speech_synthesis": {
+            "connection": "serial",
+            "driver": "zorg_emic.Emic2",
+        },
+        "speech_recognition": {
+            "connection": "speech_recognition",
+            "driver": "speech.ApiDriver",
+        },
         "touch_sensor": {
             "connection": "analytics",
             "driver": "iot_analytics.apps.zorg.drivers.Event",
@@ -62,5 +81,9 @@ robot = zorg.robot({
 
 api = zorg.api("zorg.api.Http", {})
 
-robot.start()
-api.start()
+if __name__ == "__main__":
+    try:
+        robot.start()
+        api.start()
+    except (KeyboardInterrupt, EOFError, SystemExit):
+        pass

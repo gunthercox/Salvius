@@ -8,10 +8,7 @@ class Conversation(Adaptor):
     def __init__(self, options):
         super(Conversation, self).__init__(options)
 
-        self.chatbot = ChatBot(
-            "Salvius",
-            io_adapter="chatterbot.adapters.io.JsonAdapter"
-        )
+        self.chatbot = ChatBot("Salvius", **options)
 
     def train_if_required(self):
         """
