@@ -4,8 +4,8 @@ import zorg
 
 def work(salvius):
 
-    salvius.speech_synthesis.start()
-    salvius.speech_synthesis.set_voice(1)
+    #salvius.speech_synthesis.start()
+    #salvius.speech_synthesis.set_voice(1)
 
     salvius.speech_recognition.start()
 
