@@ -26,7 +26,7 @@ robot = zorg.robot({
             "url": "http://192.168.1.6/image.jpg"
         },
         "chatterbot": {
-            "adaptor": "communication.Conversation",
+            "adaptor": "salvius.communication.Conversation",
             "io_adapter": "chatterbot.adapters.io.JsonAdapter"
         },
         "serial": {
@@ -34,7 +34,7 @@ robot = zorg.robot({
             "port": "/dev/ttyAMA0",
         },
         "speech_recognition": {
-            "adaptor": "speech.SpeechRecognition",
+            "adaptor": "salvius.speech.SpeechRecognition",
             "recognizer_function": "recognize_sphinx"
         },
         "analytics": {
@@ -57,7 +57,7 @@ robot = zorg.robot({
         },
         "communication": {
             "connection": "chatterbot",
-            "driver": "communication.ApiDriver"
+            "driver": "salvius.communication.ApiDriver"
         },
         "speech": {
             "connection": "serial",
@@ -69,7 +69,7 @@ robot = zorg.robot({
         },
         "speech_recognition": {
             "connection": "speech_recognition",
-            "driver": "speech.ApiDriver",
+            "driver": "salvius.speech.ApiDriver",
         },
         "touch_sensor": {
             "connection": "analytics",
@@ -81,9 +81,13 @@ robot = zorg.robot({
 
 api = zorg.api("zorg.api.Http", {})
 
-if __name__ == "__main__":
+
+def main():
     try:
         robot.start()
         api.start()
     except (KeyboardInterrupt, EOFError, SystemExit):
         pass
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,52 @@
+#!/bin/sh
+# /etc/init.d/salvius
+#
+### BEGIN INIT INFO
+# Provides:          salvius
+# Required-Start:    $local_fs $network $remote_fs $syslog
+# Required-Stop:     $local_fs $network $remote_fs $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Open source humanoid robot
+# Description:       Open source humanoid robot
+### END INIT INFO
+
+NAME=salvius
+DESC="Open source humanoid robot"
+SCRIPTNAME=/etc/init.d/salvius
+
+# Exit silently if package is no longer installed
+python -c "import salvius"
+[ $? ] || exit 0
+
+# Define LSB log_* functions
+. /lib/lsb/init-functions
+
+case "$1" in
+  start)
+	log_daemon_msg "Starting $DESC" "$NAME"
+    salvius
+	status=$?
+	log_end_msg $status
+    ;;
+  stop)
+	log_daemon_msg "Stopping $DESC" "$NAME"
+    killall salvius
+	status=$?
+	log_end_msg $status
+    ;;
+  restart|reload|force-reload)
+	log_daemon_msg "Restarting $DESC" "$NAME"
+	$0 stop
+	sleep 1
+	$0 start
+    status=$?
+    log_end_msg $status
+    ;;
+  *)
+	echo "Usage: $SCRIPTNAME {start|stop|restart}" >&2
+	exit 3
+    ;;
+esac
+
+exit 0
