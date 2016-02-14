@@ -7,44 +7,54 @@
 # Required-Stop:     $local_fs $network $remote_fs $syslog
 # Default-Start:     2 3 4 5
 # Default-Stop:      0 1 6
-# Short-Description: Open source humanoid robot
+# Short-Description: Salvius
 # Description:       Open source humanoid robot
 ### END INIT INFO
 
-NAME=salvius
-DESC="Open source humanoid robot"
-SCRIPTNAME=/etc/init.d/salvius
-
-# Exit silently if package is no longer installed
+# Exit silently if package is not installed
 python -c "import salvius"
 [ $? ] || exit 0
+
+NAME=salvius
+DAEMON=$(python -c "import sys; from salvius import salvius; sys.stdout.write(salvius.__file__)")
+DESC="Salvius"
+SCRIPTNAME=/etc/init.d/salvius
+
+# The process ID of the script when it runs is stored here:
+PIDFILE=/var/run/$NAME.pid
 
 # Define LSB log_* functions
 . /lib/lsb/init-functions
 
-case "$1" in
-  start)
+do_start () {
 	log_daemon_msg "Starting $DESC" "$NAME"
     salvius
-	status=$?
-	log_end_msg $status
-    ;;
-  stop)
+	log_end_msg $?
+}
+
+do_stop () {
 	log_daemon_msg "Stopping $DESC" "$NAME"
     killall salvius
-	status=$?
-	log_end_msg $status
+	log_end_msg $?
+}
+
+case "$1" in
+  start)
+    do_start&
+    ;;
+  stop)
+    do_stop
     ;;
   restart|reload|force-reload)
-	log_daemon_msg "Restarting $DESC" "$NAME"
-	$0 stop
-	sleep 1
-	$0 start
-    status=$?
-    log_end_msg $status
+    do_stop
+    sleep 1
+    do_start
+    ;;
+  status)
+    status_of_proc "$NAME" "$DAEMON" && exit 0 || exit $?
     ;;
   *)
-	echo "Usage: $SCRIPTNAME {start|stop|restart}" >&2
+	echo "Usage: $SCRIPTNAME {start|stop|restart|status}" >&2
 	exit 3
     ;;
 esac
