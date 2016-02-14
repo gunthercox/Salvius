@@ -16,34 +16,51 @@ robot that can function dynamically in a domestic environment.
 
 ## Setup
 
-Installing this software on your robot should be easy. Once you have downloaded 
-the latest copy into a directory on your Rapsberry Pi, you can download and 
-configure the robot's api and interface by running the following commands.
+```bash
+# Clone the git repo
+git clone https://github.com/gunthercox/Salvius.git
 
-```
-sudo apt-get install pip
-pip install -r requirements.txt
-```
+# Move to the Salvius directory
+cd Salvius
 
-Use the following to run the robot's server.
-```
-python salvius.py runserver
+# Install the package using pip
+sudo pip install . --upgrade
 ```
 
-**Note:** Code for the robot's Arduino boards can be found in the
-[salvius.arduino](https://github.com/gunthercox/salvius.arduino) repository.
-You will need to download the code to these boards individually and connect them
-to the robot in order to enable these features.
+### Testing the installation
 
-### Text to speech
+Once installed, you should be able to start Salvius by entering the command `salvius` into the terminal.
+After that, you should be able to view the robot's api in your browser by going to `http://localhost:8000/api/`
 
-Salvius uses the [Emic 2 Text-to-Speech Module](https://www.sparkfun.com/products/11711)
-to process text into verbal sounds. Code for controling this board is available
-through the [salvius.arduino](https://github.com/gunthercox/salvius.arduino/tree/master/speech_synthesis) package.
+### Configure Salvius to run at startup
+
+To configure Salvius to start running when your device boots,
+execute the following from inside the `scripts` directory.
+```
+bash configure.sh
+```
+
+**Note:** that if you no longer wish to run Salvius at startup, you can disable
+this functionality by running `bash deconfigure.sh` from inside the `scripts`
+directory.
+
+## Verbal communication
+
+Salvius uses the [ChatterBot](https://github.com/gunthercox/ChatterBot) library
+to generate responses to verbal input.
 
 ### Speech recognition
 
-This is still a bit of a work in progress, at best a few small words can be recognised.
+Speech recognition is accomplished using the [pocketsphinx](http://cmusphinx.sourceforge.net/wiki/tutorialpocketsphinx)
+speech recognition library for Python. Salvius is currently only configured to
+recognize English language models, but it is possible to build grammars for other
+languages for pocketsphinx.
+
+### Speech synthesis
+
+Salvius uses the [Emic 2 Text-to-Speech Module](https://www.sparkfun.com/products/11711)
+to process text into verbal sounds. A guide for using the Emic board with your
+Raspberry Pi can be found [here](http://zorg-emic.readthedocs.org/en/stable/using-with-raspberry-pi/).
 
 ### Handwriting
 
@@ -51,15 +68,11 @@ The robot can hold a pen and write when given a string of text.
 The robot's handwriting is based on a grid in which each letter is created as a
 result of horizontal and vertical lines.
 
-### Communication
-
-Salvius uses the [ChatterBot](https://github.com/gunthercox/ChatterBot) library
-to reply to messages. This package also provides Salvius with the capability to
-interact with people through social media sites.
+**Note** This functionality is being re-implemented. See https://github.com/gunthercox/Salvius/issues/5 for details.
 
 ### Object recognition
 
-This includes face recognition, object tacking and learning to recognise new items.
+This includes face recognition, object tacking and learning to recognize new items.
 Salvius currently does not have the ability to do this, however there is plans
 to implement this in the future.
 
