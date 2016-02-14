@@ -1,3 +1,4 @@
 settings.db
 database.db
-*.pyc
+*.py[cod]
+*~
