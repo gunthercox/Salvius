@@ -2,6 +2,7 @@ from zorg.adaptor import Adaptor
 from zorg.driver import Driver
 from multiprocessing import Queue
 import speech_recognition
+import subprocess
 
 
 class SpeechRecognition(Adaptor):
@@ -23,6 +24,8 @@ class SpeechRecognition(Adaptor):
         self.stop_listening = None
 
     def connect(self):
+        subprocess.call(["jack_control", "start"])
+
         # we only need to calibrate once, before we start listening
         with self.microphone as source:
             self.recognizer.adjust_for_ambient_noise(source)
@@ -37,8 +40,10 @@ class SpeechRecognition(Adaptor):
         # when called, stops background listening
 
     def disconnect(self):
-        if stop_listening:
+        if self.stop_listening:
             self.stop_listening()
+
+        subprocess.call(["jack_control", "stop"])
 
     def callback(self, recognizer, audio):
 
