@@ -1,7 +1,7 @@
 from zorg.adaptor import Adaptor
 from zorg.driver import Driver
-import speech_recognition
 from multiprocessing import Queue
+import speech_recognition
 
 
 class SpeechRecognition(Adaptor):
@@ -27,12 +27,14 @@ class SpeechRecognition(Adaptor):
         with self.microphone as source:
             self.recognizer.adjust_for_ambient_noise(source)
 
-        # start listening in the background (note that we don't have to do this inside a `with` statement)
-        stop_listening = self.recognizer.listen_in_background(
+        # start listening in the background (note that we
+        # don't have to do this inside a `with` statement)
+        self.stop_listening = self.recognizer.listen_in_background(
             self.microphone,
             self.callback
         )
-        # `stop_listening` is now a function that, when called, stops background listening
+        # `stop_listening` is now a function that,
+        # when called, stops background listening
 
     def disconnect(self):
         if stop_listening:
@@ -50,7 +52,8 @@ class SpeechRecognition(Adaptor):
         except speech_recognition.UnknownValueError:
             self.queue.put("I am sorry, I could not understand that.")
         except speech_recognition.RequestError as e:
-            self.queue.put("My speech recognition service has failed. {0}".format(e))
+            m = "My speech recognition service has failed. {0}"
+            self.queue.put(m.format(e))
 
 
 class ApiDriver(Driver):

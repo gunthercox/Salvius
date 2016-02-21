@@ -56,4 +56,3 @@ class Neck(MethodView):
         """
         pass
         # TODO
-        

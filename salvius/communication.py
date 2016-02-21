@@ -29,4 +29,3 @@ class ApiDriver(Driver):
 
     def get_response(self, text):
         return self.connection.chatbot.get_response(text)
-

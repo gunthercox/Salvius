@@ -9,9 +9,9 @@ class Ankle(MethodView):
         abort(405)
 
     def patch(self, leg_name):
-        from flask import request, jsonify
+        from flask import request
         data = request.get_json(force=True)
 
         # TODO
 
-        return marshal(self.data, self.fields), 201
+        return [self.data, self.fields, 201]

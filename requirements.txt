@@ -6,4 +6,4 @@ zorg>=0.0.3
 zorg-emic>=0.0.1
 zorg-firmata>=0.0.1
 zorg-network-camera>=0.0.1
-zorg-raspi>=0.0.1
+#zorg-raspi>=0.0.1

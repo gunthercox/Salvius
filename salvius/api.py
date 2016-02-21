@@ -1,25 +1,5 @@
-from flask import request
 from flask.views import MethodView
 from robotics.decorators import analytics
-
-
-class Writing(MethodView):
-
-    @analytics("api_response_time")
-    def post(self):
-        from flask import jsonify
-        json_data = request.get_json(force=True)
-        text = u'text'
-
-        if text in json_data:
-            data = json_data[text]
-
-            print(data)
-            #TODO: Handle motor control for hand writing text
-
-            return jsonify(json_data), 201
-
-        return jsonify({"warning": "required value not provided in request"}), 500
 
 
 class Status(MethodView):
@@ -28,7 +8,7 @@ class Status(MethodView):
         from jsondb.db import Database
         database = Database("settings.db")
 
-        if not analytics_key in database:
+        if analytics_key not in database:
             return []
 
         return database[analytics_key]
@@ -109,4 +89,3 @@ class Status(MethodView):
         data["web_response_time"] = self.get_response_times("web_response_time")
 
         return jsonify(data)
-
