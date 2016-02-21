@@ -44,7 +44,8 @@ class Status(MethodView):
         swap_memory = psutil.swap_memory()
 
         data["cpu_percent"] = psutil.cpu_percent(interval=1, percpu=True)
-        data["boot_time"] = datetime.fromtimestamp(psutil.boot_time()).strftime('%Y-%m-%d %H:%M:%S')
+        boot_time = datetime.fromtimestamp(psutil.boot_time())
+        data["boot_time"] = boot_time.strftime('%Y-%m-%d %H:%M:%S')
 
         data["disk_useage"] = {}
         data["disk_useage"]["free"] = self.bytes2human(disk_useage.free)
@@ -55,8 +56,12 @@ class Status(MethodView):
         data["disk_io_counters"] = {}
         data["disk_io_counters"]["read"] = disk_io_counters.read_bytes
         data["disk_io_counters"]["write"] = disk_io_counters.write_bytes
-        data["disk_io_counters"]["read_mb"] = self.bytes2human(disk_io_counters.read_bytes)
-        data["disk_io_counters"]["write_mb"] = self.bytes2human(disk_io_counters.write_bytes)
+        data["disk_io_counters"]["read_mb"] = self.bytes2human(
+            disk_io_counters.read_bytes
+        )
+        data["disk_io_counters"]["write_mb"] = self.bytes2human(
+            disk_io_counters.write_bytes
+        )
         data["disk_io_counters"]["read_time"] = disk_io_counters.read_time
         data["disk_io_counters"]["write_time"] = disk_io_counters.write_time
         data["disk_io_counters"]["write_count"] = disk_io_counters.write_count
@@ -65,16 +70,23 @@ class Status(MethodView):
         data["net_io_counters"] = {}
         data["net_io_counters"]["received"] = net_io_counters.bytes_recv
         data["net_io_counters"]["sent"] = net_io_counters.bytes_sent
-        data["net_io_counters"]["received_mb"] = self.bytes2human(net_io_counters.bytes_recv)
-        data["net_io_counters"]["sent_mb"] = self.bytes2human(net_io_counters.bytes_sent)
+        data["net_io_counters"]["received_mb"] = self.bytes2human(
+            net_io_counters.bytes_recv
+        )
+        data["net_io_counters"]["sent_mb"] = self.bytes2human(
+            net_io_counters.bytes_sent
+        )
         data["net_io_counters"]["packets_recv"] = net_io_counters.packets_recv
         data["net_io_counters"]["packets_sent"] = net_io_counters.packets_sent
 
-        # virtual_memory also supports active, available, buffers, cached, inactive
+        # virtual_memory also supports:
+        # active, available, buffers, cached, inactive
         data["virtual_memory"] = {}
         data["virtual_memory"]["free"] = self.bytes2human(virtual_memory.free)
         data["virtual_memory"]["percent"] = virtual_memory.percent
-        data["virtual_memory"]["total"] = self.bytes2human(virtual_memory.total)
+        data["virtual_memory"]["total"] = self.bytes2human(
+            virtual_memory.total
+        )
         data["virtual_memory"]["used"] = self.bytes2human(virtual_memory.used)
 
         # swap_memory also supports sin, sout
@@ -85,7 +97,11 @@ class Status(MethodView):
         data["swap_memory"]["used"] = self.bytes2human(swap_memory.used)
 
         # API response times
-        data["api_response_time"] = self.get_response_times("api_response_time")
-        data["web_response_time"] = self.get_response_times("web_response_time")
+        data["api_response_time"] = self.get_response_times(
+            "api_response_time"
+        )
+        data["web_response_time"] = self.get_response_times(
+            "web_response_time"
+        )
 
         return jsonify(data)
