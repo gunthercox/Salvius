@@ -1,5 +1,7 @@
 # Salvius
 
+[![Build Status](https://travis-ci.org/gunthercox/Salvius.svg?branch=master)](https://travis-ci.org/gunthercox/Salvius)
+
 Salvius is a humanoid robot made from recycled materials. The robot is designed
 to be as easy as possible for anyone to build on a limited budget.
 
@@ -62,6 +64,8 @@ Salvius uses the [Emic 2 Text-to-Speech Module](https://www.sparkfun.com/product
 to process text into verbal sounds. A guide for using the Emic board with your
 Raspberry Pi can be found [here](http://zorg-emic.readthedocs.org/en/stable/using-with-raspberry-pi/).
 
+## Non-verbal communication
+
 ### Handwriting
 
 The robot can hold a pen and write when given a string of text.
@@ -70,7 +74,13 @@ result of horizontal and vertical lines.
 
 **Note** This functionality is being re-implemented. See https://github.com/gunthercox/Salvius/issues/5 for details.
 
-### Object recognition
+### Sign language
+
+Salvius cannot yet communicate using sign language. There is an interesting opportunity for which humanoid robot's are uniquely suited. Accomplishing this still requires a great deal of research which I have not yet completed.
+
+See https://github.com/gunthercox/Salvius/issues/48 for details.
+
+## Object recognition
 
 This includes face recognition, object tacking and learning to recognize new items.
 Salvius currently does not have the ability to do this, however there is plans
@@ -88,17 +98,16 @@ to implement this in the future.
 The python package `psutil` is used to display various system statistics.
 To use install this package you will need to run `sudo apt-get install python-dev`.
 
-#### Running on Pi from a flash drive
+## Donating Parts and Supplies
 
-1. In Ubuntu `cd` into `/media/user_name/disk_name` to get to the content on the flash drive.
-2. Log in to http://routerlogin.net/ to get a list of the ips of connected devices.
-3. `ssh pi@192.168.1.2`
-4. Mount the flash drive using `sudo mount -o uid=pi,gid=pi /dev/sda1 /mnt`
-5. Then `cd` into `/mnt/salvius`
-6. Run the server using `python salvius.py runserver`
-7. In a browser navigate to `192.168.1.2:8000`
+If you are interested in donating parts to help buld Salvius,
+see the [Parts and supplies wishlist](https://github.com/gunthercox/Salvius/wiki) in the project wiki.
+
+Other types of donations are helpful as well. Feel free to contact me
+at gunthercx@gmail.com for the best way to support this project.
 
 ## Contributors
+
 This project has been made possible with funding from the following sources:
 Jennifer Cox, Adam Iredale, Janet Wise, Glen Zenor, Boris Hofer, 
 Señora Alderperson, Wilbraham Music, Chris Cox, June Cox, Rantz, Yuri Yerofeyev
