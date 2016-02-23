@@ -5,19 +5,31 @@ import time
 def work(salvius):
     from serial import SerialException
 
+    using_emic = True
+
     try:
         salvius.speech_synthesis.start()
         salvius.speech_synthesis.set_voice(1)
     except SerialException:
-        pass
+        using_emic = False
 
     salvius.speech_recognition.start()
 
     while True:
         try:
             recognized_speech = salvius.speech_recognition.get_words()
+
             if recognized_speech:
+
                 print(recognized_speech)
+                salvius.communication.get_response(recognized_speech)
+
+                if using_emic:
+                    salvius.speech_synthesis.speak()
+                else:
+                    # TODO: use espeak if emic is not available
+                    pass
+
             time.sleep(1)
         except (KeyboardInterrupt, EOFError, SystemExit):
             break

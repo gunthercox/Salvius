@@ -4,6 +4,14 @@ python:
   - '3.4'
   - '2.7'
 
+addons:
+  apt:
+    packages:
+    - tesseract-ocr
+
+services:
+  - mongodb
+
 install:
   - pip install flake8
   - pip install -r requirements.txt
