@@ -8,14 +8,14 @@ class Conversation(Adaptor):
     def __init__(self, options):
         super(Conversation, self).__init__(options)
 
-        self.chatbot = ChatBot("Salvius", **options)
+        if 'logic_adapters' not in options:
+            options["logic_adapters"] = [
+                "chatterbot.adapters.logic.ClosestMatchAdapter",
+                "chatterbot.adapters.logic.EvaluateMathematically",
+                "chatterbot.adapters.logic.TimeLogicAdapter"
+            ]
 
-    def train_if_required(self):
-        """
-        Train the current chatterbot instance
-        if it has not been trained yet.
-        """
-        # TODO
+        self.chatbot = ChatBot("Salvius", **options)
 
 
 class ApiDriver(Driver):
