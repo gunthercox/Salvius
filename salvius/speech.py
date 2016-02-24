@@ -78,3 +78,23 @@ class ApiDriver(Driver):
         if self.connection.queue.empty():
             return None
         return self.connection.queue.get()
+
+
+class SpeechSynthesis(Driver):
+
+    def __init__(self, options, connection):
+        super(SpeechSynthesis, self).__init__(options, connection)
+
+        self.commands += ["reply"]
+
+    def reply(self, text):
+        from espeak import espeak
+
+        response = self.connection.respond(text)
+        espeak.synth(response)
+
+    def start(self):
+        self.connection.connect()
+
+    def stop(self):
+        self.connection.disconnect()

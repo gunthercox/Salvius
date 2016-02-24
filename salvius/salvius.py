@@ -22,13 +22,17 @@ def work(salvius):
             if recognized_speech:
 
                 print(recognized_speech)
-                salvius.communication.get_response(recognized_speech)
 
                 if using_emic:
-                    salvius.speech_synthesis.speak()
+                    response = salvius.communication.get_response(
+                        recognized_speech
+                    )
+                    salvius.speech_synthesis.speak(response)
                 else:
-                    # TODO: use espeak if emic is not available
-                    pass
+                    salvius.speech_recognition.stop()
+                    salvius.speech_synthesis2.reply(recognized_speech)
+                    time.sleep(4)
+                    salvius.speech_recognition.start()
 
             time.sleep(1)
         except (KeyboardInterrupt, EOFError, SystemExit):
@@ -77,6 +81,10 @@ def main():
             "speech_synthesis": {
                 "connection": "serial",
                 "driver": "zorg_emic.Emic2",
+            },
+            "speech_synthesis2": {
+                "connection": "chatterbot",
+                "driver": "salvius.speech.SpeechSynthesis",
             },
             "speech_recognition": {
                 "connection": "sphinx",

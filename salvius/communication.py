@@ -17,6 +17,13 @@ class Conversation(Adaptor):
 
         self.chatbot = ChatBot("Salvius", **options)
 
+        self.chatbot.train(
+            "chatterbot.corpus.english"
+        )
+
+    def respond(self, text):
+        return self.chatbot.get_response(text)
+
 
 class ApiDriver(Driver):
 
@@ -28,4 +35,4 @@ class ApiDriver(Driver):
         ]
 
     def get_response(self, text):
-        return self.connection.chatbot.get_response(text)
+        return self.connection.respond(text)
