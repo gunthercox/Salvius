@@ -31,7 +31,6 @@ def work(salvius):
                 else:
                     salvius.speech_recognition.stop()
                     salvius.speech_synthesis2.reply(recognized_speech)
-                    time.sleep(4)
                     salvius.speech_recognition.start()
 
             time.sleep(1)
