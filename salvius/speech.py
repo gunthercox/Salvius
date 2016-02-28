@@ -23,6 +23,15 @@ class SpeechRecognition(Adaptor):
 
         self.stop_listening = None
 
+    def start_listening(self):
+        """
+        Pause the listening process.
+        """
+        return self.recognizer.listen_in_background(
+            self.microphone,
+            self.callback
+        )
+
     def connect(self):
         subprocess.call(["jack_control", "start"])
 
@@ -30,14 +39,9 @@ class SpeechRecognition(Adaptor):
         with self.microphone as source:
             self.recognizer.adjust_for_ambient_noise(source)
 
-        # start listening in the background (note that we
-        # don't have to do this inside a `with` statement)
-        self.stop_listening = self.recognizer.listen_in_background(
-            self.microphone,
-            self.callback
-        )
-        # `stop_listening` is now a function that,
-        # when called, stops background listening
+        # Start listening in the background
+        self.stop_listening = self.start_listening()
+        # `stop_listening` is now a function that stops background listening
 
     def disconnect(self):
         if self.stop_listening:
@@ -85,7 +89,7 @@ class SpeechSynthesis(Driver):
     def __init__(self, options, connection):
         super(SpeechSynthesis, self).__init__(options, connection)
 
-        self.commands += ["reply"]
+        self.commands += ["reply", "start", "stop"]
 
     def reply(self, text):
         import time
@@ -111,7 +115,7 @@ class SpeechSynthesis(Driver):
         return call_result
 
     def start(self):
-        self.connection.connect()
+        self.connection.start_listening()
 
     def stop(self):
-        self.connection.disconnect()
+        self.connection.stop_listening()
