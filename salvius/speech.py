@@ -25,7 +25,7 @@ class SpeechRecognition(Adaptor):
 
     def start_listening(self):
         """
-        Pause the listening process.
+        Start the listening process.
         """
         return self.recognizer.listen_in_background(
             self.microphone,
