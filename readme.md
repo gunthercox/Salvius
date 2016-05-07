@@ -1,6 +1,9 @@
 # Salvius
 
 [![Build Status](https://travis-ci.org/gunthercox/Salvius.svg?branch=master)](https://travis-ci.org/gunthercox/Salvius)
+[![Requirements Status](https://requires.io/github/gunthercox/Salvius/requirements.svg?branch=master)](https://requires.io/github/gunthercox/Salvius/requirements/?branch=master)
+[![Code Climate](https://codeclimate.com/github/gunthercox/Salvius/badges/gpa.svg)](https://codeclimate.com/github/gunthercox/Salvius)
+[![Coverage Status](https://coveralls.io/repos/github/gunthercox/Salvius/badge.svg?branch=master)](https://coveralls.io/github/gunthercox/Salvius?branch=master)
 
 Salvius is a humanoid robot made from recycled materials. The robot is designed
 to be as easy as possible for anyone to build on a limited budget.

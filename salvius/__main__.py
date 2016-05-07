@@ -16,6 +16,9 @@ def work(salvius):
     salvius.speech_recognition.start()
 
     while True:
+
+        # salvius.neck_servo.set_angle(100)
+
         try:
             recognized_speech = salvius.speech_recognition.get_words()
 
@@ -46,6 +49,10 @@ def main():
                 "adaptor": "zorg_network_camera.Camera",
                 "url": "http://192.168.1.6/image.jpg"
             },
+            "arduino_leonardo": {
+                "adaptor": "zorg_firmata.Firmata",
+                "port": "/dev/ttyACM0"
+            },
             "chatterbot": {
                 "adaptor": "salvius.communication.Conversation",
                 "io_adapter": "chatterbot.adapters.io.JsonAdapter"
@@ -73,25 +80,30 @@ def main():
                 "connection": "camera",
                 "driver": "zorg_network_camera.OCR"
             },
+            "neck_servo": {
+                "connection": "arduino_leonardo",
+                "driver": "zorg_grove.Servo",
+                "pin": 9
+            },
             "communication": {
                 "connection": "chatterbot",
                 "driver": "salvius.communication.ApiDriver"
             },
             "speech_synthesis": {
                 "connection": "serial",
-                "driver": "zorg_emic.Emic2",
+                "driver": "zorg_emic.Emic2"
             },
             "speech_synthesis2": {
                 "connection": "chatterbot",
-                "driver": "salvius.speech.SpeechSynthesis",
+                "driver": "salvius.speech.SpeechSynthesis"
             },
             "speech_recognition": {
                 "connection": "sphinx",
-                "driver": "salvius.speech.ApiDriver",
+                "driver": "salvius.speech.ApiDriver"
             },
             "touch_sensor": {
                 "connection": "analytics",
-                "driver": "iot_analytics.apps.zorg.drivers.Event",
+                "driver": "iot_analytics.apps.zorg.drivers.Event"
             }
         },
         "work": work,

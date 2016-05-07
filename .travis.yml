@@ -13,9 +13,13 @@ services:
   - mongodb
 
 install:
+  - pip install coveralls
   - pip install flake8
   - pip install -r requirements.txt
 
 script:
   - flake8 salvius
-  - nosetests
+  - nosetests --with-coverage --cover-package=salvius
+
+after_success:
+  - coveralls
