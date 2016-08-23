@@ -1,6 +1,7 @@
 from zorg.adaptor import Adaptor
 from zorg.driver import Driver
 from chatterbot import ChatBot
+from chatterbot.trainers import ChatterBotCorpusTrainer
 
 
 class Conversation(Adaptor):
@@ -11,11 +12,12 @@ class Conversation(Adaptor):
         if 'logic_adapters' not in options:
             options["logic_adapters"] = [
                 "chatterbot.adapters.logic.ClosestMatchAdapter",
-                "chatterbot.adapters.logic.EvaluateMathematically",
+                "chatterbot.adapters.logic.MathematicalEvaluation",
                 "chatterbot.adapters.logic.TimeLogicAdapter"
             ]
 
         self.chatbot = ChatBot("Salvius", **options)
+        self.chatbot.set_trainer(ChatterBotCorpusTrainer)
 
         self.chatbot.train(
             "chatterbot.corpus.english"

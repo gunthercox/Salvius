@@ -106,7 +106,7 @@ class SpeechSynthesis(Driver):
                 done_synth[0] = True
 
         espeak.set_SynthCallback(synth_callback)
-        call_result = espeak.synth(response['text'])
+        call_result = espeak.synth(response.text)
 
         # Wait for the speech to stop
         while call_result and not done_synth[0]:
