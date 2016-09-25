@@ -5,6 +5,10 @@ import time
 def work(salvius):
     from serial import SerialException
 
+    salvius.neck_servo.set_angle(5)
+
+    return True
+
     using_emic = True
 
     try:
@@ -83,7 +87,7 @@ def main():
             "neck_servo": {
                 "connection": "arduino_leonardo",
                 "driver": "zorg_grove.Servo",
-                "pin": 9
+                "pin": 6
             },
             "communication": {
                 "connection": "chatterbot",
