@@ -1,6 +1,7 @@
 language: python
 
 python:
+  - '3.5'
   - '3.4'
   - '2.7'
 
@@ -13,8 +14,7 @@ services:
   - mongodb
 
 install:
-  - pip install coveralls
-  - pip install flake8
+  - pip install -r dev-requirements.txt
   - pip install -r requirements.txt
 
 script:
