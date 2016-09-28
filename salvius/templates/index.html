@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <title>Interface</title>
+
+        <link rel="stylesheet" href="css/bootstrap.css"/>
+        <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css"/>
+        <link rel="stylesheet" href="bower_components/chartist/dist/chartist.min.css"/>
+    </head>
+    <body>
+
+        <main class="container-fluid background-container">
+            <div class="row">
+                <!-- 16:9 aspect ratio -->
+                <div class="embed-responsive embed-responsive-16by9"  style="background-color: #eee;">
+                    <div id="cam" class="embed-responsive-item"></div>
+                </div>
+            </div>
+
+            <div class="row foreground-container">
+                <div class="col-xs-12">
+
+                <div class="tab-content">
+
+                    <!-- Primary interface -->
+                    <div class="tab-pane active" id="interface">
+                        <div class="col-xs-12">
+                            <input type="range" min="0" max="180" value="90" class="js-rotate-head horizontal">
+                            <output class="text-center">180</output>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-2">
+                            <input type="text" value="0" class="js-angle-head" data-cursor="true">
+                        </div>
+
+                        <div class="col-xs-8 col-sm-8 text-center">
+                            <input type="text" value="90" class="js-left-right-tilt" data-cursor="true">
+                        </div>
+
+                        <div class="col-xs-2 col-sm-2">
+                            <a class="btn btn-danger btn-lg btn-block ">
+                                <i class="fa fa-camera"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Hand control interface -->
+                    <div class="tab-pane" id="hands">
+
+                        <div class="row">
+                            <div class="col-xs-12 text-center">
+                                <div class="btn-group">
+                                    <button class="btn btn-danger btn-lg active">
+                                        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                                        Left
+                                    </button>
+                                    <button class="btn btn-danger btn-lg">
+                                        <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                                        Right
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Primary interface -->
+                    <div class="tab-pane active" id="torso">
+                        <div class="row">
+
+                        </div>
+                    </div>
+
+                    <! Communiation interface -->
+                    <div class="tab-pane" id="communication">
+                        <div class="row">
+
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control js-speech-text" placeholder="Text to speech"/>
+
+                                <button class="btn btn-danger" id="say">
+                                    <i class="fa fa-volume-up" aria-hidden="true"></i>
+                                    <span class="hidden-xs">Say</span>
+                                </button>
+
+                                <!-- Hand writing input has been disabled pending updates to the robot's api. -->
+                                <button class="btn btn-danger" id="write" disabled>
+                                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                                    <span class="hidden-xs">Write</span>
+                                </button>
+
+                                <a href="" class="btn btn-danger">
+                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                    <span>Add communication method</span>
+                                </a>
+
+                            </div>
+
+                            <div class="col-sm-4">
+                                <div class="well chat-log"></div>
+                                <br/>
+                                <div class="input-group">
+                                    <input class="form-control chat-input" placeholder="Type something to begin" autofocus/>
+                                    <span class="input-group-addon"><i class="fa fa-comment" aria-hidden="true"></i></span>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <div class="btn-group-vertical btn-block js-soundboard">
+                                    <button class="btn btn-danger btn-lg">
+                                        Hello, my name is Salvius
+                                    </button>
+                                    <button class="btn btn-danger btn-lg">
+                                        I am a robot made from recycled parts
+                                    </button>
+                                    <button class="btn btn-danger btn-lg">
+                                        It is great to meet you
+                                    </button>
+                                    <button class="btn btn-danger btn-lg">
+                                        My brain is made out of a Raspberry Pi
+                                    </button>
+                                    <button class="btn btn-danger btn-lg">
+                                        That is correct
+                                    </button>
+                                    <button class="btn btn-danger btn-lg">
+                                        Thank you
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Robot health dashboard -->
+                    <div class="tab-pane" id="health">
+                        <nav class="navbar navbar-default">
+                            <div class="container-fluid">
+
+                                <div class="navbar-header">
+                                    <a class="navbar-brand" href="#">
+                                        <big>Health Dashboard:</big>
+                                        <b>Robotic System Status</b>
+                                    </a>
+                                </div>
+
+                                <div class="collapse navbar-collapse">
+                                    <ul class="nav navbar-nav navbar-right">
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle nav-icon" data-toggle="dropdown">
+                                                <i class="fa fa-heartbeat fa-2x" aria-hidden="true"></i>
+                                            </a>
+                                            <ul class="dropdown-menu" role="menu">
+                                                <li role="presentation" class="dropdown-header">System status</li>
+                                                <li class="disabled">
+                                                    <a>
+                                                        The robot reports statistics to various endpoints.<br/>
+                                                        If there are any operational interruptions,<br/>
+                                                        detailed information can be obtained here.<br/>
+                                                    </a>
+                                                </li>
+                                                <li class="divider"></li>
+                                                <li>
+                                                    <a class="js-terminate">
+                                                        <i class="fa fa-power-off" aria-hidden="true"></i>
+                                                        <span>Stop server</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </nav>
+
+                        <div class="row">
+
+                            <div class="col-xs-12 col-sm-4">
+                                <div class="panel panel-danger">
+                                    <div class="panel-heading">
+                                        <h4>
+                                            <i class="fa fa-rocket" aria-hidden="true"></i>
+                                            Operating capacity
+                                            <span class="pull-right">98%</span>
+                                        </h4>
+                                        <div class="progress">
+                                            <div class="progress-bar progress-bar-danger" role="progressbar" style="width: 98%"></div>
+                                        </div>
+                                        <p class="text-muted">
+                                            <i class="fa fa-info-circle" aria-hidden="true"></i>
+                                            The robot's full operating capacity is based on the number
+                                            of functioning services and system data. This is a gauge
+                                            which measures the robot's overall health.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-8">
+                                <div class="row">
+
+                                    <div class="col-xs-12 col-sm-6">
+                                        <div class="alert alert-danger">
+                                            <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                            <span class="name">Boot time</span>
+                                            <span class="text-success pull-right js-boot-time">
+                                                <i class="fa fa-spinner fa-spin" aria-hidden="true"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12 col-sm-6 js-build-status">
+                                        <a target="_blank" href="https://travis-ci.org/gunthercox/salvius">
+                                            <div class="alert alert-danger">
+                                                <i class="fa fa-trophy" aria-hidden="true"></i>
+                                                <span class="name">Unit tests</span>
+                                                <span class="badge pull-right js-unit-test-status">
+                                                    <i class="fa fa-spinner fa-spin" aria-hidden="true"></i>
+                                                </span>
+                                            </div>
+                                        </a>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+
+                                    <div class="col-xs-12 col-sm-6">
+                                        <div class="alert alert-danger">
+                                            <i class="fa fa-pie-chart" aria-hidden="true"></i>
+                                            <span class="name">Disk useage</span>
+                                            <span class="status pull-right js-disk-useage">
+                                                <i class="fa fa-spinner fa-spin" aria-hidden="true"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12 col-sm-6">
+                                        <a target="_blank" href="/api/device_ports/">
+                                            <div class="alert alert-danger">
+                                                <i class="fa fa-share-alt" aria-hidden="true"></i>
+                                                <span class="name">Connected devices</span>
+                                                <span class="badge pull-right usb-devices">
+                                                    <i class="fa fa-spinner fa-spin" aria-hidden="true"></i>
+                                                </span>
+                                            </div>
+                                        </a>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-2">
+                                <div class="panel panel-danger">
+                                    <div class="panel-heading">
+                                        <i class="fa fa-database" aria-hidden="true"></i>
+                                        <span class="name">Virtual memory</span>
+                                    </div>
+                                    <div class="panel-body text-center">
+                                        <span class="status lead js-virtual-memory-percent">
+                                            <i class="fa fa-spinner fa-spin" aria-hidden="true"></i>
+                                        </span>
+                                        <br/>
+                                        <span class="js-virtual-memory-used"></span> of <span class="js-virtual-memory-total"></span> used
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-6 col-sm-2">
+                                <div class="panel panel-danger">
+                                    <div class="panel-heading">
+                                        <i class="fa fa-pie-chart" aria-hidden="true"></i>
+                                        <span class="name">Swap memory</span>
+                                    </div>
+                                    <div class="panel-body text-center">
+                                        <span class="status lead js-swap-memory-percent">
+                                            <i class="fa fa-spinner fa-spin" aria-hidden="true"></i>
+                                        </span>
+                                        <br/>
+                                        <span class="js-swap-memory-used"></span> of <span class="js-swap-memory-total"></span> used
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-8">
+                                <table class="table table-bordered">
+                                    <tr class="js-cpu-percent-headings text-center"></tr>
+                                    <tr class="js-cpu-percent-values text-center">
+                                        <td class="text-center"><i class="fa fa-spinner fa-spin" aria-hidden="true"></i></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <div class="panel panel-danger">
+                                    <div class="panel-heading">
+                                        API response time
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="ct-chart ct-double-octave api-response-time"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-6">
+                                <div class="panel panel-danger">
+                                    <div class="panel-heading">
+                                        Web response time
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="ct-chart ct-double-octave web-response-time"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <div class="panel panel-danger">
+                                    <div class="panel-heading">
+                                        Disk IO Counters
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="ct-chart ct-double-octave disk-io-counters"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-6">
+                                <div class="panel panel-danger">
+                                    <div class="panel-heading">
+                                        Net IO Counters
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="ct-chart ct-double-octave net-io-counters"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sensor interface -->
+                    <div class="tab-pane" id="sensors">
+                        <div class="col-sm-12">
+                            <h2><i class="fa fa-compass" aria-hidden="true"></i> Sensors</h2>
+                            <div class="input-group">
+                                <input type="search" class="form-control" placeholder="Filter available sensors">
+                                <span class="input-group-addon"><i class="fa fa-search" aria-hidden="true"></i></span>
+                            </div>
+
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">Sensor</th>
+                                        <th class="text-center">Value</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="sensorValues">
+                                </tbody>
+                            </table>
+
+                            <div class="alert alert-warning">
+                                <p>No sensor devices have been registered.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <nav class="navbar navbar-inverse navbar-fixed-bottom">
+            <div class="container-fluid">
+                <div class="row">
+
+                    <div class="btn-group btn-group-justified">
+                        <div class="btn-group">
+                            <a href="#interface" class="btn btn-default" data-toggle="tab">
+                                <div class="fa fa-street-view" aria-hidden="true"></div>
+                                <div class="hidden-xs text-wide">Vision</div>
+                            </a>
+                        </div>
+                        <div class="btn-group">
+                            <a href="#hands" class="btn btn-default" data-toggle="tab">
+                                <div class="fa fa-sign-language" aria-hidden="true"></div>
+                                <div class="hidden-xs text-wide">Hands</div>
+                            </a>
+                        </div>
+                        <div class="btn-group">
+                            <a href="#torso" class="btn btn-default" data-toggle="tab">
+                                <div class="fa fa-hourglass-start" aria-hidden="true"></div>
+                                <div class="hidden-xs text-wide">Torso</div>
+                            </a>
+                        </div>
+                        <div class="btn-group">
+                            <a href="#communication" class="btn btn-default" data-toggle="tab">
+                                <div class="fa fa-comments" aria-hidden="true"></div>
+                                <div class="hidden-xs text-wide">Communication</div>
+                            </a>
+                        </div>
+                        <div class="btn-group">
+                            <a href="#health" class="btn btn-default" data-toggle="tab">
+                                <div class="fa fa-heartbeat" aria-hidden="true"></div>
+                                <div class="hidden-xs text-wide">Health</div>
+                            </a>
+                        </div>
+                        <div class="btn-group">
+                            <a href="#sensors" class="btn btn-default" data-toggle="tab">
+                                <div class="fa fa-compass" aria-hidden="true"></div>
+                                <div class="hidden-xs text-wide">Sensors</div>
+                            </a>
+                        </div>
+                        <div class="btn-group">
+                            <a class="btn btn-default js-toggle-mobile">
+                                <div class="fa fa-circle-o-notch" aria-hidden="true"></div>
+                                <div class="hidden-xs text-wide">Mobile</div>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </nav>
+
+        <script src="bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="bower_components/jquery-throttle-debounce/jquery.ba-throttle-debounce.min.js"></script>
+        <script src="bower_components/jquery-knob/js/jquery.knob.js"></script>
+        <script src="bower_components/jquery-network-camera/jquery.network-camera.js"></script>
+        <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="bower_components/chartist/dist/chartist.min.js"></script>
+        <script src="bower_components/moment/moment.js"></script>
+
+        <script src="bower_components/virtualjoystick.js/virtualjoystick.js"></script>
+        <script src="js/robot.js"></script>
+        <!--script src="js/robot.status.js"></script-->
+        <script src="js/robot.events.js"></script>
+        <script src="js/robot.torso.js"></script>
+    </body>
+</html>

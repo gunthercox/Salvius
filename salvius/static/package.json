@@ -1,0 +1,29 @@
+{
+  "name": "salvius.interface",
+  "author": {
+    "name": "Gunther Cox",
+    "email": "gunthercx@gmail.com",
+    "url": "https://github.com/gunthercox"
+  },
+  "repository": "https://github.com/gunthercox/salvius",
+  "description": "Visual interface for robots.",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "jquery": "^2.2.3",
+    "virtualjoystick.js": "git://github.com/jeromeetienne/virtualjoystick.js.git",
+    "chartist": "^0.9.7",
+    "moment": "^2.13.0",
+    "bootstrap": "^3.3.6",
+    "font-awesome": "^4.6.3",
+    "jquery-network-camera": "^0.0.3",
+    "jquery-throttle-debounce": "git://github.com/cowboy/jquery-throttle-debounce.git",
+    "jquery-knob": "^1.2.11"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.5"
+  },
+  "bugs": {
+    "url" : "https://github.com/gunthercox/salvius/issues"
+  }
+}
