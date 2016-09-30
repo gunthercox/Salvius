@@ -11,7 +11,7 @@ class WebAppTestCase(TestCase):
     def test_get_index(self):
         response = self.app.get('/')
         self.assertEqual(response.status_code, 200)
-        self.assertIn('<html', response.data)
+        self.assertIn('<html', str(response.data))
 
     def test_get_javascript_assets(self):
         response = self.app.get('/js/assets.min.js')
