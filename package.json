@@ -10,18 +10,9 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "browserify": "^13.1.0",
-    "grunt": "~1.0.0",
-    "grunt-contrib-uglify": "~0.5.0",
-    "bootstrap": "^3.3.6",
-    "chartist": "^0.9.7",
-    "font-awesome": "^4.6.3",
-    "jquery": "^2.2.3",
-    "jquery-knob": "^1.2.11",
-    "jquery-network-camera": "^0.0.3",
-    "jquery-throttle-debounce": "git://github.com/cowboy/jquery-throttle-debounce.git",
-    "moment": "^2.13.0",
-    "virtualjoystick.js": "git://github.com/jeromeetienne/virtualjoystick.js.git"
+    "bower": "^1.7.9",
+    "grunt": "^1.0.0",
+    "grunt-contrib-uglify": "^2.0.0"
   },
   "bugs": {
     "url": "https://github.com/gunthercox/salvius/issues"
