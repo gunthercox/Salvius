@@ -2,6 +2,11 @@ settings.db
 database.db
 
 node_modules/
+bower_components/
+*.log
 
 *.py[cod]
 *~
+
+*.min.js
+*.min.css
