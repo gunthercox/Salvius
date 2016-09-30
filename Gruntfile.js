@@ -5,6 +5,7 @@ var path = require('path');
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+
     uglify: {
       options: {
         mangle: true,
@@ -34,16 +35,29 @@ var path = require('path');
           ]
         }
       }
+    },
+
+    sass: {
+      dist: {
+        options: {
+          style: 'compressed'
+        },
+        files: {
+          'salvius/static/css/assets.min.css': 'salvius/static/css/assets.sass'
+        }
+      }
     }
+
   });
 
   // Load tasks
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-sass');
 
-  // 'bower:install'
   grunt.registerTask('default', [
     'uglify:assets',
-    'uglify:robot'
+    'uglify:robot',
+    'sass'
   ]);
 
 };
