@@ -16,6 +16,9 @@
     "grunt-contrib-sass": "^1.0.0",
     "grunt-contrib-uglify": "^2.0.0"
   },
+  "scripts": {
+    "postinstall": "bower install && grunt"
+  },
   "bugs": {
     "url": "https://github.com/gunthercox/salvius/issues"
   }
