@@ -1,8 +1,10 @@
 sudo apt-get install espeak python-espeak
+sudo apt-get install nodejs
 
-Pillow requirements:
+# Pillow requirements:
 sudo apt-get install libtiff5-dev libjpeg8-dev zlib1g-dev libfreetype6-dev liblcms2-dev libwebp-dev tcl8.6-dev tk8.6-dev python-tk
-Speech recognition requirements
+
+# Speech recognition requirements
 sudo apt-get install libjack-jackd2-dev
 sudo apt-get install portaudio19-dev
 sudo apt-get install jackd2
@@ -11,4 +13,3 @@ sudo apt-get install python-pip pyaudio
 sudo apt-get install bison libasound2-dev swig python-dev mplayer
 # required only if the system is not x86-based Windows/Linux/OS X
 sudo apt-get install flac
-sudo apt-get install nodejs
