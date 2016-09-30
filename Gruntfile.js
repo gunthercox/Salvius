@@ -39,9 +39,6 @@ var path = require('path');
 
     sass: {
       dist: {
-        options: {
-          style: 'compressed'
-        },
         files: {
           'salvius/static/css/assets.min.css': 'salvius/static/css/assets.sass'
         }
@@ -67,7 +64,7 @@ var path = require('path');
 
   // Load tasks
   grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-sass');
+  grunt.loadNpmTasks('grunt-sass');
   grunt.loadNpmTasks('grunt-contrib-copy');
 
   grunt.registerTask('default', [
