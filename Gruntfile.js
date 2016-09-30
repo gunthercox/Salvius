@@ -46,18 +46,35 @@ var path = require('path');
           'salvius/static/css/assets.min.css': 'salvius/static/css/assets.sass'
         }
       }
+    },
+
+    copy: {
+      fonts: {
+        files: [
+          {
+            cwd: 'bower_components/font-awesome/fonts/',
+            src: '*',
+            dest: 'salvius/static/fonts/',
+            expand: true,
+            filter: 'isFile'
+          }
+        ]
+      }
     }
+
 
   });
 
   // Load tasks
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-sass');
+  grunt.loadNpmTasks('grunt-contrib-copy');
 
   grunt.registerTask('default', [
     'uglify:assets',
     'uglify:robot',
-    'sass'
+    'sass',
+    'copy:fonts'
   ]);
 
 };

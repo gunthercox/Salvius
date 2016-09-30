@@ -12,3 +12,11 @@ bower_components/
 *.min.css
 *.css.map
 .sass-cache/
+
+# Font files
+**/fonts/*.otf
+**/fonts/*.eot
+**/fonts/*.svg
+**/fonts/*.ttf
+**/fonts/*.woff
+**/fonts/*.woff2
