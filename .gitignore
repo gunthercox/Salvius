@@ -1,4 +1,22 @@
 settings.db
 database.db
+
+node_modules/
+bower_components/
+*.log
+
 *.py[cod]
 *~
+
+*.min.js
+*.min.css
+*.css.map
+.sass-cache/
+
+# Font files
+**/fonts/*.otf
+**/fonts/*.eot
+**/fonts/*.svg
+**/fonts/*.ttf
+**/fonts/*.woff
+**/fonts/*.woff2

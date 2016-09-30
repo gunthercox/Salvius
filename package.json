@@ -1,0 +1,25 @@
+{
+  "name": "salvius.interface",
+  "author": {
+    "name": "Gunther Cox",
+    "email": "gunthercx@gmail.com",
+    "url": "https://github.com/gunthercox"
+  },
+  "repository": "https://github.com/gunthercox/salvius",
+  "description": "Visual interface for robots.",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "bower": "^1.7.9",
+    "grunt": "^1.0.0",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-uglify": "^2.0.0",
+    "grunt-sass": "^1.2.1"
+  },
+  "scripts": {
+    "postinstall": "bower install && grunt"
+  },
+  "bugs": {
+    "url": "https://github.com/gunthercox/salvius/issues"
+  }
+}

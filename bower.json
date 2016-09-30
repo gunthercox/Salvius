@@ -1,0 +1,33 @@
+{
+  "name": "salvius.interface",
+  "authors": [
+    "Gunther Cox <gunthercx@gmail.com>"
+  ],
+  "description": "Web based robot control panel.",
+  "license": "MIT",
+  "homepage": "http://salvius.org",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^2.2.3",
+    "virtualjoystick.js": "*",
+    "chartist": "^0.9.7",
+    "moment": "^2.13.0",
+    "bootstrap-sass": "^3.3.7",
+    "font-awesome": "^4.6.3",
+    "jquery-network-camera": "^0.0.3",
+    "jquery-throttle-debounce": "https://github.com/cowboy/jquery-throttle-debounce.git#v1.1",
+    "jquery-knob": "^1.2.13"
+  },
+  "exportsOverride": {
+    "font-awesome": {
+      "fonts": "fonts/*"
+    }
+  }
+}
