@@ -1,0 +1,142 @@
+body {
+    padding: 0px;
+}
+
+/* Range sliders */
+
+$range-input-gb: rgba(98, 4, 16, 0.32);
+$range-input-border: rgba(69, 13, 13, 0.44);
+$range-input-thumb: rgba(136, 0, 0, 0.4);
+
+input[type='range']::-webkit-slider-thumb {
+    -webkit-appearance: none !important;
+    border-radius: 20px;
+    background-color: $range-input-thumb;
+
+    border-width: 1px;
+    border-style: solid;
+    border-color: $range-input-border;
+
+    height: 40px;
+    width: 40px;
+}
+
+input[type="range"].horizontal {
+    -webkit-appearance: none;
+
+    width: 100%;
+    height: 10px;
+    outline: none;
+    background-color: $range-input-gb;
+    vertical-align: middle;
+
+    margin-bottom: 10px;
+}
+
+/* Lists */
+
+ul {
+    list-style: none;
+}
+
+output {
+    color: #fff;
+}
+
+/* Conatiner overlays */
+
+.background-container {
+    height: 100vh;
+    background: black;
+    overflow: hidden;
+}
+
+.foreground-container {
+    height: 100vh;
+    width: 100%;
+    background: rgba(136, 0, 0, 0.4);
+    position: absolute;
+    top: 0;
+    padding-top: 15px;
+    overflow: auto;
+    padding-bottom: 70px;
+}
+
+/* Custom navbar */
+
+.navbar-inverse {
+    .btn-default {
+        background: transparent;
+        border-top-width: 0px;
+        border-bottom-width: 0px;
+        border-color: #010101;
+        border-radius: 0px;
+        color: #2FA875;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        text-shadow: 0 1px 0 #000;
+    }
+
+    .btn-default .fa {
+        font-size: 30px;
+    }
+
+    .btn-default .text-wide {
+        padding-top: 2px;
+        font-size: 10px;
+        letter-spacing: 3px;
+    }
+}
+
+.navbar-inverse>.btn-group>.btn-group:first-child>.btn {
+    border-left-color: transparent;
+}
+
+.navbar-inverse>.btn-group>.btn-group:not(:last-child)>.btn {
+    border-right-color: transparent;
+}
+
+.navbar-inverse>.btn {
+    overflow: hidden;
+}
+
+/* LEDs */
+
+.led {
+	width: 8px;
+	height: 8px;
+    display: inline-block;
+ 	border-radius: 4px;
+	-webkit-transition: background-color 350ms, box-shadow 700ms;
+ 	transition: background-color 350ms, box-shadow 700ms;
+}
+
+.led.red {
+	background-color: rgb(226,0,0);
+	box-shadow: inset 0px 1px 0px 0px rgba(250,250,250, 5), 0px 0px 3px 2px rgba(226,0,0,0.5);
+}
+
+.led.green {
+	box-shadow: inset 0px 1px 0px 0px rgba(250,250,250, 5), 0px 0px 3px 2px rgba(135,187,83,0.5);
+	background-color: rgb(135,187,83);
+}
+
+/* Additional components */
+
+.chat-log {
+    height: 200px;
+    resize: none;
+    overflow-y: auto;
+}
+
+.chat-log .text:nth-child(even) {
+    color: green;
+}
+
+.chat-log .text:nth-child(odd) {
+    color: blue;
+}
+
+.readout {
+    font-size: 10px;
+}
