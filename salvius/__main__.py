@@ -56,6 +56,10 @@ def main():
                 "adaptor": "h_bridge.ArduinoServoHBridgeController",
                 "port": "/dev/ttyACM0",
             },
+            "arduino_relay_hbridge_controller": {
+                "adaptor": "h_bridge.ArduinoRelayHBridgeController",
+                "port": "/dev/ttyACM0",
+            },
             "chatterbot": {
                 "adaptor": "salvius.communication.Conversation",
                 "io_adapter": "chatterbot.adapters.io.JsonAdapter"
@@ -92,6 +96,11 @@ def main():
                 "connection": "arduino_servo_hbridge_controller",
                 "driver": "h_bridge.HBridge",
                 "pin": 5
+            },
+            "torso_left_hbridge": {
+                "connection": "arduino_relay_hbridge_controller",
+                "driver": "h_bridge.HBridge",
+                "pins": [4, 5, 6, 7]
             },
             "communication": {
                 "connection": "chatterbot",

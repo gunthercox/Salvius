@@ -30,8 +30,30 @@ class ArduinoRelayHBridgeController(Firmata):
     control a relay based h-bridge connected to an Arduino.
     """
 
-    def hbridge_write(self, value):
-        pass
+    def hbridge_write(self, options, state):
+        pins = options.get('pins')
+
+        # Turn the h-bridge off
+        if state == 0:
+            # All relays to the normally open position
+            for pin in pins:
+                self.digital_write(pin, 0)
+
+        # Rotate motor clockwise
+        if state == 1:
+            # Set two opposite adjacent pairs of relays to opposite states
+            self.digital_write(pins[0], 0)
+            self.digital_write(pins[1], 1)
+            self.digital_write(pins[2], 0)
+            self.digital_write(pins[3], 1)
+
+        # Rotate motor counterclockwise
+        if state == -1:
+            # Set two opposite adjacent pairs of relays to opposite states
+            self.digital_write(pins[0], 1)
+            self.digital_write(pins[1], 0)
+            self.digital_write(pins[2], 1)
+            self.digital_write(pins[3], 0)
 
 
 class HBridge(Driver):
@@ -43,7 +65,9 @@ class HBridge(Driver):
         super(HBridge, self).__init__(options, connection)
 
         self.options = options
+
         self.state = 0
+
         self.commands += [
             'turn_off',
             'rotate_clockwise',
