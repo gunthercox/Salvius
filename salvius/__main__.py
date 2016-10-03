@@ -5,8 +5,6 @@ import time
 def work(salvius):
     from serial import SerialException
 
-    # salvius.neck_servo.set_angle(5)
-
     using_emic = True
 
     try:
@@ -53,11 +51,11 @@ def main():
                 "port": "/dev/ttyACM0"
             },
             "arduino_servo_hbridge_controller": {
-                "adaptor": "h_bridge.ArduinoServoHBridgeController",
+                "adaptor": "hbridge.ArduinoServoHBridgeController",
                 "port": "/dev/ttyACM0",
             },
             "arduino_relay_hbridge_controller": {
-                "adaptor": "h_bridge.ArduinoRelayHBridgeController",
+                "adaptor": "hbridge.ArduinoRelayHBridgeController",
                 "port": "/dev/ttyACM0",
             },
             "chatterbot": {
@@ -94,12 +92,12 @@ def main():
             },
             "torso_right_hbridge": {
                 "connection": "arduino_servo_hbridge_controller",
-                "driver": "h_bridge.HBridge",
+                "driver": "hbridge.HBridge",
                 "pin": 5
             },
             "torso_left_hbridge": {
                 "connection": "arduino_relay_hbridge_controller",
-                "driver": "h_bridge.HBridge",
+                "driver": "hbridge.HBridge",
                 "pins": [4, 5, 6, 7]
             },
             "communication": {

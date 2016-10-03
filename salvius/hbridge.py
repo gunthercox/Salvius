@@ -23,6 +23,8 @@ class ArduinoServoHBridgeController(Firmata):
         angle = self.servo_angle_map[state]
         self.servo_write(pin, angle)
 
+        return state
+
 
 class ArduinoRelayHBridgeController(Firmata):
     """
@@ -54,6 +56,8 @@ class ArduinoRelayHBridgeController(Firmata):
             self.digital_write(pins[1], 0)
             self.digital_write(pins[2], 1)
             self.digital_write(pins[3], 0)
+
+        return state
 
 
 class HBridge(Driver):
