@@ -5,10 +5,6 @@ import time
 def work(salvius):
     from serial import SerialException
 
-    salvius.neck_servo.set_angle(5)
-
-    return True
-
     using_emic = True
 
     try:
@@ -20,9 +16,6 @@ def work(salvius):
     salvius.speech_recognition.start()
 
     while True:
-
-        # salvius.neck_servo.set_angle(100)
-
         try:
             recognized_speech = salvius.speech_recognition.get_words()
 
@@ -57,6 +50,14 @@ def main():
                 "adaptor": "zorg_firmata.Firmata",
                 "port": "/dev/ttyACM0"
             },
+            "arduino_servo_hbridge_controller": {
+                "adaptor": "hbridge.ArduinoServoHBridgeController",
+                "port": "/dev/ttyACM0",
+            },
+            "arduino_relay_hbridge_controller": {
+                "adaptor": "hbridge.ArduinoRelayHBridgeController",
+                "port": "/dev/ttyACM0",
+            },
             "chatterbot": {
                 "adaptor": "salvius.communication.Conversation",
                 "io_adapter": "chatterbot.adapters.io.JsonAdapter"
@@ -88,6 +89,16 @@ def main():
                 "connection": "arduino_leonardo",
                 "driver": "zorg_grove.Servo",
                 "pin": 6
+            },
+            "torso_right_hbridge": {
+                "connection": "arduino_servo_hbridge_controller",
+                "driver": "hbridge.HBridge",
+                "pin": 5
+            },
+            "torso_left_hbridge": {
+                "connection": "arduino_relay_hbridge_controller",
+                "driver": "hbridge.HBridge",
+                "pins": [4, 5, 6, 7]
             },
             "communication": {
                 "connection": "chatterbot",
