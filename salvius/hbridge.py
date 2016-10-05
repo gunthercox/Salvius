@@ -89,6 +89,7 @@ class HBridge(Driver):
         """
         Turn the h-bridge on and set it to spin the motor clockwise.
         """
+        self.turn_off()
         self.state = 1
         self.connection.hbridge_write(self.options, 1)
 
@@ -96,5 +97,6 @@ class HBridge(Driver):
         """
         Turn the h-bridge on and set it to spin the motor counterclockwise.
         """
+        self.turn_off()
         self.state = -1
         self.connection.hbridge_write(self.options, -1)
