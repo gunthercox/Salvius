@@ -3,9 +3,10 @@ flask>=0.11,<0.12
 iot_analytics>=0.0.1
 psutil==2.2.1
 speechrecognition>=3.2.0
-zorg>=0.0.5
+zorg>=0.0.5,<0.1.0
 zorg-emic>=0.0.1
 zorg-firmata>=0.0.2
 zorg-grove==0.0.4
+zorg-gpio>=0.0.7,<0.1.0
 zorg-network-camera>=0.0.1
 #zorg-raspi>=0.0.1
