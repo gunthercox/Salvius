@@ -50,21 +50,13 @@ def main():
                 "adaptor": "zorg_firmata.Firmata",
                 "port": "/dev/ttyACM0"
             },
-            "arduino_servo_hbridge_controller": {
-                "adaptor": "hbridge.ArduinoServoHBridgeController",
-                "port": "/dev/ttyACM0",
-            },
-            "arduino_relay_hbridge_controller": {
-                "adaptor": "hbridge.ArduinoRelayHBridgeController",
-                "port": "/dev/ttyACM0",
-            },
             "chatterbot": {
                 "adaptor": "salvius.communication.Conversation",
                 "io_adapter": "chatterbot.adapters.io.JsonAdapter"
             },
             "serial": {
                 "adaptor": "zorg_emic.Serial",
-                "port": "/dev/ttyAMA0",
+                "port": "/dev/ttyAMA0"
             },
             "sphinx": {
                 "adaptor": "salvius.speech.SpeechRecognition",
@@ -73,7 +65,7 @@ def main():
             "analytics": {
                 "adaptor": "iot_analytics.apps.zorg.GoogleAnalytics",
                 "property_id": "UA-12573345-12",
-                "client_id": "salvius",
+                "client_id": "salvius"
             },
         },
         "devices": {
@@ -91,13 +83,13 @@ def main():
                 "pin": 6
             },
             "torso_right_hbridge": {
-                "connection": "arduino_servo_hbridge_controller",
-                "driver": "hbridge.HBridge",
+                "connection": "arduino_leonardo",
+                "driver": "hbridge.ServoHBridge",
                 "pin": 5
             },
             "torso_left_hbridge": {
-                "connection": "arduino_relay_hbridge_controller",
-                "driver": "hbridge.HBridge",
+                "connection": "arduino_leonardo",
+                "driver": "hbridge.RelayHBridge",
                 "pins": [4, 5, 6, 7]
             },
             "communication": {
