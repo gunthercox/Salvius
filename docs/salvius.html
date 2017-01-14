@@ -1,0 +1,304 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>salvius package &#8212; Salvius 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="salvius" href="modules.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="salvius-package">
+<h1>salvius package<a class="headerlink" href="#salvius-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-salvius.communication">
+<span id="salvius-communication-module"></span><h2>salvius.communication module<a class="headerlink" href="#module-salvius.communication" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="salvius.communication.ApiDriver">
+<em class="property">class </em><code class="descclassname">salvius.communication.</code><code class="descname">ApiDriver</code><span class="sig-paren">(</span><em>options</em>, <em>connection</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/salvius/communication.html#ApiDriver"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#salvius.communication.ApiDriver" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">zorg.driver.Driver</span></code></p>
+<dl class="method">
+<dt id="salvius.communication.ApiDriver.get_response">
+<code class="descname">get_response</code><span class="sig-paren">(</span><em>text</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/salvius/communication.html#ApiDriver.get_response"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#salvius.communication.ApiDriver.get_response" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="salvius.communication.Conversation">
+<em class="property">class </em><code class="descclassname">salvius.communication.</code><code class="descname">Conversation</code><span class="sig-paren">(</span><em>options</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/salvius/communication.html#Conversation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#salvius.communication.Conversation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">zorg.adaptor.Adaptor</span></code></p>
+<dl class="method">
+<dt id="salvius.communication.Conversation.respond">
+<code class="descname">respond</code><span class="sig-paren">(</span><em>text</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/salvius/communication.html#Conversation.respond"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#salvius.communication.Conversation.respond" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-salvius.hbridge">
+<span id="salvius-hbridge-module"></span><h2>salvius.hbridge module<a class="headerlink" href="#module-salvius.hbridge" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="salvius.hbridge.HBridge">
+<em class="property">class </em><code class="descclassname">salvius.hbridge.</code><code class="descname">HBridge</code><span class="sig-paren">(</span><em>options</em>, <em>connection</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/salvius/hbridge.html#HBridge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#salvius.hbridge.HBridge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">zorg.driver.Driver</span></code></p>
+<p>A h-bridge base class.</p>
+<dl class="exception">
+<dt id="salvius.hbridge.HBridge.RelayException">
+<em class="property">exception </em><code class="descname">RelayException</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/salvius/hbridge.html#HBridge.RelayException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#salvius.hbridge.HBridge.RelayException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/exceptions.html#exceptions.Exception" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">exceptions.Exception</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="salvius.hbridge.RelayHBridge">
+<em class="property">class </em><code class="descclassname">salvius.hbridge.</code><code class="descname">RelayHBridge</code><span class="sig-paren">(</span><em>options</em>, <em>connection</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/salvius/hbridge.html#RelayHBridge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#salvius.hbridge.RelayHBridge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#salvius.hbridge.HBridge" title="salvius.hbridge.HBridge"><code class="xref py py-class docutils literal"><span class="pre">salvius.hbridge.HBridge</span></code></a></p>
+<p>A relay h-bridge driver class.</p>
+<dl class="method">
+<dt id="salvius.hbridge.RelayHBridge.rotate_clockwise">
+<code class="descname">rotate_clockwise</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/salvius/hbridge.html#RelayHBridge.rotate_clockwise"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#salvius.hbridge.RelayHBridge.rotate_clockwise" title="Permalink to this definition">¶</a></dt>
+<dd><p>Turn the h-bridge on and set it to spin the motor clockwise.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="salvius.hbridge.RelayHBridge.rotate_counterclockwise">
+<code class="descname">rotate_counterclockwise</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/salvius/hbridge.html#RelayHBridge.rotate_counterclockwise"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#salvius.hbridge.RelayHBridge.rotate_counterclockwise" title="Permalink to this definition">¶</a></dt>
+<dd><p>Turn the h-bridge on and set it to spin the motor counterclockwise.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="salvius.hbridge.RelayHBridge.turn_off">
+<code class="descname">turn_off</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/salvius/hbridge.html#RelayHBridge.turn_off"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#salvius.hbridge.RelayHBridge.turn_off" title="Permalink to this definition">¶</a></dt>
+<dd><p>Turn the h-bridge off.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="salvius.hbridge.RelayHBridge.turn_relays_off_if_on">
+<code class="descname">turn_relays_off_if_on</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/salvius/hbridge.html#RelayHBridge.turn_relays_off_if_on"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#salvius.hbridge.RelayHBridge.turn_relays_off_if_on" title="Permalink to this definition">¶</a></dt>
+<dd><p>Turn each relay off only if it is on.
+This prevents unnecessary writes to relays that are already off.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="salvius.hbridge.ServoHBridge">
+<em class="property">class </em><code class="descclassname">salvius.hbridge.</code><code class="descname">ServoHBridge</code><span class="sig-paren">(</span><em>options</em>, <em>connection</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/salvius/hbridge.html#ServoHBridge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#salvius.hbridge.ServoHBridge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#salvius.hbridge.HBridge" title="salvius.hbridge.HBridge"><code class="xref py py-class docutils literal"><span class="pre">salvius.hbridge.HBridge</span></code></a></p>
+<p>A servo h-bridge driver class.</p>
+<dl class="method">
+<dt id="salvius.hbridge.ServoHBridge.rotate_clockwise">
+<code class="descname">rotate_clockwise</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/salvius/hbridge.html#ServoHBridge.rotate_clockwise"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#salvius.hbridge.ServoHBridge.rotate_clockwise" title="Permalink to this definition">¶</a></dt>
+<dd><p>Turn the h-bridge on and set it to spin the motor clockwise.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="salvius.hbridge.ServoHBridge.rotate_counterclockwise">
+<code class="descname">rotate_counterclockwise</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/salvius/hbridge.html#ServoHBridge.rotate_counterclockwise"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#salvius.hbridge.ServoHBridge.rotate_counterclockwise" title="Permalink to this definition">¶</a></dt>
+<dd><p>Turn the h-bridge on and set it to spin the motor counterclockwise.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="salvius.hbridge.ServoHBridge.turn_off">
+<code class="descname">turn_off</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/salvius/hbridge.html#ServoHBridge.turn_off"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#salvius.hbridge.ServoHBridge.turn_off" title="Permalink to this definition">¶</a></dt>
+<dd><p>Turn the h-bridge off.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-salvius.speech">
+<span id="salvius-speech-module"></span><h2>salvius.speech module<a class="headerlink" href="#module-salvius.speech" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="salvius.speech.ApiDriver">
+<em class="property">class </em><code class="descclassname">salvius.speech.</code><code class="descname">ApiDriver</code><span class="sig-paren">(</span><em>options</em>, <em>connection</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/salvius/speech.html#ApiDriver"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#salvius.speech.ApiDriver" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">zorg.driver.Driver</span></code></p>
+<dl class="method">
+<dt id="salvius.speech.ApiDriver.get_words">
+<code class="descname">get_words</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/salvius/speech.html#ApiDriver.get_words"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#salvius.speech.ApiDriver.get_words" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="salvius.speech.ApiDriver.start">
+<code class="descname">start</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/salvius/speech.html#ApiDriver.start"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#salvius.speech.ApiDriver.start" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="salvius.speech.ApiDriver.stop">
+<code class="descname">stop</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/salvius/speech.html#ApiDriver.stop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#salvius.speech.ApiDriver.stop" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="salvius.speech.SpeechRecognition">
+<em class="property">class </em><code class="descclassname">salvius.speech.</code><code class="descname">SpeechRecognition</code><span class="sig-paren">(</span><em>options</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/salvius/speech.html#SpeechRecognition"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#salvius.speech.SpeechRecognition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">zorg.adaptor.Adaptor</span></code></p>
+<dl class="method">
+<dt id="salvius.speech.SpeechRecognition.callback">
+<code class="descname">callback</code><span class="sig-paren">(</span><em>recognizer</em>, <em>audio</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/salvius/speech.html#SpeechRecognition.callback"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#salvius.speech.SpeechRecognition.callback" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="salvius.speech.SpeechRecognition.connect">
+<code class="descname">connect</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/salvius/speech.html#SpeechRecognition.connect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#salvius.speech.SpeechRecognition.connect" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="salvius.speech.SpeechRecognition.disconnect">
+<code class="descname">disconnect</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/salvius/speech.html#SpeechRecognition.disconnect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#salvius.speech.SpeechRecognition.disconnect" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="salvius.speech.SpeechRecognition.start_listening">
+<code class="descname">start_listening</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/salvius/speech.html#SpeechRecognition.start_listening"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#salvius.speech.SpeechRecognition.start_listening" title="Permalink to this definition">¶</a></dt>
+<dd><p>Start the listening process.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="salvius.speech.SpeechSynthesis">
+<em class="property">class </em><code class="descclassname">salvius.speech.</code><code class="descname">SpeechSynthesis</code><span class="sig-paren">(</span><em>options</em>, <em>connection</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/salvius/speech.html#SpeechSynthesis"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#salvius.speech.SpeechSynthesis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">zorg.driver.Driver</span></code></p>
+<dl class="method">
+<dt id="salvius.speech.SpeechSynthesis.reply">
+<code class="descname">reply</code><span class="sig-paren">(</span><em>text</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/salvius/speech.html#SpeechSynthesis.reply"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#salvius.speech.SpeechSynthesis.reply" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="salvius.speech.SpeechSynthesis.start">
+<code class="descname">start</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/salvius/speech.html#SpeechSynthesis.start"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#salvius.speech.SpeechSynthesis.start" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="salvius.speech.SpeechSynthesis.stop">
+<code class="descname">stop</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/salvius/speech.html#SpeechSynthesis.stop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#salvius.speech.SpeechSynthesis.stop" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-salvius.webapp">
+<span id="salvius-webapp-module"></span><h2>salvius.webapp module<a class="headerlink" href="#module-salvius.webapp" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="salvius.webapp.index">
+<code class="descclassname">salvius.webapp.</code><code class="descname">index</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/salvius/webapp.html#index"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#salvius.webapp.index" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="salvius.webapp.send_static">
+<code class="descclassname">salvius.webapp.</code><code class="descname">send_static</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/salvius/webapp.html#send_static"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#salvius.webapp.send_static" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-salvius">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-salvius" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">salvius package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-salvius.communication">salvius.communication module</a></li>
+<li><a class="reference internal" href="#module-salvius.hbridge">salvius.hbridge module</a></li>
+<li><a class="reference internal" href="#module-salvius.speech">salvius.speech module</a></li>
+<li><a class="reference internal" href="#module-salvius.webapp">salvius.webapp module</a></li>
+<li><a class="reference internal" href="#module-salvius">Module contents</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">salvius</a><ul>
+      <li>Previous: <a href="modules.html" title="previous chapter">salvius</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/salvius.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, Gunther Cox.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/salvius.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

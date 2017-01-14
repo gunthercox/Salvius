@@ -10,3 +10,6 @@ zorg-grove==0.0.4
 zorg-gpio>=0.0.7,<0.1.0
 zorg-network-camera>=0.0.1
 #zorg-raspi>=0.0.1
+
+# Develoment requirements
+sphinx

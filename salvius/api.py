@@ -1,5 +1,4 @@
 from flask.views import MethodView
-from robotics.decorators import analytics
 
 
 class Status(MethodView):
@@ -29,7 +28,6 @@ class Status(MethodView):
                 return '%.1f%s' % (value, s)
         return "%sB" % n
 
-    @analytics("api_response_time")
     def get(self):
         from flask import jsonify
         import psutil

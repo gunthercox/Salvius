@@ -21,6 +21,7 @@ install:
 
 script:
   - flake8 salvius
+  - sphinx-build -b html ./docs_source/ ./docs/
   - nosetests --with-coverage --cover-package=salvius
 
 after_success:
