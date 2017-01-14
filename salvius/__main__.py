@@ -5,6 +5,21 @@ import time
 def work(salvius):
     from serial import SerialException
 
+    # salvius.neck_servo.set_angle(5)
+
+    '''
+    while True:
+        salvius.torso_left_hbridge.turn_off()
+        time.sleep(1)
+        salvius.torso_left_hbridge.rotate_clockwise()
+        time.sleep(1)
+        salvius.torso_left_hbridge.rotate_counterclockwise()
+        time.sleep(1)
+        salvius.torso_left_hbridge.turn_off()
+
+    return True
+    '''
+
     using_emic = True
 
     try:
