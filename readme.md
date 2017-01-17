@@ -15,7 +15,6 @@ robot that can function dynamically in a domestic environment.
 
 **Key features:**
   - Web based user interface
-  - Easily customizable robots
   - REST API
   - Modular design makes it easy to connect new hardware
 
@@ -31,6 +30,10 @@ cd Salvius
 # Install the package using pip
 sudo pip install . --upgrade
 ```
+
+### Software Documentation
+
+Module documentation: http://gunthercox.github.io/Salvius/
 
 ### Testing the installation
 
