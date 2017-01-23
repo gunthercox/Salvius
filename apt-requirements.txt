@@ -11,5 +11,9 @@ sudo apt-get install jackd2
 
 sudo apt-get install python-pip pyaudio
 sudo apt-get install bison libasound2-dev swig python-dev mplayer
+
 # required only if the system is not x86-based Windows/Linux/OS X
 sudo apt-get install flac
+
+# RabbitMQ
+sudo apt-get install rabbitmq-server
