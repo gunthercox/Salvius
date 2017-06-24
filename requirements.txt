@@ -12,4 +12,5 @@ zorg-network-camera>=0.0.1
 #zorg-raspi>=0.0.1
 
 # Develoment requirements
+docker-compose>=1.14<1.15
 sphinx
