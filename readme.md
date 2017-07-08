@@ -33,7 +33,7 @@ sudo pip install . --upgrade
 
 ### Software Documentation
 
-Module documentation: http://gunthercox.github.io/Salvius/
+Module documentation: https://docs.salvius.org/
 
 ### Testing the installation
 
