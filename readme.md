@@ -107,7 +107,7 @@ To use install this package you will need to run `sudo apt-get install python-de
 ## Donating Parts and Supplies
 
 If you are interested in donating parts to help buld Salvius,
-see the [Parts and supplies wishlist](https://github.com/gunthercox/Salvius/wiki) in the project wiki.
+see the [Parts and supplies wishlist](https://wiki.salvius.org/parts-and-supplies-wish-list) in the project wiki.
 
 Other types of donations are helpful as well. Feel free to contact me
 at gunthercx@gmail.com for the best way to support this project.
