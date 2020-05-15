@@ -15,7 +15,7 @@
     "tests"
   ],
   "dependencies": {
-    "jquery": "^2.2.3",
+    "jquery": "^3.5.1",
     "virtualjoystick.js": "*",
     "chartist": "^0.9.7",
     "moment": "^2.13.0",
