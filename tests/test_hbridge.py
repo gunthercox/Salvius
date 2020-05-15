@@ -18,7 +18,7 @@ class RelayHBridgeTestCase(HBridgeTestCase):
 
     def setUp(self):
         super(RelayHBridgeTestCase, self).setUp()
-        self.options['pins'] = [1, 2, 3, 4] 
+        self.options['pins'] = [1, 2, 3, 4]
         self.driver = RelayHBridge(self.options, self.connection)
 
     def test_command_method_exists(self):

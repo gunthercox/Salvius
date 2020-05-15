@@ -94,19 +94,14 @@ to implement this in the future.
 
 ## Notes
 
-#### SSH into Rapsberry Pi
+#### SSH into Raspberry Pi
 
 - ```ssh pi@192.168.1.4``` (Your local ip may differ).
 - The default password is ```password```.
 
-#### Instlling psutil
-
-The python package `psutil` is used to display various system statistics.
-To use install this package you will need to run `sudo apt-get install python-dev`.
-
 ## Donating Parts and Supplies
 
-If you are interested in donating parts to help buld Salvius,
+If you are interested in donating parts to help build Salvius,
 see the [Parts and supplies wishlist](https://wiki.salvius.org/parts-and-supplies-wish-list) in the project wiki.
 
 Other types of donations are helpful as well. Feel free to contact me

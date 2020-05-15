@@ -79,7 +79,6 @@ Robot.prototype.renderStatus = function() {
             labels: [data.net_io_counters.received_mb, data.net_io_counters.sent_mb],
             series: [data.net_io_counters.received, data.net_io_counters.sent]
         });
-        //data["disk_io_counters"]["packets_recv"]
 
     }).error(function() {
         robot.error("Unable to connect to status api.");
