@@ -99,6 +99,12 @@ to implement this in the future.
 - ```ssh pi@192.168.1.4``` (Your local ip may differ).
 - The default password is ```password```.
 
+#### Building the Python module documentation
+
+```
+sphinx-build -b html docs_source/ docs/
+```
+
 ## Donating Parts and Supplies
 
 If you are interested in donating parts to help build Salvius,
