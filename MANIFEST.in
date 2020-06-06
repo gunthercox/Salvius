@@ -3,18 +3,8 @@ include readme.md
 include requirements.txt
 include dev-requirements.txt
 include apt-requirements.txt
-include bower.json
-include package.json
 
-recursive-include salvius/templates/* *.html
-recursive-include salvius/static/* *.sass
-recursive-include salvius/static/* *.js
 recursive-include scripts/*
 
-recursive-exclude bower_components
-recursive-exclude node_modules
-recursive-exclude * *.min.css
-recursive-exclude * *.css.map
-recursive-exclude * *.min.js
 recursive-exclude * *.pyc
 recursive-exclude * *.py~

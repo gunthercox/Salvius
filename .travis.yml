@@ -7,15 +7,10 @@ addons:
   apt:
     packages:
     - tesseract-ocr
-    - nodejs
-
-services:
-  - mongodb
 
 install:
   - pip install -r dev-requirements.txt
   - pip install -r requirements.txt
-  - npm install
 
 script:
   - flake8 salvius
