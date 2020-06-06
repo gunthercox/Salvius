@@ -28,14 +28,6 @@ salvius.speech module
     :undoc-members:
     :show-inheritance:
 
-salvius.webapp module
----------------------
-
-.. automodule:: salvius.webapp
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
 
 Module contents
 ---------------
