@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+
+    data_hub:
+        image: ubuntu:16.04
+        restart: on-failure
+        env_file:
+            - variables.env
+
+    visual_processing:
+        image: ubuntu:16.04
+        restart: on-failure
+        env_file:
+            - variables.env
+
+    audiol_processing:
+        image: ubuntu:16.04
+        restart: on-failure
+        env_file:
+            - variables.env
+
+    comminication:
+        image: ubuntu:16.04
+        restart: on-failure
+        env_file:
+            - variables.env
+
+    physical_animation_service:
+        image: ubuntu:16.04
+        restart: on-failure
+        env_file:
+            - variables.env
