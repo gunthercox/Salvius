@@ -1,6 +1,5 @@
 # Salvius
 
-[![Code Climate](https://codeclimate.com/github/gunthercox/Salvius/badges/gpa.svg)](https://codeclimate.com/github/gunthercox/Salvius)
 [![Coverage Status](https://coveralls.io/repos/github/gunthercox/Salvius/badge.svg?branch=master)](https://coveralls.io/github/gunthercox/Salvius?branch=master)
 
 Salvius is a humanoid robot made from recycled materials. The robot is designed
@@ -15,6 +14,17 @@ robot that can function dynamically in a domestic environment.
   - Web based user interface
   - REST API
   - Modular design makes it easy to connect new hardware
+
+
+**Update (2025-08-30):**
+
+![The Robot Science Coloring Book](https://salvius.org/images/library/robot-science-coloring-book-cover.jpg)
+
+Salvius is now featured in a science and education based coloring book!  
+Copies are are available on Amazon:  
+https://amzn.to/41K298G
+
+***
 
 ## Setup
 
